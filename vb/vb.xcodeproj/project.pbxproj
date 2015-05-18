@@ -7,12 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4121DE41B07184400612CA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DE31B07184400612CA3 /* AppDelegate.swift */; };
-		D4121DE61B07184400612CA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DE51B07184400612CA3 /* ViewController.swift */; };
+		2FEAE8C16947F0A5B4270542 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FA06EBD3EB1CDBC21D21D4 /* libPods.a */; };
+		D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */; };
 		D4121DE91B07184400612CA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
 		D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEA1B07184400612CA3 /* Images.xcassets */; };
 		D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4121DFA1B07184400612CA3 /* vbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DF91B07184400612CA3 /* vbTests.swift */; };
+		D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */; };
+		D4121E651B07314700612CA3 /* MVBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E641B07314700612CA3 /* MVBUser.swift */; };
+		D4121E761B075CDC00612CA3 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E6B1B075CDC00612CA3 /* libWeiboSDK.a */; };
+		D4121E771B075CDC00612CA3 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4121E731B075CDC00612CA3 /* WeiboSDK.bundle */; };
+		D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E781B075D9200612CA3 /* QuartzCore.framework */; };
+		D4121E7B1B075D9B00612CA3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7A1B075D9B00612CA3 /* ImageIO.framework */; };
+		D4121E7D1B075DA700612CA3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7C1B075DA700612CA3 /* SystemConfiguration.framework */; };
+		D4121E7F1B075DAE00612CA3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7E1B075DAE00612CA3 /* Security.framework */; };
+		D4121E811B075DBA00612CA3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E801B075DBA00612CA3 /* CoreTelephony.framework */; };
+		D4121E831B075DC200612CA3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E821B075DC200612CA3 /* CoreText.framework */; };
+		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
+		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
+		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +39,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F82BDBD5A2E755D7FA6CF21 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7E9AB9D9291257BA4918BAF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		94FA06EBD3EB1CDBC21D21D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DDE1B07184400612CA3 /* vb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DE21B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4121DE31B07184400612CA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D4121DE51B07184400612CA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D4121DE81B07184400612CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4121DEA1B07184400612CA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4121DED1B07184400612CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D4121DF31B07184400612CA3 /* vbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DF81B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4121DF91B07184400612CA3 /* vbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vbTests.swift; sourceTree = "<group>"; };
+		D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vb-Bridging-Header.h"; sourceTree = "<group>"; };
+		D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
+		D4121E641B07314700612CA3 /* MVBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUser.swift; sourceTree = "<group>"; };
+		D4121E6B1B075CDC00612CA3 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		D4121E6C1B075CDC00612CA3 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
+		D4121E6D1B075CDC00612CA3 /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
+		D4121E6E1B075CDC00612CA3 /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
+		D4121E6F1B075CDC00612CA3 /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
+		D4121E701B075CDC00612CA3 /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
+		D4121E711B075CDC00612CA3 /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
+		D4121E721B075CDC00612CA3 /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
+		D4121E731B075CDC00612CA3 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		D4121E741B075CDC00612CA3 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		D4121E751B075CDC00612CA3 /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
+		D4121E781B075D9200612CA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D4121E7A1B075D9B00612CA3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		D4121E7C1B075DA700612CA3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D4121E7E1B075DAE00612CA3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D4121E801B075DBA00612CA3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D4121E821B075DC200612CA3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +81,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */,
+				D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */,
+				D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */,
+				D4121E831B075DC200612CA3 /* CoreText.framework in Frameworks */,
+				D4121E811B075DBA00612CA3 /* CoreTelephony.framework in Frameworks */,
+				D4121E7F1B075DAE00612CA3 /* Security.framework in Frameworks */,
+				D4121E7D1B075DA700612CA3 /* SystemConfiguration.framework in Frameworks */,
+				D4121E7B1B075D9B00612CA3 /* ImageIO.framework in Frameworks */,
+				D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */,
+				2FEAE8C16947F0A5B4270542 /* libPods.a in Frameworks */,
+				D4121E761B075CDC00612CA3 /* libWeiboSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +105,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65F955B630BA72D9EA0558A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F82BDBD5A2E755D7FA6CF21 /* Pods.debug.xcconfig */,
+				7E9AB9D9291257BA4918BAF9 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9114F6F747F82872356B1F1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4121E881B075DDC00612CA3 /* CoreGraphics.framework */,
+				D4121E861B075DD600612CA3 /* Foundation.framework */,
+				D4121E841B075DCC00612CA3 /* UIKit.framework */,
+				D4121E821B075DC200612CA3 /* CoreText.framework */,
+				D4121E801B075DBA00612CA3 /* CoreTelephony.framework */,
+				D4121E7E1B075DAE00612CA3 /* Security.framework */,
+				D4121E7C1B075DA700612CA3 /* SystemConfiguration.framework */,
+				D4121E7A1B075D9B00612CA3 /* ImageIO.framework */,
+				D4121E781B075D9200612CA3 /* QuartzCore.framework */,
+				94FA06EBD3EB1CDBC21D21D4 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D4121DD51B07184400612CA3 = {
 			isa = PBXGroup;
 			children = (
 				D4121DE01B07184400612CA3 /* vb */,
 				D4121DF61B07184400612CA3 /* vbTests */,
 				D4121DDF1B07184400612CA3 /* Products */,
+				65F955B630BA72D9EA0558A4 /* Pods */,
+				9114F6F747F82872356B1F1F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +154,17 @@
 		D4121DE01B07184400612CA3 /* vb */ = {
 			isa = PBXGroup;
 			children = (
-				D4121DE31B07184400612CA3 /* AppDelegate.swift */,
-				D4121DE51B07184400612CA3 /* ViewController.swift */,
+				D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */,
 				D4121DE71B07184400612CA3 /* Main.storyboard */,
 				D4121DEA1B07184400612CA3 /* Images.xcassets */,
 				D4121DEC1B07184400612CA3 /* LaunchScreen.xib */,
+				D4121E5F1B0730A100612CA3 /* Controllers */,
+				D4121E081B072EAA00612CA3 /* Models */,
+				D4121E091B072EAA00612CA3 /* Modules */,
+				D4121E0A1B072EAA00612CA3 /* Views */,
+				D4121E681B075C8300612CA3 /* SDK */,
 				D4121DE11B07184400612CA3 /* Supporting Files */,
+				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
 			);
 			path = vb;
 			sourceTree = "<group>";
@@ -112,6 +194,62 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D4121E081B072EAA00612CA3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4121E641B07314700612CA3 /* MVBUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D4121E091B072EAA00612CA3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		D4121E0A1B072EAA00612CA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D4121E5F1B0730A100612CA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D4121E681B075C8300612CA3 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				D4121E6A1B075CDC00612CA3 /* WeiboSDK */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		D4121E6A1B075CDC00612CA3 /* WeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D4121E6B1B075CDC00612CA3 /* libWeiboSDK.a */,
+				D4121E6C1B075CDC00612CA3 /* WBHttpRequest+WeiboShare.h */,
+				D4121E6D1B075CDC00612CA3 /* WBHttpRequest+WeiboToken.h */,
+				D4121E6E1B075CDC00612CA3 /* WBHttpRequest+WeiboUser.h */,
+				D4121E6F1B075CDC00612CA3 /* WBHttpRequest.h */,
+				D4121E701B075CDC00612CA3 /* WBSDKBasicButton.h */,
+				D4121E711B075CDC00612CA3 /* WBSDKCommentButton.h */,
+				D4121E721B075CDC00612CA3 /* WBSDKRelationshipButton.h */,
+				D4121E741B075CDC00612CA3 /* WeiboSDK.h */,
+				D4121E751B075CDC00612CA3 /* WeiboUser.h */,
+				D4121E731B075CDC00612CA3 /* WeiboSDK.bundle */,
+			);
+			path = WeiboSDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +257,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4121DFD1B07184400612CA3 /* Build configuration list for PBXNativeTarget "vb" */;
 			buildPhases = (
+				0418923BFFD40DAA8092B8D6 /* Check Pods Manifest.lock */,
 				D4121DDA1B07184400612CA3 /* Sources */,
 				D4121DDB1B07184400612CA3 /* Frameworks */,
 				D4121DDC1B07184400612CA3 /* Resources */,
+				48CBB893B52F082A23EA1B78 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,6 +335,7 @@
 				D4121DE91B07184400612CA3 /* Main.storyboard in Resources */,
 				D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */,
 				D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */,
+				D4121E771B075CDC00612CA3 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,13 +348,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0418923BFFD40DAA8092B8D6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		48CBB893B52F082A23EA1B78 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D4121DDA1B07184400612CA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4121DE61B07184400612CA3 /* ViewController.swift in Sources */,
-				D4121DE41B07184400612CA3 /* AppDelegate.swift in Sources */,
+				D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */,
+				D4121E651B07314700612CA3 /* MVBUser.swift in Sources */,
+				D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +504,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -338,21 +513,38 @@
 		};
 		D4121DFE1B07184400612CA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F82BDBD5A2E755D7FA6CF21 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = vb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/SDK/WeiboSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D4121DFF1B07184400612CA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E9AB9D9291257BA4918BAF9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = vb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/SDK/WeiboSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -409,6 +601,7 @@
 				D4121DFF1B07184400612CA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4121E001B07184400612CA3 /* Build configuration list for PBXNativeTarget "vbTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +610,7 @@
 				D4121E021B07184400612CA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
