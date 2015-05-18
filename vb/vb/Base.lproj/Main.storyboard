@@ -1,52 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jhY-S8-x0H">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Log In View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="En0-gp-Bhl">
             <objects>
-                <viewController storyboardIdentifier="MVBLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="MVBLogInViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MVBLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jhY-S8-x0H" customClass="MVBLogInViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="Y3g-t8-CaR"/>
+                        <viewControllerLayoutGuide type="bottom" id="qwC-uq-odk"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="Kk1-DL-X3V">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIx-8i-ldW">
-                                <rect key="frame" x="216" y="220" width="184" height="90"/>
-                                <color key="backgroundColor" red="0.3572175179" green="0.80363941279999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="OVP-ms-6z6"/>
-                                    <constraint firstAttribute="width" constant="184" id="th4-63-TGD"/>
-                                </constraints>
-                                <color key="tintColor" red="0.3572175179" green="0.80363941279999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="logIn">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-QE-UZY">
+                                <rect key="frame" x="277" y="210" width="39" height="30"/>
+                                <state key="normal" title="LogIn">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="logInAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VGw-oR-7pe"/>
+                                    <action selector="logInAction:" destination="jhY-S8-x0H" eventType="touchUpInside" id="Kf2-X5-0Wr"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BIx-8i-ldW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="200" id="0le-ub-KUY"/>
-                            <constraint firstItem="BIx-8i-ldW" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="200" id="3k1-3b-fl0"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="logIn" destination="BIx-8i-ldW" id="lyO-bq-wXU"/>
+                        <outlet property="logIn" destination="HzZ-QE-UZY" id="Xw1-AO-t2j"/>
+                        <segue destination="amP-ie-ySa" kind="presentation" identifier="LogIn" modalPresentationStyle="fullScreen" id="GD7-fO-joS"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-53" y="174"/>
+            <point key="canvasLocation" x="-2168" y="-127"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="Ujo-oe-Pcs">
+            <objects>
+                <viewController storyboardIdentifier="MVBMainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="amP-ie-ySa" customClass="MVBMainViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jl7-qG-Gfx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bmi-o8-3UU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S9V-Vp-rVw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最近内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcD-7k-4d9">
+                                <rect key="frame" x="174" y="77" width="248" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MgR-Kv-Hmo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yti-as-QRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1388" y="-164"/>
         </scene>
     </scenes>
 </document>

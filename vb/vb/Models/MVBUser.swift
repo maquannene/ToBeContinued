@@ -9,5 +9,6 @@
 import UIKit
 
 class MVBUser: JSONModel {
-    
+    var id: NSString?
+    var name: NSString?
 }

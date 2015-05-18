@@ -1,0 +1,15 @@
+//
+//  vb-Prefix.pch
+//  vb
+//
+//  Created by 马权 on 5/18/15.
+//  Copyright (c) 2015 maquan. All rights reserved.
+//
+
+#ifndef vb_vb_Prefix_pch
+#define vb_vb_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
