@@ -9,3 +9,4 @@
 #import "WBHttpRequest.h"
 #import "WBHttpRequest+WeiboUser.h"
 #import "WeiboUser.h"
+#import "UIKit+AFNetworking.h"

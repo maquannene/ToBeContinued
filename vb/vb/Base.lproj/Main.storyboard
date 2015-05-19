@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jhY-S8-x0H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jhY-S8-x0H">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Log In View Controller-->
@@ -14,12 +14,18 @@
                         <viewControllerLayoutGuide type="bottom" id="qwC-uq-odk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kk1-DL-X3V">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-QE-UZY">
-                                <rect key="frame" x="277" y="210" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-QE-UZY">
+                                <rect key="frame" x="117" y="204" width="100" height="44"/>
+                                <color key="backgroundColor" red="0.3572175179" green="0.80363941279999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fku-Hn-JHV"/>
+                                    <constraint firstAttribute="width" constant="100" id="uTb-6L-8fe"/>
+                                </constraints>
                                 <state key="normal" title="LogIn">
+                                    <color key="titleColor" red="0.007215566353887426" green="0.0068273490414068692" blue="0.006880899255218129" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -28,7 +34,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="HzZ-QE-UZY" secondAttribute="centerX" constant="-6.5" id="YTj-fs-U2M"/>
+                            <constraint firstAttribute="centerY" secondItem="HzZ-QE-UZY" secondAttribute="centerY" constant="58" id="cSk-Vl-6Aj"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="logIn" destination="HzZ-QE-UZY" id="Xw1-AO-t2j"/>
                         <segue destination="amP-ie-ySa" kind="presentation" identifier="LogIn" modalPresentationStyle="fullScreen" id="GD7-fO-joS"/>
@@ -47,23 +58,58 @@
                         <viewControllerLayoutGuide type="bottom" id="Bmi-o8-3UU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S9V-Vp-rVw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最近内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcD-7k-4d9">
-                                <rect key="frame" x="174" y="77" width="248" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klC-rw-oaM">
+                                <rect key="frame" x="99" y="20" width="100" height="44"/>
+                                <color key="backgroundColor" white="0.80189220179999998" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="BAg-oZ-7a2"/>
+                                    <constraint firstAttribute="width" constant="100" id="LK6-1j-cuu"/>
+                                </constraints>
+                                <state key="normal" title="个人设置">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="personalSeting" id="kR2-ZT-wSs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="klC-rw-oaM" secondAttribute="centerX" constant="11" id="HmR-Le-IkV"/>
+                            <constraint firstItem="jl7-qG-Gfx" firstAttribute="bottom" secondItem="klC-rw-oaM" secondAttribute="top" id="yYw-0b-ED8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MgR-Kv-Hmo"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yti-as-QRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1388" y="-164"/>
+            <point key="canvasLocation" x="-1632" y="-153"/>
+        </scene>
+        <!--Person View Controller-->
+        <scene sceneID="uev-wj-8Zq">
+            <objects>
+                <viewController id="qPG-3N-nQH" customClass="MVBPersonViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QVm-CR-tMl"/>
+                        <viewControllerLayoutGuide type="bottom" id="MAq-Ms-EVE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lRm-4p-6Ub" customClass="MVBPersonView" customModule="vb" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="view" destination="lRm-4p-6Ub" id="9bo-mn-0zr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-EU-0ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1224" y="-153"/>
         </scene>
     </scenes>
 </document>

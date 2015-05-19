@@ -14,7 +14,7 @@
 		D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4121DFA1B07184400612CA3 /* vbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DF91B07184400612CA3 /* vbTests.swift */; };
 		D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */; };
-		D4121E651B07314700612CA3 /* MVBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E641B07314700612CA3 /* MVBUser.swift */; };
+		D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E641B07314700612CA3 /* MVBUserModel.swift */; };
 		D4121E761B075CDC00612CA3 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E6B1B075CDC00612CA3 /* libWeiboSDK.a */; };
 		D4121E771B075CDC00612CA3 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4121E731B075CDC00612CA3 /* WeiboSDK.bundle */; };
 		D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E781B075D9200612CA3 /* QuartzCore.framework */; };
@@ -26,7 +26,10 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
+		D47A1EF01B0B870C009F089E /* MVBPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */; };
+		D47A1EF41B0B87B9009F089E /* MVBPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */; };
 		D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */; };
+		D4DAF3271B0A0AB300BDEE1F /* MVBPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +57,7 @@
 		D4121DF91B07184400612CA3 /* vbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vbTests.swift; sourceTree = "<group>"; };
 		D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vb-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
-		D4121E641B07314700612CA3 /* MVBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUser.swift; sourceTree = "<group>"; };
+		D4121E641B07314700612CA3 /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
 		D4121E6B1B075CDC00612CA3 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		D4121E6C1B075CDC00612CA3 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
 		D4121E6D1B075CDC00612CA3 /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
@@ -75,8 +78,11 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBPersonView.xib; sourceTree = "<group>"; };
+		D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPersonView.swift; sourceTree = "<group>"; };
 		D4A6EA8C1B09D0CD0069F9FE /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vb-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
+		D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPersonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +207,7 @@
 		D4121E081B072EAA00612CA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D4121E641B07314700612CA3 /* MVBUser.swift */,
+				D4121E641B07314700612CA3 /* MVBUserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +231,9 @@
 			children = (
 				D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */,
 				D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */,
+				D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */,
+				D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */,
+				D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47A1EF01B0B870C009F089E /* MVBPersonView.xib in Resources */,
 				D4121DE91B07184400612CA3 /* Main.storyboard in Resources */,
 				D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */,
 				D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */,
@@ -391,10 +401,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4DAF3271B0A0AB300BDEE1F /* MVBPersonViewController.swift in Sources */,
 				D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */,
-				D4121E651B07314700612CA3 /* MVBUser.swift in Sources */,
+				D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */,
 				D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */,
 				D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */,
+				D47A1EF41B0B87B9009F089E /* MVBPersonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

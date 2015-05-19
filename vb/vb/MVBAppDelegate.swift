@@ -18,8 +18,8 @@ let kMVBUserID = "kMVBUserID"
 class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
-    
     var mainVc: UIViewController!
+    var userModel: MVBUserModel?
     
     var userID: String? {
         get {
@@ -39,8 +39,21 @@ class MVBAppDelegate: UIResponder {
         }
     }
     
-    func MVBApp() -> MVBAppDelegate {
+    class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
+    }
+    
+    func getUserInfo(delegate: WBHttpRequestDelegate) {
+        var delegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
+        if self.userID != nil && self.accessToken != nil {
+            var param: [String: AnyObject] = ["access_token": delegate.accessToken!,
+                "uid": delegate.userID!]
+            WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
+                          httpMethod: "GET",
+                          params: param,
+                          delegate: delegate,
+                          withTag: "liuliuliu")
+        }
     }
 }
 
@@ -51,6 +64,9 @@ extension MVBAppDelegate: UIApplicationDelegate {
         
         //  使用kMVBAppKey注册应用
         WeiboSDK.registerApp(kMVBAppKey)
+        
+        //  获取用户信息
+        self.getUserInfo(self)
         
         if self.userID == nil || self.accessToken == nil {
             //  主视图控制器
@@ -76,7 +92,15 @@ extension MVBAppDelegate: UIApplicationDelegate {
     }
 }
 
-
+extension MVBAppDelegate: WBHttpRequestDelegate {
+    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+//        self.userModel = MVBUserModel(data: data, error: nil)
+    }
+    
+    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+        self.userModel = MVBUserModel(string: result, error: nil)
+    }
+}
 
 
 

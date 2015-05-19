@@ -43,11 +43,18 @@ extension MVBLogInViewController: WeiboSDKDelegate {
             }
             NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
             NSUserDefaults.standardUserDefaults().synchronize()
-            println(_response.userInfo)
-            println(_response.accessToken)
-            println(_response.userID)
-            
             self.performSegueWithIdentifier("LogIn", sender: self)
         }
+        //  登陆成功
+        MVBAppDelegate.MVBApp().getUserInfo(self)
     }
 }
+
+extension MVBLogInViewController: WBHttpRequestDelegate {
+    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+        MVBAppDelegate.MVBApp().userModel = MVBUserModel(string: result, error: nil)
+    }
+}
+
+
+
