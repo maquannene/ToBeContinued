@@ -10,4 +10,14 @@ import UIKit
 
 class MVBPersonView: UIView {
     
+    @IBOutlet var userImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        self.userImageView.clipsToBounds = true
+        self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height / 2
+    }
+    
+    override func layoutSubviews() {
+        
+    }
 }

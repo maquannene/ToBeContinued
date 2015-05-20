@@ -8,11 +8,18 @@
 
 import UIKit
 
-class MVBUserModel: JSONModel {
+class MVBUserModel: NSObject {
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
     var profile_image_url: NSString?    //  头像
     var followers_count: NSNumber?
     var friends_count: NSNumber?
     var statuses_count: NSNumber?
+    var _description: NSString?
+    override init() {
+        //  处理属性和Json key不匹配情况
+        MVBUserModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+            return ["_description": "description"]
+        }
+    }
 }

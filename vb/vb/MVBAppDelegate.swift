@@ -19,7 +19,7 @@ class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
     var mainVc: UIViewController!
-    var userModel: MVBUserModel?
+    var userModel: MVBUserModel = MVBUserModel()
     
     var userID: String? {
         get {
@@ -59,6 +59,9 @@ class MVBAppDelegate: UIResponder {
 
 extension MVBAppDelegate: UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+//        self.test()
+        
         //  debug模式
         WeiboSDK.enableDebugMode(true)
         
@@ -98,12 +101,38 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     }
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        self.userModel = MVBUserModel(string: result, error: nil)
+        self.userModel = MVBUserModel(keyValues: result)
     }
 }
 
 
-
+//extension MVBAppDelegate {
+//    func test() {
+////        var requestOperate: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
+////        var param: [String: String] = ["key": "5E09D57E6D09BE20A1DF727134A89871", "language": "zh"]
+////        requestOperate.GET("https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key=5E09D57E6D09BE20A1DF727134A89871&language=zh_cn", parameters: param, success: { (operation :AFHTTPRequestOperation!, result :AnyObject!) -> Void in
+////            println(result)
+////            var heroes = Heroes(keyValues: result)
+////            
+////        }) { (operation, error) -> Void in
+////            println(error)
+////        }
+//        
+////        var param: [String: String] = ["Content-Type": "image/png"]
+//        
+//        var image: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/terrorblade_lg.png"))
+////        image.requestSerializer = AFHTTPRequestSerializer() as AFHTTPRequestSerializer
+////        image.responseSerializer = AFImageResponseSerializer() as AFHTTPResponseSerializer
+////        image.responseSerializer.acceptableContentTypes = ["application/json", "text/json", "text/javascript","text/html", "text/plain", "image/png"]
+//        image.GET("http://cdn.dota2.com/apps/dota2/images/heroes/terrorblade_lg.png", parameters: nil, success: { (operation, result) -> Void in
+//            println(result)
+//            var image = result as! UIImage
+//        }) { (operation, error) -> Void in
+//            println(error)
+//        }
+//        
+//    }
+//}
 
 
 

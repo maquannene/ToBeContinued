@@ -29,6 +29,11 @@ class MVBPersonViewController: UIViewController {
         self.friendsCount.text = "关注: \(userModel.friends_count!)"
         self.statusCount.text = "微博: \(userModel.statuses_count!)"
     }
+    @IBAction func exitAction(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
     
     func getUserInfo() {
 

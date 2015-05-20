@@ -52,7 +52,7 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 
 extension MVBLogInViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        MVBAppDelegate.MVBApp().userModel = MVBUserModel(string: result, error: nil)
+        MVBAppDelegate.MVBApp().userModel = MVBUserModel(keyValues: result)
     }
 }
 
