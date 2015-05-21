@@ -30,7 +30,7 @@
 		D46530251B0C9FE600CF2C2D /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */; };
 		D46530281B0CA1BF00CF2C2D /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46530261B0CA1BF00CF2C2D /* MVBHeroTableViewCell.swift */; };
 		D46530291B0CA1BF00CF2C2D /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46530271B0CA1BF00CF2C2D /* MVBHeroTableViewCell.xib */; };
-		D465302D1B0CA78E00CF2C2D /* MVBHeroesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302C1B0CA78E00CF2C2D /* MVBHeroesModel.swift */; };
+		D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */; };
 		D465302F1B0CA79800CF2C2D /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */; };
 		D47A1EF01B0B870C009F089E /* MVBPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */; };
 		D47A1EF41B0B87B9009F089E /* MVBPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */; };
@@ -89,7 +89,7 @@
 		D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
 		D46530261B0CA1BF00CF2C2D /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
 		D46530271B0CA1BF00CF2C2D /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
-		D465302C1B0CA78E00CF2C2D /* MVBHeroesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesModel.swift; sourceTree = "<group>"; };
+		D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
 		D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MVBPersonView.xib; path = ../Controllers/MVBPersonView.xib; sourceTree = "<group>"; };
 		D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MVBPersonView.swift; path = ../Controllers/MVBPersonView.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				D4121E641B07314700612CA3 /* MVBUserModel.swift */,
-				D465302C1B0CA78E00CF2C2D /* MVBHeroesModel.swift */,
+				D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */,
 				D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */,
 			);
 			path = Models;
@@ -439,7 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4DAF3271B0A0AB300BDEE1F /* MVBPersonViewController.swift in Sources */,
-				D465302D1B0CA78E00CF2C2D /* MVBHeroesModel.swift in Sources */,
+				D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */,
 				D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */,
 				D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */,
 				D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */,

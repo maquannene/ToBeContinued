@@ -17,7 +17,7 @@ let kDota2HeroesUrl = "https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v00
 class MVBHeroesViewController: UIViewController {
 
     @IBOutlet weak var heroesTableView: UITableView!
-    var heroesModel: MVBHeroesModel = MVBHeroesModel()
+    var heroesInfo: MVBHeroesInfoModel = MVBHeroesInfoModel()
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,7 +39,8 @@ extension MVBHeroesViewController {
         weak var aSelf = self
         requestOperate.GET(kDota2HeroesUrl, parameters: param, success: { (operation, result: AnyObject!) in
             let resultDic = result as! NSDictionary
-            self.heroesModel = MVBHeroesModel(keyValues: result["result"])
+            self.heroesInfo = MVBHeroesInfoModel(keyValues: resultDic["result"])
+            self.heroesInfo.heroseModelArray = NSMutableArray(array:MVBHeroModel.objectArrayWithKeyValuesArray(self.heroesInfo.heroesDicArray))
             aSelf!.heroesTableView.reloadData()
         }) {
             println($1)
@@ -60,13 +61,17 @@ extension MVBHeroesViewController {
 
 extension MVBHeroesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.heroesModel.count.integerValue
+        return self.heroesInfo.count.integerValue
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView .dequeueReusableCellWithIdentifier("hero") as! MVBHeroTableViewCell
-        if let cellModel = self.heroesModel.heroes[indexPath.row] as? MVBHeroModel {
+        var heroesModel = self.heroesInfo.heroseModelArray
+        if let cellModel = heroesModel[indexPath.row] as? MVBHeroModel {
             cell.configure(cellModel)
         }
         return cell
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 120
     }
 }

@@ -25,6 +25,22 @@ class MVBHeroTableViewCell: UITableViewCell {
     }
     
     func configure(heroModel: MVBHeroModel!) {
+        if let heroImage = heroModel.heroImage as UIImage? {
+            self.heroImageButton.setBackgroundImage(heroImage, forState: UIControlState.Normal)
+        }
+        else {
+            self.heroImageButton.setBackgroundImage(nil, forState: UIControlState.Normal)
+            heroModel.getHeroImage(self)
+        }
         self.heroNameLabel.text = heroModel.localized_name! as? String
+    }
+}
+
+extension MVBHeroTableViewCell: MVBHeroModelDelegate {
+    func heroModelHeroImageDidLoad(heroModel: MVBHeroModel) {
+        if heroNameLabel.text == heroModel.localized_name {
+            self.heroImageButton.setBackgroundImage(heroModel.heroImage!, forState: UIControlState.Normal)
+        }
+
     }
 }
