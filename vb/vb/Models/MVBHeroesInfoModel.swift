@@ -15,9 +15,10 @@ class MVBHeroesInfoModel: NSObject {
     var status: NSNumber!
     var heroseModelArray: NSMutableArray!
     override init() {
-        MVBHeroesInfoModel.setupObjectClassInArray { () -> [NSObject : AnyObject]! in
-            return ["heroesDicArray": "MVBHeroModel"]
-        }
+        
+//        MVBHeroesInfoModel.setupObjectClassInArray { () -> [NSObject : AnyObject]! in
+//            return ["heroesDicArray": "MVBHeroModel"]
+//        }
         MVBHeroesInfoModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
             return ["heroseModelArray"]
         }

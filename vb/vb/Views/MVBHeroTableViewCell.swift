@@ -15,32 +15,19 @@ class MVBHeroTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.heroImageButton.setTitle("", forState: UIControlState.Normal)
+        self.heroNameLabel.text = ""
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
+
     func configure(heroModel: MVBHeroModel!) {
-        if let heroImage = heroModel.heroImage as UIImage? {
-            self.heroImageButton.setBackgroundImage(heroImage, forState: UIControlState.Normal)
-        }
-        else {
-            self.heroImageButton.setBackgroundImage(nil, forState: UIControlState.Normal)
-            heroModel.getHeroImage(self)
+//        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal)
+        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal, placeholderImage: UIImage(named: "load.png"), options: SDWebImageOptions.ProgressiveDownload) { (image, error, cacheType, url) -> Void in
         }
         self.heroNameLabel.text = heroModel.localized_name! as? String
     }
 }
 
-extension MVBHeroTableViewCell: MVBHeroModelDelegate {
-    func heroModelHeroImageDidLoad(heroModel: MVBHeroModel) {
-        if heroNameLabel.text == heroModel.localized_name {
-            self.heroImageButton.setBackgroundImage(heroModel.heroImage!, forState: UIControlState.Normal)
-        }
-
-    }
-}

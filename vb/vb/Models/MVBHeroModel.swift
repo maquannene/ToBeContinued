@@ -23,32 +23,23 @@ class MVBHeroModel: NSObject {
     var heroImage: UIImage?
     var delegate: MVBHeroModelDelegate?
     override init() {
+        //  转json 将id 解析为heroId
         MVBHeroModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
             return ["heroId": "id"]
         }
+        //  转json忽略 heroImage
         MVBHeroModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
             return ["heroImage"]
         }
     }
-
-    func getHeroImage(delegate: MVBHeroModelDelegate?) {
-        self.delegate = delegate
-        var image: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL: NSURL(string: self.getHeroImageUrl() as! String))
-        image.requestSerializer = AFHTTPRequestSerializer() as AFHTTPRequestSerializer
-        image.responseSerializer = AFImageResponseSerializer() as AFHTTPResponseSerializer
-        image.responseSerializer.acceptableContentTypes = ["application/json", "text/json", "text/javascript","text/html", "text/plain", "image/png"]
-        image.GET(self.getHeroImageUrl() as! String, parameters: nil, success: { (operation, result) in
-            self.heroImage = (result as! UIImage)
-            self.delegate?.heroModelHeroImageDidLoad(self)
-            }) { (operation, error) in
-                println(error)
-        }
-    }
+    
+    //  获取英雄头像图片路径
     func getHeroImageUrl() -> NSString {
         var urlName = self.getUrlName(self.name!)
         return kDota2HeroImageUrl + (urlName as String) + "_" + "lg.png"
     }
     
+    //  获取英雄名字
     func getUrlName(name: NSString) -> NSString {
         var range = name.rangeOfString("npc_dota_hero_")
         return name.substringFromIndex(range.length)

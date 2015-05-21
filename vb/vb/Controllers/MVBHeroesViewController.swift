@@ -26,6 +26,7 @@ class MVBHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.heroesTableView.registerNib(UINib(nibName: "MVBHeroTableViewCell", bundle: nil), forCellReuseIdentifier: "hero")
+        SDImageCache.sharedImageCache().clearDisk()
         self.getHeroesModel()
     }
 }
@@ -45,17 +46,6 @@ extension MVBHeroesViewController {
         }) {
             println($1)
         }
-        
-//        var image: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/terrorblade_lg.png"))
-//        image.requestSerializer = AFHTTPRequestSerializer() as AFHTTPRequestSerializer
-//        image.responseSerializer = AFImageResponseSerializer() as AFHTTPResponseSerializer
-//        image.responseSerializer.acceptableContentTypes = ["application/json", "text/json", "text/javascript","text/html", "text/plain", "image/png"]
-//        image.GET("http://cdn.dota2.com/apps/dota2/images/heroes/terrorblade_lg.png", parameters: nil, success: { (operation, result) -> Void in
-//            println(result)
-//            var image = result as! UIImage
-//            }) { (operation, error) -> Void in
-//                println(error)
-//        }
     }
 }
 
