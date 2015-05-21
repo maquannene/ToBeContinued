@@ -16,10 +16,22 @@ class MVBUserModel: NSObject {
     var friends_count: NSNumber?
     var statuses_count: NSNumber?
     var _description: NSString?
-    override init() {
-        //  处理属性和Json key不匹配情况
-        MVBUserModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
-            return ["_description": "description"]
+}
+
+extension MVBUserModel {
+    internal override class func initialize() {
+        struct Static {
+            static var token: dispatch_once_t = 0
+        }
+        // make sure this isn't a subclass
+        if self !== MVBUserModel.self {
+            return
+        }
+        dispatch_once(&Static.token) {
+            //  处理属性和Json key不匹配情况
+            MVBUserModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+                return ["_description": "description"]
+            }
         }
     }
 }

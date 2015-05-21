@@ -116,10 +116,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j0-xk-prI">
-                                <rect key="frame" x="10" y="518" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <rect key="frame" x="10" y="518" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.74305345020000002" green="1" blue="0.58986363819999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="返回">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="exitAction:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="sQ8-Uj-28Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTo-cx-ArN">
+                                <rect key="frame" x="70" y="518" width="105" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="清除硬盘缓存">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearDiskAction:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="xEN-qn-Kl8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fw0-Vc-E4u">
+                                <rect key="frame" x="205" y="518" width="105" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="清除内存缓存">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearMemory:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="cK7-Vv-OP8"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-2H-k0a">
                                 <rect key="frame" x="0.0" y="40" width="320" height="428"/>
@@ -132,12 +156,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="centerY" secondItem="Fw0-Vc-E4u" secondAttribute="centerY" id="3m5-ed-Hd7"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="leading" secondItem="7j0-xk-prI" secondAttribute="trailing" constant="30" id="8yB-wh-0SK"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="width" secondItem="Fw0-Vc-E4u" secondAttribute="width" id="9ze-G2-SGG"/>
                             <constraint firstItem="Frn-NA-6JZ" firstAttribute="top" secondItem="7j0-xk-prI" secondAttribute="bottom" constant="20" id="FHi-Oa-b3J"/>
                             <constraint firstAttribute="width" secondItem="GF8-2H-k0a" secondAttribute="width" id="IxE-Fm-Gcp"/>
                             <constraint firstAttribute="centerX" secondItem="GF8-2H-k0a" secondAttribute="centerX" id="K4w-es-ipO"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="centerY" secondItem="7j0-xk-prI" secondAttribute="centerY" id="LLj-gx-xnS"/>
                             <constraint firstItem="GF8-2H-k0a" firstAttribute="top" secondItem="Cn3-Ib-dG5" secondAttribute="bottom" constant="20" id="Me0-fu-kBc"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="height" secondItem="Fw0-Vc-E4u" secondAttribute="height" id="aD5-gR-LSa"/>
                             <constraint firstItem="Frn-NA-6JZ" firstAttribute="top" secondItem="GF8-2H-k0a" secondAttribute="bottom" constant="100" id="hJz-yd-rGe"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="height" secondItem="7j0-xk-prI" secondAttribute="height" id="iDn-pr-WEt"/>
+                            <constraint firstAttribute="right" secondItem="Fw0-Vc-E4u" secondAttribute="right" constant="10" id="stf-Lr-E1R"/>
                             <constraint firstItem="7j0-xk-prI" firstAttribute="left" secondItem="EOd-sd-9un" secondAttribute="left" constant="10" id="xFx-LL-DcZ"/>
+                            <constraint firstItem="Fw0-Vc-E4u" firstAttribute="leading" secondItem="dTo-cx-ArN" secondAttribute="trailing" constant="30" id="xJO-BF-qcU"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -147,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Es-7l-lG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1221" y="0.0"/>
+            <point key="canvasLocation" x="-1185" y="-178"/>
         </scene>
         <!--Person View Controller-->
         <scene sceneID="uev-wj-8Zq">

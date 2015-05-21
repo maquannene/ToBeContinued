@@ -11,23 +11,38 @@ import UIKit
 
 class MVBHeroesInfoModel: NSObject {
     var count: NSNumber!
-    var heroesDicArray: NSMutableArray!
-    var status: NSNumber!
-    var heroseModelArray: NSMutableArray!
+    var heroesDicArray: NSMutableArray?
+    var status: NSNumber?
+    var heroseModelArray: NSMutableArray?
     override init() {
+        self.count = NSNumber(integer: 0)
         
-//        MVBHeroesInfoModel.setupObjectClassInArray { () -> [NSObject : AnyObject]! in
-//            return ["heroesDicArray": "MVBHeroModel"]
-//        }
-        MVBHeroesInfoModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
-            return ["heroseModelArray"]
+    }
+    
+    deinit {
+        println(" 英雄信息析构 ")
+    }
+}
+
+extension MVBHeroesInfoModel {
+    internal override class func initialize() {
+        struct Static {
+            static var token: dispatch_once_t = 0
         }
-        MVBHeroesInfoModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
-            return ["heroesDicArray": "heroes"]
+        // make sure this isn't a subclass
+        if self !== MVBHeroesInfoModel.self {
+            return
         }
-        count = NSNumber(integer: 0)
-        status = NSNumber(integer: 0)
-        heroesDicArray = NSMutableArray()
-        heroseModelArray = NSMutableArray()
+        dispatch_once(&Static.token) {
+            //        MVBHeroesInfoModel.setupObjectClassInArray { () -> [NSObject : AnyObject]! in
+            //            return ["heroesDicArray": "MVBHeroModel"]
+            //        }
+            MVBHeroesInfoModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
+                return ["heroseModelArray"]
+            }
+            MVBHeroesInfoModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+                return ["heroesDicArray": "heroes"]
+            }
+        }
     }
 }

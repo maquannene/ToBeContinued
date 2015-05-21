@@ -26,8 +26,26 @@ class MVBHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.heroesTableView.registerNib(UINib(nibName: "MVBHeroTableViewCell", bundle: nil), forCellReuseIdentifier: "hero")
-        SDImageCache.sharedImageCache().clearDisk()
         self.getHeroesModel()
+    }
+    
+    @IBAction func exitAction(sender: AnyObject) {
+        SDImageCache.sharedImageCache().clearMemory()
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    @IBAction func clearDiskAction(sender: AnyObject) {
+        SDImageCache.sharedImageCache().clearDisk()
+    }
+    
+    @IBAction func clearMemory(sender: AnyObject) {
+        SDImageCache.sharedImageCache().clearMemory()
+    }
+    
+    deinit {
+        println(" 英雄页面析构 ")
     }
 }
 
@@ -56,7 +74,7 @@ extension MVBHeroesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView .dequeueReusableCellWithIdentifier("hero") as! MVBHeroTableViewCell
         var heroesModel = self.heroesInfo.heroseModelArray
-        if let cellModel = heroesModel[indexPath.row] as? MVBHeroModel {
+        if let cellModel = heroesModel?[indexPath.row] as? MVBHeroModel {
             cell.configure(cellModel)
         }
         return cell

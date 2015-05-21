@@ -52,7 +52,7 @@ class MVBAppDelegate: UIResponder {
                           httpMethod: "GET",
                           params: param,
                           delegate: delegate,
-                          withTag: "liuliuliu")
+                          withTag: nil)
         }
     }
 }

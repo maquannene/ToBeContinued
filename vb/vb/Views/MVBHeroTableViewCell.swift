@@ -24,10 +24,11 @@ class MVBHeroTableViewCell: UITableViewCell {
     }
 
     func configure(heroModel: MVBHeroModel!) {
-//        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal)
-        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal, placeholderImage: UIImage(named: "load.png"), options: SDWebImageOptions.ProgressiveDownload) { (image, error, cacheType, url) -> Void in
-        }
+        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal)
         self.heroNameLabel.text = heroModel.localized_name! as? String
+    }
+    deinit {
+        println("英雄页面析构\(heroNameLabel.text)")
     }
 }
 

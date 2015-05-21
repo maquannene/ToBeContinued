@@ -241,8 +241,8 @@
 		D4121E0A1B072EAA00612CA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */,
 				D47A1EF31B0B87B9009F089E /* MVBPersonView.swift */,
+				D47A1EEF1B0B870C009F089E /* MVBPersonView.xib */,
 				D46530261B0CA1BF00CF2C2D /* MVBHeroTableViewCell.swift */,
 				D46530271B0CA1BF00CF2C2D /* MVBHeroTableViewCell.xib */,
 			);
