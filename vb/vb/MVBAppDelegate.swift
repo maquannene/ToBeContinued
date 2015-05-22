@@ -19,7 +19,7 @@ class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
     var mainVc: UIViewController!
-    var userModel: MVBUserModel = MVBUserModel()
+    var userModel: MVBUserModel?
     
     var userID: String? {
         get {
@@ -44,10 +44,10 @@ class MVBAppDelegate: UIResponder {
     }
     
     func getUserInfo(delegate: WBHttpRequestDelegate) {
-        var delegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
+        var appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
         if self.userID != nil && self.accessToken != nil {
-            var param: [String: AnyObject] = ["access_token": delegate.accessToken!,
-                "uid": delegate.userID!]
+            var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!,
+                "uid": appDelegate.userID!]
             WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
                           httpMethod: "GET",
                           params: param,
@@ -101,7 +101,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     }
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        self.userModel = MVBUserModel(keyValues: result)
+//        self.userModel = MVBUserModel(keyValues: result)
     }
 }
 

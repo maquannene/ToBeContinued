@@ -6,5 +6,5 @@ pod 'SVPullToRefresh', '~>0.4'
 pod 'JSONModel', '~>0.13'
 pod 'MJExtension'
 pod 'BlocksKit'
-pod 'SDWebImage', '~>3.6
-'
+pod 'SDWebImage', '~>3.6'
+pod 'UIActivityIndicator-for-SDWebImage'

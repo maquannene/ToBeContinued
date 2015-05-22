@@ -24,7 +24,8 @@ class MVBHeroTableViewCell: UITableViewCell {
     }
 
     func configure(heroModel: MVBHeroModel!) {
-        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal)
+        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal, placeholderImage: UIImage(named: "load.png"), options: SDWebImageOptions(0)) { (image, error, cacheType, url) -> Void in
+        }
         self.heroNameLabel.text = heroModel.localized_name! as? String
     }
     deinit {

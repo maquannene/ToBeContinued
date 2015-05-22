@@ -22,20 +22,40 @@ class MVBPersonViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        let userModel: MVBUserModel! = MVBAppDelegate.MVBApp().userModel
-        self.userImage.setImageWithURL(NSURL(string: "http://tp3.sinaimg.cn/1697721754/50/5720722434/1"))
-        self.userNameLabel.text = userModel.name! as? String
-        self.followsCount.text = "粉丝: \(userModel.followers_count!)"
-        self.friendsCount.text = "关注: \(userModel.friends_count!)"
-        self.statusCount.text = "微博: \(userModel.statuses_count!)"
+        self.configurUserInfo()
     }
+    
     @IBAction func exitAction(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         })
     }
-    
-    func getUserInfo() {
+}
 
+extension MVBPersonViewController {
+    func configurUserInfo() {
+        if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
+            self.userImage.sd_setImageWithURL(NSURL(string: (userModel.profile_image_url as String?)!))
+            self.userNameLabel.text = userModel.name! as? String
+            self.followsCount.text = "粉丝: \(userModel.followers_count!)"
+            self.friendsCount.text = "关注: \(userModel.friends_count!)"
+            self.statusCount.text = "微博: \(userModel.statuses_count!)"
+        }
+        else {
+            let delegate = MVBAppDelegate.MVBApp()
+            delegate.getUserInfo(self)
+        }
+    }
+}
+
+extension MVBPersonViewController: WBHttpRequestDelegate {
+    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+        
+    }
+    
+    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+        var delegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
+        delegate.userModel = MVBUserModel(keyValues: result)
+        self.configurUserInfo()
     }
 }

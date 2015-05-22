@@ -73,7 +73,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="personalSeting" id="kR2-ZT-wSs"/>
+                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="personViewController" id="kR2-ZT-wSs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-bT-fKO">
@@ -82,7 +82,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroes" id="CgF-Yp-Icd"/>
+                                    <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroesViewController" id="CgF-Yp-Icd"/>
                                 </connections>
                             </button>
                         </subviews>

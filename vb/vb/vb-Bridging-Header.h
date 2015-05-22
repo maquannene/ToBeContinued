@@ -15,8 +15,9 @@
 #import "WBHttpRequest+WeiboUser.h"
 
 //  SDWebImage
-//#import "UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
+#import "UIImage+GIF.h"
 
 //  AFNetworking
 #import "AFNetworking.h"
@@ -24,3 +25,6 @@
 
 //  MJExtension
 #import "MJExtension.h"
+
+//  Pods-UIActivityIndicator-for-SDWebImage
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
