@@ -14,8 +14,21 @@ class MVBUserModel: NSObject {
     var profile_image_url: NSString?    //  头像
     var followers_count: NSNumber?
     var friends_count: NSNumber?
+    
     var statuses_count: NSNumber?
     var _description: NSString?
+//    var province: NSString?             //  省
+//    var city: NSString?                 //  市
+    var location: NSString?             //  地区
+    var cover_image_phone: NSString?    //  背景图片
+    var gender: NSString?               //  性别
+    var created_at: NSString?           //  注册时间
+    
+    var status: NSDictionary?           //  最近一条微博
+    
+    var avatar_large: NSString?         //  大图头像
+    var avatar_hd: NSString?            //  高清图像
+    
 }
 
 extension MVBUserModel {

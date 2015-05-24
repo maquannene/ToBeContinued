@@ -11,17 +11,17 @@ import UIKit
 
 class MVBMainViewController: UIViewController, WBHttpRequestDelegate {
     
-    weak var personViewController: MVBPersonViewController?
-    var heroesViewController: MVBHeroesViewController?
+    var userVC: MVBUserViewController?
+    var heroesVC: MVBHeroesViewController?
     
     override func viewDidLoad() {
         
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if identifier == "heroesViewController" {
-            if heroesViewController != nil {
-                self.presentViewController(heroesViewController!, animated: true, completion: { () -> Void in
+        if identifier == "heroesVC" {
+            if heroesVC != nil {
+                self.presentViewController(heroesVC!, animated: true, completion: { () -> Void in
                     
                 })
                 return false
@@ -30,9 +30,9 @@ class MVBMainViewController: UIViewController, WBHttpRequestDelegate {
                 return true
             }
         }
-        if identifier == "personViewController" {
-            if personViewController != nil {
-                self.presentViewController(personViewController!, animated: true, completion: { () -> Void in
+        if identifier == "userVC" {
+            if userVC != nil {
+                self.presentViewController(userVC!, animated: true, completion: { () -> Void in
                     
                 })
                 return false

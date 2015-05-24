@@ -9,7 +9,7 @@
 import UIKit
 
 let kMVBAppKey = "1325571405"
-let kRedirectURI = "http://api.weibo.com/oauth2/default/html"
+let kRedirectURL = "http://api.weibo.com/oauth2/default/html"
 let kMVBAutorizeInfo = "kMVBAutorizeInfo"
 let kMVBAccessToken = "kMVBAccessToken"
 let kMVBUserID = "kMVBUserID"
@@ -60,7 +60,13 @@ class MVBAppDelegate: UIResponder {
 extension MVBAppDelegate: UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-//        self.test()
+//      self.test()
+        
+        let key = String(kCFBundleVersionKey)
+        //先去沙盒中取出上次使用的版本号
+        let lastVersionCode = NSUserDefaults.standardUserDefaults().objectForKey(key) as? String
+        //加载程序中的info.plist
+        let currentVersionCode = NSBundle.mainBundle().infoDictionary?[key] as! String
         
         //  debug模式
         WeiboSDK.enableDebugMode(true)
@@ -101,7 +107,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     }
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-//        self.userModel = MVBUserModel(keyValues: result)
+        self.userModel = MVBUserModel(keyValues: result)
     }
 }
 

@@ -26,17 +26,19 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
-		D454FE581B0C36A0002D6630 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D454FE571B0C36A0002D6630 /* SwiftyJSON.swift */; };
 		D46530251B0C9FE600CF2C2D /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */; };
 		D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */; };
 		D465302F1B0CA79800CF2C2D /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */; };
+		D46C6C651B10223700EA9FF6 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C6C641B10223700EA9FF6 /* SwiftyJSON.swift */; };
+		D46C6C7D1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C6C7C1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.m */; };
+		D4B157E61B11FE3E00AFC26A /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B157E51B11FE3E00AFC26A /* MQButton.swift */; };
+		D4B157EA1B12019900AFC26A /* MVBUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */; };
 		D4D4909E1B0F636D0071F71B /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */; };
-		D4D4909F1B0F636D0071F71B /* MVBPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D4909C1B0F636D0071F71B /* MVBPersonView.swift */; };
-		D4D490A01B0F636D0071F71B /* MVBPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4909D1B0F636D0071F71B /* MVBPersonView.xib */; };
+		D4D4909F1B0F636D0071F71B /* MVBUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D4909C1B0F636D0071F71B /* MVBUserView.swift */; };
+		D4D490A01B0F636D0071F71B /* MVBUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4909D1B0F636D0071F71B /* MVBUserView.xib */; };
 		D4D490A21B0F63860071F71B /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */; };
-		D4D490A41B0F63A10071F71B /* load.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D490A31B0F63A10071F71B /* load.png */; };
 		D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */; };
-		D4DAF3271B0A0AB300BDEE1F /* MVBPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */; };
+		D4DAF3271B0A0AB300BDEE1F /* MVBUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,19 +87,22 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D454FE561B0C36A0002D6630 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
-		D454FE571B0C36A0002D6630 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
 		D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
-		D4A6EA8C1B09D0CD0069F9FE /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vb-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		D46C6C631B10223700EA9FF6 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
+		D46C6C641B10223700EA9FF6 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		D46C6C7B1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
+		D46C6C7C1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
+		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vb-Prefix.pch"; sourceTree = "<group>"; };
+		D4B157E51B11FE3E00AFC26A /* MQButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQButton.swift; sourceTree = "<group>"; };
+		D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserInformationViewController.swift; sourceTree = "<group>"; };
 		D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
-		D4D4909C1B0F636D0071F71B /* MVBPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPersonView.swift; sourceTree = "<group>"; };
-		D4D4909D1B0F636D0071F71B /* MVBPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBPersonView.xib; sourceTree = "<group>"; };
+		D4D4909C1B0F636D0071F71B /* MVBUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserView.swift; sourceTree = "<group>"; };
+		D4D4909D1B0F636D0071F71B /* MVBUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBUserView.xib; sourceTree = "<group>"; };
 		D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
-		D4D490A31B0F63A10071F71B /* load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = load.png; sourceTree = "<group>"; };
 		D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
-		D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPersonViewController.swift; sourceTree = "<group>"; };
+		D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,18 +184,14 @@
 			isa = PBXGroup;
 			children = (
 				D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */,
-				D4121DE71B07184400612CA3 /* Main.storyboard */,
-				D4121DEA1B07184400612CA3 /* Images.xcassets */,
-				D4121DEC1B07184400612CA3 /* LaunchScreen.xib */,
 				D4121E5F1B0730A100612CA3 /* Controllers */,
 				D4121E081B072EAA00612CA3 /* Models */,
 				D4121E0A1B072EAA00612CA3 /* Views */,
-				D4D490A51B0F65600071F71B /* Modules */,
 				D4121E681B075C8300612CA3 /* SDK */,
 				D454FE531B0C3670002D6630 /* Library */,
 				D4121DE11B07184400612CA3 /* Supporting Files */,
 				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
-				D4A6EA8C1B09D0CD0069F9FE /* vb-Prefix.pch */,
+				D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */,
 			);
 			path = vb;
 			sourceTree = "<group>";
@@ -198,7 +199,9 @@
 		D4121DE11B07184400612CA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D4D490A31B0F63A10071F71B /* load.png */,
+				D4121DE71B07184400612CA3 /* Main.storyboard */,
+				D4121DEA1B07184400612CA3 /* Images.xcassets */,
+				D4121DEC1B07184400612CA3 /* LaunchScreen.xib */,
 				D4121DE21B07184400612CA3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -236,8 +239,8 @@
 			children = (
 				D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */,
 				D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */,
-				D4D4909C1B0F636D0071F71B /* MVBPersonView.swift */,
-				D4D4909D1B0F636D0071F71B /* MVBPersonView.xib */,
+				D4D4909C1B0F636D0071F71B /* MVBUserView.swift */,
+				D4D4909D1B0F636D0071F71B /* MVBUserView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,8 +250,9 @@
 			children = (
 				D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */,
 				D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */,
-				D4DAF3261B0A0AB300BDEE1F /* MVBPersonViewController.swift */,
 				D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */,
+				D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */,
+				D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -282,1001 +286,29 @@
 		D454FE531B0C3670002D6630 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				D454FE551B0C368F002D6630 /* SwiftyJson */,
+				D46C6C7A1B10255100EA9FF6 /* VbLibrary */,
+				D46C6C621B10223700EA9FF6 /* SwiftyJson */,
 			);
 			path = Library;
 			sourceTree = "<group>";
 		};
-		D454FE551B0C368F002D6630 /* SwiftyJson */ = {
+		D46C6C621B10223700EA9FF6 /* SwiftyJson */ = {
 			isa = PBXGroup;
 			children = (
-				D454FE561B0C36A0002D6630 /* SwiftyJSON.h */,
-				D454FE571B0C36A0002D6630 /* SwiftyJSON.swift */,
+				D46C6C631B10223700EA9FF6 /* SwiftyJSON.h */,
+				D46C6C641B10223700EA9FF6 /* SwiftyJSON.swift */,
 			);
 			path = SwiftyJson;
 			sourceTree = "<group>";
 		};
-		D4D490A51B0F65600071F71B /* Modules */ = {
+		D46C6C7A1B10255100EA9FF6 /* VbLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				D4D490A61B0F65600071F71B /* Modules */,
+				D46C6C7B1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.h */,
+				D46C6C7C1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.m */,
+				D4B157E51B11FE3E00AFC26A /* MQButton.swift */,
 			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490A61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490A71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490A71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490A81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490A81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490A91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490A91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AD1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AD1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490AF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490AF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B01B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B01B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B11B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B11B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B21B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B21B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B31B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B31B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B41B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B41B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B51B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B51B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B61B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490B91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490B91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BD1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BD1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490BF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490BF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C01B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C01B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C11B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C11B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C21B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C21B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C31B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C31B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C41B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C41B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C51B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C51B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C61B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490C91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490C91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CD1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CD1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490CF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490CF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D01B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D01B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D11B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D11B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D21B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D21B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D31B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D31B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D41B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D41B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D51B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D51B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D61B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490D91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490D91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DD1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DD1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490DF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490DF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E01B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E01B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E11B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E11B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E21B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E21B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E31B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E31B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E41B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E41B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E51B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E51B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E61B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490E91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490E91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490EA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490EA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490EB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490EB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490EC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490EC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490ED1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490ED1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490EE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490EE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490EF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490EF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F01B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F01B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F11B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F11B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F21B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F21B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F31B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F31B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F41B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F41B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F51B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F51B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F61B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F61B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F71B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F71B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F81B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F81B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490F91B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490F91B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FA1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FA1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FB1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FB1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FC1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FC1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FD1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FD1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FE1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FE1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490FF1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D490FF1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491001B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491001B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491011B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491011B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491021B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491021B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491031B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491031B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491041B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491041B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491051B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491051B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491061B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491061B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491071B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491071B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491081B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491081B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491091B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491091B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910A1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910A1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910B1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910B1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910C1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910C1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910D1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910D1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910E1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910E1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4910F1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4910F1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491101B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491101B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491111B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491111B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491121B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491121B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491131B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491131B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491141B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491141B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491151B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491151B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491161B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491161B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491171B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491171B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491181B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491181B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D491191B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D491191B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911A1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911A1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911B1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911B1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911C1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911C1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911D1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911D1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911E1B0F65600071F71B /* Modules */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911E1B0F65600071F71B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				D4D4911F1B0F65600071F71B /* Modul */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		D4D4911F1B0F65600071F71B /* Modul */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modul;
+			path = VbLibrary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1363,10 +395,9 @@
 			files = (
 				D4D4909E1B0F636D0071F71B /* MVBHeroTableViewCell.xib in Resources */,
 				D4121DE91B07184400612CA3 /* Main.storyboard in Resources */,
-				D4D490A41B0F63A10071F71B /* load.png in Resources */,
 				D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */,
 				D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */,
-				D4D490A01B0F636D0071F71B /* MVBPersonView.xib in Resources */,
+				D4D490A01B0F636D0071F71B /* MVBUserView.xib in Resources */,
 				D4121E771B075CDC00612CA3 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1418,16 +449,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4DAF3271B0A0AB300BDEE1F /* MVBPersonViewController.swift in Sources */,
-				D4D4909F1B0F636D0071F71B /* MVBPersonView.swift in Sources */,
+				D4DAF3271B0A0AB300BDEE1F /* MVBUserViewController.swift in Sources */,
+				D4D4909F1B0F636D0071F71B /* MVBUserView.swift in Sources */,
 				D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */,
+				D46C6C7D1B10255100EA9FF6 /* UIView+MQRecursiveLevelLog.m in Sources */,
+				D46C6C651B10223700EA9FF6 /* SwiftyJSON.swift in Sources */,
 				D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */,
 				D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */,
 				D4D490A21B0F63860071F71B /* MVBHeroTableViewCell.swift in Sources */,
 				D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */,
+				D4B157E61B11FE3E00AFC26A /* MQButton.swift in Sources */,
 				D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */,
 				D465302F1B0CA79800CF2C2D /* MVBHeroModel.swift in Sources */,
-				D454FE581B0C36A0002D6630 /* SwiftyJSON.swift in Sources */,
+				D4B157EA1B12019900AFC26A /* MVBUserInformationViewController.swift in Sources */,
 				D46530251B0C9FE600CF2C2D /* MVBHeroesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1556,6 +590,7 @@
 			baseConfigurationReference = 3F82BDBD5A2E755D7FA6CF21 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
@@ -1577,6 +612,7 @@
 			baseConfigurationReference = 7E9AB9D9291257BA4918BAF9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";

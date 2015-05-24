@@ -1,5 +1,5 @@
 //
-//  MVBPersonView.swift
+//  MVBUserView.swift
 //  vb
 //
 //  Created by 马权 on 5/19/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MVBPersonView: UIView {
+class MVBUserView: UIView {
     
     @IBOutlet var userImageView: UIImageView!
     

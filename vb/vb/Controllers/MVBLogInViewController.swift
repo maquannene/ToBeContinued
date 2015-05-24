@@ -20,7 +20,7 @@ class MVBLogInViewController: UIViewController {
     
     @IBAction func logInAction(sender: AnyObject) {
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
-        request.redirectURI = kRedirectURI
+        request.redirectURI = kRedirectURL
         request.scope = "all"
         WeiboSDK.sendRequest(request)
     }

@@ -47,7 +47,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2168" y="-127"/>
+            <point key="canvasLocation" x="-2394" y="-309"/>
+        </scene>
+        <!--User Information View Controller-->
+        <scene sceneID="oac-Kb-Lla">
+            <objects>
+                <viewController id="060-7V-8dK" customClass="MVBUserInformationViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yjb-GL-qd5"/>
+                        <viewControllerLayoutGuide type="bottom" id="8r3-Q2-ZwT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KNJ-uW-fEu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOB-W0-YDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1118" y="-908"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="Ujo-oe-Pcs">
@@ -73,7 +92,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="personViewController" id="kR2-ZT-wSs"/>
+                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="userVC" id="Iba-t8-dKy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-bT-fKO">
@@ -82,7 +101,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroesViewController" id="CgF-Yp-Icd"/>
+                                    <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroesVC" id="CgF-Yp-Icd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -101,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yti-as-QRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1765" y="-298"/>
+            <point key="canvasLocation" x="-1995" y="-309"/>
         </scene>
         <!--Heroes View Controller-->
         <scene sceneID="iw7-KQ-TDk">
@@ -179,17 +198,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Es-7l-lG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1185" y="-178"/>
+            <point key="canvasLocation" x="-1550" y="70"/>
         </scene>
-        <!--Person View Controller-->
+        <!--User View Controller-->
         <scene sceneID="uev-wj-8Zq">
             <objects>
-                <viewController id="qPG-3N-nQH" customClass="MVBPersonViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qPG-3N-nQH" customClass="MVBUserViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QVm-CR-tMl"/>
                         <viewControllerLayoutGuide type="bottom" id="MAq-Ms-EVE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lRm-4p-6Ub" customClass="MVBPersonView" customModule="vb" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="lRm-4p-6Ub" customClass="MVBUserView" customModule="vb" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,11 +216,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="view" destination="lRm-4p-6Ub" id="9bo-mn-0zr"/>
+                        <segue destination="060-7V-8dK" kind="presentation" identifier="userInformationVC" id="e9w-Fu-mZ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-EU-0ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1236" y="-616"/>
+            <point key="canvasLocation" x="-1556" y="-616"/>
         </scene>
     </scenes>
 </document>
