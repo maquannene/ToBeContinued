@@ -111,12 +111,12 @@ static NSNumberFormatter *_numberFormatter;
     MJAssertError([keyValues isKindOfClass:[NSDictionary class]], self, error, @"keyValues参数不是一个字典");
     
     @try {
-        Class class = [self class];
-        NSArray *allowedPropertyNames = [class totalAllowedPropertyNames];
-        NSArray *ignoredPropertyNames = [class totalIgnoredPropertyNames];
+        Class aClass = [self class];
+        NSArray *allowedPropertyNames = [aClass totalAllowedPropertyNames];
+        NSArray *ignoredPropertyNames = [aClass totalIgnoredPropertyNames];
         
         //通过封装的方法回调一个通过运行时编写的，用于返回属性列表的方法。
-        [class enumeratePropertiesWithBlock:^(MJProperty *property, BOOL *stop) {
+        [aClass enumeratePropertiesWithBlock:^(MJProperty *property, BOOL *stop) {
             // 0.检测是否被忽略
             if (allowedPropertyNames.count && ![allowedPropertyNames containsObject:property.name]) return;
             if ([ignoredPropertyNames containsObject:property.name]) return;
@@ -230,8 +230,12 @@ static NSNumberFormatter *_numberFormatter;
     
     // 3.遍历
     for (NSDictionary *keyValues in keyValuesArray) {
-        id model = [self objectWithKeyValues:keyValues context:context error:error];
-        if (model) [modelArray addObject:model];
+        if ([keyValues isKindOfClass:[NSArray class]]){
+            [modelArray addObject:[self objectArrayWithKeyValuesArray:keyValues context:context error:error]];
+        } else {
+            id model = [self objectWithKeyValues:keyValues context:context error:error];
+            if (model) [modelArray addObject:model];
+        }
     }
     
     return modelArray;
@@ -347,11 +351,11 @@ static NSNumberFormatter *_numberFormatter;
     __block NSMutableDictionary *keyValues = [NSMutableDictionary dictionary];
     
     @try {
-        Class class = [self class];
-        NSArray *allowedPropertyNames = [class totalAllowedPropertyNames];
-        NSArray *ignoredPropertyNames = [class totalIgnoredPropertyNames];
+        Class aClass = [self class];
+        NSArray *allowedPropertyNames = [aClass totalAllowedPropertyNames];
+        NSArray *ignoredPropertyNames = [aClass totalIgnoredPropertyNames];
         
-        [class enumeratePropertiesWithBlock:^(MJProperty *property, BOOL *stop) {
+        [aClass enumeratePropertiesWithBlock:^(MJProperty *property, BOOL *stop) {
             // 0.检测是否被忽略
             if (allowedPropertyNames.count && ![allowedPropertyNames containsObject:property.name]) return;
             if ([ignoredPropertyNames containsObject:property.name]) return;

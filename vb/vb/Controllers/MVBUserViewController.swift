@@ -42,7 +42,8 @@ class MVBUserViewController: UIViewController {
 extension MVBUserViewController {
 
     @IBAction func userNameAction(sender: AnyObject) {
-        self.performSegueWithIdentifier("userInformationVC", sender: sender)
+//        self.performSegueWithIdentifier("userInformationVC", sender: sender)
+        self.getList()
     }
     
     @IBAction func followsAction(sender: AnyObject) {
@@ -70,8 +71,18 @@ extension MVBUserViewController {
         }
         else {
             let delegate = MVBAppDelegate.MVBApp()
-            delegate.getUserInfo(self)
+            delegate.getUserInfo(self, tag: nil)
         }
+    }
+    func getList() {
+        var appDelegate = MVBAppDelegate.MVBApp()
+        var search: NSString = "张嘉佳"
+        var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "q": search.URLEncodedString()]
+        WBHttpRequest(URL: "https://api.weibo.com/2/search/suggestions/users.json",
+            httpMethod: "GET",
+            params: param,
+            delegate: self,
+            withTag: "https://api.weibo.com/2/search/suggestions/users.json")
     }
 }
 

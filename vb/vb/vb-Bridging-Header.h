@@ -9,10 +9,7 @@
 #import "JSONModelLib.h"
 
 //  WeiboSDK
-#import "WeiboUser.h"
 #import "WeiboSDK.h"
-#import "WBHttpRequest.h"
-#import "WBHttpRequest+WeiboUser.h"
 
 //  SDWebImage
 #import "UIImageView+WebCache.h"
@@ -31,3 +28,6 @@
 
 //  UIView+MQRecursiveLevelLog
 #import "UIView+MQRecursiveLevelLog.h"
+
+//
+#import "NSString+URLEncodingAdditions.h"

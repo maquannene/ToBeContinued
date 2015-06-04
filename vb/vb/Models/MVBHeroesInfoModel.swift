@@ -11,9 +11,9 @@ import UIKit
 
 class MVBHeroesInfoModel: NSObject {
     var count: NSNumber!
-    var heroesDicArray: NSMutableArray?
     var status: NSNumber?
     var heroseModelArray: NSMutableArray?
+    var heroesDicArray: NSMutableArray?
     override init() {
         self.count = NSNumber(integer: 0)
         

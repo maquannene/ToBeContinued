@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MVBMainViewController: UIViewController, WBHttpRequestDelegate {
+class MVBMainViewController: UIViewController {
     
     var userVC: MVBUserViewController?
     var heroesVC: MVBHeroesViewController?
@@ -48,5 +48,23 @@ class MVBMainViewController: UIViewController, WBHttpRequestDelegate {
         if let identifier = segue.identifier as String? {
             self.setValue(segue.destinationViewController, forKey: identifier)
         }
+    }
+    @IBAction func logOutAction(sender: AnyObject) {
+        var appDelegate = MVBAppDelegate.MVBApp()
+        WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: nil)
+    }
+    
+    deinit {
+    
+    }
+    
+}
+
+extension MVBMainViewController: WBHttpRequestDelegate {
+    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+        
+    }
+    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

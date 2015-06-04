@@ -38,15 +38,23 @@ extension MVBLogInViewController: WeiboSDKDelegate {
             if let accessToken = _response.accessToken {
                 authorizeInfo[kMVBAccessToken] = accessToken
             }
+            else {
+                return
+            }
+            
             if let userID = _response.userID {
                 authorizeInfo[kMVBUserID] = userID
             }
+            else {
+                return
+            }
+            
             NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
             NSUserDefaults.standardUserDefaults().synchronize()
             self.performSegueWithIdentifier("LogIn", sender: self)
         }
         //  登陆成功
-        MVBAppDelegate.MVBApp().getUserInfo(self)
+        MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
     }
 }
 

@@ -12,10 +12,11 @@ class MVBUserModel: NSObject {
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
     var profile_image_url: NSString?    //  头像
+    
     var followers_count: NSNumber?
     var friends_count: NSNumber?
-    
     var statuses_count: NSNumber?
+    
     var _description: NSString?
 //    var province: NSString?             //  省
 //    var city: NSString?                 //  市

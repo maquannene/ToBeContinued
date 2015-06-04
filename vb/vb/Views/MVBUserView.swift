@@ -18,6 +18,6 @@ class MVBUserView: UIView {
     }
     
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
     }
 }

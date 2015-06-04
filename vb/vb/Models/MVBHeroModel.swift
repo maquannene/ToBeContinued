@@ -12,10 +12,6 @@ import UIKit
 
 let kDota2HeroImageUrl = "http://cdn.dota2.com/apps/dota2/images/heroes/"
 
-protocol MVBHeroModelDelegate {
-    func heroModelHeroImageDidLoad(heroModel: MVBHeroModel)
-}
-
 class MVBHeroModel: NSObject {
     var heroId: NSNumber?
     var name: NSString?

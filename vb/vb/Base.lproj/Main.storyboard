@@ -104,6 +104,15 @@
                                     <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroesVC" id="CgF-Yp-Icd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfj-fg-xJo">
+                                <rect key="frame" x="110" y="494" width="100" height="44"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutAction:" destination="amP-ie-ySa" eventType="touchUpInside" id="BSD-kR-sb7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -111,7 +120,11 @@
                             <constraint firstItem="klC-rw-oaM" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="H8d-Nd-1gd"/>
                             <constraint firstItem="h2c-bT-fKO" firstAttribute="top" secondItem="klC-rw-oaM" secondAttribute="bottom" constant="10" id="HXx-um-sHr"/>
                             <constraint firstAttribute="centerX" secondItem="klC-rw-oaM" secondAttribute="centerX" id="HmR-Le-IkV"/>
+                            <constraint firstItem="Wfj-fg-xJo" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="foY-t6-Ric"/>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="h7N-ho-3fa"/>
+                            <constraint firstItem="Wfj-fg-xJo" firstAttribute="height" secondItem="h2c-bT-fKO" secondAttribute="height" id="hZA-Gr-tbx"/>
+                            <constraint firstItem="Bmi-o8-3UU" firstAttribute="top" secondItem="Wfj-fg-xJo" secondAttribute="bottom" constant="30" id="mmB-Ap-zg8"/>
+                            <constraint firstItem="Wfj-fg-xJo" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="wHo-nq-EWx"/>
                             <constraint firstItem="jl7-qG-Gfx" firstAttribute="bottom" secondItem="klC-rw-oaM" secondAttribute="top" id="yYw-0b-ED8"/>
                         </constraints>
                     </view>
@@ -222,6 +235,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-EU-0ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1556" y="-616"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5SZ-In-fgt">
+            <objects>
+                <viewController id="XEg-b3-zlZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="guM-nA-5U9"/>
+                        <viewControllerLayoutGuide type="bottom" id="zrU-WG-iN1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nOK-vd-Mny">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1M-iZ-Rwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>

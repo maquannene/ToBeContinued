@@ -55,12 +55,12 @@ extension MVBHeroesViewController {
         requestOperate.responseSerializer = AFJSONResponseSerializer()
         var param: [String: String] = [kDota2DevApiKey: kDota2DevApiValue,
                                        kDota2HeroesLanguageKey: kDota2HeroesLanguageValue]
-        weak var aSelf = self
-        requestOperate.GET(kDota2HeroesUrl, parameters: param, success: { (operation, result: AnyObject!) in
+        requestOperate.GET(kDota2HeroesUrl, parameters: param, success: {
+            [unowned self] (operation, result: AnyObject!) in
             let resultDic = result as! NSDictionary
             self.heroesInfo = MVBHeroesInfoModel(keyValues: resultDic["result"])
             self.heroesInfo.heroseModelArray = NSMutableArray(array:MVBHeroModel.objectArrayWithKeyValuesArray(self.heroesInfo.heroesDicArray))
-            aSelf!.heroesTableView.reloadData()
+            self.heroesTableView.reloadData()
         }) {
             println($1)
         }

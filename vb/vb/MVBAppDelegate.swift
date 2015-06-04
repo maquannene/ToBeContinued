@@ -8,9 +8,9 @@
 
 import UIKit
 
-let kMVBAppKey = "1325571405"
-let kRedirectURL = "http://api.weibo.com/oauth2/default/html"
-let kMVBAutorizeInfo = "kMVBAutorizeInfo"
+let kMVBAppKey = "1325571405"                                       //  key
+let kRedirectURL = "http://api.weibo.com/oauth2/default/html"       //  回调页
+let kMVBAutorizeInfo = "kMVBAutorizeInfo"   
 let kMVBAccessToken = "kMVBAccessToken"
 let kMVBUserID = "kMVBUserID"
 
@@ -42,19 +42,6 @@ class MVBAppDelegate: UIResponder {
     class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
     }
-    
-    func getUserInfo(delegate: WBHttpRequestDelegate) {
-        var appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
-        if self.userID != nil && self.accessToken != nil {
-            var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!,
-                "uid": appDelegate.userID!]
-            WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
-                          httpMethod: "GET",
-                          params: param,
-                          delegate: delegate,
-                          withTag: nil)
-        }
-    }
 }
 
 extension MVBAppDelegate: UIApplicationDelegate {
@@ -75,7 +62,7 @@ extension MVBAppDelegate: UIApplicationDelegate {
         WeiboSDK.registerApp(kMVBAppKey)
         
         //  获取用户信息
-        self.getUserInfo(self)
+        self.getUserInfo(self, tag: nil)
         
         if self.userID == nil || self.accessToken == nil {
             //  主视图控制器
@@ -102,6 +89,19 @@ extension MVBAppDelegate: UIApplicationDelegate {
 }
 
 extension MVBAppDelegate: WBHttpRequestDelegate {
+    
+    func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?) {
+        var appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
+        if self.userID != nil && self.accessToken != nil {
+            var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
+            WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
+                httpMethod: "GET",
+                params: param,
+                delegate: delegate,
+                withTag: tag)
+        }
+    }
+    
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
 //        self.userModel = MVBUserModel(data: data, error: nil)
     }
@@ -139,24 +139,5 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
 //        
 //    }
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
