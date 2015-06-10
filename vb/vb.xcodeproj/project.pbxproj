@@ -8,13 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2FEAE8C16947F0A5B4270542 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FA06EBD3EB1CDBC21D21D4 /* libPods.a */; };
-		D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */; };
 		D4121DE91B07184400612CA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
-		D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEA1B07184400612CA3 /* Images.xcassets */; };
 		D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4121DFA1B07184400612CA3 /* vbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DF91B07184400612CA3 /* vbTests.swift */; };
-		D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */; };
-		D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121E641B07314700612CA3 /* MVBUserModel.swift */; };
 		D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E781B075D9200612CA3 /* QuartzCore.framework */; };
 		D4121E7B1B075D9B00612CA3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7A1B075D9B00612CA3 /* ImageIO.framework */; };
 		D4121E7D1B075DA700612CA3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7C1B075DA700612CA3 /* SystemConfiguration.framework */; };
@@ -27,19 +23,26 @@
 		D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFD1B1BEF2600987D42 /* SwiftyJSON.swift */; };
 		D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFF1B1BEF2600987D42 /* MQButton.swift */; };
 		D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */; };
-		D43FB8CB1B1C7A28005DE57E /* MVBTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FB8CA1B1C7A28005DE57E /* MVBTestModel.swift */; };
-		D4529C441B1F3F8F003EF881 /* MVBSearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4529C431B1F3F8F003EF881 /* MVBSearchUserModel.swift */; };
-		D46530251B0C9FE600CF2C2D /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */; };
-		D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */; };
-		D465302F1B0CA79800CF2C2D /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */; };
-		D4B157EA1B12019900AFC26A /* MVBUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */; };
+		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
+		D488BF101B2868D60050C2E2 /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */; };
+		D488BF111B2868D60050C2E2 /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF081B2868D60050C2E2 /* MVBHeroTableViewCell.swift */; };
+		D488BF121B2868D60050C2E2 /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D488BF091B2868D60050C2E2 /* MVBHeroTableViewCell.xib */; };
+		D488BF131B2868D60050C2E2 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF0A1B2868D60050C2E2 /* MVBLogInViewController.swift */; };
+		D488BF141B2868D60050C2E2 /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF0B1B2868D60050C2E2 /* MVBMainViewController.swift */; };
+		D488BF151B2868D60050C2E2 /* MVBUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF0C1B2868D60050C2E2 /* MVBUserInformationViewController.swift */; };
+		D488BF161B2868D60050C2E2 /* MVBUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF0D1B2868D60050C2E2 /* MVBUserView.swift */; };
+		D488BF171B2868D60050C2E2 /* MVBUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D488BF0E1B2868D60050C2E2 /* MVBUserView.xib */; };
+		D488BF181B2868D60050C2E2 /* MVBUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF0F1B2868D60050C2E2 /* MVBUserViewController.swift */; };
 		D4CE3D6E1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE3D6D1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m */; };
-		D4D4909E1B0F636D0071F71B /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */; };
-		D4D4909F1B0F636D0071F71B /* MVBUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D4909C1B0F636D0071F71B /* MVBUserView.swift */; };
-		D4D490A01B0F636D0071F71B /* MVBUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4909D1B0F636D0071F71B /* MVBUserView.xib */; };
-		D4D490A21B0F63860071F71B /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */; };
-		D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */; };
-		D4DAF3271B0A0AB300BDEE1F /* MVBUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */; };
+		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
+		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
+		D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */; };
+		D4E17B481B28695300228B4A /* MVBTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B431B28695300228B4A /* MVBTestModel.swift */; };
+		D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B441B28695300228B4A /* MVBUserModel.swift */; };
+		D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E17B4B1B286A7F00228B4A /* Images.xcassets */; };
+		D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B4D1B286BC100228B4A /* AppMacro.swift */; };
+		D4FD3BC51B209D1700F73D43 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FD3BBA1B209D1700F73D43 /* libWeiboSDK.a */; };
+		D4FD3BC61B209D1700F73D43 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4FD3BC21B209D1700F73D43 /* WeiboSDK.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,16 +61,12 @@
 		94FA06EBD3EB1CDBC21D21D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DDE1B07184400612CA3 /* vb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DE21B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D4121DE81B07184400612CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D4121DEA1B07184400612CA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4121DED1B07184400612CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D4121DF31B07184400612CA3 /* vbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DF81B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4121DF91B07184400612CA3 /* vbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vbTests.swift; sourceTree = "<group>"; };
-		D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vb-Bridging-Header.h"; sourceTree = "<group>"; };
-		D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
-		D4121E641B07314700612CA3 /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
+		D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4121E781B075D9200612CA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D4121E7A1B075D9B00612CA3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D4121E7C1B075DA700612CA3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -82,21 +81,37 @@
 		D41C7FFF1B1BEF2600987D42 /* MQButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQButton.swift; sourceTree = "<group>"; };
 		D41C80001B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
-		D43FB8CA1B1C7A28005DE57E /* MVBTestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBTestModel.swift; sourceTree = "<group>"; };
-		D4529C431B1F3F8F003EF881 /* MVBSearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSearchUserModel.swift; sourceTree = "<group>"; };
-		D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
-		D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
-		D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
-		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vb-Prefix.pch"; sourceTree = "<group>"; };
-		D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserInformationViewController.swift; sourceTree = "<group>"; };
+		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
+		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
+		D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
+		D488BF081B2868D60050C2E2 /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
+		D488BF091B2868D60050C2E2 /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
+		D488BF0A1B2868D60050C2E2 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
+		D488BF0B1B2868D60050C2E2 /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
+		D488BF0C1B2868D60050C2E2 /* MVBUserInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserInformationViewController.swift; sourceTree = "<group>"; };
+		D488BF0D1B2868D60050C2E2 /* MVBUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserView.swift; sourceTree = "<group>"; };
+		D488BF0E1B2868D60050C2E2 /* MVBUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBUserView.xib; sourceTree = "<group>"; };
+		D488BF0F1B2868D60050C2E2 /* MVBUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserViewController.swift; sourceTree = "<group>"; };
 		D4CE3D6C1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncodingAdditions.h"; sourceTree = "<group>"; };
 		D4CE3D6D1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingAdditions.m"; sourceTree = "<group>"; };
-		D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
-		D4D4909C1B0F636D0071F71B /* MVBUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserView.swift; sourceTree = "<group>"; };
-		D4D4909D1B0F636D0071F71B /* MVBUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBUserView.xib; sourceTree = "<group>"; };
-		D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
-		D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
-		D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserViewController.swift; sourceTree = "<group>"; };
+		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
+		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
+		D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSearchUserModel.swift; sourceTree = "<group>"; };
+		D4E17B431B28695300228B4A /* MVBTestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBTestModel.swift; sourceTree = "<group>"; };
+		D4E17B441B28695300228B4A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
+		D4E17B4B1B286A7F00228B4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D4E17B4D1B286BC100228B4A /* AppMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMacro.swift; sourceTree = "<group>"; };
+		D4FD3BBA1B209D1700F73D43 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		D4FD3BBB1B209D1700F73D43 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
+		D4FD3BBC1B209D1700F73D43 /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
+		D4FD3BBD1B209D1700F73D43 /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
+		D4FD3BBE1B209D1700F73D43 /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
+		D4FD3BBF1B209D1700F73D43 /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
+		D4FD3BC01B209D1700F73D43 /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
+		D4FD3BC11B209D1700F73D43 /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
+		D4FD3BC21B209D1700F73D43 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		D4FD3BC31B209D1700F73D43 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		D4FD3BC41B209D1700F73D43 /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */,
+				D4FD3BC51B209D1700F73D43 /* libWeiboSDK.a in Frameworks */,
 				D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */,
 				D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */,
 				D4121E831B075DC200612CA3 /* CoreText.framework in Frameworks */,
@@ -157,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				D4121DE01B07184400612CA3 /* vb */,
+				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
+				D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */,
 				D4121DF61B07184400612CA3 /* vbTests */,
 				D4121DDF1B07184400612CA3 /* Products */,
 				65F955B630BA72D9EA0558A4 /* Pods */,
@@ -176,14 +194,13 @@
 		D4121DE01B07184400612CA3 /* vb */ = {
 			isa = PBXGroup;
 			children = (
-				D4121DE31B07184400612CA3 /* MVBAppDelegate.swift */,
-				D4121E5F1B0730A100612CA3 /* Controllers */,
+				D488BF031B28685A0050C2E2 /* AppDelegate */,
+				D488BF061B2868910050C2E2 /* Modules */,
 				D4121E081B072EAA00612CA3 /* Models */,
-				D4121E0A1B072EAA00612CA3 /* Views */,
+				D488BF191B2868F50050C2E2 /* Macro */,
 				D41C7FF91B1BEF2600987D42 /* Utils */,
+				D4E17B4A1B286A6300228B4A /* Resources */,
 				D4121DE11B07184400612CA3 /* Supporting Files */,
-				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
-				D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */,
 			);
 			path = vb;
 			sourceTree = "<group>";
@@ -191,9 +208,8 @@
 		D4121DE11B07184400612CA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D4121DE71B07184400612CA3 /* Main.storyboard */,
-				D4121DEA1B07184400612CA3 /* Images.xcassets */,
 				D4121DEC1B07184400612CA3 /* LaunchScreen.xib */,
+				D4121DE71B07184400612CA3 /* Main.storyboard */,
 				D4121DE21B07184400612CA3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -219,36 +235,13 @@
 		D4121E081B072EAA00612CA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D4121E641B07314700612CA3 /* MVBUserModel.swift */,
-				D465302C1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift */,
-				D465302E1B0CA79800CF2C2D /* MVBHeroModel.swift */,
-				D43FB8CA1B1C7A28005DE57E /* MVBTestModel.swift */,
-				D4529C431B1F3F8F003EF881 /* MVBSearchUserModel.swift */,
+				D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */,
+				D4E17B411B28695300228B4A /* MVBHeroModel.swift */,
+				D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */,
+				D4E17B431B28695300228B4A /* MVBTestModel.swift */,
+				D4E17B441B28695300228B4A /* MVBUserModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		D4121E0A1B072EAA00612CA3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D4D490A11B0F63860071F71B /* MVBHeroTableViewCell.swift */,
-				D4D4909B1B0F636D0071F71B /* MVBHeroTableViewCell.xib */,
-				D4D4909C1B0F636D0071F71B /* MVBUserView.swift */,
-				D4D4909D1B0F636D0071F71B /* MVBUserView.xib */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D4121E5F1B0730A100612CA3 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				D4121E601B0730BA00612CA3 /* MVBLogInViewController.swift */,
-				D4DAF3241B0A045800BDEE1F /* MVBMainViewController.swift */,
-				D46530241B0C9FE600CF2C2D /* MVBHeroesViewController.swift */,
-				D4DAF3261B0A0AB300BDEE1F /* MVBUserViewController.swift */,
-				D4B157E91B12019900AFC26A /* MVBUserInformationViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D41C7FF91B1BEF2600987D42 /* Utils */ = {
@@ -293,8 +286,67 @@
 		D41C80021B1BEF2600987D42 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				D4FD3BB91B209D1700F73D43 /* libWeiboSDK */,
 			);
 			path = SDK;
+			sourceTree = "<group>";
+		};
+		D488BF031B28685A0050C2E2 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		D488BF061B2868910050C2E2 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */,
+				D488BF081B2868D60050C2E2 /* MVBHeroTableViewCell.swift */,
+				D488BF091B2868D60050C2E2 /* MVBHeroTableViewCell.xib */,
+				D488BF0A1B2868D60050C2E2 /* MVBLogInViewController.swift */,
+				D488BF0B1B2868D60050C2E2 /* MVBMainViewController.swift */,
+				D488BF0C1B2868D60050C2E2 /* MVBUserInformationViewController.swift */,
+				D488BF0D1B2868D60050C2E2 /* MVBUserView.swift */,
+				D488BF0E1B2868D60050C2E2 /* MVBUserView.xib */,
+				D488BF0F1B2868D60050C2E2 /* MVBUserViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		D488BF191B2868F50050C2E2 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				D4E17B4D1B286BC100228B4A /* AppMacro.swift */,
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		D4E17B4A1B286A6300228B4A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4E17B4B1B286A7F00228B4A /* Images.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4FD3BB91B209D1700F73D43 /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D4FD3BBA1B209D1700F73D43 /* libWeiboSDK.a */,
+				D4FD3BBB1B209D1700F73D43 /* WBHttpRequest+WeiboShare.h */,
+				D4FD3BBC1B209D1700F73D43 /* WBHttpRequest+WeiboToken.h */,
+				D4FD3BBD1B209D1700F73D43 /* WBHttpRequest+WeiboUser.h */,
+				D4FD3BBE1B209D1700F73D43 /* WBHttpRequest.h */,
+				D4FD3BBF1B209D1700F73D43 /* WBSDKBasicButton.h */,
+				D4FD3BC01B209D1700F73D43 /* WBSDKCommentButton.h */,
+				D4FD3BC11B209D1700F73D43 /* WBSDKRelationshipButton.h */,
+				D4FD3BC21B209D1700F73D43 /* WeiboSDK.bundle */,
+				D4FD3BC31B209D1700F73D43 /* WeiboSDK.h */,
+				D4FD3BC41B209D1700F73D43 /* WeiboUser.h */,
+			);
+			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,11 +431,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D4909E1B0F636D0071F71B /* MVBHeroTableViewCell.xib in Resources */,
 				D4121DE91B07184400612CA3 /* Main.storyboard in Resources */,
 				D4121DEE1B07184400612CA3 /* LaunchScreen.xib in Resources */,
-				D4121DEB1B07184400612CA3 /* Images.xcassets in Resources */,
-				D4D490A01B0F636D0071F71B /* MVBUserView.xib in Resources */,
+				D488BF121B2868D60050C2E2 /* MVBHeroTableViewCell.xib in Resources */,
+				D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */,
+				D4FD3BC61B209D1700F73D43 /* WeiboSDK.bundle in Resources */,
+				D488BF171B2868D60050C2E2 /* MVBUserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,23 +487,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4DAF3271B0A0AB300BDEE1F /* MVBUserViewController.swift in Sources */,
-				D4D4909F1B0F636D0071F71B /* MVBUserView.swift in Sources */,
-				D465302D1B0CA78E00CF2C2D /* MVBHeroesInfoModel.swift in Sources */,
+				D488BF111B2868D60050C2E2 /* MVBHeroTableViewCell.swift in Sources */,
 				D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */,
-				D4121E621B0730BA00612CA3 /* MVBLogInViewController.swift in Sources */,
+				D488BF141B2868D60050C2E2 /* MVBMainViewController.swift in Sources */,
+				D4E17B481B28695300228B4A /* MVBTestModel.swift in Sources */,
+				D488BF101B2868D60050C2E2 /* MVBHeroesViewController.swift in Sources */,
+				D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
 				D4CE3D6E1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m in Sources */,
-				D43FB8CB1B1C7A28005DE57E /* MVBTestModel.swift in Sources */,
-				D4121E651B07314700612CA3 /* MVBUserModel.swift in Sources */,
-				D4529C441B1F3F8F003EF881 /* MVBSearchUserModel.swift in Sources */,
-				D4D490A21B0F63860071F71B /* MVBHeroTableViewCell.swift in Sources */,
-				D4121DE41B07184400612CA3 /* MVBAppDelegate.swift in Sources */,
-				D4DAF3251B0A045800BDEE1F /* MVBMainViewController.swift in Sources */,
+				D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */,
+				D488BF131B2868D60050C2E2 /* MVBLogInViewController.swift in Sources */,
+				D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */,
+				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
+				D488BF151B2868D60050C2E2 /* MVBUserInformationViewController.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
-				D465302F1B0CA79800CF2C2D /* MVBHeroModel.swift in Sources */,
-				D4B157EA1B12019900AFC26A /* MVBUserInformationViewController.swift in Sources */,
-				D46530251B0C9FE600CF2C2D /* MVBHeroesViewController.swift in Sources */,
+				D488BF161B2868D60050C2E2 /* MVBUserView.swift in Sources */,
+				D488BF181B2868D60050C2E2 /* MVBUserViewController.swift in Sources */,
+				D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */,
+				D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +641,10 @@
 				INFOPLIST_FILE = vb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/Utils/SDK/libWeiboSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";
@@ -609,7 +666,10 @@
 				INFOPLIST_FILE = vb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/Utils/SDK/libWeiboSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";

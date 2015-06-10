@@ -31,3 +31,6 @@
 
 //
 #import "NSString+URLEncodingAdditions.h"
+
+//  BlocksKit+UIKit
+#import "BlocksKit+UIKit.h"

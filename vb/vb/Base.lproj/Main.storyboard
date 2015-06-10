@@ -52,7 +52,7 @@
         <!--User Information View Controller-->
         <scene sceneID="oac-Kb-Lla">
             <objects>
-                <viewController id="060-7V-8dK" customClass="MVBUserInformationViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MVBUserInformationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="060-7V-8dK" customClass="MVBUserInformationViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yjb-GL-qd5"/>
                         <viewControllerLayoutGuide type="bottom" id="8r3-Q2-ZwT"/>
@@ -235,23 +235,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-EU-0ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1556" y="-616"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="5SZ-In-fgt">
-            <objects>
-                <viewController id="XEg-b3-zlZ" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="guM-nA-5U9"/>
-                        <viewControllerLayoutGuide type="bottom" id="zrU-WG-iN1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nOK-vd-Mny">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n1M-iZ-Rwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

@@ -126,9 +126,3 @@
 #define COCOAPODS_VERSION_MINOR_UIActivityIndicator_for_SDWebImage 2
 #define COCOAPODS_VERSION_PATCH_UIActivityIndicator_for_SDWebImage 0
 
-// Weibo
-#define COCOAPODS_POD_AVAILABLE_Weibo
-#define COCOAPODS_VERSION_MAJOR_Weibo 2
-#define COCOAPODS_VERSION_MINOR_Weibo 4
-#define COCOAPODS_VERSION_PATCH_Weibo 2
-

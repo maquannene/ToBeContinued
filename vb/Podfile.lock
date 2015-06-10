@@ -44,7 +44,6 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
-  - Weibo (2.4.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2)
@@ -55,7 +54,6 @@ DEPENDENCIES:
   - SVProgressHUD (~> 1.0)
   - SVPullToRefresh (~> 0.4)
   - UIActivityIndicator-for-SDWebImage
-  - Weibo
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -66,6 +64,5 @@ SPEC CHECKSUMS:
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
-  Weibo: ed569ffed6eb043a159ac3b01dc5122b4e1fd77a
 
 COCOAPODS: 0.36.0
