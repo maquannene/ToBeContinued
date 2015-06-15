@@ -137,7 +137,7 @@
             <connections>
                 <outlet property="userImageView" destination="zZQ-JS-g1x" id="epj-Lq-RC6"/>
             </connections>
-            <point key="canvasLocation" x="977" y="59"/>
+            <point key="canvasLocation" x="1449" y="71"/>
         </view>
     </objects>
 </document>

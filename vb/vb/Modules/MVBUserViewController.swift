@@ -33,17 +33,19 @@ class MVBUserViewController: UIViewController {
     }
     
     @IBAction func exitAction(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
+        self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    deinit {
+        println("UserViewController deinit")
     }
 }
 
 extension MVBUserViewController {
 
     @IBAction func userNameAction(sender: AnyObject) {
-//        self.performSegueWithIdentifier("userInformationVC", sender: sender)
-//        self.getList()
+        self.performSegueWithIdentifier("userInformationVC", sender: sender)
+        self.getList()
     }
     
     @IBAction func followsAction(sender: AnyObject) {

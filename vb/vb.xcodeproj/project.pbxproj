@@ -23,6 +23,7 @@
 		D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFD1B1BEF2600987D42 /* SwiftyJSON.swift */; };
 		D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFF1B1BEF2600987D42 /* MQButton.swift */; };
 		D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */; };
+		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D488BF101B2868D60050C2E2 /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */; };
 		D488BF111B2868D60050C2E2 /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF081B2868D60050C2E2 /* MVBHeroTableViewCell.swift */; };
@@ -81,6 +82,8 @@
 		D41C7FFF1B1BEF2600987D42 /* MQButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQButton.swift; sourceTree = "<group>"; };
 		D41C80001B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
+		D44A6B131B288696003C4834 /* AppMacroObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacroObjc.h; sourceTree = "<group>"; };
+		D44A6B141B2886A7003C4834 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
@@ -302,15 +305,15 @@
 		D488BF061B2868910050C2E2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D488BF0A1B2868D60050C2E2 /* MVBLogInViewController.swift */,
+				D488BF0B1B2868D60050C2E2 /* MVBMainViewController.swift */,
+				D488BF0F1B2868D60050C2E2 /* MVBUserViewController.swift */,
+				D488BF0D1B2868D60050C2E2 /* MVBUserView.swift */,
+				D488BF0E1B2868D60050C2E2 /* MVBUserView.xib */,
 				D488BF071B2868D60050C2E2 /* MVBHeroesViewController.swift */,
 				D488BF081B2868D60050C2E2 /* MVBHeroTableViewCell.swift */,
 				D488BF091B2868D60050C2E2 /* MVBHeroTableViewCell.xib */,
-				D488BF0A1B2868D60050C2E2 /* MVBLogInViewController.swift */,
-				D488BF0B1B2868D60050C2E2 /* MVBMainViewController.swift */,
 				D488BF0C1B2868D60050C2E2 /* MVBUserInformationViewController.swift */,
-				D488BF0D1B2868D60050C2E2 /* MVBUserView.swift */,
-				D488BF0E1B2868D60050C2E2 /* MVBUserView.xib */,
-				D488BF0F1B2868D60050C2E2 /* MVBUserViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -319,6 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				D4E17B4D1B286BC100228B4A /* AppMacro.swift */,
+				D44A6B131B288696003C4834 /* AppMacroObjc.h */,
+				D44A6B141B2886A7003C4834 /* AppMacroObjc.m */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 		D4121DD61B07184400612CA3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MVB;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = maquan;
 				TargetAttributes = {
@@ -502,6 +508,7 @@
 				D488BF151B2868D60050C2E2 /* MVBUserInformationViewController.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
 				D488BF161B2868D60050C2E2 /* MVBUserView.swift in Sources */,
+				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
 				D488BF181B2868D60050C2E2 /* MVBUserViewController.swift in Sources */,
 				D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */,
 				D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */,
@@ -638,12 +645,34 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = vb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vb/Utils/SDK/libWeiboSDK",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/BlocksKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SVPullToRefresh\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -663,12 +692,34 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = vb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vb/Utils/SDK/libWeiboSDK",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/BlocksKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SVPullToRefresh\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -84,13 +84,8 @@ extension MVBAppDelegate: UIApplicationDelegate {
         //  获取用户信息
         self.getUserInfo(self, tag: nil)
         
-//        if self.userID == nil || self.accessToken == nil {
-            //  主视图控制器
-            self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MVBLogInViewController") as! MVBLogInViewController)
-//        }
-//        else {
-//            self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MVBMainViewController") as! MVBMainViewController)
-//        }
+        //  主视图控制器
+        self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MVBLogInViewController") as! MVBLogInViewController)
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.grayColor()

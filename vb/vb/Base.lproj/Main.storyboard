@@ -32,6 +32,15 @@
                                     <action selector="logInAction:" destination="jhY-S8-x0H" eventType="touchUpInside" id="Kf2-X5-0Wr"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhF-d3-uQX">
+                                <rect key="frame" x="233" y="518" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="94U-Ww-EZe" kind="show" identifier="LogIn" id="Zl1-aE-gcA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -42,12 +51,11 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="logIn" destination="HzZ-QE-UZY" id="Xw1-AO-t2j"/>
-                        <segue destination="amP-ie-ySa" kind="presentation" identifier="LogIn" modalPresentationStyle="fullScreen" id="GD7-fO-joS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2394" y="-309"/>
+            <point key="canvasLocation" x="-2848" y="-303"/>
         </scene>
         <!--User Information View Controller-->
         <scene sceneID="oac-Kb-Lla">
@@ -66,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOB-W0-YDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1118" y="-908"/>
+            <point key="canvasLocation" x="-1120" y="-928"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="Ujo-oe-Pcs">
@@ -81,7 +89,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klC-rw-oaM">
-                                <rect key="frame" x="110" y="20" width="100" height="44"/>
+                                <rect key="frame" x="110" y="120" width="100" height="44"/>
                                 <color key="backgroundColor" white="0.80189220179999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="BAg-oZ-7a2"/>
@@ -92,16 +100,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qPG-3N-nQH" kind="presentation" identifier="userVC" id="Iba-t8-dKy"/>
+                                    <segue destination="qPG-3N-nQH" kind="push" identifier="userVC" id="Iba-t8-dKy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-bT-fKO">
-                                <rect key="frame" x="110" y="74" width="100" height="44"/>
+                                <rect key="frame" x="110" y="174" width="100" height="44"/>
                                 <state key="normal" title="英雄池">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CKJ-yM-cEp" kind="presentation" identifier="heroesVC" id="CgF-Yp-Icd"/>
+                                    <segue destination="CKJ-yM-cEp" kind="push" identifier="heroesVC" id="CgF-Yp-Icd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfj-fg-xJo">
@@ -113,6 +121,15 @@
                                     <action selector="logOutAction:" destination="amP-ie-ySa" eventType="touchUpInside" id="BSD-kR-sb7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnP-SS-qVU">
+                                <rect key="frame" x="130" y="395" width="60" height="30"/>
+                                <state key="normal" title="密码记录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xAZ-r2-28J" kind="push" id="4vn-tE-o2p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -120,12 +137,12 @@
                             <constraint firstItem="klC-rw-oaM" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="H8d-Nd-1gd"/>
                             <constraint firstItem="h2c-bT-fKO" firstAttribute="top" secondItem="klC-rw-oaM" secondAttribute="bottom" constant="10" id="HXx-um-sHr"/>
                             <constraint firstAttribute="centerX" secondItem="klC-rw-oaM" secondAttribute="centerX" id="HmR-Le-IkV"/>
+                            <constraint firstItem="klC-rw-oaM" firstAttribute="top" secondItem="jl7-qG-Gfx" secondAttribute="bottom" constant="100" id="Jyj-HD-x82"/>
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="foY-t6-Ric"/>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="h7N-ho-3fa"/>
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="height" secondItem="h2c-bT-fKO" secondAttribute="height" id="hZA-Gr-tbx"/>
                             <constraint firstItem="Bmi-o8-3UU" firstAttribute="top" secondItem="Wfj-fg-xJo" secondAttribute="bottom" constant="30" id="mmB-Ap-zg8"/>
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="wHo-nq-EWx"/>
-                            <constraint firstItem="jl7-qG-Gfx" firstAttribute="bottom" secondItem="klC-rw-oaM" secondAttribute="top" id="yYw-0b-ED8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MgR-Kv-Hmo"/>
@@ -133,7 +150,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yti-as-QRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1995" y="-309"/>
+            <point key="canvasLocation" x="-2019" y="-303"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6dL-pP-ZRu">
+            <objects>
+                <viewController id="xAZ-r2-28J" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ot2-8Q-lgD"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fti-iG-iy6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RCb-Sf-nbr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fed-XO-gC0"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIy-P6-f8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2019" y="426"/>
         </scene>
         <!--Heroes View Controller-->
         <scene sceneID="iw7-KQ-TDk">
@@ -177,9 +214,14 @@
                                     <action selector="clearMemory:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="cK7-Vv-OP8"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-2H-k0a">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-2H-k0a">
                                 <rect key="frame" x="0.0" y="40" width="320" height="428"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Dc2-GO-Dzt">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="CKJ-yM-cEp" id="ZCk-CP-Szq"/>
                                     <outlet property="delegate" destination="CKJ-yM-cEp" id="TfJ-hF-k70"/>
@@ -204,6 +246,7 @@
                             <constraint firstItem="Fw0-Vc-E4u" firstAttribute="leading" secondItem="dTo-cx-ArN" secondAttribute="trailing" constant="30" id="xJO-BF-qcU"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dT7-zd-3ZU"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="heroesTableView" destination="GF8-2H-k0a" id="SGb-KP-IOR"/>
@@ -211,7 +254,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Es-7l-lG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1550" y="70"/>
+            <point key="canvasLocation" x="-1571" y="-121"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qMZ-PU-eR0">
+            <objects>
+                <navigationController id="94U-Ww-EZe" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zfM-vJ-JwY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="amP-ie-ySa" kind="relationship" relationship="rootViewController" id="0D6-qN-XXB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Lr-KH-o4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2456" y="-303"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="uev-wj-8Zq">
@@ -226,6 +286,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ZB2-qX-Jf4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="view" destination="lRm-4p-6Ub" id="9bo-mn-0zr"/>
@@ -234,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-EU-0ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1556" y="-616"/>
+            <point key="canvasLocation" x="-1582" y="-928"/>
         </scene>
     </scenes>
 </document>

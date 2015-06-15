@@ -15,15 +15,13 @@ class MVBMainViewController: UIViewController {
     var heroesVC: MVBHeroesViewController?
     
     override func viewDidLoad() {
-        
+        self.view.backgroundColor = UIColor.yellowColor()
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == "heroesVC" {
             if heroesVC != nil {
-                self.presentViewController(heroesVC!, animated: true, completion: { () -> Void in
-                    
-                })
+                self.navigationController!.pushViewController(heroesVC!, animated: true)
                 return false
             }
             else {
@@ -32,9 +30,7 @@ class MVBMainViewController: UIViewController {
         }
         if identifier == "userVC" {
             if userVC != nil {
-                self.presentViewController(userVC!, animated: true, completion: { () -> Void in
-                    
-                })
+                self.navigationController!.pushViewController(userVC!, animated: true)
                 return false
             }
             else {
@@ -43,7 +39,7 @@ class MVBMainViewController: UIViewController {
         }
         return true
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let identifier = segue.identifier as String? {
             self.setValue(segue.destinationViewController, forKey: identifier)
@@ -54,10 +50,10 @@ class MVBMainViewController: UIViewController {
             if index == 1 {
                 var appDelegate = MVBAppDelegate.MVBApp()
                 WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: nil)
+                SVProgressHUD.showWithStatus("正在退出...", maskType: SVProgressHUDMaskType.Black)
             }
         }
     }
-    
     deinit {
     
     }
@@ -71,6 +67,7 @@ extension MVBMainViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         MVBAppDelegate.MVBApp().accessToken = nil
         MVBAppDelegate.MVBApp().userID = nil
-        self.dismissViewControllerAnimated(true, completion: nil)
+        SVProgressHUD.dismiss()
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }
 }

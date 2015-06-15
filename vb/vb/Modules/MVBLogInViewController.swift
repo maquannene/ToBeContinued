@@ -32,7 +32,6 @@ class MVBLogInViewController: UIViewController {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.performSegueWithIdentifier("LogIn", sender: self)
-            MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
         }
     }
     
@@ -70,16 +69,21 @@ extension MVBLogInViewController: WeiboSDKDelegate {
             
             NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
             NSUserDefaults.standardUserDefaults().synchronize()
-            self.performSegueWithIdentifier("LogIn", sender: self)
         }
-        //  登陆成功
-        MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
+        
+        SVProgressHUD.showSuccessWithStatus("登陆成功", maskType: SVProgressHUDMaskType.Black)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+            SVProgressHUD.showWithStatus("读取个人信息...", maskType: SVProgressHUDMaskType.Black)
+            MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
+        }
     }
 }
 
 extension MVBLogInViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         MVBAppDelegate.MVBApp().userModel = MVBUserModel(keyValues: result)
+        SVProgressHUD.dismiss()
+        self.performSegueWithIdentifier("LogIn", sender: self)
     }
 }
 
