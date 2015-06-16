@@ -13,31 +13,21 @@ class MVBMainViewController: UIViewController {
     
     var userVC: MVBUserViewController?
     var heroesVC: MVBHeroesViewController?
+    var passwordManageVc: MVBPasswordManageViewController?
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.yellowColor()
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if identifier == "heroesVC" {
-            if heroesVC != nil {
-                self.navigationController!.pushViewController(heroesVC!, animated: true)
-                return false
-            }
-            else {
-                return true
-            }
+        var destVc: UIViewController? = self.valueForKey(identifier!) as? UIViewController
+        if destVc != nil {
+            self.navigationController!.pushViewController(destVc!, animated: true)
+            return false
         }
-        if identifier == "userVC" {
-            if userVC != nil {
-                self.navigationController!.pushViewController(userVC!, animated: true)
-                return false
-            }
-            else {
-                return true
-            }
+        else {
+            return true
         }
-        return true
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -45,6 +35,7 @@ class MVBMainViewController: UIViewController {
             self.setValue(segue.destinationViewController, forKey: identifier)
         }
     }
+    
     @IBAction func logOutAction(sender: AnyObject) {
         UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
             if index == 1 {
@@ -54,6 +45,7 @@ class MVBMainViewController: UIViewController {
             }
         }
     }
+    
     deinit {
     
     }

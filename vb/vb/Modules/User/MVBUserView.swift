@@ -10,7 +10,12 @@ import UIKit
 
 class MVBUserView: UIView {
     
+    @IBOutlet var userBgImageView: UIImageView!
     @IBOutlet var userImageView: UIImageView!
+    @IBOutlet var userNameBtn: UIButton!
+    @IBOutlet var followsCountBtn: UIButton!
+    @IBOutlet var friendsCountBtn: UIButton!
+    @IBOutlet var statusCountBtn: UIButton!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

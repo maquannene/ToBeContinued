@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Log In View Controller-->
@@ -32,15 +33,6 @@
                                     <action selector="logInAction:" destination="jhY-S8-x0H" eventType="touchUpInside" id="Kf2-X5-0Wr"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhF-d3-uQX">
-                                <rect key="frame" x="233" y="518" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="94U-Ww-EZe" kind="show" identifier="LogIn" id="Zl1-aE-gcA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -51,11 +43,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="logIn" destination="HzZ-QE-UZY" id="Xw1-AO-t2j"/>
+                        <segue destination="94U-Ww-EZe" kind="show" identifier="LogIn" id="S63-Bq-oX1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2848" y="-303"/>
+            <point key="canvasLocation" x="-2918" y="-303"/>
         </scene>
         <!--User Information View Controller-->
         <scene sceneID="oac-Kb-Lla">
@@ -76,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="-1120" y="-928"/>
         </scene>
-        <!--Main View Controller-->
+        <!--主页-->
         <scene sceneID="Ujo-oe-Pcs">
             <objects>
                 <viewController storyboardIdentifier="MVBMainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="amP-ie-ySa" customClass="MVBMainViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klC-rw-oaM">
-                                <rect key="frame" x="110" y="120" width="100" height="44"/>
+                                <rect key="frame" x="110" y="164" width="100" height="44"/>
                                 <color key="backgroundColor" white="0.80189220179999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="BAg-oZ-7a2"/>
@@ -100,16 +93,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qPG-3N-nQH" kind="push" identifier="userVC" id="Iba-t8-dKy"/>
+                                    <segue destination="qPG-3N-nQH" kind="show" identifier="userVC" id="Iba-t8-dKy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-bT-fKO">
-                                <rect key="frame" x="110" y="174" width="100" height="44"/>
+                                <rect key="frame" x="110" y="218" width="100" height="44"/>
                                 <state key="normal" title="英雄池">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CKJ-yM-cEp" kind="push" identifier="heroesVC" id="CgF-Yp-Icd"/>
+                                    <segue destination="CKJ-yM-cEp" kind="show" identifier="heroesVC" id="CgF-Yp-Icd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfj-fg-xJo">
@@ -121,23 +114,25 @@
                                     <action selector="logOutAction:" destination="amP-ie-ySa" eventType="touchUpInside" id="BSD-kR-sb7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnP-SS-qVU">
-                                <rect key="frame" x="130" y="395" width="60" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnP-SS-qVU">
+                                <rect key="frame" x="130" y="280" width="60" height="30"/>
                                 <state key="normal" title="密码记录">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xAZ-r2-28J" kind="push" id="4vn-tE-o2p"/>
+                                    <segue destination="xAZ-r2-28J" kind="show" identifier="passwordManageVc" id="4vn-tE-o2p"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="height" secondItem="h2c-bT-fKO" secondAttribute="height" id="3iX-B5-vvL"/>
+                            <constraint firstItem="LnP-SS-qVU" firstAttribute="top" secondItem="h2c-bT-fKO" secondAttribute="bottom" constant="18" id="88K-a0-zEw"/>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="H8d-Nd-1gd"/>
                             <constraint firstItem="h2c-bT-fKO" firstAttribute="top" secondItem="klC-rw-oaM" secondAttribute="bottom" constant="10" id="HXx-um-sHr"/>
                             <constraint firstAttribute="centerX" secondItem="klC-rw-oaM" secondAttribute="centerX" id="HmR-Le-IkV"/>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="top" secondItem="jl7-qG-Gfx" secondAttribute="bottom" constant="100" id="Jyj-HD-x82"/>
+                            <constraint firstItem="LnP-SS-qVU" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="LKe-Kg-ltr"/>
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="centerX" secondItem="h2c-bT-fKO" secondAttribute="centerX" id="foY-t6-Ric"/>
                             <constraint firstItem="klC-rw-oaM" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="h7N-ho-3fa"/>
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="height" secondItem="h2c-bT-fKO" secondAttribute="height" id="hZA-Gr-tbx"/>
@@ -145,17 +140,19 @@
                             <constraint firstItem="Wfj-fg-xJo" firstAttribute="width" secondItem="h2c-bT-fKO" secondAttribute="width" id="wHo-nq-EWx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MgR-Kv-Hmo"/>
+                    <navigationItem key="navigationItem" title="主页" id="MgR-Kv-Hmo">
+                        <barButtonItem key="backBarButtonItem" title="主页" id="SmJ-fc-0Db"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yti-as-QRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2019" y="-303"/>
         </scene>
-        <!--View Controller-->
+        <!--密码记录-->
         <scene sceneID="6dL-pP-ZRu">
             <objects>
-                <viewController id="xAZ-r2-28J" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MVBPasswordManageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xAZ-r2-28J" customClass="MVBPasswordManageViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ot2-8Q-lgD"/>
                         <viewControllerLayoutGuide type="bottom" id="Fti-iG-iy6"/>
@@ -165,14 +162,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fed-XO-gC0"/>
+                    <navigationItem key="navigationItem" title="密码记录" id="fed-XO-gC0">
+                        <barButtonItem key="backBarButtonItem" title="取消" id="Lpk-L4-c7I"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="zai-Mo-qfz" kind="show" identifier="newPasswordConfigVc" id="6IQ-5X-2eD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIy-P6-f8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2019" y="426"/>
         </scene>
-        <!--Heroes View Controller-->
+        <!--新建密码-->
+        <scene sceneID="ITC-dT-56n">
+            <objects>
+                <viewController storyboardIdentifier="MVBNewPasswordConfigViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zai-Mo-qfz" customClass="MVBNewPasswordConfigViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TiQ-uf-80K"/>
+                        <viewControllerLayoutGuide type="bottom" id="lvC-sN-lNm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xJn-fa-wHu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="新建密码" id="VYo-Lp-uUW"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hs7-td-888" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2019" y="1144"/>
+        </scene>
+        <!--英雄池-->
         <scene sceneID="iw7-KQ-TDk">
             <objects>
                 <viewController storyboardIdentifier="MVBHeroesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CKJ-yM-cEp" customClass="MVBHeroesViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
@@ -184,16 +206,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j0-xk-prI">
-                                <rect key="frame" x="10" y="518" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.74305345020000002" green="1" blue="0.58986363819999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="返回">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="exitAction:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="sQ8-Uj-28Q"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTo-cx-ArN">
                                 <rect key="frame" x="70" y="518" width="105" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -214,14 +226,9 @@
                                     <action selector="clearMemory:" destination="CKJ-yM-cEp" eventType="touchUpInside" id="cK7-Vv-OP8"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-2H-k0a">
-                                <rect key="frame" x="0.0" y="40" width="320" height="428"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-2H-k0a">
+                                <rect key="frame" x="0.0" y="64" width="320" height="404"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="Dc2-GO-Dzt">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="CKJ-yM-cEp" id="ZCk-CP-Szq"/>
                                     <outlet property="delegate" destination="CKJ-yM-cEp" id="TfJ-hF-k70"/>
@@ -231,22 +238,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dTo-cx-ArN" firstAttribute="centerY" secondItem="Fw0-Vc-E4u" secondAttribute="centerY" id="3m5-ed-Hd7"/>
-                            <constraint firstItem="dTo-cx-ArN" firstAttribute="leading" secondItem="7j0-xk-prI" secondAttribute="trailing" constant="30" id="8yB-wh-0SK"/>
                             <constraint firstItem="dTo-cx-ArN" firstAttribute="width" secondItem="Fw0-Vc-E4u" secondAttribute="width" id="9ze-G2-SGG"/>
-                            <constraint firstItem="Frn-NA-6JZ" firstAttribute="top" secondItem="7j0-xk-prI" secondAttribute="bottom" constant="20" id="FHi-Oa-b3J"/>
                             <constraint firstAttribute="width" secondItem="GF8-2H-k0a" secondAttribute="width" id="IxE-Fm-Gcp"/>
                             <constraint firstAttribute="centerX" secondItem="GF8-2H-k0a" secondAttribute="centerX" id="K4w-es-ipO"/>
-                            <constraint firstItem="dTo-cx-ArN" firstAttribute="centerY" secondItem="7j0-xk-prI" secondAttribute="centerY" id="LLj-gx-xnS"/>
-                            <constraint firstItem="GF8-2H-k0a" firstAttribute="top" secondItem="Cn3-Ib-dG5" secondAttribute="bottom" constant="20" id="Me0-fu-kBc"/>
+                            <constraint firstItem="GF8-2H-k0a" firstAttribute="top" secondItem="Cn3-Ib-dG5" secondAttribute="bottom" id="Me0-fu-kBc"/>
                             <constraint firstItem="dTo-cx-ArN" firstAttribute="height" secondItem="Fw0-Vc-E4u" secondAttribute="height" id="aD5-gR-LSa"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="leading" secondItem="EOd-sd-9un" secondAttribute="leadingMargin" constant="54" id="eIy-ux-k7d"/>
                             <constraint firstItem="Frn-NA-6JZ" firstAttribute="top" secondItem="GF8-2H-k0a" secondAttribute="bottom" constant="100" id="hJz-yd-rGe"/>
-                            <constraint firstItem="dTo-cx-ArN" firstAttribute="height" secondItem="7j0-xk-prI" secondAttribute="height" id="iDn-pr-WEt"/>
+                            <constraint firstItem="dTo-cx-ArN" firstAttribute="top" secondItem="GF8-2H-k0a" secondAttribute="bottom" constant="50" id="ie6-aR-chZ"/>
                             <constraint firstAttribute="right" secondItem="Fw0-Vc-E4u" secondAttribute="right" constant="10" id="stf-Lr-E1R"/>
-                            <constraint firstItem="7j0-xk-prI" firstAttribute="left" secondItem="EOd-sd-9un" secondAttribute="left" constant="10" id="xFx-LL-DcZ"/>
+                            <constraint firstAttribute="bottom" secondItem="dTo-cx-ArN" secondAttribute="bottom" constant="20" symbolic="YES" id="txo-gt-waO"/>
                             <constraint firstItem="Fw0-Vc-E4u" firstAttribute="leading" secondItem="dTo-cx-ArN" secondAttribute="trailing" constant="30" id="xJO-BF-qcU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dT7-zd-3ZU"/>
+                    <navigationItem key="navigationItem" title="英雄池" id="dT7-zd-3ZU">
+                        <barButtonItem key="backBarButtonItem" title="英雄池" id="p9O-y7-ZYa"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="heroesTableView" destination="GF8-2H-k0a" id="SGb-KP-IOR"/>
@@ -273,7 +280,7 @@
             </objects>
             <point key="canvasLocation" x="-2456" y="-303"/>
         </scene>
-        <!--User View Controller-->
+        <!--个人信息-->
         <scene sceneID="uev-wj-8Zq">
             <objects>
                 <viewController id="qPG-3N-nQH" customClass="MVBUserViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
@@ -281,15 +288,16 @@
                         <viewControllerLayoutGuide type="top" id="QVm-CR-tMl"/>
                         <viewControllerLayoutGuide type="bottom" id="MAq-Ms-EVE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lRm-4p-6Ub" customClass="MVBUserView" customModule="vb" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="lRm-4p-6Ub">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ZB2-qX-Jf4"/>
+                    <navigationItem key="navigationItem" title="个人信息" id="ZB2-qX-Jf4">
+                        <barButtonItem key="backBarButtonItem" title="个人信息" id="Fhh-Kt-wu1"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="view" destination="lRm-4p-6Ub" id="9bo-mn-0zr"/>
                         <segue destination="060-7V-8dK" kind="presentation" identifier="userInformationVC" id="e9w-Fu-mZ8"/>
                     </connections>
                 </viewController>

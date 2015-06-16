@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 let kDota2DevApiKey = "key"
 let kDota2DevApiValue = "5E09D57E6D09BE20A1DF727134A89871"
 let kDota2HeroesLanguageKey = "language"
@@ -26,14 +24,13 @@ class MVBHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.heroesTableView.registerNib(UINib(nibName: "MVBHeroTableViewCell", bundle: nil), forCellReuseIdentifier: "hero")
+        self.heroesTableView.tableFooterView = UIView()//奇巧淫技
         self.getHeroesModel()
     }
     
-    @IBAction func exitAction(sender: AnyObject) {
+    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
         SDImageCache.sharedImageCache().clearMemory()
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
+        super.dismissViewControllerAnimated(flag, completion: completion)
     }
     
     @IBAction func clearDiskAction(sender: AnyObject) {

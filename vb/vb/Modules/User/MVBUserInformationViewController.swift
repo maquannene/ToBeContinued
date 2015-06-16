@@ -9,10 +9,6 @@
 import UIKit
 
 class MVBUserInformationViewController: UIViewController {
-
-//    override func loadView() {
-//        
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
