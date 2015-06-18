@@ -7,8 +7,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBHeroesInfoModel: NSObject {
     var count: NSNumber!
     var status: NSNumber?
@@ -20,7 +18,7 @@ class MVBHeroesInfoModel: NSObject {
     }
     
     deinit {
-        println(" 英雄信息析构 ")
+        println("\(self.dynamicType) deinit")
     }
 }
 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBUserView: UIView {
     
     @IBOutlet var userBgImageView: UIImageView!

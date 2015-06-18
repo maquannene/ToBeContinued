@@ -42,7 +42,7 @@ class MVBHeroesViewController: UIViewController {
     }
     
     deinit {
-        println(" 英雄页面析构 ")
+        println("\(self.dynamicType) deinit")
     }
 }
 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 @UIApplicationMain
 class MVBAppDelegate: UIResponder {
 

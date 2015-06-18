@@ -8,8 +8,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 let kDota2HeroImageUrl = "http://cdn.dota2.com/apps/dota2/images/heroes/"
 
 class MVBHeroModel: NSObject {
@@ -29,7 +27,7 @@ class MVBHeroModel: NSObject {
     }
     
     deinit {
-        println("英雄析构\(localized_name)")
+        println("\(self.dynamicType) deinit")
     }
 }
 

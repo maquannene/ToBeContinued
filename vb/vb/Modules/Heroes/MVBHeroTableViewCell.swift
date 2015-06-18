@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBHeroTableViewCell: UITableViewCell {
 
     @IBOutlet var heroImageButton: UIButton!
@@ -30,7 +28,7 @@ class MVBHeroTableViewCell: UITableViewCell {
         self.heroNameLabel.text = heroModel.localized_name! as? String
     }
     deinit {
-        println("英雄页面析构\(heroNameLabel.text)")
+        println("\(self.dynamicType) deinit \(heroNameLabel.text)")
     }
 }
 

@@ -11,23 +11,25 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="XIu-WT-NhD">
-                    <rect key="frame" x="0.0" y="20" width="480" height="460"/>
-                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bs-GE-bG5">
+                    <rect key="frame" x="140" y="203.5" width="200" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="0Qt-RT-nRp"/>
+                        <constraint firstAttribute="width" constant="200" id="cgv-py-0WY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="XIu-WT-NhD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VLS-xB-90p"/>
-                <constraint firstItem="XIu-WT-NhD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="mDW-rN-AfW"/>
-                <constraint firstAttribute="bottom" secondItem="XIu-WT-NhD" secondAttribute="bottom" id="pLz-Xd-NpP"/>
-                <constraint firstAttribute="trailing" secondItem="XIu-WT-NhD" secondAttribute="trailing" id="rj8-gV-frC"/>
+                <constraint firstAttribute="centerX" secondItem="7bs-GE-bG5" secondAttribute="centerX" id="G6D-xA-hDN"/>
+                <constraint firstAttribute="centerY" secondItem="7bs-GE-bG5" secondAttribute="centerY" constant="14.5" id="oyz-gI-Fft"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="349" y="296"/>
         </view>
     </objects>
-    <resources>
-        <image name="Default" width="320" height="568"/>
-    </resources>
 </document>

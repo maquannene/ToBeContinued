@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBSearchUserModel: NSObject {
     var screen_name: String?
     var followers_count: NSNumber?

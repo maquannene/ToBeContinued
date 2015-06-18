@@ -1,1 +1,1 @@
-../../../MJExtension/MJExtensionExample/MJExtensionExample/MJExtension/MJFoundation.h
+../../../MJExtension/MJExtension/MJFoundation.h

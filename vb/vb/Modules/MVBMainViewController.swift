@@ -7,8 +7,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBMainViewController: UIViewController {
     
     var userVC: MVBUserViewController?
@@ -47,7 +45,7 @@ class MVBMainViewController: UIViewController {
     }
     
     deinit {
-    
+        println("\(self.dynamicType) deinit")
     }
     
 }

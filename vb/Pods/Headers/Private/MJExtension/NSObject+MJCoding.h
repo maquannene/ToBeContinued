@@ -1,1 +1,1 @@
-../../../MJExtension/MJExtensionExample/MJExtensionExample/MJExtension/NSObject+MJCoding.h
+../../../MJExtension/MJExtension/NSObject+MJCoding.h

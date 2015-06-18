@@ -1,0 +1,6 @@
+framework module MJExtension {
+  umbrella header "Pods-MJExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}

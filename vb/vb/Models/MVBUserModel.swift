@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBUserModel: NSObject {
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
