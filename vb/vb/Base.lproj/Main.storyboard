@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jhY-S8-x0H">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -42,13 +41,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="logIn" destination="HzZ-QE-UZY" id="Xw1-AO-t2j"/>
-                        <segue destination="94U-Ww-EZe" kind="show" identifier="LogIn" id="S63-Bq-oX1"/>
+                        <outlet property="logInBtn" destination="HzZ-QE-UZY" id="hH7-7K-XTE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2918" y="-303"/>
+            <point key="canvasLocation" x="-2984" y="-303"/>
         </scene>
         <!--User Information View Controller-->
         <scene sceneID="oac-Kb-Lla">
@@ -266,7 +264,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qMZ-PU-eR0">
             <objects>
-                <navigationController id="94U-Ww-EZe" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="94U-Ww-EZe" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zfM-vJ-JwY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

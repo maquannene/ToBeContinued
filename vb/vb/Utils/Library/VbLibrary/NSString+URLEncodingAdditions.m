@@ -27,7 +27,7 @@
                                                                               (CFStringRef)self,
                                                                               CFSTR(""),
                                                                               kCFStringEncodingUTF8));
-    return result;  
+    return result;
 }
 
 @end
