@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MJExtension
+
 class MVBUserModel: NSObject {
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
@@ -26,7 +28,7 @@ class MVBUserModel: NSObject {
     var status: NSDictionary?           //  最近一条微博
     
     var avatar_large: NSString?         //  大图头像
-    var avatar_hd: NSString?            //  高清图像
+    var avatar_hd: NSString?            //  高清头像
     
 }
 

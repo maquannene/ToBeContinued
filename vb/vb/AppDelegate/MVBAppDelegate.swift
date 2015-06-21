@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import AVOSCloud
+
 @UIApplicationMain
 class MVBAppDelegate: UIResponder {
 
@@ -15,21 +17,21 @@ class MVBAppDelegate: UIResponder {
     
     var userID: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBAutorizeInfo) as? Dictionary {
-                return authorizeInfo[kMVBUserID]
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                return authorizeInfo[kMVBSinaSDKUserID]
             }
             return nil
         }
         set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBAutorizeInfo) as? Dictionary {
-                authorizeInfo[kMVBUserID] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                authorizeInfo[kMVBSinaSDKUserID] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
             else {
                 var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[kMVBUserID] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
+                authorizeInfo[kMVBSinaSDKUserID] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
@@ -37,21 +39,21 @@ class MVBAppDelegate: UIResponder {
     
     var accessToken: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBAutorizeInfo) as? Dictionary {
-                return authorizeInfo[kMVBAccessToken]
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                return authorizeInfo[kMVBSinaSDKAccessToken]
             }
             return nil
         }
         set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBAutorizeInfo) as? Dictionary {
-                authorizeInfo[kMVBAccessToken] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                authorizeInfo[kMVBSinaSDKAccessToken] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
             else {
                 var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[kMVBAccessToken] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBAutorizeInfo)
+                authorizeInfo[kMVBSinaSDKAccessToken] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
@@ -59,6 +61,14 @@ class MVBAppDelegate: UIResponder {
     
     class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
+    }
+    
+    func registThirdSDK() {
+        //  sina sdk
+        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.registerApp(kMVBSinaSDKAppKey)
+        //  AVOSCloud sdk
+        AVOSCloud.setApplicationId(kMVBAVCloudSDKAppID, clientKey: kMVBAVCloudSDKAppKey)
     }
 }
 
@@ -73,11 +83,7 @@ extension MVBAppDelegate: UIApplicationDelegate {
         //加载程序中的info.plist
         let currentVersionCode = NSBundle.mainBundle().infoDictionary?[key] as! String
         
-        //  debug模式
-        WeiboSDK.enableDebugMode(true)
-        
-        //  使用kMVBAppKey注册应用
-        WeiboSDK.registerApp(kMVBAppKey)
+        self.registThirdSDK()
         
         //  获取用户信息
         self.getUserInfo(self, tag: nil)
@@ -114,7 +120,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
                 withTag: tag)
         }
     }
-    
+
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
 //        self.userModel = MVBUserModel(data: data, error: nil)
     }

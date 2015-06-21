@@ -7,6 +7,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MJExtension
+
 class MVBHeroesInfoModel: NSObject {
     var count: NSNumber!
     var status: NSNumber?
@@ -14,7 +16,6 @@ class MVBHeroesInfoModel: NSObject {
     var heroesDicArray: NSMutableArray?
     override init() {
         self.count = NSNumber(integer: 0)
-        
     }
     
     deinit {

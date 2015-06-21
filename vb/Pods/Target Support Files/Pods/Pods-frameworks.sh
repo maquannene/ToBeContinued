@@ -49,22 +49,26 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'AFNetworking.framework'
+  install_framework 'AVOSCloud.framework'
   install_framework 'BlocksKit.framework'
   install_framework 'JSONModel.framework'
   install_framework 'MJExtension.framework'
   install_framework 'MMDrawerController.framework'
   install_framework 'SDWebImage.framework'
+  install_framework 'SLExpandableTableView.framework'
   install_framework 'SVProgressHUD.framework'
   install_framework 'SVPullToRefresh.framework'
   install_framework 'UIActivityIndicator_for_SDWebImage.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
+  install_framework 'AVOSCloud.framework'
   install_framework 'BlocksKit.framework'
   install_framework 'JSONModel.framework'
   install_framework 'MJExtension.framework'
   install_framework 'MMDrawerController.framework'
   install_framework 'SDWebImage.framework'
+  install_framework 'SLExpandableTableView.framework'
   install_framework 'SVProgressHUD.framework'
   install_framework 'SVPullToRefresh.framework'
   install_framework 'UIActivityIndicator_for_SDWebImage.framework'

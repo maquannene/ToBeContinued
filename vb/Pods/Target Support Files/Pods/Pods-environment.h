@@ -48,6 +48,13 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// AVOSCloud
+#define COCOAPODS_POD_AVAILABLE_AVOSCloud
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 3.1.2.4.
+
 // BlocksKit
 #define COCOAPODS_POD_AVAILABLE_BlocksKit
 #define COCOAPODS_VERSION_MAJOR_BlocksKit 2
@@ -94,7 +101,7 @@
 #define COCOAPODS_POD_AVAILABLE_MJExtension
 #define COCOAPODS_VERSION_MAJOR_MJExtension 2
 #define COCOAPODS_VERSION_MINOR_MJExtension 3
-#define COCOAPODS_VERSION_PATCH_MJExtension 5
+#define COCOAPODS_VERSION_PATCH_MJExtension 6
 
 // MMDrawerController
 #define COCOAPODS_POD_AVAILABLE_MMDrawerController
@@ -137,6 +144,12 @@
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
+
+// SLExpandableTableView
+#define COCOAPODS_POD_AVAILABLE_SLExpandableTableView
+#define COCOAPODS_VERSION_MAJOR_SLExpandableTableView 1
+#define COCOAPODS_VERSION_MINOR_SLExpandableTableView 3
+#define COCOAPODS_VERSION_PATCH_SLExpandableTableView 1
 
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
