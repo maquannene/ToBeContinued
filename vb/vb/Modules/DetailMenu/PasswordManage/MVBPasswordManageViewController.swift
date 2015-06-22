@@ -20,10 +20,6 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     var passwordCount: Int = 0
     var expendIndex: Int = -1
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func loadView() {
         super.loadView()
         self.automaticallyAdjustsScrollViewInsets = false

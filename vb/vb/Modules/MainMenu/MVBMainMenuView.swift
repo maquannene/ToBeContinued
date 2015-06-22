@@ -21,6 +21,7 @@ class MVBMainMenuView: UIView {
     
     func baseConfigure() {
         self.backgroundColor = UIColor.whiteColor()
+        headBackgroundImageView.userInteractionEnabled = true
     }
     
     override func layoutSubviews() {

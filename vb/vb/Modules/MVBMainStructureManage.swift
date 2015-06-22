@@ -10,14 +10,23 @@ import MMDrawerController
 
 class MVBMainStructureManage: NSObject {
     
+    //  抽屉
     var drawerController: MMDrawerController?
+    
+    //  左侧主菜单页面
     var mainMenuViewController: MVBMainMenuViewController?
+    //  中间主菜单页面
     var mainViewController: MVBMainViewController?
+    //
+    var heroesManageVc: MVBHeroesViewController?
+    //
+    var passwordManageVc: MVBPasswordManageViewController?
     
     override init() {
-        
+        super.init()
         //  左侧
         mainMenuViewController = MVBMainMenuViewController()
+        mainMenuViewController!.delegate = self
         
         //  中间
         mainViewController = MVBMainViewController()
@@ -42,7 +51,39 @@ class MVBMainStructureManage: NSObject {
         }
     }
     
-    func acquireViewController() -> MMDrawerController! {
-        return drawerController!
+    deinit {
+        println("\(self.dynamicType) deinit")
     }
 }
+
+extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
+    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
+        switch operate {
+        case MVBMainMenuViewControllerOperate.Main:
+            drawerController!.setCenterViewController(mainViewController, withFullCloseAnimation: true, completion: { (finish) -> Void in
+                
+            })
+        case MVBMainMenuViewControllerOperate.HeroesManage:
+            if heroesManageVc == nil {
+                heroesManageVc = MVBHeroesViewController()
+            }
+            drawerController!.setCenterViewController(heroesManageVc, withFullCloseAnimation: true, completion: { (finish) -> Void in
+                
+            })
+        case MVBMainMenuViewControllerOperate.PasswordManage:
+            if passwordManageVc == nil {
+                passwordManageVc = MVBPasswordManageViewController()
+            }
+            drawerController!.setCenterViewController(passwordManageVc, withFullCloseAnimation: true, completion: { (finish) -> Void in
+                
+            })
+        default:
+            println()
+        }
+    }
+}
+
+
+
+
+

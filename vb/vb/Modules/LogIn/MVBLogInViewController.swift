@@ -8,24 +8,41 @@
 
 import SVProgressHUD
 
+enum MVBLogInViewModel : Int {
+    case NotLogIn
+    case AlreadyLogIn
+}
+
 class MVBLogInViewController: UIViewController {
 
+    var structureManage: MVBMainStructureManage?
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var logInBtn: UIButton!
+    
+    var model: MVBLogInViewModel = MVBLogInViewModel.NotLogIn {
+        didSet {
+            if model == MVBLogInViewModel.AlreadyLogIn {
+                logInBtn.setTitle("Welcome to Back", forState: UIControlState.Normal)
+            }
+            if model == MVBLogInViewModel.NotLogIn {
+                logInBtn.setTitle("LogIn User Weibo", forState: UIControlState.Normal)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.brownColor()
+        self.backgroundImageView!.image = UIImage(named: "LogInImage")
     }
     
     override func viewWillAppear(animated: Bool) {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
-            logInBtn.hidden = true
-            self.view.backgroundColor = UIColor.whiteColor()
+            self.model = MVBLogInViewModel.AlreadyLogIn
         }
         else {
-            logInBtn.hidden = false
-            self.view.backgroundColor = UIColor.brownColor()
+            self.model = MVBLogInViewModel.NotLogIn
         }
     }
     
@@ -45,8 +62,12 @@ class MVBLogInViewController: UIViewController {
     }
     
     func successLogIn() {
-        var structureManage = MVBMainStructureManage()
-        structureManage.displayMainStructureFrom(presentingVc: self)
+        structureManage = MVBMainStructureManage()
+        structureManage!.displayMainStructureFrom(presentingVc: self)
+    }
+    
+    func changeViewModel() {
+        
     }
 }
 
@@ -76,7 +97,7 @@ extension MVBLogInViewController: WeiboSDKDelegate {
             NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
-        logInBtn.hidden = true
+        self.model = MVBLogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功", maskType: SVProgressHUDMaskType.Black)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             SVProgressHUD.showWithStatus("读取个人信息...", maskType: SVProgressHUDMaskType.Black)

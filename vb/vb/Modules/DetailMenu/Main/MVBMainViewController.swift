@@ -13,10 +13,11 @@ class MVBMainViewController: MVBDetailBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.hidden = true
         self.view.backgroundColor = UIColor.yellowColor()
         
         var button: UIButton = UIButton(frame: CGRectMake(100, 200, 80, 44))
-//        button.backgroundColor = UIColor.redColor()
+        button.backgroundColor = UIColor.redColor()
         button.bk_addEventHandler({ (button) -> Void in
             var vc = UIViewController()
             

@@ -19,16 +19,12 @@ class MVBHeroesViewController: MVBDetailBaseViewController {
 
     @IBOutlet weak var heroesTableView: UITableView!
     var heroesInfo: MVBHeroesInfoModel = MVBHeroesInfoModel()
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.heroesTableView.registerNib(UINib(nibName: "MVBHeroTableViewCell", bundle: nil), forCellReuseIdentifier: "hero")
-        self.heroesTableView.tableFooterView = UIView()//奇巧淫技
-        self.getHeroesModel()
+//        self.heroesTableView = 
+//        self.heroesTableView.tableFooterView = UIView()//奇巧淫技
+//        self.getHeroesModel()
     }
     
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {

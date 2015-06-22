@@ -9,8 +9,19 @@
 import SVProgressHUD
 import SDWebImage
 
+enum MVBMainMenuViewControllerOperate: Int {
+    case Main
+    case PasswordManage
+    case HeroesManage
+}
+
+protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
+    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) -> Void
+}
+
 class MVBMainMenuViewController: UIViewController {
     
+    weak var delegate: MVBMainMenuViewControllerDelegate?
     weak var mainMenuView: MVBMainMenuView? {
         get {
             return self.view as? MVBMainMenuView
@@ -25,7 +36,29 @@ class MVBMainMenuViewController: UIViewController {
         super.viewDidLoad()
         self.configurUserInfo()
     }
+    
+    func configurUserInfo() {
+        if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: ~SDWebImageOptions.CacheMemoryOnly)
+            mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
+            mainMenuView!.nameLabel.text = userModel.name as? String
+            mainMenuView!.descriptionLabel.text = userModel._description as? String
+        }
+        else {
+            let delegate = MVBAppDelegate.MVBApp()
+            delegate.getUserInfo(self, tag: "getUserInfo")
+        }
+    }
+    
+    deinit {
+        println("\(self.dynamicType) deinit")
+    }
+}
 
+/**
+*  @brief  button action
+*/
+extension MVBMainMenuViewController {
     @IBAction func logOutAction(sender: AnyObject) {
         UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
             if index == 1 {
@@ -35,19 +68,14 @@ class MVBMainMenuViewController: UIViewController {
             }
         }
     }
-    
-    func configurUserInfo() {
-        if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: ~SDWebImageOptions.CacheMemoryOnly)
-            mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
-            mainMenuView!.nameLabel.text = userModel.name as? String
-            mainMenuView!.descriptionLabel.text = userModel._description as? String
-            
-        }
-        else {
-            let delegate = MVBAppDelegate.MVBApp()
-            delegate.getUserInfo(self, tag: "getUserInfo")
-        }
+    @IBAction func backMainAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.Main)
+    }
+    @IBAction func heroesManageAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
+    }
+    @IBAction func passwordManageAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.PasswordManage)
     }
 }
 
@@ -65,7 +93,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
         }
         if request.tag == "getUserInfo" {
             MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
-            self.configurUserInfo()
+            configurUserInfo()
         }
     }
 }

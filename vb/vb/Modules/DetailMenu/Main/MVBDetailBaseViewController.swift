@@ -14,12 +14,12 @@ class MVBDetailBaseViewController: UIViewController {
         super.viewDidDisappear(animated)
         println("\(self.dynamicType) \(__FUNCTION__))")
         //  主页面不出现时，如新push出了一个vc时，mm_drawerController的打开侧边手势要关闭。知道回主页面。
-        self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+        self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         println("\(self.dynamicType) \(__FUNCTION__))")
-        self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
     }
 }
