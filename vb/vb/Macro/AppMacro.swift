@@ -16,4 +16,11 @@ let kMVBSinaSDKUserID = "kMVBSinaSDKUserID"
 
 //  avoscloud sdk
 let kMVBAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"
-let kMVBAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"   
+let kMVBAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
+
+//  userInfoKey
+let kMVBUserInfoKey = "kMVBUserInfoKey"
+
+func getMainBundlePath() -> String? {
+    return  NSBundle.mainBundle().bundlePath
+}

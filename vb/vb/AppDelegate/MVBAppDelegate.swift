@@ -112,21 +112,41 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?) {
         var appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
         if self.userID != nil && self.accessToken != nil {
-            var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
-            WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
-                httpMethod: "GET",
-                params: param,
-                delegate: delegate,
-                withTag: tag)
+            if let userData = NSUserDefaults.standardUserDefaults().valueForKey(kMVBUserInfoKey) as? NSData {
+                self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
+            }
+            else {
+                var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
+                WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
+                    httpMethod: "GET",
+                    params: param,
+                    delegate: delegate,
+                    withTag: tag)
+            }
         }
+    }
+    
+    func setUserInfoWithJsonString(jsonString: String!) {
+        self.userModel = MVBUserModel(keyValues: jsonString)
+        //  归档
+        var userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
+        NSUserDefaults.standardUserDefaults().setObject(userData, forKey: kMVBUserInfoKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    func clearUserInfo() {
+        MVBAppDelegate.MVBApp().accessToken = nil
+        MVBAppDelegate.MVBApp().userID = nil
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBUserInfoKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-//        self.userModel = MVBUserModel(data: data, error: nil)
+
     }
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        self.userModel = MVBUserModel(keyValues: result)
+        self.setUserInfoWithJsonString(result)
     }
 }
 

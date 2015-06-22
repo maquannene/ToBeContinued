@@ -21,9 +21,11 @@ class MVBLogInViewController: UIViewController {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             logInBtn.hidden = true
+            self.view.backgroundColor = UIColor.whiteColor()
         }
         else {
             logInBtn.hidden = false
+            self.view.backgroundColor = UIColor.brownColor()
         }
     }
     
@@ -85,7 +87,7 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 
 extension MVBLogInViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        MVBAppDelegate.MVBApp().userModel = MVBUserModel(keyValues: result)
+        MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
         SVProgressHUD.dismiss()
         self.successLogIn()
     }

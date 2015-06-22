@@ -30,6 +30,19 @@ class MVBUserModel: NSObject {
     var avatar_large: NSString?         //  大图头像
     var avatar_hd: NSString?            //  高清头像
     
+    //  这里这个重载的init()十分必要。
+    override init() {
+    
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+        self.decode(aDecoder)
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        self.encode(aCoder)
+    }
 }
 
 extension MVBUserModel {

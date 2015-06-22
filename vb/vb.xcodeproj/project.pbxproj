@@ -248,10 +248,10 @@
 		D4121E081B072EAA00612CA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D4E17B441B28695300228B4A /* MVBUserModel.swift */,
 				D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */,
 				D4E17B411B28695300228B4A /* MVBHeroModel.swift */,
 				D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */,
-				D4E17B441B28695300228B4A /* MVBUserModel.swift */,
 				D4E17B431B28695300228B4A /* MVBTestModel.swift */,
 			);
 			path = Models;

@@ -38,7 +38,7 @@ class MVBMainMenuViewController: UIViewController {
     
     func configurUserInfo() {
         if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!))
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: ~SDWebImageOptions.CacheMemoryOnly)
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
             mainMenuView!.descriptionLabel.text = userModel._description as? String
@@ -57,16 +57,14 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
     }
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         if request.tag == "logOut" {
-            MVBAppDelegate.MVBApp().accessToken = nil
-            MVBAppDelegate.MVBApp().userID = nil
+            MVBAppDelegate.MVBApp().clearUserInfo()
             SVProgressHUD.dismiss()
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
             self.mm_drawerController!.dismissViewControllerAnimated(true, completion: nil)
         }
         if request.tag == "getUserInfo" {
-            var delegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
-            delegate.userModel = MVBUserModel(keyValues: result)
+            MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
             self.configurUserInfo()
         }
     }

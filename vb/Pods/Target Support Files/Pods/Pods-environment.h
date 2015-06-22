@@ -145,12 +145,6 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
-// SLExpandableTableView
-#define COCOAPODS_POD_AVAILABLE_SLExpandableTableView
-#define COCOAPODS_VERSION_MAJOR_SLExpandableTableView 1
-#define COCOAPODS_VERSION_MINOR_SLExpandableTableView 3
-#define COCOAPODS_VERSION_PATCH_SLExpandableTableView 1
-
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1

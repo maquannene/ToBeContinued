@@ -21,8 +21,6 @@ class MVBMainMenuView: UIView {
     
     func baseConfigure() {
         self.backgroundColor = UIColor.whiteColor()
-        self.headImageView.clipsToBounds = true
-        self.headImageView.layer.cornerRadius = self.headImageView.frame.height / 2
     }
     
     override func layoutSubviews() {

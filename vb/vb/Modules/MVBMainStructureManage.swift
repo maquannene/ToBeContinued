@@ -37,8 +37,8 @@ class MVBMainStructureManage: NSObject {
     }
     
     func displayMainStructureFrom(#presentingVc: UIViewController) {
-        presentingVc.presentViewController(drawerController!, animated: false) { Bool in
-            self.drawerController!.openDrawerSide(MMDrawerSide.Left, animated: false, completion: nil)
+        presentingVc.presentViewController(drawerController!, animated: true) { Bool in
+            self.drawerController!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         }
     }
     
