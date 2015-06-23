@@ -26,6 +26,9 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
     
     override func viewDidLoad() {
+        
+        self.view.backgroundColor = UIColor.greenColor()
+        
         newPasswordBtn = (UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton)
         newPasswordBtn!.addTarget(self, action: "addNewPasswrodAction:", forControlEvents: UIControlEvents.TouchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: newPasswordBtn!)

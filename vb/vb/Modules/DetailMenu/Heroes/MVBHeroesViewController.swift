@@ -22,9 +22,7 @@ class MVBHeroesViewController: MVBDetailBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.heroesTableView = 
-//        self.heroesTableView.tableFooterView = UIView()//奇巧淫技
-//        self.getHeroesModel()
+        self.view.backgroundColor = UIColor.blueColor()
     }
     
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {

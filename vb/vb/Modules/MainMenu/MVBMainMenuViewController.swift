@@ -71,11 +71,11 @@ extension MVBMainMenuViewController {
     @IBAction func backMainAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.Main)
     }
-    @IBAction func heroesManageAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
-    }
     @IBAction func passwordManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.PasswordManage)
+    }
+    @IBAction func heroesManageAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
     }
 }
 

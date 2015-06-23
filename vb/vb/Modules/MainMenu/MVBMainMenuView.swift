@@ -23,7 +23,11 @@ class MVBMainMenuView: UIView {
         self.backgroundColor = UIColor.whiteColor()
         headBackgroundImageView.userInteractionEnabled = true
     }
-    
+    override var frame: CGRect {
+        didSet {
+            println("23")
+        }
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
     }
