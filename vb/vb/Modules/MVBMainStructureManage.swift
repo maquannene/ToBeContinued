@@ -38,7 +38,8 @@ class MVBMainStructureManage: NSObject {
         drawerController!.maximumLeftDrawerWidth = 260
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All & ~MMCloseDrawerGestureMode.PanningDrawerView
-        drawerController!.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
+        //  注意这里闭包引起的循环引用问题。self 的 drawerController 的一个 closure 持有self 导致循环引用。使用无主引用解决此问题
+        drawerController!.setDrawerVisualStateBlock { [unowned self] (drawerVc, drawerSide, percentVisible) -> Void in
             var block: MMDrawerControllerDrawerVisualStateBlock = self.configureDrawerVisualBlock()
             block(drawerVc, drawerSide, percentVisible)
         }
@@ -111,6 +112,8 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
     func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
         var centerViewController: UIViewController
         switch operate {
+        case MVBMainMenuViewControllerOperate.LogOut:
+            return
         case MVBMainMenuViewControllerOperate.Main:
             centerViewController = mainViewController!.navigationController!
         case MVBMainMenuViewControllerOperate.PasswordManage:
@@ -132,15 +135,12 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             }
         }
         else {
-            //  屎一样的写法，不过我喜欢
-            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true) {
-                $0
+            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { (finish) -> Void in
                 self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
-                self.drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5) {
-                    $0
+                self.drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { (finish) -> Void in
                     self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
-                }
-            }
+                })
+            })
         }
     }
 }

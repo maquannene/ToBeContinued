@@ -13,6 +13,7 @@ enum MVBMainMenuViewControllerOperate: Int {
     case Main
     case PasswordManage
     case HeroesManage
+    case LogOut
 }
 
 protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
@@ -89,7 +90,9 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             SVProgressHUD.dismiss()
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
-            self.mm_drawerController!.dismissViewControllerAnimated(true, completion: nil)
+            self.mm_drawerController!.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
+            })
         }
         if request.tag == "getUserInfo" {
             MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)

@@ -17,6 +17,8 @@ class MVBLogInViewController: UIViewController {
 
     var structureManage: MVBMainStructureManage?
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageViewCenterY: NSLayoutConstraint!
     @IBOutlet weak var logInBtn: UIButton!
     
     var model: MVBLogInViewModel = MVBLogInViewModel.NotLogIn {
@@ -34,15 +36,20 @@ class MVBLogInViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.brownColor()
         self.backgroundImageView!.image = UIImage(named: "LogInImage")
+        self.userImageView.clipsToBounds = true
+        self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
     }
     
     override func viewWillAppear(animated: Bool) {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.model = MVBLogInViewModel.AlreadyLogIn
+            userImageView.sd_setImageWithURL(NSURL(string: appDelegate.userModel!.avatar_large as String!))
         }
         else {
             self.model = MVBLogInViewModel.NotLogIn
+            userImageView.image = nil
+            userImageView.alpha = 0
         }
     }
     
@@ -62,12 +69,17 @@ class MVBLogInViewController: UIViewController {
     }
     
     func successLogIn() {
-        structureManage = MVBMainStructureManage()
-        structureManage!.displayMainStructureFrom(presentingVc: self)
-    }
-    
-    func changeViewModel() {
-        
+        userImageView.alpha = 0.3
+        self.userImageViewCenterY.constant = -50
+        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.LayoutSubviews, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            self.userImageView.alpha = 1
+        }) { (finish) -> Void in
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                self.structureManage = MVBMainStructureManage()
+                self.structureManage!.displayMainStructureFrom(presentingVc: self)
+            }
+        }
     }
 }
 
@@ -108,8 +120,11 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 
 extension MVBLogInViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+        //  设置userModel
         MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
+        //  隐藏进度条
         SVProgressHUD.dismiss()
+        //  成功登陆
         self.successLogIn()
     }
 }

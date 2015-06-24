@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jhY-S8-x0H">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Log In View Controller-->
@@ -18,6 +19,13 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-MU-9DZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nMW-uG-CpB">
+                                <rect key="frame" x="116" y="145.5" width="88" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="2WO-da-zco"/>
+                                    <constraint firstAttribute="width" constant="88" id="C1p-2r-YWY"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-QE-UZY">
                                 <rect key="frame" x="0.0" y="480" width="320" height="44"/>
@@ -39,7 +47,9 @@
                             <constraint firstItem="AEd-MU-9DZ" firstAttribute="leading" secondItem="Kk1-DL-X3V" secondAttribute="leading" id="1b5-2A-fIm"/>
                             <constraint firstItem="qwC-uq-odk" firstAttribute="top" secondItem="HzZ-QE-UZY" secondAttribute="bottom" constant="44" id="88t-xA-gvx"/>
                             <constraint firstItem="qwC-uq-odk" firstAttribute="bottom" secondItem="AEd-MU-9DZ" secondAttribute="bottom" id="Dbn-5p-A04"/>
+                            <constraint firstItem="nMW-uG-CpB" firstAttribute="centerY" secondItem="AEd-MU-9DZ" secondAttribute="centerY" multiplier="2/3" id="F4k-kX-ea9"/>
                             <constraint firstItem="AEd-MU-9DZ" firstAttribute="trailing" secondItem="Kk1-DL-X3V" secondAttribute="trailing" id="PjQ-3T-PxR"/>
+                            <constraint firstItem="nMW-uG-CpB" firstAttribute="centerX" secondItem="AEd-MU-9DZ" secondAttribute="centerX" id="Sb9-yR-rwH"/>
                             <constraint firstItem="HzZ-QE-UZY" firstAttribute="left" secondItem="Kk1-DL-X3V" secondAttribute="left" id="YyY-ND-PzQ"/>
                             <constraint firstAttribute="right" secondItem="HzZ-QE-UZY" secondAttribute="right" id="efo-V8-oav"/>
                             <constraint firstItem="AEd-MU-9DZ" firstAttribute="top" secondItem="Y3g-t8-CaR" secondAttribute="top" id="kvo-uc-sNE"/>
@@ -50,11 +60,13 @@
                     <connections>
                         <outlet property="backgroundImageView" destination="AEd-MU-9DZ" id="Z3t-uJ-HZ6"/>
                         <outlet property="logInBtn" destination="HzZ-QE-UZY" id="hH7-7K-XTE"/>
+                        <outlet property="userImageView" destination="nMW-uG-CpB" id="4lt-S2-ECQ"/>
+                        <outlet property="userImageViewCenterY" destination="F4k-kX-ea9" id="EHT-Dv-iSw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haP-Gn-Ujc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3273" y="-328"/>
+            <point key="canvasLocation" x="-3482" y="-329"/>
         </scene>
         <!--新建密码-->
         <scene sceneID="ITC-dT-56n">

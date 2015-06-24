@@ -38,4 +38,7 @@ class MVBMainMenuView: UIView {
 //        }
         super.layoutSubviews()
     }
+    deinit {
+        println("\(self.dynamicType) deinit")
+    }
 }
