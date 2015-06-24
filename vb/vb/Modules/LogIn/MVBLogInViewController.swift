@@ -25,9 +25,16 @@ class MVBLogInViewController: UIViewController {
         didSet {
             if model == MVBLogInViewModel.AlreadyLogIn {
                 logInBtn.setTitle("Welcome to Back", forState: UIControlState.Normal)
+                userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
             }
             if model == MVBLogInViewModel.NotLogIn {
                 logInBtn.setTitle("LogIn User Weibo", forState: UIControlState.Normal)
+                //  头像归位
+                userImageView.image = nil
+                userImageView.alpha = 0
+                userImageViewCenterY.constant = 0
+                self.view.setNeedsUpdateConstraints()
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -44,12 +51,10 @@ class MVBLogInViewController: UIViewController {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.model = MVBLogInViewModel.AlreadyLogIn
-            userImageView.sd_setImageWithURL(NSURL(string: appDelegate.userModel!.avatar_large as String!))
         }
         else {
             self.model = MVBLogInViewModel.NotLogIn
-            userImageView.image = nil
-            userImageView.alpha = 0
+
         }
     }
     
@@ -61,6 +66,9 @@ class MVBLogInViewController: UIViewController {
     }
     
     @IBAction func logInAction(sender: AnyObject) {
+        if model == MVBLogInViewModel.AlreadyLogIn {
+            return
+        }
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
         request.redirectURI = kMVBSinaSDKRedirectURL
         request.scope = "all"
