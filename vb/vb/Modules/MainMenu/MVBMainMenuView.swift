@@ -15,6 +15,7 @@ class MVBMainMenuView: UIView {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     
+    @IBOutlet weak var rightGap: NSLayoutConstraint!
     override func awakeFromNib() {
         self.baseConfigure()
     }
@@ -29,6 +30,12 @@ class MVBMainMenuView: UIView {
         }
     }
     override func layoutSubviews() {
+//        if getScreenSize().width > self.frame.width {
+            rightGap.constant = -(getScreenSize().width - self.frame.width)
+//        }
+//        else {
+        
+//        }
         super.layoutSubviews()
     }
 }

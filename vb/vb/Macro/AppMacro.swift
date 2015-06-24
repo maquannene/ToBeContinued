@@ -24,3 +24,7 @@ let kMVBUserInfoKey = "kMVBUserInfoKey"
 func getMainBundlePath() -> String? {
     return  NSBundle.mainBundle().bundlePath
 }
+
+func getScreenSize() -> CGSize! {
+    return UIScreen.mainScreen().bounds.size
+}

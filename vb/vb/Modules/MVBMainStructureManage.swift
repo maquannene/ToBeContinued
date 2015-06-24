@@ -39,11 +39,8 @@ class MVBMainStructureManage: NSObject {
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All & ~MMCloseDrawerGestureMode.PanningDrawerView
         drawerController!.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
-//            if drawerSide == MMDrawerSide.Left {
-                var block: MMDrawerControllerDrawerVisualStateBlock = self.configureDrawerVisualBlock()
-                block(drawerVc, drawerSide, percentVisible)
-//            }
-//            self.configureDrawerVisualBlock()(drawerVc, drawerSide, percentVisible)
+            var block: MMDrawerControllerDrawerVisualStateBlock = self.configureDrawerVisualBlock()
+            block(drawerVc, drawerSide, percentVisible)
         }
     }
     
@@ -55,36 +52,51 @@ class MVBMainStructureManage: NSObject {
     
     func configureDrawerVisualBlock() -> MMDrawerControllerDrawerVisualStateBlock {
         return { (drawerController: MMDrawerController!, drawerSide: MMDrawerSide, percentVisible: CGFloat) -> Void in
-            var minScale: CGFloat = 0.9
-            var scale: CGFloat = minScale + (percentVisible * (1.0 - minScale))
-            var scaleTransform: CATransform3D = CATransform3DMakeScale(scale, scale, scale)
-            var translateTransform: CATransform3D = CATransform3DIdentity
+            
             var sideViewController: UIViewController?
+            var scale: CGFloat!
+            var scaleTransform: CATransform3D = CATransform3DMakeScale(1, 1, 1);
+            var translateTransform: CATransform3D = CATransform3DIdentity
             var maxDistance: CGFloat = 0.0
             var distance: CGFloat = 0.0
+            var minScale: CGFloat = 0.0     //  收起时最小缩放比
+            
+            if drawerSide == MMDrawerSide.None {
+                return
+            }
             
             if drawerSide == MMDrawerSide.Left {
-                sideViewController = drawerController.leftDrawerViewController!
+                sideViewController = drawerController.leftDrawerViewController
                 maxDistance = drawerController.maximumLeftDrawerWidth
                 distance = maxDistance * percentVisible;
+                //  越界
                 if distance - maxDistance > 0 {
-                    translateTransform = CATransform3DMakeTranslation((distance-maxDistance), 0.0, 0.0);
+                    scale = (percentVisible - 1) + 1;
+                    translateTransform = CATransform3DMakeTranslation((distance - maxDistance) / 2, 0.0, 0.0);
                 }
                 else {
+                    minScale = maxDistance / drawerController.centerViewController.view.frame.width
+                    scale = minScale + percentVisible * (1 - minScale)
                     translateTransform = CATransform3DMakeTranslation(0, 0.0, 0.0);
                 }
             }
             if drawerSide == MMDrawerSide.Right {
-                sideViewController = drawerController.rightDrawerViewController!
+                sideViewController = drawerController.rightDrawerViewController
                 maxDistance = drawerController.maximumRightDrawerWidth
                 distance = maxDistance * percentVisible
-                if maxDistance - distance > 0 {
-                    translateTransform = CATransform3DMakeTranslation(-(maxDistance-distance), 0.0, 0.0);
+                //  越界
+                if distance - maxDistance > 0 {
+                    scale = (percentVisible - 1) * 2 + 1;
+                    translateTransform = CATransform3DMakeTranslation(-(distance - maxDistance), 0.0, 0.0);
                 }
                 else {
+                    minScale = maxDistance / drawerController.centerViewController.view.frame.width
+                    scale = minScale + percentVisible * (1 - minScale)
                     translateTransform = CATransform3DMakeTranslation(0, 0.0, 0.0);
                 }
             }
+            
+            scaleTransform = CATransform3DMakeScale(scale, scale, scale);
             sideViewController?.view.layer.transform = CATransform3DConcat(scaleTransform, translateTransform)
             sideViewController?.view.alpha = percentVisible
         }
@@ -120,7 +132,7 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             }
         }
         else {
-            //  屎一样的写法，不写还不行
+            //  屎一样的写法，不过我喜欢
             drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true) {
                 $0
                 self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None

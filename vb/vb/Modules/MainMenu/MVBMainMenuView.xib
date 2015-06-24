@@ -107,8 +107,9 @@
                 <outlet property="headBackgroundImageView" destination="Lfy-TX-D2u" id="7vv-8S-85V"/>
                 <outlet property="headImageView" destination="LUX-t3-gbc" id="iCu-vf-pFj"/>
                 <outlet property="nameLabel" destination="GxG-99-YhF" id="wQE-t4-srf"/>
+                <outlet property="rightGap" destination="H5Y-GN-aMw" id="tyz-lk-GQq"/>
             </connections>
-            <point key="canvasLocation" x="1211" y="546"/>
+            <point key="canvasLocation" x="1385" y="581"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr">
             <connections>
