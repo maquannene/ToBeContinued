@@ -11,14 +11,26 @@ import BlocksKit
 
 class MVBMainViewController: MVBDetailBaseViewController {
     
+    //  将自己放在一个navigationController上初始化，可采用类方法
+    //  但是这种方法不好，如果有一百个类继承MVBDetailBaseViewController都想用这种初始化方法就要写100遍
+    //  所以在父类中 写一个便利构造函数
+    //  且因为swift 不允许 initCustom() 这种写法，必须要用参数区别，所以用枚举代替init后缀也是不错的选择。
+//    class func initOnNavigationController() -> MVBMainViewController {
+//        var vc: MVBMainViewController = MVBMainViewController()
+//        var navi: UINavigationController = UINavigationController(rootViewController: vc)
+//        vc.mainNavi = navi
+//        return vc
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBar.hidden = true
+        self.navigationController?.navigationBar.hidden = true
         self.view.backgroundColor = UIColor.yellowColor()
         
         var button: UIButton = UIButton(frame: CGRectMake(100, 200, 80, 44))
         button.backgroundColor = UIColor.redColor()
-        button.bk_addEventHandler({ (button) -> Void in
+        //  注意这里，closure引起的cycle retain问题
+        button.bk_addEventHandler({ [unowned self] (button) -> Void in
             var vc = UIViewController()
             
             vc.view.backgroundColor = UIColor.redColor()

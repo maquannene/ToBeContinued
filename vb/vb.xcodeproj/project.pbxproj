@@ -40,6 +40,9 @@
 		D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
 		D4CE3D6E1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE3D6D1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m */; };
+		D4D36A151B3BC81000F2BBF5 /* MVBAccountManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */; };
+		D4D36A191B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */; };
+		D4D36A1B1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */; };
 		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
 		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
 		D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */; };
@@ -107,6 +110,9 @@
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D4CE3D6C1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncodingAdditions.h"; sourceTree = "<group>"; };
 		D4CE3D6D1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingAdditions.m"; sourceTree = "<group>"; };
+		D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountManageViewController.swift; sourceTree = "<group>"; };
+		D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountManageDataSource.swift; sourceTree = "<group>"; };
+		D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAcconutTableViewCell.swift; sourceTree = "<group>"; };
 		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
 		D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSearchUserModel.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				D45E89961B3700B300AFF9F8 /* Main */,
 				D45E89921B3700B300AFF9F8 /* Heroes */,
 				D45E89981B3700B300AFF9F8 /* PasswordManage */,
+				D4D36A131B3BC7E300F2BBF5 /* AccountManage */,
 			);
 			path = DetailMenu;
 			sourceTree = "<group>";
@@ -389,6 +396,17 @@
 				D44A6B141B2886A7003C4834 /* AppMacroObjc.m */,
 			);
 			path = Macro;
+			sourceTree = "<group>";
+		};
+		D4D36A131B3BC7E300F2BBF5 /* AccountManage */ = {
+			isa = PBXGroup;
+			children = (
+				D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */,
+				D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */,
+				D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */,
+			);
+			name = AccountManage;
+			path = PasswordManage/AccountManage;
 			sourceTree = "<group>";
 		};
 		D4E17B4A1B286A6300228B4A /* Resources */ = {
@@ -585,12 +603,15 @@
 				D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */,
 				D45E89A41B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift in Sources */,
 				D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */,
+				D4D36A151B3BC81000F2BBF5 /* MVBAccountManageViewController.swift in Sources */,
 				D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */,
+				D4D36A1B1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
 				D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */,
 				D45E89881B36CD1500AFF9F8 /* MVBMainStructureManage.swift in Sources */,
 				D45E89A31B3700B300AFF9F8 /* MVBPasswordRecordCell.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
+				D4D36A191B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift in Sources */,
 				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
 				D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */,
 				D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */,

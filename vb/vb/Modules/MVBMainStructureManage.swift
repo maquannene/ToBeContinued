@@ -16,12 +16,14 @@ class MVBMainStructureManage: NSObject {
     //  左侧主菜单页面
     var mainMenuViewController: MVBMainMenuViewController?
     //  中间主菜单页面
-    var mainViewNVC: UINavigationController?
     var mainViewController: MVBMainViewController?
+    
     //
     var heroesManageVc: MVBHeroesViewController?
     //
     var passwordManageVc: MVBPasswordManageViewController?
+    //  
+    var accountManangeVc: MVBAccountManageViewController?
     
     override init() {
         super.init()
@@ -30,11 +32,10 @@ class MVBMainStructureManage: NSObject {
         mainMenuViewController!.delegate = self
         
         //  中间
-        mainViewController = MVBMainViewController()
-        mainViewNVC = UINavigationController(rootViewController: mainViewController!)
+        mainViewController = MVBMainViewController(type: MVBDetailBaseViewControllerCustomType.withNavi)
         
         //  抽屉控制器
-        drawerController = MMDrawerController(centerViewController: mainViewNVC, leftDrawerViewController: mainMenuViewController)
+        drawerController = MMDrawerController(centerViewController: mainViewController!.mainNavi!, leftDrawerViewController: mainMenuViewController)
         drawerController!.maximumLeftDrawerWidth = 260
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All & ~MMCloseDrawerGestureMode.PanningDrawerView
@@ -115,7 +116,7 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
         case MVBMainMenuViewControllerOperate.LogOut:
             return
         case MVBMainMenuViewControllerOperate.Main:
-            centerViewController = mainViewController!.navigationController!
+            centerViewController = mainViewController!.mainNavi!
         case MVBMainMenuViewControllerOperate.PasswordManage:
             if passwordManageVc == nil {
                 passwordManageVc = MVBPasswordManageViewController()
@@ -126,6 +127,11 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
                 heroesManageVc = MVBHeroesViewController()
             }
             centerViewController = heroesManageVc!
+        case MVBMainMenuViewControllerOperate.AccountManage:
+            if accountManangeVc == nil {
+                accountManangeVc = MVBAccountManageViewController(type: MVBDetailBaseViewControllerCustomType.withNavi)
+            }
+            centerViewController = accountManangeVc!
         default:
             println()
         }

@@ -25,7 +25,6 @@ class MVBLogInViewController: UIViewController {
         didSet {
             if model == MVBLogInViewModel.AlreadyLogIn {
                 logInBtn.setTitle("Welcome to Back", forState: UIControlState.Normal)
-                userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
             }
             if model == MVBLogInViewModel.NotLogIn {
                 logInBtn.setTitle("LogIn User Weibo", forState: UIControlState.Normal)
@@ -51,6 +50,8 @@ class MVBLogInViewController: UIViewController {
         var appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.model = MVBLogInViewModel.AlreadyLogIn
+            //  如果开启时是登陆过的，直接加载头像
+            userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
         }
         else {
             self.model = MVBLogInViewModel.NotLogIn
@@ -130,6 +131,8 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         //  设置userModel
         MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
+        //  登陆获取信息成功后设置头像
+        userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
         //  隐藏进度条
         SVProgressHUD.dismiss()
         //  成功登陆

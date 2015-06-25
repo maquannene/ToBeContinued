@@ -14,8 +14,8 @@ class MVBMainMenuView: UIView {
     @IBOutlet var headImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
-    
-    @IBOutlet weak var rightGap: NSLayoutConstraint!
+    @IBOutlet weak var beyondViewRightGap: NSLayoutConstraint!
+    @IBOutlet weak var headBgRightGap: NSLayoutConstraint!
     override func awakeFromNib() {
         self.baseConfigure()
     }
@@ -30,13 +30,9 @@ class MVBMainMenuView: UIView {
         }
     }
     override func layoutSubviews() {
-//        if getScreenSize().width > self.frame.width {
-            rightGap.constant = -(getScreenSize().width - self.frame.width)
-//        }
-//        else {
-        
-//        }
         super.layoutSubviews()
+        headBgRightGap.constant = -(getScreenSize().width - self.frame.width)
+        beyondViewRightGap.constant = -(getScreenSize().width - self.frame.width)
     }
     deinit {
         println("\(self.dynamicType) deinit")

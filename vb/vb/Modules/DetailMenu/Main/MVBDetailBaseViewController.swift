@@ -8,7 +8,22 @@
 
 import MMDrawerController
 
+enum MVBDetailBaseViewControllerCustomType {
+    case withNavi
+}
+
 class MVBDetailBaseViewController: UIViewController {
+    
+    var mainNavi: UINavigationController?
+    
+    //  此方法相比在子中写类方法的好处
+    convenience init(type: MVBDetailBaseViewControllerCustomType) {
+        self.init()
+        if type == MVBDetailBaseViewControllerCustomType.withNavi {
+            var navi: UINavigationController = UINavigationController(rootViewController: self)
+            mainNavi = navi
+        }
+    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

@@ -13,6 +13,7 @@ enum MVBMainMenuViewControllerOperate: Int {
     case Main
     case PasswordManage
     case HeroesManage
+    case AccountManage
     case LogOut
 }
 
@@ -77,6 +78,9 @@ extension MVBMainMenuViewController {
     }
     @IBAction func heroesManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
+    }
+    @IBAction func accountManageAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.AccountManage)
     }
 }
 
