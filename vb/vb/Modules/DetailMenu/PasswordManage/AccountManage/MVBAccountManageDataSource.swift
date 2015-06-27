@@ -7,20 +7,19 @@
 //
 
 class MVBAccountManageDataSource: NSObject {
-    var accountCount: Int = 10
+    var accountArray: NSMutableArray = NSMutableArray()
+    var accountCount: Int = 0
 }
 
 extension MVBAccountManageDataSource: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountCount
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kAccountCell) as! UITableViewCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }

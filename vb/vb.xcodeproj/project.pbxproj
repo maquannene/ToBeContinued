@@ -18,9 +18,13 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
+		D4127CF81B3D1A0600AE7AEA /* MVBAccountRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4127CF71B3D1A0600AE7AEA /* MVBAccountRecordView.swift */; };
+		D4127CFA1B3D1A1E00AE7AEA /* MVBAccountRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4127CF91B3D1A1E00AE7AEA /* MVBAccountRecordView.xib */; };
 		D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFD1B1BEF2600987D42 /* SwiftyJSON.swift */; };
 		D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFF1B1BEF2600987D42 /* MQButton.swift */; };
 		D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */; };
+		D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */; };
+		D441578F1B3E4D34004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */; };
 		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */; };
 		D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89741B36CD1500AFF9F8 /* MVBMainMenuView.swift */; };
@@ -85,11 +89,15 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D4127CF71B3D1A0600AE7AEA /* MVBAccountRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountRecordView.swift; sourceTree = "<group>"; };
+		D4127CF91B3D1A1E00AE7AEA /* MVBAccountRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBAccountRecordView.xib; sourceTree = "<group>"; };
 		D41C7FFC1B1BEF2600987D42 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		D41C7FFD1B1BEF2600987D42 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		D41C7FFF1B1BEF2600987D42 /* MQButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQButton.swift; sourceTree = "<group>"; };
 		D41C80001B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
+		D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQMaskController.podspec; sourceTree = "<group>"; };
+		D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQMaskController.podspec; sourceTree = "<group>"; };
 		D44A6B131B288696003C4834 /* AppMacroObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacroObjc.h; sourceTree = "<group>"; };
 		D44A6B141B2886A7003C4834 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +202,7 @@
 				D4121DE01B07184400612CA3 /* vb */,
 				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
 				D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */,
+				D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */,
 				D4121DF61B07184400612CA3 /* vbTests */,
 				D4121DDF1B07184400612CA3 /* Products */,
 				65F955B630BA72D9EA0558A4 /* Pods */,
@@ -268,6 +277,7 @@
 			children = (
 				D41C7FFA1B1BEF2600987D42 /* Library */,
 				D41C80021B1BEF2600987D42 /* SDK */,
+				D44157891B3E4B35004ECC7E /* Podspec */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -308,6 +318,14 @@
 				D4FD3BB91B209D1700F73D43 /* libWeiboSDK */,
 			);
 			path = SDK;
+			sourceTree = "<group>";
+		};
+		D44157891B3E4B35004ECC7E /* Podspec */ = {
+			isa = PBXGroup;
+			children = (
+				D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */,
+			);
+			path = Podspec;
 			sourceTree = "<group>";
 		};
 		D45E89701B36CD1500AFF9F8 /* Modules */ = {
@@ -404,6 +422,8 @@
 				D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */,
 				D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */,
 				D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */,
+				D4127CF71B3D1A0600AE7AEA /* MVBAccountRecordView.swift */,
+				D4127CF91B3D1A1E00AE7AEA /* MVBAccountRecordView.xib */,
 			);
 			name = AccountManage;
 			path = PasswordManage/AccountManage;
@@ -520,6 +540,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
+				D441578F1B3E4D34004ECC7E /* MQMaskController.podspec in Resources */,
+				D4127CFA1B3D1A1E00AE7AEA /* MVBAccountRecordView.xib in Resources */,
+				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
 				D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
 				D45E89861B36CD1500AFF9F8 /* MVBMainMenuView.xib in Resources */,
@@ -594,6 +617,7 @@
 				D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */,
 				D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */,
 				D45E89A11B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift in Sources */,
+				D4127CF81B3D1A0600AE7AEA /* MVBAccountRecordView.swift in Sources */,
 				D4E17B481B28695300228B4A /* MVBTestModel.swift in Sources */,
 				D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,

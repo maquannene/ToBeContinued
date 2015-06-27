@@ -53,7 +53,7 @@
 // This library does not follow semantic-versioning,
 // so we were not able to define version macros.
 // Please contact the author.
-// Version: 3.1.2.4.
+// Version: 3.1.2.5.
 
 // BlocksKit
 #define COCOAPODS_POD_AVAILABLE_BlocksKit
@@ -133,6 +133,12 @@
 #define COCOAPODS_VERSION_MINOR_MMDrawerController_Subclass 5
 #define COCOAPODS_VERSION_PATCH_MMDrawerController_Subclass 7
 
+// MQMaskController
+#define COCOAPODS_POD_AVAILABLE_MQMaskController
+#define COCOAPODS_VERSION_MAJOR_MQMaskController 0
+#define COCOAPODS_VERSION_MINOR_MQMaskController 0
+#define COCOAPODS_VERSION_PATCH_MQMaskController 1
+
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
@@ -144,6 +150,12 @@
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
+
+// SLExpandableTableView
+#define COCOAPODS_POD_AVAILABLE_SLExpandableTableView
+#define COCOAPODS_VERSION_MAJOR_SLExpandableTableView 1
+#define COCOAPODS_VERSION_MINOR_SLExpandableTableView 3
+#define COCOAPODS_VERSION_PATCH_SLExpandableTableView 1
 
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
