@@ -68,6 +68,7 @@ class MVBAppDelegate: UIResponder {
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(kMVBSinaSDKAppKey)
         //  AVOSCloud sdk
+        MVBPasswordIdListModel.registerSubclass()
         AVOSCloud.setApplicationId(kMVBAVCloudSDKAppID, clientKey: kMVBAVCloudSDKAppKey)
     }
 }

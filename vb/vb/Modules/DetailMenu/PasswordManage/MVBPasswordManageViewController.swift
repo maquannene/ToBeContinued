@@ -13,35 +13,41 @@ let pwRecordDetailCellId = "passwordRecordDetailCell"
 
 class MVBPasswordManageViewController: MVBDetailBaseViewController {
     
-    weak var newPasswordBtn: UIButton?
-    weak var newPasswordConfigVc: MVBNewPasswordConfigViewController?
-    var passwordListTableView: SLExpandableTableView?
+    var newPasswordBtn: UIButton?
     
-    var passwordCount: Int = 0
-    var expendIndex: Int = -1
+    var dataSource: MVBPasswordManageDataSource?
+    var passwordListTableView: UITableView?
+    
+    var newPasswordVc: MQMaskController?
+    
+    weak var newPasswordConfigVc: MVBNewPasswordConfigViewController?
     
     override func loadView() {
         super.loadView()
-        self.automaticallyAdjustsScrollViewInsets = false
+//        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidLoad() {
-        
+
+        //  基础设置
         self.view.backgroundColor = UIColor.greenColor()
-        
         newPasswordBtn = (UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton)
+        newPasswordBtn!.frame = CGRectMake(0, 0, 44, 44)
         newPasswordBtn!.addTarget(self, action: "addNewPasswrodAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: newPasswordBtn!)
+        self.view.addSubview(newPasswordBtn!)
         
-        passwordListTableView = SLExpandableTableView(frame: CGRectMake(20, 64, 280, 400), style: UITableViewStyle.Plain)
+        dataSource = MVBPasswordManageDataSource()
+        dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
+            self.passwordListTableView!.reloadData()
+        }
+        
+        passwordListTableView = UITableView(frame: CGRectMake(20, 64, 280, 400), style: UITableViewStyle.Plain)
         passwordListTableView!.tableFooterView = UIView(frame: CGRectZero)
         passwordListTableView!.tableHeaderView = UIView(frame: CGRectZero)
         passwordListTableView!.rowHeight = 44
         passwordListTableView!.delegate = self
-        passwordListTableView!.dataSource = self
-//        passwordListTableView!.backgroundColor = UIColor.brownColor()
+        passwordListTableView!.dataSource = dataSource
         passwordListTableView!.registerClass(MVBPasswordRecordCell.self, forCellReuseIdentifier: pwRecordCellId)
-        passwordListTableView!.registerClass(MVBPasswordRecordDetailCell.self, forCellReuseIdentifier: pwRecordDetailCellId)
         self.view.addSubview(passwordListTableView!)
     }
     
@@ -52,7 +58,9 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
     
     func addNewPasswrodAction(sender: AnyObject!) {
-//        self .performSegueWithIdentifier("newPasswordConfigVc", sender: sender)
+        dataSource!.addPasswordRecord(MVBPasswordRecordModel(title: "wow", detailContent: "123"), complete: { (succeed) -> Void in
+            
+        })
     }
     
     deinit {
@@ -60,57 +68,9 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
 }
 
-extension MVBPasswordManageViewController: SLExpandableTableViewDelegate, SLExpandableTableViewDatasource {
-    
-    //  UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 44
-        }
-        else {
-            return 44
-        }
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var passwordRecordCell:MVBPasswordRecordDetailCell = tableView.dequeueReusableCellWithIdentifier(pwRecordDetailCellId) as! MVBPasswordRecordDetailCell
-        passwordRecordCell.selectionStyle = UITableViewCellSelectionStyle.None
-        passwordRecordCell.textLabel?.text = "\(indexPath.row)"
-        return passwordRecordCell
-    }
-    
-    func tableView(tableView: SLExpandableTableView!, canExpandSection section: Int) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: SLExpandableTableView!, needsToDownloadDataForExpandableSection section: Int) -> Bool {
-        return !(section == expendIndex)
-    }
-    
-    func tableView(tableView: SLExpandableTableView!, expandingCellForSection section: Int) -> UITableViewCell! {
-        var passwordRecordCell:MVBPasswordRecordCell = tableView.dequeueReusableCellWithIdentifier(pwRecordCellId) as! MVBPasswordRecordCell
-        passwordRecordCell.selectionStyle = UITableViewCellSelectionStyle.None
-        passwordRecordCell.textLabel?.text = "\(section)"
-        return passwordRecordCell
-    }
-    
+extension MVBPasswordManageViewController: UITableViewDelegate {
     //  UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-    }
-    
-    func tableView(tableView: SLExpandableTableView!, downloadDataForExpandableSection section: Int) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-            self.expendIndex = section
-            tableView.expandSection(section, animated: false)
-        }
     }
 }

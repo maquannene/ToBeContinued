@@ -24,7 +24,6 @@
 		D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFF1B1BEF2600987D42 /* MQButton.swift */; };
 		D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */; };
 		D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */; };
-		D441578F1B3E4D34004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */; };
 		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */; };
 		D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89741B36CD1500AFF9F8 /* MVBMainMenuView.swift */; };
@@ -40,6 +39,9 @@
 		D45E89A31B3700B300AFF9F8 /* MVBPasswordRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */; };
 		D45E89A41B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */; };
 		D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */; };
+		D47B272D1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */; };
+		D47B27331B400A8500679BEE /* MVBPasswordIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B27321B400A8500679BEE /* MVBPasswordIdListModel.swift */; };
+		D47B27351B40277600679BEE /* MVBPasswordRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B27341B40277600679BEE /* MVBPasswordRecordModel.swift */; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
@@ -49,8 +51,6 @@
 		D4D36A1B1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */; };
 		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
 		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
-		D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */; };
-		D4E17B481B28695300228B4A /* MVBTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B431B28695300228B4A /* MVBTestModel.swift */; };
 		D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B441B28695300228B4A /* MVBUserModel.swift */; };
 		D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E17B4B1B286A7F00228B4A /* Images.xcassets */; };
 		D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B4D1B286BC100228B4A /* AppMacro.swift */; };
@@ -97,7 +97,6 @@
 		D41C80001B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
 		D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQMaskController.podspec; sourceTree = "<group>"; };
-		D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQMaskController.podspec; sourceTree = "<group>"; };
 		D44A6B131B288696003C4834 /* AppMacroObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacroObjc.h; sourceTree = "<group>"; };
 		D44A6B141B2886A7003C4834 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +114,9 @@
 		D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordDetailCell.swift; sourceTree = "<group>"; };
 		D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MVBDetailBaseViewController.swift; path = Main/MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
+		D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordManageDataSource.swift; sourceTree = "<group>"; };
+		D47B27321B400A8500679BEE /* MVBPasswordIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordIdListModel.swift; sourceTree = "<group>"; };
+		D47B27341B40277600679BEE /* MVBPasswordRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordModel.swift; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D4CE3D6C1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncodingAdditions.h"; sourceTree = "<group>"; };
 		D4CE3D6D1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingAdditions.m"; sourceTree = "<group>"; };
@@ -123,8 +125,6 @@
 		D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAcconutTableViewCell.swift; sourceTree = "<group>"; };
 		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
-		D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSearchUserModel.swift; sourceTree = "<group>"; };
-		D4E17B431B28695300228B4A /* MVBTestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBTestModel.swift; sourceTree = "<group>"; };
 		D4E17B441B28695300228B4A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
 		D4E17B4B1B286A7F00228B4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4E17B4D1B286BC100228B4A /* AppMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMacro.swift; sourceTree = "<group>"; };
@@ -202,7 +202,6 @@
 				D4121DE01B07184400612CA3 /* vb */,
 				D4121E031B071E9800612CA3 /* vb-Bridging-Header.h */,
 				D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */,
-				D441578E1B3E4D34004ECC7E /* MQMaskController.podspec */,
 				D4121DF61B07184400612CA3 /* vbTests */,
 				D4121DDF1B07184400612CA3 /* Products */,
 				65F955B630BA72D9EA0558A4 /* Pods */,
@@ -266,8 +265,7 @@
 				D4E17B441B28695300228B4A /* MVBUserModel.swift */,
 				D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */,
 				D4E17B411B28695300228B4A /* MVBHeroModel.swift */,
-				D4E17B421B28695300228B4A /* MVBSearchUserModel.swift */,
-				D4E17B431B28695300228B4A /* MVBTestModel.swift */,
+				D47B27311B400A5F00679BEE /* PasswordModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -391,11 +389,21 @@
 			isa = PBXGroup;
 			children = (
 				D45E899A1B3700B300AFF9F8 /* MVBPasswordManageViewController.swift */,
+				D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */,
 				D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */,
 				D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */,
 				D45E89991B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift */,
 			);
 			path = PasswordManage;
+			sourceTree = "<group>";
+		};
+		D47B27311B400A5F00679BEE /* PasswordModels */ = {
+			isa = PBXGroup;
+			children = (
+				D47B27321B400A8500679BEE /* MVBPasswordIdListModel.swift */,
+				D47B27341B40277600679BEE /* MVBPasswordRecordModel.swift */,
+			);
+			path = PasswordModels;
 			sourceTree = "<group>";
 		};
 		D488BF031B28685A0050C2E2 /* AppDelegate */ = {
@@ -540,7 +548,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
-				D441578F1B3E4D34004ECC7E /* MQMaskController.podspec in Resources */,
 				D4127CFA1B3D1A1E00AE7AEA /* MVBAccountRecordView.xib in Resources */,
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
 				D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */,
@@ -618,7 +625,6 @@
 				D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */,
 				D45E89A11B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift in Sources */,
 				D4127CF81B3D1A0600AE7AEA /* MVBAccountRecordView.swift in Sources */,
-				D4E17B481B28695300228B4A /* MVBTestModel.swift in Sources */,
 				D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
 				D45E89871B36CD1500AFF9F8 /* MVBMainMenuViewController.swift in Sources */,
@@ -626,9 +632,10 @@
 				D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */,
 				D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */,
 				D45E89A41B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift in Sources */,
-				D4E17B471B28695300228B4A /* MVBSearchUserModel.swift in Sources */,
 				D4D36A151B3BC81000F2BBF5 /* MVBAccountManageViewController.swift in Sources */,
+				D47B27331B400A8500679BEE /* MVBPasswordIdListModel.swift in Sources */,
 				D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */,
+				D47B27351B40277600679BEE /* MVBPasswordRecordModel.swift in Sources */,
 				D4D36A1B1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
 				D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */,
@@ -636,6 +643,7 @@
 				D45E89A31B3700B300AFF9F8 /* MVBPasswordRecordCell.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
 				D4D36A191B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift in Sources */,
+				D47B272D1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift in Sources */,
 				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
 				D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */,
 				D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */,

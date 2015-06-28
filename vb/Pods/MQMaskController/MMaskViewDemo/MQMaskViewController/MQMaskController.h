@@ -24,6 +24,11 @@ typedef void(^MQMaskControllerCloseAnimationState)(UIView *maskView, UIView* con
 @protocol MQMaskControllerDelegate <NSObject>
 
 @optional
+
+- (void)maskControllerWillShow:(MQMaskController *)maskController;
+
+- (void)maskControllerDidShow:(MQMaskController *)maskController;
+
 - (void)maskControllerWillDismiss:(MQMaskController *)maskController;
 
 - (void)maskControllerDidDismiss:(MQMaskController *)maskController;     /*you maybe need release instance here*/
@@ -45,7 +50,6 @@ typedef void(^MQMaskControllerCloseAnimationState)(UIView *maskView, UIView* con
  */
 - (instancetype)initMaskController:(MQMaskControllerType)type
                    withContentView:(UIView *)view
-                         animation:(BOOL)animation
                      contentCenter:(BOOL)contentCenter
                          delayTime:(CGFloat)delayTime;
 
@@ -56,11 +60,11 @@ typedef void(^MQMaskControllerCloseAnimationState)(UIView *maskView, UIView* con
 /**
  *  显示maskController的内容
  */
-- (void)show;
+- (void)showWithAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 /**
  *  消失掉maskController
  */
-- (void)dismiss;
+- (void)dismissWithAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end

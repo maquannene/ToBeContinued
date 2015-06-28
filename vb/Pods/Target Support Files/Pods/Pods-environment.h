@@ -53,7 +53,7 @@
 // This library does not follow semantic-versioning,
 // so we were not able to define version macros.
 // Please contact the author.
-// Version: 3.1.2.5.
+// Version: 3.1.2.6.
 
 // BlocksKit
 #define COCOAPODS_POD_AVAILABLE_BlocksKit
@@ -135,9 +135,9 @@
 
 // MQMaskController
 #define COCOAPODS_POD_AVAILABLE_MQMaskController
-#define COCOAPODS_VERSION_MAJOR_MQMaskController 0
+#define COCOAPODS_VERSION_MAJOR_MQMaskController 
 #define COCOAPODS_VERSION_MINOR_MQMaskController 0
-#define COCOAPODS_VERSION_PATCH_MQMaskController 1
+#define COCOAPODS_VERSION_PATCH_MQMaskController 0
 
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage

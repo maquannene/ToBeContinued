@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (3.1.2.5)
+  - AVOSCloud (3.1.2.6)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -50,7 +50,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
-  - MQMaskController (0.0.1)
+  - MQMaskController
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -78,14 +78,19 @@ EXTERNAL SOURCES:
   MQMaskController:
     :podspec: ../vb/vb/Utils/Podspec/MQMaskController.podspec
 
+CHECKOUT OPTIONS:
+  MQMaskController:
+    :commit: 5a79151a22c081e3486e25a1e1bce48217fe82aa
+    :git: https://github.com/wuhanness/MQMaskViewController.git
+
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AVOSCloud: 67447efd9abec78d952b914872439f6971297659
+  AVOSCloud: a2fc903a1aee5a346f0fb839f92617378fffd2ed
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
   MJExtension: eb9d381740563b520fbabdfa6caf92d666314467
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
+  MQMaskController: 95c659dee8e3109abd8446d4fd1a7c057794d505
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

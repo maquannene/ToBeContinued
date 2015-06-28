@@ -14,8 +14,8 @@
 @interface MQMaskController () <UIGestureRecognizerDelegate>
 
 @property (retain, nonatomic) UIView *contentView;          //  内容层。
-@property (assign, nonatomic) BOOL animation;               //  消失和出现是否有动画,default NO
 @property (assign, nonatomic) BOOL contentViewCenter;       //  内容是否显示在中心。
+@property (assign, nonatomic) BOOL isShowAnimated;
 @property (copy, nonatomic) MQMaskControllerShowAnimationState showAnimationState;
 @property (copy, nonatomic) MQMaskControllerCloseAnimationState closeAnimationState;
 
@@ -43,7 +43,6 @@
     if (self) {
         
         _contentViewCenter = NO;
-        _animation = NO;
         
         _maskView = [[UIView alloc] init];
         //  8.0+ 和 8.0-加的地方不一样。
@@ -66,19 +65,16 @@
     self = [self init];
     if (self) {
         self.contentView = view;
-        [_maskView addSubview:self.contentView];
     }
     return self;
 }
 
 - (instancetype)initMaskController:(MQMaskControllerType)type
                    withContentView:(UIView *)view
-                         animation:(BOOL)animation
                      contentCenter:(BOOL)contentCenter
                          delayTime:(CGFloat)delayTime {
     self = [self initWithContentView:view];
     if (self) {
-        self.animation = animation;
         self.contentViewCenter = contentCenter;
         
         //  默认类型
@@ -111,20 +107,49 @@
     return self;
 }
 
-- (void)show {
+- (void)dismiss {
+    [self dismissWithAnimated:_isShowAnimated completion:nil];
+}
+
+#pragma mark - Public
+
+- (void)showWithAnimated:(BOOL)animated completion:(void (^)(void))completion {
+    
+    _isShowAnimated = animated;
     //  如果设置了内容中心，就显示在中心
     if (_contentViewCenter) {
         self.contentView.center = _maskView.center;
     }
+    
+    if ([_delegate respondsToSelector:@selector(maskControllerWillShow:)]) {
+        [_delegate maskControllerWillShow:self];
+    }
+    
+    [_maskView addSubview:self.contentView];
     //  如果设置了动画，要进行动画。
-    if (_animation) {
-        [self showAnimation:^{
-            
+    if (animated) {
+        [self showwithAnimated:^{
+            if (completion) {
+                completion();
+            }
+            if ([_delegate respondsToSelector:@selector(maskControllerDidShow:)]) {
+                [_delegate maskControllerDidShow:self];
+            }
         }];
+    }
+    else {
+        if (completion) {
+            completion();
+        }
+        if ([_delegate respondsToSelector:@selector(maskControllerDidShow:)]) {
+            [_delegate maskControllerDidShow:self];
+        }
     }
 }
 
-- (void)dismiss {
+
+
+- (void)dismissWithAnimated:(BOOL)animated completion:(void (^)(void))completion {
     //  如果点击调用隐藏，那么取消延时隐藏。
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:nil];
     
@@ -132,23 +157,33 @@
         [_delegate maskControllerWillDismiss:self];
     }
     
-    if (_animation) {
-        [self dismissAnimation:^{
+    if (animated) {
+        [self dismissWithAnimated:^{
             [_maskView removeFromSuperview];
             if ([_delegate respondsToSelector:@selector(maskControllerDidDismiss:)]) {
                 [_delegate maskControllerDidDismiss:self];
             }
+            if (completion) {
+                completion();
+            }
         }];
     }
     else {
+        [_maskView removeFromSuperview];
         if ([_delegate respondsToSelector:@selector(maskControllerDidDismiss:)]) {
-            [_maskView removeFromSuperview];
             [_delegate maskControllerDidDismiss:self];
+        }
+        if (completion) {
+            completion();
         }
     }
 }
 
-- (void)showAnimation:(void (^)())complete {
+#pragma mark - Private
+
+- (void)showwithAnimated:(void (^)())complete {
+    
+    //  如果设置了动画状态
     if (self.showAnimationState) {
         [UIView animateWithDuration:.3 animations:^{
             self.showAnimationState(_maskView, _contentView);
@@ -158,6 +193,7 @@
             }
         }];
     }
+    //  否则默认动画
     else {
         _contentView.transform = CGAffineTransformMakeScale(0.01, 0.01);
         _maskView.alpha = 0.01;
@@ -173,7 +209,8 @@
     }
 }
 
-- (void)dismissAnimation:(void (^)())complete {
+- (void)dismissWithAnimated:(void (^)())complete {
+    
     if (self.closeAnimationState) {
         [UIView animateWithDuration:.3 animations:^{
             self.closeAnimationState(_maskView, _contentView);

@@ -7,7 +7,6 @@
 //
 
 let kAccountCell = "kAccountCell"
-import MQMaskController
 
 class MVBAccountManageViewController: MVBDetailBaseViewController {
     
@@ -42,14 +41,27 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
     }
     
     func addRecordAction(sender: AnyObject!) -> Void {
-//        var recordView = NSBundle.mainBundle().loadNibNamed("MVBAccountRecordView", owner: nil, options: nil)[0] as! MVBAccountRecordView
-//        recordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: recordView!, animation: true, contentCenter: false, delayTime: 0)
+        var recordView = NSBundle.mainBundle().loadNibNamed("MVBAccountRecordView", owner: nil, options: nil)[0] as! MVBAccountRecordView
+        recordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
+        recordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: recordView, contentCenter: true, delayTime: 0)
+        recordVc!.delegate = self
+        recordVc!.showWithAnimated(true, completion: nil)
     }
     
     deinit {
         println("\(self.dynamicType) deinit")
     }
 
+}
+
+extension MVBAccountManageViewController: MQMaskControllerDelegate {
+    func maskControllerWillDismiss(maskController: MQMaskController!) {
+        
+    }
+    
+    func maskControllerDidDismiss(maskController: MQMaskController!) {
+        recordVc = nil
+    }
 }
 
 extension MVBAccountManageViewController: UITableViewDelegate {
