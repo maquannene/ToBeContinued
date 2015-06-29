@@ -38,7 +38,7 @@
 //#import "BlocksKit+UIKit.h"
 
 @import UIKit;
-//@import AFNetworking;
+@import AFNetworking;
 //@import SVProgressHUD;
 //@import BlocksKit;
 //@import SDWebImage;
@@ -47,3 +47,5 @@
 @import AVOSCloud;
 //@import SLExpandableTableView;
 @import MQMaskController;
+
+#import <AVOSCloud/AVObject+Subclass.h>

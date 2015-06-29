@@ -9,8 +9,7 @@
     "ios": "7.0"
   },
   "source": {
-    "git": "https://github.com/wuhanness/MQMaskViewController.git",
-    "commit": "5a79151a22c081e3486e25a1e1bce48217fe82aa"
+    "git": "https://github.com/wuhanness/MQMaskViewController.git"
   },
   "source_files": "MMaskViewDemo/MQMaskViewController/*.{h,m}",
   "frameworks": "UIKit",

@@ -80,7 +80,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MQMaskController:
-    :commit: 5a79151a22c081e3486e25a1e1bce48217fe82aa
+    :commit: fd261f9dc467f2c5ef2fed5d5b12cd6c815e626d
     :git: https://github.com/wuhanness/MQMaskViewController.git
 
 SPEC CHECKSUMS:
@@ -90,7 +90,7 @@ SPEC CHECKSUMS:
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
   MJExtension: eb9d381740563b520fbabdfa6caf92d666314467
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  MQMaskController: 95c659dee8e3109abd8446d4fd1a7c057794d505
+  MQMaskController: 7c7f562d11a70ddfb13ee66923301ee655829dcc
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

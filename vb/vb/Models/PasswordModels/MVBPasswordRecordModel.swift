@@ -7,8 +7,10 @@
 //
 
 class MVBPasswordRecordModel: AVObject {
+    
     var title: String!
     var detailContent: String!
+    
     convenience init(title: String, detailContent: String) {
         self.init()
         self.setObject(title, forKey: "title")

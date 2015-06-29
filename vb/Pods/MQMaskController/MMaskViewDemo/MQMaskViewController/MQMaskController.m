@@ -13,7 +13,6 @@
 
 @interface MQMaskController () <UIGestureRecognizerDelegate>
 
-@property (retain, nonatomic) UIView *contentView;          //  内容层。
 @property (assign, nonatomic) BOOL contentViewCenter;       //  内容是否显示在中心。
 @property (assign, nonatomic) BOOL isShowAnimated;
 @property (copy, nonatomic) MQMaskControllerShowAnimationState showAnimationState;

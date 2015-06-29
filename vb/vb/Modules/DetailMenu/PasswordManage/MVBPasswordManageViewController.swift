@@ -58,8 +58,20 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
     
     func addNewPasswrodAction(sender: AnyObject!) {
-        dataSource!.addPasswordRecord(MVBPasswordRecordModel(title: "wow", detailContent: "123"), complete: { (succeed) -> Void in
-            
+        var newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
+        newPasswordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
+        newPasswordView.createButton.addTarget(self, action: "finishCreateNewPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: true, delayTime: 0)
+        newPasswordVc!.showWithAnimated(true, completion: nil)
+    }
+    
+    func finishCreateNewPasswordAction(sender: AnyObject!) {
+        var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
+        dataSource!.addPasswordRecord( MVBPasswordRecordModel(title: contentView.titleTextField.text, detailContent: contentView.detailContentTextField.text), complete: { [unowned self]  (succeed) -> Void in
+            self.passwordListTableView!.reloadData()
+            self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
+                
+            })
         })
     }
     

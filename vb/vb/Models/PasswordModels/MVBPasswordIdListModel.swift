@@ -7,19 +7,15 @@
 //
 
 class MVBPasswordIdListModel: AVObject {
-    var listIdentifier: String!
-    var idList: NSMutableArray!
     
-    override init() {
-        super.init()
-        var idList = NSMutableArray()
-        self.setObject(idList, forKey: "idList")
-        self.setObject("", forKey: "listIdentifier")
-    }
+    var identifier: String!
+    var list: NSMutableArray!
     
-    convenience init(listIdentifier identifier: String) {
+    convenience init(identifier: String) {
         self.init()
-        self.setObject(identifier, forKey: "listIdentifier")
+        var list = NSMutableArray()
+        self.setObject(list, forKey: "list")
+        self.setObject(identifier, forKey: "identifier")
     }
 }
 

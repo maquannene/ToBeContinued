@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.author       = { "maquan" => "maquan@kingsoft.com" }
   s.platform     = :ios
   s.platform     = :ios, "7.0"
-  s.source       = {:git => 'https://github.com/wuhanness/MQMaskViewController.git', :commit => '5a79151a22c081e3486e25a1e1bce48217fe82aa'}
+  s.source       = {:git => 'https://github.com/wuhanness/MQMaskViewController.git'}
   s.source_files = "MMaskViewDemo/MQMaskViewController/*.{h,m}"
   s.framework    = "UIKit"
   s.requires_arc = false
