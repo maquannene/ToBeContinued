@@ -37,10 +37,8 @@
 		D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89941B3700B300AFF9F8 /* MVBHeroTableViewCell.swift */; };
 		D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45E89951B3700B300AFF9F8 /* MVBHeroTableViewCell.xib */; };
 		D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */; };
-		D45E89A11B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89991B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift */; };
 		D45E89A21B3700B300AFF9F8 /* MVBPasswordManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E899A1B3700B300AFF9F8 /* MVBPasswordManageViewController.swift */; };
 		D45E89A31B3700B300AFF9F8 /* MVBPasswordRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */; };
-		D45E89A41B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */; };
 		D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */; };
 		D47B272D1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
@@ -113,10 +111,8 @@
 		D45E89941B3700B300AFF9F8 /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
 		D45E89951B3700B300AFF9F8 /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
 		D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
-		D45E89991B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNewPasswordConfigViewController.swift; sourceTree = "<group>"; };
 		D45E899A1B3700B300AFF9F8 /* MVBPasswordManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordManageViewController.swift; sourceTree = "<group>"; };
 		D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordCell.swift; sourceTree = "<group>"; };
-		D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordDetailCell.swift; sourceTree = "<group>"; };
 		D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MVBDetailBaseViewController.swift; path = Main/MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordManageDataSource.swift; sourceTree = "<group>"; };
@@ -397,8 +393,6 @@
 				D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */,
 				D41620F01B4104E000D1D021 /* MVBNewPasswordView.swift */,
 				D41620F21B4104ED00D1D021 /* MVBNewPasswordView.xib */,
-				D45E899C1B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift */,
-				D45E89991B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift */,
 			);
 			path = PasswordManage;
 			sourceTree = "<group>";
@@ -631,7 +625,6 @@
 				D430B0F01B417D480082A310 /* MVBPasswordIdListModel.swift in Sources */,
 				D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */,
 				D41C800F1B1BEF2600987D42 /* SwiftyJSON.swift in Sources */,
-				D45E89A11B3700B300AFF9F8 /* MVBNewPasswordConfigViewController.swift in Sources */,
 				D4127CF81B3D1A0600AE7AEA /* MVBAccountRecordView.swift in Sources */,
 				D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
@@ -639,7 +632,6 @@
 				D4CE3D6E1B1E08FF0053DFC5 /* NSString+URLEncodingAdditions.m in Sources */,
 				D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */,
 				D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */,
-				D45E89A41B3700B300AFF9F8 /* MVBPasswordRecordDetailCell.swift in Sources */,
 				D4D36A151B3BC81000F2BBF5 /* MVBAccountManageViewController.swift in Sources */,
 				D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */,
 				D4F52C431B417983009E80AE /* MVBPasswordRecordModel.swift in Sources */,

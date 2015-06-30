@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+ let kList = "list"
+let kIdentifier = "identifier"
+
 class MVBPasswordIdListModel: AVObject {
     
     var identifier: String!
@@ -14,8 +17,8 @@ class MVBPasswordIdListModel: AVObject {
     convenience init(identifier: String) {
         self.init()
         var list = NSMutableArray()
-        self.setObject(list, forKey: "list")
-        self.setObject(identifier, forKey: "identifier")
+        self.setObject(list, forKey: kList)
+        self.setObject(identifier, forKey: kIdentifier)
     }
 }
 

@@ -6,15 +6,26 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+let kTitle = "title"
+let kDetailContent = "detailContent"
+
 class MVBPasswordRecordModel: AVObject {
     
     var title: String!
     var detailContent: String!
     
-    convenience init(title: String, detailContent: String) {
+    convenience init(title: String?, detailContent: String?) {
         self.init()
-        self.setObject(title, forKey: "title")
-        self.setObject(detailContent, forKey: "detailContent")
+        update(title: title, detailContent: detailContent)
+    }
+    
+    func update(#title: String?, detailContent: String?) {
+        if title != nil {
+            self.setObject(title, forKey: kTitle)
+        }
+        if detailContent != nil {
+            self.setObject(detailContent, forKey: kDetailContent)
+        }
     }
 }
 

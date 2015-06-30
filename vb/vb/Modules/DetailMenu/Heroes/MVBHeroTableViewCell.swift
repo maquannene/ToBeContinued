@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import SDWebImage
-
 class MVBHeroTableViewCell: UITableViewCell {
 
     @IBOutlet var heroImageButton: UIButton!

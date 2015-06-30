@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import SVProgressHUD
-import SDWebImage
-
 enum MVBMainMenuViewControllerOperate: Int {
     case Main
     case PasswordManage

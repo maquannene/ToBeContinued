@@ -7,8 +7,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import BlocksKit
-
 class MVBMainViewController: MVBDetailBaseViewController {
     
     //  将自己放在一个navigationController上初始化，可采用类方法

@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import SLExpandableTableView
-
 let pwRecordCellId = "passwordRecordCell"
 let pwRecordDetailCellId = "passwordRecordDetailCell"
 
@@ -17,18 +15,16 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     
     var dataSource: MVBPasswordManageDataSource?
     var passwordListTableView: UITableView?
-    
+
     var newPasswordVc: MQMaskController?
-    
-    weak var newPasswordConfigVc: MVBNewPasswordConfigViewController?
+  
+    var selectedIndex: Int = 0
     
     override func loadView() {
         super.loadView()
-//        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidLoad() {
-
         //  基础设置
         self.view.backgroundColor = UIColor.greenColor()
         newPasswordBtn = (UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton)
@@ -37,9 +33,6 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
         self.view.addSubview(newPasswordBtn!)
         
         dataSource = MVBPasswordManageDataSource()
-        dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
-            self.passwordListTableView!.reloadData()
-        }
         
         passwordListTableView = UITableView(frame: CGRectMake(20, 64, 280, 400), style: UITableViewStyle.Plain)
         passwordListTableView!.tableFooterView = UIView(frame: CGRectZero)
@@ -51,28 +44,32 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
         self.view.addSubview(passwordListTableView!)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let identifier = segue.identifier as String? {
-            self.setValue(segue.destinationViewController, forKey: identifier)
+    override func viewDidAppear(animated: Bool) {
+        SVProgressHUD.showWithStatus("加载列表")
+        dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
+            if succeed == true {
+                self.dataSource?.queryPasswordDataList({ (succeed) -> Void in
+                    SVProgressHUD.dismiss()
+                    if succeed == true {
+                        self.passwordListTableView!.reloadData()
+                    }
+                    else {
+                        SVProgressHUD.showErrorWithStatus("加载失败")
+                    }
+                })
+            }
+            else {
+                self.dataSource!.queryCreatePasswordIdList({ (succeed) -> Void in
+                    SVProgressHUD.dismiss()
+                    if succeed == true {
+                        
+                    }
+                    else {
+                        SVProgressHUD.showErrorWithStatus("加载失败")
+                    }
+                })
+            }
         }
-    }
-    
-    func addNewPasswrodAction(sender: AnyObject!) {
-        var newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
-        newPasswordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
-        newPasswordView.createButton.addTarget(self, action: "finishCreateNewPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: true, delayTime: 0)
-        newPasswordVc!.showWithAnimated(true, completion: nil)
-    }
-    
-    func finishCreateNewPasswordAction(sender: AnyObject!) {
-        var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
-        dataSource!.addPasswordRecord( MVBPasswordRecordModel(title: contentView.titleTextField.text, detailContent: contentView.detailContentTextField.text), complete: { [unowned self]  (succeed) -> Void in
-            self.passwordListTableView!.reloadData()
-            self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
-                
-            })
-        })
     }
     
     deinit {
@@ -80,9 +77,47 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
 }
 
+extension MVBPasswordManageViewController {
+    func addNewPasswrodAction(sender: AnyObject!) {
+        var newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
+        newPasswordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
+        newPasswordView.createButton.addTarget(self, action: "confirmCreateNewPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: true, delayTime: 0)
+        newPasswordVc!.showWithAnimated(true, completion: nil)
+    }
+    
+    func confirmCreateNewPasswordAction(sender: AnyObject!) {
+        var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
+        dataSource!.queryAddPasswordRecord( MVBPasswordRecordModel(title: contentView.titleTextField.text, detailContent: contentView.detailContentTextField.text), complete: { [unowned self]  (succeed) -> Void in
+            self.passwordListTableView!.reloadData()
+            self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
+                
+            })
+        })
+    }
+    
+    func confirmUpdataPasswordAction(sender: AnyObject!) {
+        var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
+        var recordModel: MVBPasswordRecordModel = dataSource!.fetchPassrecordRecord(selectedIndex)
+        recordModel.update(title: contentView.titleTextField.text, detailContent: contentView.detailContentTextField.text)
+        dataSource!.queryUpdatePasswordRecord(recordModel, complete: { [unowned self] (succeed) -> Void in
+            self.passwordListTableView!.reloadData()
+            self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
+            })
+        })
+    }
+}
+
 extension MVBPasswordManageViewController: UITableViewDelegate {
     //  UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        selectedIndex = indexPath.row
+        var recordModel: MVBPasswordRecordModel = dataSource!.fetchPassrecordRecord(selectedIndex)
+        var detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
+        detailPasswordView.configureData(recordModel.title, detailContent: recordModel.detailContent)
+        detailPasswordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
+        detailPasswordView.createButton.addTarget(self, action: "confirmUpdataPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailPasswordView, contentCenter: true, delayTime: 0)
+        newPasswordVc!.showWithAnimated(true, completion: nil)
     }
 }

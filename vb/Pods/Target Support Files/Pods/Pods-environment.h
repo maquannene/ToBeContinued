@@ -101,7 +101,7 @@
 #define COCOAPODS_POD_AVAILABLE_MJExtension
 #define COCOAPODS_VERSION_MAJOR_MJExtension 2
 #define COCOAPODS_VERSION_MINOR_MJExtension 3
-#define COCOAPODS_VERSION_PATCH_MJExtension 6
+#define COCOAPODS_VERSION_PATCH_MJExtension 7
 
 // MMDrawerController
 #define COCOAPODS_POD_AVAILABLE_MMDrawerController
@@ -168,6 +168,12 @@
 #define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0
 #define COCOAPODS_VERSION_MINOR_SVPullToRefresh 4
 #define COCOAPODS_VERSION_PATCH_SVPullToRefresh 1
+
+// SWTableViewCell
+#define COCOAPODS_POD_AVAILABLE_SWTableViewCell
+#define COCOAPODS_VERSION_MAJOR_SWTableViewCell 0
+#define COCOAPODS_VERSION_MINOR_SWTableViewCell 3
+#define COCOAPODS_VERSION_PATCH_SWTableViewCell 7
 
 // UIActivityIndicator-for-SDWebImage
 #define COCOAPODS_POD_AVAILABLE_UIActivityIndicator_for_SDWebImage

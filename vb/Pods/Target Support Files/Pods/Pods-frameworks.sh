@@ -59,6 +59,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'SLExpandableTableView.framework'
   install_framework 'SVProgressHUD.framework'
   install_framework 'SVPullToRefresh.framework'
+  install_framework 'SWTableViewCell.framework'
   install_framework 'UIActivityIndicator_for_SDWebImage.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -73,5 +74,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'SLExpandableTableView.framework'
   install_framework 'SVProgressHUD.framework'
   install_framework 'SVPullToRefresh.framework'
+  install_framework 'SWTableViewCell.framework'
   install_framework 'UIActivityIndicator_for_SDWebImage.framework'
 fi

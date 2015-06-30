@@ -7,8 +7,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import UIKit
-
 class MVBNewPasswordView: UIView {
    
     @IBOutlet weak var createButton: UIButton!
@@ -16,9 +14,17 @@ class MVBNewPasswordView: UIView {
     @IBOutlet weak var titleTextField: UITextField!
     
     @IBOutlet weak var detailContentTextField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
+    func configureData(title: String, detailContent: String) {
+        titleTextField.text = title
+        detailContentTextField.text = detailContent
+    }
+    
+    deinit {
+        println("\(self.dynamicType) deinit")
+    }
 }

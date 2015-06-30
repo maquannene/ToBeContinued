@@ -37,7 +37,7 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - JSONModel (0.13.0)
-  - MJExtension (2.3.6)
+  - MJExtension (2.3.7)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -57,6 +57,7 @@ PODS:
   - SLExpandableTableView (1.3.1)
   - SVProgressHUD (1.1.3)
   - SVPullToRefresh (0.4.1)
+  - SWTableViewCell (0.3.7)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
 
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - SLExpandableTableView
   - SVProgressHUD (~> 1.0)
   - SVPullToRefresh (~> 0.4)
+  - SWTableViewCell (~> 0.3.7)
   - UIActivityIndicator-for-SDWebImage
 
 EXTERNAL SOURCES:
@@ -88,13 +90,14 @@ SPEC CHECKSUMS:
   AVOSCloud: a2fc903a1aee5a346f0fb839f92617378fffd2ed
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
-  MJExtension: eb9d381740563b520fbabdfa6caf92d666314467
+  MJExtension: ab4e7c529b2c7a705e6f78f73e33d97929a42b39
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c7f562d11a70ddfb13ee66923301ee655829dcc
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
 COCOAPODS: 0.36.0
