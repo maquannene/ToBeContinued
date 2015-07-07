@@ -230,7 +230,7 @@ static NSString * const kTableViewPanState = @"state";
                 {
                     if([self.delegate swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:self])
                     {
-                        [self hideUtilityButtonsAnimated:YES];
+//                        [self hideUtilityButtonsAnimated:YES];
                     }
                 }
             }
@@ -414,7 +414,9 @@ static NSString * const kTableViewPanState = @"state";
     else
     {
         // Scroll back to center
-        [self hideUtilityButtonsAnimated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self hideUtilityButtonsAnimated:YES];
+        });
     }
 }
 
@@ -780,16 +782,17 @@ static NSString * const kTableViewPanState = @"state";
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
-        || (gestureRecognizer == self.longPressGestureRecognizer && otherGestureRecognizer == self.containingTableView.panGestureRecognizer))
-    {
-        // Return YES so the pan gesture of the containing table view is not cancelled by the long press recognizer
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
+//    if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
+//        || (gestureRecognizer == self.longPressGestureRecognizer && otherGestureRecognizer == self.containingTableView.panGestureRecognizer))
+//    {
+//        // Return YES so the pan gesture of the containing table view is not cancelled by the long press recognizer
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+    return YES;
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch

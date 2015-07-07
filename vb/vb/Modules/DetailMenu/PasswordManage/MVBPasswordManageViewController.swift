@@ -18,7 +18,7 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
 
     var newPasswordVc: MQMaskController?
   
-    var selectedIndex: Int = 0
+    var selectedIndex: Int = -1
     
     override func loadView() {
         super.loadView()
@@ -26,13 +26,14 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     
     override func viewDidLoad() {
         //  基础设置
-        self.view.backgroundColor = UIColor.greenColor()
+        view.backgroundColor = UIColor.greenColor()
         newPasswordBtn = (UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton)
         newPasswordBtn!.frame = CGRectMake(0, 0, 44, 44)
         newPasswordBtn!.addTarget(self, action: "addNewPasswrodAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(newPasswordBtn!)
+        view.addSubview(newPasswordBtn!)
         
         dataSource = MVBPasswordManageDataSource()
+        dataSource!.tableViewCellDelegate = self
         
         passwordListTableView = UITableView(frame: CGRectMake(20, 64, 280, 400), style: UITableViewStyle.Plain)
         passwordListTableView!.tableFooterView = UIView(frame: CGRectZero)
@@ -41,10 +42,16 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
         passwordListTableView!.delegate = self
         passwordListTableView!.dataSource = dataSource
         passwordListTableView!.registerClass(MVBPasswordRecordCell.self, forCellReuseIdentifier: pwRecordCellId)
-        self.view.addSubview(passwordListTableView!)
+        view.addSubview(passwordListTableView!)
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (dataSource!.passwordIdList != nil) {
+            return
+        }
+        
         SVProgressHUD.showWithStatus("加载列表")
         dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
             if succeed == true {
@@ -111,6 +118,10 @@ extension MVBPasswordManageViewController {
 extension MVBPasswordManageViewController: UITableViewDelegate {
     //  UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell: UITableViewCell! = tableView.cellForRowAtIndexPath(indexPath)
+        if tableView.editing == false {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
         selectedIndex = indexPath.row
         var recordModel: MVBPasswordRecordModel = dataSource!.fetchPassrecordRecord(selectedIndex)
         var detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
@@ -119,5 +130,35 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
         detailPasswordView.createButton.addTarget(self, action: "confirmUpdataPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
         newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailPasswordView, contentCenter: true, delayTime: 0)
         newPasswordVc!.showWithAnimated(true, completion: nil)
+    }
+}
+
+extension MVBPasswordManageViewController: SWTableViewCellDelegate {
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+        println("删除按键")
+    }
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
+
+    }
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, scrollingToState state: SWCellState) {
+        if let recordCell = cell as? MVBPasswordRecordCell {
+            if state == SWCellState.CellStateRight {
+                self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+            }
+            if state == SWCellState.CellStateCenter {
+                self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+            }
+        }
+    }
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, canSwipeToState state: SWCellState) -> Bool {
+        return true
+    }
+    
+    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
+        return true
     }
 }

@@ -48,5 +48,3 @@
 @import SLExpandableTableView;
 @import MQMaskController;
 @import SWTableViewCell;
-
-#import <AVOSCloud/AVObject+Subclass.h>

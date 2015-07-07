@@ -10,4 +10,8 @@
 
 @interface SWCellScrollView : UIScrollView <UIGestureRecognizerDelegate>
 
+@property (nonatomic, weak) UIViewController *viewController;
+@property (nonatomic, weak) UITableView *containingTableView;
+@property (nonatomic, weak) UITableViewCell *containingCell;
+
 @end

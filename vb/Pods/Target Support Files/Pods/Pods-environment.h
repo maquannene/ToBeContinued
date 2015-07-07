@@ -100,8 +100,8 @@
 // MJExtension
 #define COCOAPODS_POD_AVAILABLE_MJExtension
 #define COCOAPODS_VERSION_MAJOR_MJExtension 2
-#define COCOAPODS_VERSION_MINOR_MJExtension 3
-#define COCOAPODS_VERSION_PATCH_MJExtension 7
+#define COCOAPODS_VERSION_MINOR_MJExtension 4
+#define COCOAPODS_VERSION_PATCH_MJExtension 0
 
 // MMDrawerController
 #define COCOAPODS_POD_AVAILABLE_MMDrawerController

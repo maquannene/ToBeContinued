@@ -37,7 +37,7 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - JSONModel (0.13.0)
-  - MJExtension (2.3.7)
+  - MJExtension (2.4.0)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -90,7 +90,7 @@ SPEC CHECKSUMS:
   AVOSCloud: a2fc903a1aee5a346f0fb839f92617378fffd2ed
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
-  MJExtension: ab4e7c529b2c7a705e6f78f73e33d97929a42b39
+  MJExtension: 8eee258752778d14788a153e12795d1d1f76e312
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c7f562d11a70ddfb13ee66923301ee655829dcc
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29

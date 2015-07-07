@@ -7,7 +7,7 @@
 //
 
 class MVBPasswordRecordCell: SWTableViewCell {
-    
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -17,4 +17,8 @@ class MVBPasswordRecordCell: SWTableViewCell {
         self.backgroundColor = UIColor.grayColor()
     }
     
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        var view = super.hitTest(point, withEvent: event)
+        return view
+    }
 }
