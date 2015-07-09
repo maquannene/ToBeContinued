@@ -9,6 +9,7 @@
 let pwRecordCellId = "passwordRecordCell"
 let pwRecordDetailCellId = "passwordRecordDetailCell"
 
+// MARK: LeftCycle
 class MVBPasswordManageViewController: MVBDetailBaseViewController {
     
     var newPasswordBtn: UIButton?
@@ -84,6 +85,7 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
 }
 
+// MARK: Action
 extension MVBPasswordManageViewController {
     func addNewPasswrodAction(sender: AnyObject!) {
         var newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
@@ -93,6 +95,9 @@ extension MVBPasswordManageViewController {
         newPasswordVc!.showWithAnimated(true, completion: nil)
     }
     
+    /**
+    确认新增密码条目事件
+    */
     func confirmCreateNewPasswordAction(sender: AnyObject!) {
         var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
         dataSource!.queryAddPasswordRecord( MVBPasswordRecordModel(title: contentView.titleTextField.text, detailContent: contentView.detailContentTextField.text), complete: { [unowned self]  (succeed) -> Void in
@@ -103,6 +108,9 @@ extension MVBPasswordManageViewController {
         })
     }
     
+    /**
+    确认更新密码条目事件
+    */
     func confirmUpdataPasswordAction(sender: AnyObject!) {
         var contentView = newPasswordVc!.contentView as! MVBNewPasswordView
         var recordModel: MVBPasswordRecordModel = dataSource!.fetchPassrecordRecord(selectedIndex)
@@ -115,6 +123,7 @@ extension MVBPasswordManageViewController {
     }
 }
 
+// MARK: UITableViewDelegate
 extension MVBPasswordManageViewController: UITableViewDelegate {
     //  UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -133,10 +142,15 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
     }
 }
 
+// MARK: SWTableViewCellDelegate
 extension MVBPasswordManageViewController: SWTableViewCellDelegate {
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        println("删除按键")
+        if let recordCell = cell as? MVBPasswordRecordCell {
+            dataSource!.queryDeletePasswordRecord(recordCell.indexPath.row, complete: { (succeed) -> Void in
+                self.passwordListTableView!.deleteRowsAtIndexPaths([recordCell.indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+            })
+        }
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
@@ -146,10 +160,10 @@ extension MVBPasswordManageViewController: SWTableViewCellDelegate {
     func swipeableTableViewCell(cell: SWTableViewCell!, scrollingToState state: SWCellState) {
         if let recordCell = cell as? MVBPasswordRecordCell {
             if state == SWCellState.CellStateRight {
-                self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+
             }
             if state == SWCellState.CellStateCenter {
-                self.mm_drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+                
             }
         }
     }

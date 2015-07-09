@@ -8,6 +8,8 @@
 
 class MVBPasswordRecordCell: SWTableViewCell {
 
+    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -15,10 +17,6 @@ class MVBPasswordRecordCell: SWTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.grayColor()
-    }
-    
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        var view = super.hitTest(point, withEvent: event)
-        return view
+        self.selectionStyle = UITableViewCellSelectionStyle.None
     }
 }

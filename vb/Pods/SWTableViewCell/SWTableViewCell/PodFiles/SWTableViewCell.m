@@ -231,6 +231,7 @@ static NSString * const kTableViewPanState = @"state";
                     if([self.delegate swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:self])
                     {
 //                        [self hideUtilityButtonsAnimated:YES];
+                        //  change: maquan 屏蔽pan的时候收起button
                     }
                 }
             }
@@ -782,22 +783,24 @@ static NSString * const kTableViewPanState = @"state";
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-//    if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
-//        || (gestureRecognizer == self.longPressGestureRecognizer && otherGestureRecognizer == self.containingTableView.panGestureRecognizer))
-//    {
-//        // Return YES so the pan gesture of the containing table view is not cancelled by the long press recognizer
-//        return YES;
-//    }
-//    else
-//    {
-//        return NO;
-//    }
-    return YES;
+    //  这个共存处理很重要。短距离快速pan之后立刻tap  tap不会生效
+    //  非常非常重要。
+    if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
+        || (gestureRecognizer == self.longPressGestureRecognizer && otherGestureRecognizer == self.containingTableView.panGestureRecognizer))
+    {
+        // Return YES so the pan gesture of the containing table view is not cancelled by the long press recognizer
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     return ![touch.view isKindOfClass:[UIControl class]];
 }
+
 
 @end

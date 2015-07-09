@@ -9,11 +9,13 @@
 typealias MVBPasswordDataOparateCompleteClosure = (succeed: Bool!) -> Void
   
 class MVBPasswordManageDataSource: NSObject {
-    
     var passwordIdList: MVBPasswordIdListModel?
-    var passwordDataList: NSMutableArray = NSMutableArray()
+    var passwordDataList: NSMutableArray = NSMutableArray()             //  存储密码信息列表的缓存数组
     weak var tableViewCellDelegate: SWTableViewCellDelegate?
-    
+}
+
+// MARK: Public
+extension MVBPasswordManageDataSource {
     /**
     请求获取包含每个密码对象objectId的列表
     
@@ -44,7 +46,7 @@ class MVBPasswordManageDataSource: NSObject {
                                         complete!(succeed: true)
                                     }
                                 }
-                            })
+                                })
                         }
                         else {
                             complete!(succeed: false)
@@ -56,7 +58,7 @@ class MVBPasswordManageDataSource: NSObject {
                 }
             }
         }
-
+        
     }
     
     /**
@@ -80,23 +82,79 @@ class MVBPasswordManageDataSource: NSObject {
     }
     
     /**
+    根据passwordIdList的id列表重新生成passwordDataList
+    
+    :param: complete 完成回调
+    */
+    func queryPasswordDataList(complete: MVBPasswordDataOparateCompleteClosure?) {
+        var fetchGroup: dispatch_group_t = dispatch_group_create()
+        self.passwordDataList.removeAllObjects()
+        for objectId in self.passwordIdList!.list {
+            dispatch_group_enter(fetchGroup)
+            var passwordRecord: MVBPasswordRecordModel = MVBPasswordRecordModel(withoutDataWithObjectId: objectId as! String)
+            passwordRecord.fetchInBackgroundWithBlock({ [unowned self] (object, error) -> Void in
+                self.passwordDataList.addObject(passwordRecord)
+                dispatch_group_leave(fetchGroup)
+                })
+        }
+        dispatch_group_notify(fetchGroup, dispatch_get_main_queue(), { () -> Void in
+            //  对数据根据时间进行排序
+            self.passwordDataList.sortUsingComparator({ (objc1, ojbc2) -> NSComparisonResult in
+                return (objc1 as! MVBPasswordRecordModel).createdAt.compare((ojbc2 as! MVBPasswordRecordModel).createdAt)
+            })
+            
+            if complete != nil {
+                complete!(succeed: true)
+            }
+        })
+    }
+    
+    /**
     请求新增密码对象
     
     :param: recrod   密码项的类对象
     :param: complete 完成回调
     */
-    func queryAddPasswordRecord(recrod: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryAddPasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
         //  将新的密码记录写入AVOSCloud
-        recrod.setObject(self.passwordIdList!.list.count, forKey: "index")
-        recrod.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error NSError) -> Void in
+        record.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             //  写完成功后要再将密码记录的objectId写入passwordIdList并且保存
-            self.passwordIdList!.addObject(recrod.objectId, forKey: "list")
+            self.passwordIdList!.addObject(record.objectId, forKey: "list")
             self.passwordIdList!.fetchWhenSave = true    //  保存的同时获取新的值
             self.passwordIdList!.save()
-            //  将新建的record加入内存中
-            self.passwordDataList.addObject(recrod)
+            //  将新建的record加入缓存中
+            self.passwordDataList.addObject(record)
             if complete != nil {
                 complete!(succeed: true)
+            }
+        }
+    }
+    
+    func queryDeletePasswordRecord(index: Int!, complete: MVBPasswordDataOparateCompleteClosure?) {
+        var record: MVBPasswordRecordModel! = fetchPassrecordRecord(index)
+        record.deleteInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
+            //  删除成功后要将密码记录的objectId从passwordIdLis中删除并保存
+            self.passwordIdList!.removeObject(record.objectId, forKey: "list")
+            self.passwordIdList!.fetchWhenSave = true   //  保存的同时获取最新的值
+            self.passwordIdList!.save()
+            //  将要删除的record从缓存中删除
+            self.passwordDataList.removeObjectAtIndex(index)
+            if complete != nil {
+                complete!(succeed: true)
+            }
+        }
+    }
+    
+    /**
+    请求更新密码对象
+    
+    :param: record   需要更新的密码对象
+    :param: complete 完成回调
+    */
+    func queryUpdatePasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
+        record.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
+            if complete != nil {
+                complete!(succeed: succeed)
             }
         }
     }
@@ -111,50 +169,10 @@ class MVBPasswordManageDataSource: NSObject {
     func fetchPassrecordRecord(index: Int!) -> MVBPasswordRecordModel! {
         return passwordDataList[index] as? MVBPasswordRecordModel
     }
-    
-    /**
-    请求更新密码对象
-    
-    :param: record   需要更新的密码对象
-    :param: complete 完成回调
-    */
-    func queryUpdatePasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
-        record.saveInBackgroundWithBlock { [unowned self] (succeed, error) -> Void in
-            if complete != nil {
-                complete!(succeed: succeed)
-            }
-        }
-    }
-    
-    /**
-    根据passwordIdList的id列表重新生成passwordDataList
-    
-    :param: complete 完成回调
-    */
-    func queryPasswordDataList(complete: MVBPasswordDataOparateCompleteClosure?) {
-        var fetchGroup: dispatch_group_t = dispatch_group_create()
-        self.passwordDataList.removeAllObjects()
-        for objectId in self.passwordIdList!.list {
-            dispatch_group_enter(fetchGroup)
-            var passwordRecord: MVBPasswordRecordModel = MVBPasswordRecordModel(withoutDataWithObjectId: objectId as! String)
-            passwordRecord.fetchInBackgroundWithBlock({ [unowned self] (object, error) -> Void in
-                self.passwordDataList.addObject(passwordRecord)
-                dispatch_group_leave(fetchGroup)
-            })
-        }
-        dispatch_group_notify(fetchGroup, dispatch_get_main_queue(), { () -> Void in
-            //  对数据根据时间进行排序
-            self.passwordDataList.sortUsingComparator({ (objc1, ojbc2) -> NSComparisonResult in
-                return (objc1 as! MVBPasswordRecordModel).createdAt.compare((ojbc2 as! MVBPasswordRecordModel).createdAt)
-            })
-            
-            if complete != nil {
-                complete!(succeed: true)
-            }
-        })
-    }
-}
 
+}
+  
+// MARK: UITableViewDataSource
 extension MVBPasswordManageDataSource: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -163,7 +181,7 @@ extension MVBPasswordManageDataSource: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: MVBPasswordRecordCell! = tableView.dequeueReusableCellWithIdentifier(pwRecordCellId) as! MVBPasswordRecordCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.indexPath = indexPath
         cell.delegate = tableViewCellDelegate
         cell.rightUtilityButtons = rightButtons() as [AnyObject]
         var record: MVBPasswordRecordModel = passwordDataList[indexPath.row] as! MVBPasswordRecordModel
@@ -172,8 +190,9 @@ extension MVBPasswordManageDataSource: UITableViewDataSource {
     }
 }
 
+// MARK: Private
 extension MVBPasswordManageDataSource {
-    func rightButtons() -> NSArray {
+    private func rightButtons() -> NSArray {
         var rightButtons: NSMutableArray = NSMutableArray()
         rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除")
         return rightButtons
