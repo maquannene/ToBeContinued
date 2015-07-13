@@ -101,7 +101,13 @@
 #define COCOAPODS_POD_AVAILABLE_MJExtension
 #define COCOAPODS_VERSION_MAJOR_MJExtension 2
 #define COCOAPODS_VERSION_MINOR_MJExtension 4
-#define COCOAPODS_VERSION_PATCH_MJExtension 0
+#define COCOAPODS_VERSION_PATCH_MJExtension 4
+
+// MJRefresh
+#define COCOAPODS_POD_AVAILABLE_MJRefresh
+#define COCOAPODS_VERSION_MAJOR_MJRefresh 2
+#define COCOAPODS_VERSION_MINOR_MJRefresh 2
+#define COCOAPODS_VERSION_PATCH_MJRefresh 0
 
 // MMDrawerController
 #define COCOAPODS_POD_AVAILABLE_MMDrawerController
@@ -139,6 +145,12 @@
 #define COCOAPODS_VERSION_MINOR_MQMaskController 0
 #define COCOAPODS_VERSION_PATCH_MQMaskController 0
 
+// MQPullToRefresh
+#define COCOAPODS_POD_AVAILABLE_MQPullToRefresh
+#define COCOAPODS_VERSION_MAJOR_MQPullToRefresh 
+#define COCOAPODS_VERSION_MINOR_MQPullToRefresh 0
+#define COCOAPODS_VERSION_PATCH_MQPullToRefresh 0
+
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
@@ -151,23 +163,11 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
-// SLExpandableTableView
-#define COCOAPODS_POD_AVAILABLE_SLExpandableTableView
-#define COCOAPODS_VERSION_MAJOR_SLExpandableTableView 1
-#define COCOAPODS_VERSION_MINOR_SLExpandableTableView 3
-#define COCOAPODS_VERSION_PATCH_SLExpandableTableView 1
-
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 3
-
-// SVPullToRefresh
-#define COCOAPODS_POD_AVAILABLE_SVPullToRefresh
-#define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0
-#define COCOAPODS_VERSION_MINOR_SVPullToRefresh 4
-#define COCOAPODS_VERSION_PATCH_SVPullToRefresh 1
 
 // SWTableViewCell
 #define COCOAPODS_POD_AVAILABLE_SWTableViewCell

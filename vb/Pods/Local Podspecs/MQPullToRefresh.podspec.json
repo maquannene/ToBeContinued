@@ -1,0 +1,17 @@
+{
+  "name": "MQPullToRefresh",
+  "summary": "下拉刷新 可自定义 正常，将要刷新，正在刷新，刷新成功，刷新失败五个状态的视图",
+  "homepage": "https://github.com/wuhanness/MQPullToRefresh",
+  "authors": {
+    "maquan": "maquan@kingsoft.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/wuhanness/MQPullToRefresh.git"
+  },
+  "source_files": "MQPullToRefreshDemo/MQPullToRefresh/*.{h,m}",
+  "frameworks": "UIKit",
+  "requires_arc": false
+}

@@ -9,6 +9,7 @@
 import MJExtension
 
 class MVBUserModel: NSObject {
+    
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
     var profile_image_url: NSString?    //  头像
@@ -30,22 +31,25 @@ class MVBUserModel: NSObject {
     var avatar_large: NSString?         //  大图头像
     var avatar_hd: NSString?            //  高清头像
     
-    //  这里这个重载的init()十分必要。
+    //  这里这个重载的init()十分必要，否则便利构造函数无法调用。
     override init() {
     
     }
     
+    //  利用MJExtension 使其可编码支持NSKeyedArchiver
     required init(coder aDecoder: NSCoder) {
         super.init()
         self.decode(aDecoder)
     }
     
+    //  利用MJExtension 使其可编码支持NSKeyedUnarchiver
     func encodeWithCoder(aCoder: NSCoder) {
         self.encode(aCoder)
     }
 }
 
 extension MVBUserModel {
+    
     internal override class func initialize() {
         struct Static {
             static var token: dispatch_once_t = 0

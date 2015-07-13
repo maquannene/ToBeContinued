@@ -22,16 +22,13 @@ class MVBMainMenuView: UIView {
         self.backgroundColor = UIColor.whiteColor()
         headBackgroundImageView.userInteractionEnabled = true
     }
-    override var frame: CGRect {
-        didSet {
-            println("23")
-        }
-    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         headBgRightGap.constant = -(getScreenSize().width - self.frame.width)
         beyondViewRightGap.constant = -(getScreenSize().width - self.frame.width)
     }
+    
     deinit {
         println("\(self.dynamicType) deinit")
     }

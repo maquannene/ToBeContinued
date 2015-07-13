@@ -63,7 +63,7 @@ class MVBAppDelegate: UIResponder {
     
     func registThirdSDK() {
         //  sina sdk
-        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.enableDebugMode(false)
         WeiboSDK.registerApp(kMVBSinaSDKAppKey)
         //  AVOSCloud sdk
         MVBPasswordIdListModel.registerSubclass()

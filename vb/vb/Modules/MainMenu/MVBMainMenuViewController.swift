@@ -54,10 +54,9 @@ class MVBMainMenuViewController: UIViewController {
     }
 }
 
-/**
-*  @brief  button action
-*/
+// MARK: buttonAction
 extension MVBMainMenuViewController {
+    
     @IBAction func logOutAction(sender: AnyObject) {
         UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
             if index == 1 {
@@ -67,24 +66,31 @@ extension MVBMainMenuViewController {
             }
         }
     }
+    
     @IBAction func backMainAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.Main)
     }
+    
     @IBAction func passwordManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.PasswordManage)
     }
+    
     @IBAction func heroesManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
     }
+    
     @IBAction func accountManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.AccountManage)
     }
 }
 
+// MARK: WBHttpRequestDelegate
 extension MVBMainMenuViewController: WBHttpRequestDelegate {
+    
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
         
     }
+    
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         if request.tag == "logOut" {
             MVBAppDelegate.MVBApp().clearUserInfo()
@@ -100,4 +106,5 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             configurUserInfo()
         }
     }
+    
 }

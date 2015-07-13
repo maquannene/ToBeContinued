@@ -1,6 +1,0 @@
-framework module SLExpandableTableView {
-  umbrella header "Pods-SLExpandableTableView-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -19,4 +19,8 @@ class MVBPasswordRecordCell: SWTableViewCell {
         self.backgroundColor = UIColor.grayColor()
         self.selectionStyle = UITableViewCellSelectionStyle.None
     }
+    
+    deinit {
+        println("\(self.dynamicType) deinit")
+    }
 }

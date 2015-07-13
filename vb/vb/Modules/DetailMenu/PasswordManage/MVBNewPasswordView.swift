@@ -11,17 +11,17 @@ class MVBNewPasswordView: UIView {
    
     @IBOutlet weak var createButton: UIButton!
     
-    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var titleTextView: UITextView!
     
-    @IBOutlet weak var detailContentTextField: UITextField!
+    @IBOutlet weak var detailContentTextView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     func configureData(title: String, detailContent: String) {
-        titleTextField.text = title
-        detailContentTextField.text = detailContent
+        titleTextView.text = title
+        detailContentTextView.text = detailContent
     }
     
     deinit {

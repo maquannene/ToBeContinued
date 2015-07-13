@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20DDA0C198D04FA10F62CA85 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316EA5417F4D2DEFBE67E1EE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */; };
 		D4121DFA1B07184400612CA3 /* vbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4121DF91B07184400612CA3 /* vbTests.swift */; };
 		D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E781B075D9200612CA3 /* QuartzCore.framework */; };
 		D4121E7B1B075D9B00612CA3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7A1B075D9B00612CA3 /* ImageIO.framework */; };
@@ -72,6 +73,7 @@
 		316EA5417F4D2DEFBE67E1EE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F82BDBD5A2E755D7FA6CF21 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7E9AB9D9291257BA4918BAF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPullToRefresh.podspec; sourceTree = "<group>"; };
 		D4121DDE1B07184400612CA3 /* vb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DE21B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4121DE81B07184400612CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */,
+				D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */,
 			);
 			path = Podspec;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				D41620F31B4104ED00D1D021 /* MVBNewPasswordView.xib in Resources */,
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
 				D4127CFA1B3D1A1E00AE7AEA /* MVBAccountRecordView.xib in Resources */,
+				D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */,
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
 				D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,

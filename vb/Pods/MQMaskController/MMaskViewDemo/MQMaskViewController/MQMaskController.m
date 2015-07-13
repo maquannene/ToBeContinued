@@ -24,6 +24,7 @@
 
 - (void)dealloc
 {
+    _delegate = nil;
     [_maskView release];
     _maskView = nil;
     [_contentView release];
