@@ -60,8 +60,11 @@ class MVBAppDelegate: UIResponder {
     class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
     }
-    
-    func registThirdSDK() {
+}
+
+// MARK: Private
+extension MVBAppDelegate {
+    private func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(false)
         WeiboSDK.registerApp(kMVBSinaSDKAppKey)
@@ -148,7 +151,6 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
         self.setUserInfoWithJsonString(result)
     }
 }
-
 
 //extension MVBAppDelegate {
 //    func test() {

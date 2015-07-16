@@ -24,3 +24,21 @@ class MVBPasswordRecordCell: SWTableViewCell {
         println("\(self.dynamicType) deinit")
     }
 }
+
+// MARK: Public
+extension MVBPasswordRecordCell {
+    func configureWithRecord(record: MVBPasswordRecordModel) -> Void {
+        self.textLabel!.text = "title: \(record.title)"
+        self.rightUtilityButtons = rightUtilityButtons
+    }
+}
+
+// MARK: Private
+extension MVBPasswordRecordCell {
+    private func rightButtons() -> NSArray {
+        var rightButtons: NSMutableArray = NSMutableArray()
+        rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "编辑")
+        rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除")
+        return rightButtons
+    }
+}

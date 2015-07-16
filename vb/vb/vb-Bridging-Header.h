@@ -48,3 +48,4 @@
 @import SWTableViewCell;
 @import MQMaskController;
 @import MQPullToRefresh;
+@import FDFullscreenPopGesture;

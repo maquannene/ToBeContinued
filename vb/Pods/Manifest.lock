@@ -36,6 +36,7 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - FDFullscreenPopGesture (1.1)
   - JSONModel (0.13.0)
   - MJExtension (2.4.4)
   - MJRefresh (2.2.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.2)
   - AVOSCloud
   - BlocksKit
+  - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`, commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
   - JSONModel (~> 0.13)
   - MJExtension
   - MJRefresh
@@ -77,12 +79,18 @@ DEPENDENCIES:
   - UIActivityIndicator-for-SDWebImage
 
 EXTERNAL SOURCES:
+  FDFullscreenPopGesture:
+    :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
+    :git: git://github.com/forkingdog/FDFullscreenPopGesture
   MQMaskController:
     :podspec: ../vb/vb/Utils/Podspec/MQMaskController.podspec
   MQPullToRefresh:
     :podspec: ../vb/vb/Utils/Podspec/MQPullToRefresh.podspec
 
 CHECKOUT OPTIONS:
+  FDFullscreenPopGesture:
+    :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
+    :git: git://github.com/forkingdog/FDFullscreenPopGesture
   MQMaskController:
     :commit: fd261f9dc467f2c5ef2fed5d5b12cd6c815e626d
     :git: https://github.com/wuhanness/MQMaskViewController.git
@@ -94,6 +102,7 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AVOSCloud: a2fc903a1aee5a346f0fb839f92617378fffd2ed
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
   MJExtension: fabc9e6084f14363ed6828490a98ee516c9cbbfe
   MJRefresh: 65a2bf14abb6feeaed8696aa1551f70e15ab0a08

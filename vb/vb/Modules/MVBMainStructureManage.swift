@@ -50,7 +50,57 @@ class MVBMainStructureManage: NSObject {
         }
     }
     
-    func configureDrawerVisualBlock() -> MMDrawerControllerDrawerVisualStateBlock {
+    deinit {
+        println("\(self.dynamicType) deinit")
+    }
+}
+
+// MARK: MVBMainMenuViewControllerDelegate
+extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
+    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
+        var centerViewController: UIViewController
+        switch operate {
+        case MVBMainMenuViewControllerOperate.LogOut:
+            return
+        case MVBMainMenuViewControllerOperate.Main:
+            centerViewController = mainViewController!.mainNavi!
+        case MVBMainMenuViewControllerOperate.PasswordManage:
+            if passwordManageVc == nil {
+                passwordManageVc = MVBPasswordManageViewController()
+            }
+            centerViewController = passwordManageVc!
+        case MVBMainMenuViewControllerOperate.HeroesManage:
+            if heroesManageVc == nil {
+                heroesManageVc = MVBHeroesViewController()
+            }
+            centerViewController = heroesManageVc!
+        case MVBMainMenuViewControllerOperate.AccountManage:
+            if accountManangeVc == nil {
+                accountManangeVc = MVBAccountManageViewController(type: MVBDetailBaseViewControllerCustomType.withNavi)
+            }
+            centerViewController = accountManangeVc!
+        default:
+            println()
+        }
+        if centerViewController == drawerController!.centerViewController {
+            drawerController!.closeDrawerAnimated(true) {
+                (finsih) -> Void in
+            }
+        }
+        else {
+            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { (finish) -> Void in
+                self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+                self.drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { (finish) -> Void in
+                    self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+                })
+            })
+        }
+    }
+}
+
+// MARK: Private
+extension MVBMainStructureManage {
+    private func configureDrawerVisualBlock() -> MMDrawerControllerDrawerVisualStateBlock {
         return { (drawerController: MMDrawerController!, drawerSide: MMDrawerSide, percentVisible: CGFloat) -> Void in
             
             var sideViewController: UIViewController?
@@ -101,55 +151,4 @@ class MVBMainStructureManage: NSObject {
             sideViewController?.view.alpha = percentVisible
         }
     }
-    
-    deinit {
-        println("\(self.dynamicType) deinit")
-    }
 }
-
-extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
-    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
-        var centerViewController: UIViewController
-        switch operate {
-        case MVBMainMenuViewControllerOperate.LogOut:
-            return
-        case MVBMainMenuViewControllerOperate.Main:
-            centerViewController = mainViewController!.mainNavi!
-        case MVBMainMenuViewControllerOperate.PasswordManage:
-            if passwordManageVc == nil {
-                passwordManageVc = MVBPasswordManageViewController()
-            }
-            centerViewController = passwordManageVc!
-        case MVBMainMenuViewControllerOperate.HeroesManage:
-            if heroesManageVc == nil {
-                heroesManageVc = MVBHeroesViewController()
-            }
-            centerViewController = heroesManageVc!
-        case MVBMainMenuViewControllerOperate.AccountManage:
-            if accountManangeVc == nil {
-                accountManangeVc = MVBAccountManageViewController(type: MVBDetailBaseViewControllerCustomType.withNavi)
-            }
-            centerViewController = accountManangeVc!
-        default:
-            println()
-        }
-        if centerViewController == drawerController!.centerViewController {
-            drawerController!.closeDrawerAnimated(true) {
-                (finsih) -> Void in
-            }
-        }
-        else {
-            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { (finish) -> Void in
-                self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
-                self.drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { (finish) -> Void in
-                    self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
-                })
-            })
-        }
-    }
-}
-
-
-
-
-

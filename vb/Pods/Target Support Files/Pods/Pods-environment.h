@@ -91,6 +91,12 @@
 #define COCOAPODS_VERSION_MINOR_BlocksKit_UIKit 2
 #define COCOAPODS_VERSION_PATCH_BlocksKit_UIKit 5
 
+// FDFullscreenPopGesture
+#define COCOAPODS_POD_AVAILABLE_FDFullscreenPopGesture
+#define COCOAPODS_VERSION_MAJOR_FDFullscreenPopGesture 1
+#define COCOAPODS_VERSION_MINOR_FDFullscreenPopGesture 1
+#define COCOAPODS_VERSION_PATCH_FDFullscreenPopGesture 0
+
 // JSONModel
 #define COCOAPODS_POD_AVAILABLE_JSONModel
 #define COCOAPODS_VERSION_MAJOR_JSONModel 0

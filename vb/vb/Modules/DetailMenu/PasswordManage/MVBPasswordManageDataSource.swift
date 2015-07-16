@@ -11,6 +11,8 @@ typealias MVBPasswordDataOparateCompleteClosure = (succeed: Bool!) -> Void
 class MVBPasswordManageDataSource: NSObject {
     var passwordIdList: MVBPasswordIdListModel?
     var passwordDataList: NSMutableArray = NSMutableArray()             //  存储密码信息列表的缓存数组
+    var expandingIndexPath: NSIndexPath?
+    var expandedIndexPath: NSIndexPath?
     weak var tableViewCellDelegate: SWTableViewCellDelegate?
     
     deinit {
@@ -21,7 +23,7 @@ class MVBPasswordManageDataSource: NSObject {
 // MARK: Public
 extension MVBPasswordManageDataSource {
     /**
-    请求获取包含每个密码对象objectId的列表
+    请求获取包含每个密码对象objectId的列表（先找到列表，再fetch）
     
     :param: complete 完成回调
     */
@@ -80,20 +82,28 @@ extension MVBPasswordManageDataSource {
     func queryPasswordDataList(complete: MVBPasswordDataOparateCompleteClosure?) {
         var fetchGroup: dispatch_group_t = dispatch_group_create()
         self.passwordDataList.removeAllObjects()
+        var success = true      //  加载标志位，一旦有一个失败，就标记失败
         for objectId in self.passwordIdList!.list {
             dispatch_group_enter(fetchGroup)
             var passwordRecord: MVBPasswordRecordModel = MVBPasswordRecordModel(withoutDataWithObjectId: objectId as! String)
             passwordRecord.fetchInBackgroundWithBlock({ [unowned self] (object, error) -> Void in
-                self.passwordDataList.addObject(passwordRecord)
+                if error != nil {
+                    success = false
+                }
+                else {
+                    self.passwordDataList.addObject(passwordRecord)
+                }
                 dispatch_group_leave(fetchGroup)
             })
         }
         dispatch_group_notify(fetchGroup, dispatch_get_main_queue(), { () -> Void in
-            //  对数据根据时间进行排序
-            self.passwordDataList.sortUsingComparator({ (objc1, ojbc2) -> NSComparisonResult in
-                return (objc1 as! MVBPasswordRecordModel).createdAt.compare((ojbc2 as! MVBPasswordRecordModel).createdAt)
-            })
-            complete?(succeed: true)
+            if success == true {
+                //  对数据根据时间进行排序
+                self.passwordDataList.sortUsingComparator({ (objc1, ojbc2) -> NSComparisonResult in
+                    return (objc1 as! MVBPasswordRecordModel).createdAt.compare((ojbc2 as! MVBPasswordRecordModel).createdAt)
+                })
+            }
+            complete?(succeed: success)
         })
     }
     
@@ -124,7 +134,7 @@ extension MVBPasswordManageDataSource {
     :param: complete 删除完成回调
     */
     func queryDeletePasswordRecord(index: Int!, complete: MVBPasswordDataOparateCompleteClosure?) {
-        var record: MVBPasswordRecordModel! = fetchPassrecordRecord(index)
+        var record: MVBPasswordRecordModel! = fetchPasswordRecord(index)
         record.deleteInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed == false { complete?(succeed: false); return }
             //  删除成功后要将密码记录的objectId从passwordIdLis中删除并保存
@@ -155,36 +165,46 @@ extension MVBPasswordManageDataSource {
     :param: index 下标号
     :returns: 密码对象
     */
-    func fetchPassrecordRecord(index: Int!) -> MVBPasswordRecordModel! {
+    func fetchPasswordRecord(index: Int!) -> MVBPasswordRecordModel! {
         return passwordDataList[index] as? MVBPasswordRecordModel
+    }
+
+    func convertToActualIndexPath(indexPath: NSIndexPath) -> NSIndexPath! {
+        if (expandedIndexPath != nil && indexPath.row >= expandedIndexPath!.row) {
+            return NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+        }
+        return indexPath
     }
 }
   
 // MARK: UITableViewDataSource
 extension MVBPasswordManageDataSource: UITableViewDataSource {
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return passwordDataList.count
+        if expandedIndexPath != nil {
+            return passwordDataList.count + 1
+        }
+        else {
+            return passwordDataList.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: MVBPasswordRecordCell! = tableView.dequeueReusableCellWithIdentifier(pwRecordCellId) as! MVBPasswordRecordCell
-        cell.indexPath = indexPath
-        cell.delegate = tableViewCellDelegate
-        cell.rightUtilityButtons = rightButtons() as [AnyObject]
-        var record: MVBPasswordRecordModel = passwordDataList[indexPath.row] as! MVBPasswordRecordModel
-        cell?.textLabel?.text = record.title
-        return cell
+        var actualIndexPath = convertToActualIndexPath(indexPath)
+        var record: MVBPasswordRecordModel = passwordDataList[actualIndexPath.row] as! MVBPasswordRecordModel
+        //  如果是展开的detailCell
+        if (expandedIndexPath != nil && expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
+            var detailCell: MVBPasswordRecordDetailCell = tableView.dequeueReusableCellWithIdentifier(pwRecordDetailCellId) as! MVBPasswordRecordDetailCell
+            detailCell.configureWithRecord(record)
+            return detailCell
+        }
+        else {
+            var titleCell: MVBPasswordRecordCell = tableView.dequeueReusableCellWithIdentifier(pwRecordCellId) as! MVBPasswordRecordCell
+            titleCell.indexPath = actualIndexPath
+            titleCell.delegate = tableViewCellDelegate
+            titleCell.configureWithRecord(record)
+            return titleCell
+        }
     }
 }
 
-// MARK: Private
-extension MVBPasswordManageDataSource {
-    
-    private func rightButtons() -> NSArray {
-        var rightButtons: NSMutableArray = NSMutableArray()
-        rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除")
-        return rightButtons
-    }
-}
   

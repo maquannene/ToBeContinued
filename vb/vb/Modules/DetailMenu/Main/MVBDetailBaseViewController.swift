@@ -14,7 +14,7 @@ class MVBDetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?
     
-    //  此方法相比在子中写类方法的好处
+    //  此方法作用等于在子中写类方法的好处
     convenience init(type: MVBDetailBaseViewControllerCustomType) {
         self.init()
         if type == MVBDetailBaseViewControllerCustomType.withNavi {

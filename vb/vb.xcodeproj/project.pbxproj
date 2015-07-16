@@ -49,6 +49,7 @@
 		D4D36A151B3BC81000F2BBF5 /* MVBAccountManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */; };
 		D4D36A191B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */; };
 		D4D36A1B1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */; };
+		D4DE759F1B573EAD007E31F0 /* MVBPasswordRecordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE759E1B573EAD007E31F0 /* MVBPasswordRecordDetailCell.swift */; };
 		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
 		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
 		D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B441B28695300228B4A /* MVBUserModel.swift */; };
@@ -124,6 +125,7 @@
 		D4D36A141B3BC81000F2BBF5 /* MVBAccountManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountManageViewController.swift; sourceTree = "<group>"; };
 		D4D36A181B3C48E800F2BBF5 /* MVBAccountManageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountManageDataSource.swift; sourceTree = "<group>"; };
 		D4D36A1A1B3C49AD00F2BBF5 /* MVBAcconutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAcconutTableViewCell.swift; sourceTree = "<group>"; };
+		D4DE759E1B573EAD007E31F0 /* MVBPasswordRecordDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordDetailCell.swift; sourceTree = "<group>"; };
 		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
 		D4E17B441B28695300228B4A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				D45E899A1B3700B300AFF9F8 /* MVBPasswordManageViewController.swift */,
 				D47B272C1B3FFE1B00679BEE /* MVBPasswordManageDataSource.swift */,
 				D45E899B1B3700B300AFF9F8 /* MVBPasswordRecordCell.swift */,
+				D4DE759E1B573EAD007E31F0 /* MVBPasswordRecordDetailCell.swift */,
 				D41620F01B4104E000D1D021 /* MVBNewPasswordView.swift */,
 				D41620F21B4104ED00D1D021 /* MVBNewPasswordView.xib */,
 			);
@@ -653,6 +656,7 @@
 				D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */,
 				D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */,
 				D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */,
+				D4DE759F1B573EAD007E31F0 /* MVBPasswordRecordDetailCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
