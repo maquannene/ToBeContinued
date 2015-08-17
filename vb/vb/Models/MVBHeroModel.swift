@@ -16,18 +16,18 @@ class MVBHeroModel: NSObject {
     var localized_name: NSString?
     //  获取英雄头像图片路径
     func getHeroImageUrl() -> NSString {
-        var urlName = self.getUrlName(self.name!)
+        let urlName = self.getUrlName(self.name!)
         return kDota2HeroImageUrl + (urlName as String) + "_" + "lg.png"
     }
     
     //  获取英雄名字
     func getUrlName(name: NSString) -> NSString {
-        var range = name.rangeOfString("npc_dota_hero_")
+        let range = name.rangeOfString("npc_dota_hero_")
         return name.substringFromIndex(range.length)
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit", appendNewline: false)
     }
 }
 

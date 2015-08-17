@@ -19,7 +19,7 @@ class MVBHeroesInfoModel: NSObject {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit", appendNewline: false)
     }
 }
 

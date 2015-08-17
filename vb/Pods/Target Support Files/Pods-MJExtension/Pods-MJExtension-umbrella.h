@@ -1,10 +1,12 @@
 #import <UIKit/UIKit.h>
 
-#import "MJConst.h"
 #import "MJExtension.h"
+#import "MJExtensionConst.h"
 #import "MJFoundation.h"
 #import "MJProperty.h"
-#import "MJType.h"
+#import "MJPropertyKey.h"
+#import "MJPropertyType.h"
+#import "NSObject+MJClass.h"
 #import "NSObject+MJCoding.h"
 #import "NSObject+MJKeyValue.h"
 #import "NSObject+MJProperty.h"

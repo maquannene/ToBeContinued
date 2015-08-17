@@ -13,7 +13,7 @@ let kDota2HeroesLanguageValue = "zh"
 let kDota2HeroesUrl = "https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/"
 
 class MVBHeroesViewController: MVBDetailBaseViewController {
-
+    
     @IBOutlet weak var heroesTableView: UITableView!
     var heroesInfo: MVBHeroesInfoModel = MVBHeroesInfoModel()
     
@@ -36,15 +36,15 @@ class MVBHeroesViewController: MVBDetailBaseViewController {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit")
     }
 }
 
 extension MVBHeroesViewController {
     func getHeroesModel() {
-        var requestOperate: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
+        let requestOperate: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
         requestOperate.responseSerializer = AFJSONResponseSerializer()
-        var param: [String: String] = [kDota2DevApiKey: kDota2DevApiValue,
+        let param: [String: String] = [kDota2DevApiKey: kDota2DevApiValue,
                                        kDota2HeroesLanguageKey: kDota2HeroesLanguageValue]
         requestOperate.GET(kDota2HeroesUrl, parameters: param, success: {
             [unowned self] (operation, result: AnyObject!) in
@@ -53,7 +53,7 @@ extension MVBHeroesViewController {
             self.heroesInfo.heroseModelArray = NSMutableArray(array:MVBHeroModel.objectArrayWithKeyValuesArray(self.heroesInfo.heroesDicArray))
             self.heroesTableView.reloadData()
         }) {
-            println($1)
+            print($1)
         }
     } 
 }
@@ -63,8 +63,8 @@ extension MVBHeroesViewController: UITableViewDelegate, UITableViewDataSource {
         return self.heroesInfo.count.integerValue
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView .dequeueReusableCellWithIdentifier("hero") as! MVBHeroTableViewCell
-        var heroesModel = self.heroesInfo.heroseModelArray
+        let cell = tableView .dequeueReusableCellWithIdentifier("hero") as! MVBHeroTableViewCell
+        let heroesModel = self.heroesInfo.heroseModelArray
         if let cellModel = heroesModel?[indexPath.row] as? MVBHeroModel {
             cell.configure(cellModel)
         }

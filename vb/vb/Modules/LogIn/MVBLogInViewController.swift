@@ -47,7 +47,7 @@ class MVBLogInViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        var appDelegate = MVBAppDelegate.MVBApp()
+        let appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.model = MVBLogInViewModel.AlreadyLogIn
             //  如果开启时是登陆过的，直接加载头像
@@ -60,7 +60,7 @@ class MVBLogInViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var appDelegate = MVBAppDelegate.MVBApp()
+        let appDelegate = MVBAppDelegate.MVBApp()
         if appDelegate.accessToken != nil && appDelegate.userID != nil {
             self.successLogIn()
         }
@@ -73,7 +73,6 @@ class MVBLogInViewController: UIViewController {
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
         request.redirectURI = kMVBSinaSDKRedirectURL
         request.scope = "all"
-        request.userInfo = ["SSO_From": "SendMessageToWeiboViewController"]
         WeiboSDK.sendRequest(request)
     }
     
@@ -86,7 +85,7 @@ class MVBLogInViewController: UIViewController {
         }) { (finish) -> Void in
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
                 self.structureManage = MVBMainStructureManage()
-                self.structureManage!.displayMainStructureFrom(presentingVc: self)
+                self.structureManage!.displayMainStructureFrom(self)
             }
         }
     }

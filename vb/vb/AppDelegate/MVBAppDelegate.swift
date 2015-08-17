@@ -70,6 +70,7 @@ extension MVBAppDelegate {
         WeiboSDK.registerApp(kMVBSinaSDKAppKey)
         //  AVOSCloud sdk
         MVBPasswordIdListModel.registerSubclass()
+        MVBPasswordRecordModel.registerSubclass()
         AVOSCloud.setApplicationId(kMVBAVCloudSDKAppID, clientKey: kMVBAVCloudSDKAppKey)
     }
 }
@@ -77,13 +78,11 @@ extension MVBAppDelegate {
 extension MVBAppDelegate: UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-//      self.test()
-        
         let key = String(kCFBundleVersionKey)
         //先去沙盒中取出上次使用的版本号
-        let lastVersionCode = NSUserDefaults.standardUserDefaults().objectForKey(key) as? String
+        _ = NSUserDefaults.standardUserDefaults().objectForKey(key) as? String
         //加载程序中的info.plist
-        let currentVersionCode = NSBundle.mainBundle().infoDictionary?[key] as! String
+        _ = NSBundle.mainBundle().infoDictionary?[key] as! String
         
         self.registThirdSDK()
         
@@ -99,8 +98,8 @@ extension MVBAppDelegate: UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         return true
     }
-    
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
     }
     
@@ -112,13 +111,13 @@ extension MVBAppDelegate: UIApplicationDelegate {
 extension MVBAppDelegate: WBHttpRequestDelegate {
     
     func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?) {
-        var appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
+        let appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
         if self.userID != nil && self.accessToken != nil {
             if let userData = NSUserDefaults.standardUserDefaults().valueForKey(kMVBUserInfoKey) as? NSData {
                 self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
             }
             else {
-                var param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
+                let param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
                 WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
                     httpMethod: "GET",
                     params: param,
@@ -131,7 +130,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     func setUserInfoWithJsonString(jsonString: String!) {
         self.userModel = MVBUserModel(keyValues: jsonString)
         //  归档
-        var userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
+        let userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
         NSUserDefaults.standardUserDefaults().setObject(userData, forKey: kMVBUserInfoKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     }

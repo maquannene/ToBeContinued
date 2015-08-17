@@ -19,7 +19,7 @@ class MVBPasswordRecordModel: AVObject {
         update(title: title, detailContent: detailContent)
     }
     
-    func update(#title: String?, detailContent: String?) {
+    func update(title title: String?, detailContent: String?) {
         if title != nil {
             self.setObject(title, forKey: kTitle)
         }

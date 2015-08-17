@@ -230,8 +230,10 @@ static NSString * const kTableViewPanState = @"state";
                 {
                     if([self.delegate swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:self])
                     {
+                        //  modify: maquan 屏蔽pan的时候收起button
+                        {
 //                        [self hideUtilityButtonsAnimated:YES];
-                        //  change: maquan 屏蔽pan的时候收起button
+                        }
                     }
                 }
             }

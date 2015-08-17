@@ -9,23 +9,40 @@
 #import "MJRefreshAutoFooter.h"
 
 @interface MJRefreshAutoFooter()
-@property (strong, nonatomic) UIPanGestureRecognizer *pan;
+@property (assign, nonatomic, getter=isPlusInsetBottom) BOOL plusInsetBottom;
+@property (assign, nonatomic, getter=isMinusInsetBottom) BOOL minusInsetBottom;
 @end
 
 @implementation MJRefreshAutoFooter
 
 #pragma mark - 初始化
+- (void)plusInsetBottom
+{
+    if (self.isPlusInsetBottom == NO) {
+        self.scrollView.mj_insetB += self.mj_h;
+        self.plusInsetBottom = YES;
+    }
+}
+
+- (void)minusInsetBottom
+{
+    if (self.isMinusInsetBottom == NO) {
+        self.scrollView.mj_insetB -= self.mj_h;
+        self.minusInsetBottom = YES;
+    }
+}
+
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     [super willMoveToSuperview:newSuperview];
     
     if (newSuperview) { // 新的父控件
-        self.scrollView.mj_insetB += self.mj_h;
+        [self plusInsetBottom];
         
-        // 重新调整frame
-        [self scrollViewContentSizeDidChange:nil];
+        // 设置位置
+        self.mj_y = _scrollView.mj_contentH;
     } else { // 被移除了
-        self.scrollView.mj_insetB -= self.mj_h;
+        [self minusInsetBottom];
     }
 }
 
@@ -57,7 +74,7 @@
     
     if (_scrollView.mj_insetT + _scrollView.mj_contentH > _scrollView.mj_h) { // 内容超过一个屏幕
         // 这里的_scrollView.mj_contentH替换掉self.mj_y更为合理
-        if (_scrollView.mj_offsetY > _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h * self.appearencePercentTriggerAutoRefresh + _scrollView.mj_insetB - self.mj_h) {
+        if (_scrollView.mj_offsetY >= _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h * self.appearencePercentTriggerAutoRefresh + _scrollView.mj_insetB - self.mj_h) {
             // 防止手松开时连续调用
             CGPoint old = [change[@"old"] CGPointValue];
             CGPoint new = [change[@"new"] CGPointValue];
@@ -77,11 +94,11 @@
     
     if (_scrollView.panGestureRecognizer.state == UIGestureRecognizerStateEnded) {// 手松开
         if (_scrollView.mj_insetT + _scrollView.mj_contentH <= _scrollView.mj_h) {  // 不够一个屏幕
-            if (_scrollView.mj_offsetY > - _scrollView.mj_insetT) { // 向上拽
+            if (_scrollView.mj_offsetY >= - _scrollView.mj_insetT) { // 向上拽
                 [self beginRefreshing];
             }
         } else { // 超出一个屏幕
-            if (_scrollView.mj_offsetY > _scrollView.mj_contentH + _scrollView.mj_insetB - _scrollView.mj_h) {
+            if (_scrollView.mj_offsetY >= _scrollView.mj_contentH + _scrollView.mj_insetB - _scrollView.mj_h) {
                 [self beginRefreshing];
             }
         }
@@ -93,7 +110,6 @@
     MJRefreshCheckState
     
     if (state == MJRefreshStateRefreshing) {
-        // 这里延迟是防止惯性导致连续上拉
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self executeRefreshingCallback];
         });
@@ -108,11 +124,13 @@
     
     if (!lastHidden && hidden) {
         self.state = MJRefreshStateIdle;
-        _scrollView.mj_insetB -= self.mj_h;
-    } else if (lastHidden && !hidden) {
-        _scrollView.mj_insetB += self.mj_h;
         
-        [self scrollViewContentSizeDidChange:nil];
+        [self minusInsetBottom];
+    } else if (lastHidden && !hidden) {
+        [self plusInsetBottom];
+        
+        // 设置位置
+        self.mj_y = _scrollView.mj_contentH;
     }
 }
 @end

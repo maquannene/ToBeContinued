@@ -38,7 +38,7 @@ class MVBMainMenuViewController: UIViewController {
     
     func configurUserInfo() {
         if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: ~SDWebImageOptions.CacheMemoryOnly)
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: SDWebImageOptions(rawValue: ~SDWebImageOptions.CacheMemoryOnly.rawValue))
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
             mainMenuView!.descriptionLabel.text = userModel._description as? String
@@ -50,7 +50,7 @@ class MVBMainMenuViewController: UIViewController {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit", appendNewline: false)
     }
 }
 
@@ -60,7 +60,7 @@ extension MVBMainMenuViewController {
     @IBAction func logOutAction(sender: AnyObject) {
         UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
             if index == 1 {
-                var appDelegate = MVBAppDelegate.MVBApp()
+                let appDelegate = MVBAppDelegate.MVBApp()
                 WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: "logOut")
                 SVProgressHUD.showWithStatus("正在退出...", maskType: SVProgressHUDMaskType.Black)
             }

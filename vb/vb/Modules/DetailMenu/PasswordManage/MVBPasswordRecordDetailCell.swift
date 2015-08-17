@@ -13,6 +13,8 @@ class MVBPasswordRecordDetailCell: UITableViewCell {
 // MARK: Public
 extension MVBPasswordRecordDetailCell {
     func configureWithRecord(record: MVBPasswordRecordModel) -> Void {
-        self.textLabel!.text = "detail: \(record.title)"
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.backgroundColor = UIColor.cyanColor()
+        self.textLabel!.text = "detail: \(record.detailContent)"
     }
 }

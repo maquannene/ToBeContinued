@@ -18,7 +18,7 @@ extension MVBAccountManageDataSource: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kAccountCell) as! UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kAccountCell)! 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.textLabel?.text = "\(indexPath.row)"
         return cell

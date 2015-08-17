@@ -25,12 +25,11 @@ class MVBMainViewController: MVBDetailBaseViewController {
         self.navigationController?.navigationBar.hidden = true
         self.view.backgroundColor = UIColor.yellowColor()
         
-        var button: UIButton = UIButton(frame: CGRectMake(100, 200, 80, 44))
+        let button: UIButton = UIButton(frame: CGRectMake(100, 200, 80, 44))
         button.backgroundColor = UIColor.redColor()
         //  注意这里，closure引起的cycle retain问题
         button.bk_addEventHandler({ [unowned self] (button) -> Void in
-            var vc = UIViewController()
-            
+            let vc = UIViewController()
             vc.view.backgroundColor = UIColor.redColor()
             self.navigationController!.pushViewController(vc, animated: true)
         }, forControlEvents: UIControlEvents.TouchUpInside)
@@ -38,7 +37,7 @@ class MVBMainViewController: MVBDetailBaseViewController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        var destVc: UIViewController? = self.valueForKey(identifier!) as? UIViewController
+        let destVc: UIViewController? = self.valueForKey(identifier!) as? UIViewController
         if destVc != nil {
             self.navigationController!.pushViewController(destVc!, animated: true)
             return false
@@ -55,6 +54,6 @@ class MVBMainViewController: MVBDetailBaseViewController {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit")
     }
 }

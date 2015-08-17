@@ -24,9 +24,9 @@ This pulls from the `master` branch directly. We are usually careful about what 
 
 ### Carthage
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/TransitApp/SVProgressHUD)
+You can install `SVProgressHUD` with [Carthage](https://github.com/Carthage/Carthage).
 
-You can install SVProgressHUD with Carthage
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/TransitApp/SVProgressHUD)
 
 ### Manually
 
@@ -145,4 +145,4 @@ review the guidelines written by [Nicolas Gallagher](https://github.com/necolas/
 
 ## Credits
 
-`SVProgressHUD` is brought to you by [Sam Vermette](http://samvermette.com) and [contributors to the project](https://github.com/samvermette/SVProgressHUD/contributors). If you're using `SVProgressHUD` in your project, attribution would be very appreciated. The info, success and error icons are made by [Freepik](http://www.freepik.com) from [Flaticon](www.flaticon.com) and are licensed under [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/). 
+`SVProgressHUD` is brought to you by [Sam Vermette](http://samvermette.com) and [contributors to the project](https://github.com/samvermette/SVProgressHUD/contributors). If you're using `SVProgressHUD` in your project, attribution would be very appreciated. The info, success and error icons are made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com/) and are licensed under [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/). 

@@ -31,21 +31,6 @@
 #import "AVUserFeedback.h"
 #import "AVUserFeedbackAgent.h"
 #import "AVUserFeedbackThread.h"
-#import "AFNetworkingFix.h"
-#import "AVAmazonS3Client.h"
-#import "AVFileHTTPRequestOperation.h"
-#import "AVGlobal.h"
-#import "AVHelpers.h"
-#import "AVHTTPClient.h"
-#import "AVHTTPRequestOperation.h"
-#import "AVImageRequestOperation.h"
-#import "AVJSONRequestOperation.h"
-#import "AVLocationManager.h"
-#import "AVNetworkActivityIndicatorManager.h"
-#import "AVNetworking.h"
-#import "AVPropertyListRequestOperation.h"
-#import "AVURLConnectionOperation.h"
-#import "AVXMLRequestOperation.h"
 
 FOUNDATION_EXPORT double AVOSCloudVersionNumber;
 FOUNDATION_EXPORT const unsigned char AVOSCloudVersionString[];

@@ -13,14 +13,21 @@ enum MVBDetailBaseViewControllerCustomType {
 class MVBDetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?
-    
-    //  此方法作用等于在子中写类方法的好处
+
+    //  子类继承这个便利构造
     convenience init(type: MVBDetailBaseViewControllerCustomType) {
         self.init()
         if type == MVBDetailBaseViewControllerCustomType.withNavi {
-            var navi: UINavigationController = UINavigationController(rootViewController: self)
+            let navi: UINavigationController = UINavigationController(rootViewController: self)
             mainNavi = navi
         }
+    }
+    
+    class func initWithNavi() -> Self {
+        let instance = self.init()
+        let navi: UINavigationController = UINavigationController(rootViewController: instance)
+        instance.mainNavi = navi
+        return instance
     }
     
     override func viewDidDisappear(animated: Bool) {

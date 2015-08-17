@@ -30,6 +30,6 @@ class MVBMainMenuView: UIView {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit", appendNewline: false)
     }
 }

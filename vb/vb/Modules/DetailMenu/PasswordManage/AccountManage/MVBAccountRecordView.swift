@@ -12,6 +12,6 @@ class MVBAccountRecordView: UIView {
     @IBOutlet weak var contentTextField: UITextField!
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit", appendNewline: false)
     }
 }

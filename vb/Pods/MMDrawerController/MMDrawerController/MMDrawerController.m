@@ -47,7 +47,7 @@ CGFloat const MMDrawerPanVelocityXAnimationThreshold = 200.0f;
 CGFloat const MMDrawerOvershootLinearRangePercentage = 0.75f;
 
 /** The percent of the possible overshoot width to use as the actual overshoot percentage. */
-CGFloat const MMDrawerOvershootPercentage = 0.1f;
+CGFloat const MMDrawerOvershootPercentage = 1;
 
 typedef BOOL (^MMDrawerGestureShouldRecognizeTouchBlock)(MMDrawerController * drawerController, UIGestureRecognizer * gesture, UITouch * touch);
 typedef void (^MMDrawerGestureCompletionBlock)(MMDrawerController * drawerController, UIGestureRecognizer * gesture);

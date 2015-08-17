@@ -12,7 +12,7 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
     
     var addButton: UIButton!
     var accountListView: UITableView?
-    var dataSource: MVBAccountManageDataSource!
+    lazy var dataSource: MVBAccountManageDataSource = MVBAccountManageDataSource()
     var recordVc: MQMaskController?
     
     override func loadView() {
@@ -24,13 +24,12 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
         self.view.backgroundColor = UIColor.orangeColor()
         
         //
-        addButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton
+        addButton = UIButton(type: UIButtonType.ContactAdd)
         addButton.frame = CGRectMake(0, 20, 44, 44)
         addButton.addTarget(self, action: Selector("addRecordAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(addButton)
         
         //
-        dataSource = MVBAccountManageDataSource()
         accountListView = UITableView(frame: CGRectMake(0, 64, self.view.frame.width, self.view.frame.height - 64 - 44), style: UITableViewStyle.Plain)
         accountListView!.delegate = self
         accountListView!.dataSource = dataSource as UITableViewDataSource
@@ -41,7 +40,7 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
     }
     
     func addRecordAction(sender: AnyObject!) -> Void {
-        var recordView = NSBundle.mainBundle().loadNibNamed("MVBAccountRecordView", owner: nil, options: nil)[0] as! MVBAccountRecordView
+        let recordView = NSBundle.mainBundle().loadNibNamed("MVBAccountRecordView", owner: nil, options: nil)[0] as! MVBAccountRecordView
         recordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
         recordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: recordView, contentCenter: true, delayTime: 0)
         recordVc!.delegate = self
@@ -49,7 +48,7 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
     }
     
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit")
     }
 
 }
@@ -66,6 +65,6 @@ extension MVBAccountManageViewController: MQMaskControllerDelegate {
 
 extension MVBAccountManageViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("\(indexPath.row)")
+        print("\(indexPath.row)")
     }
 }

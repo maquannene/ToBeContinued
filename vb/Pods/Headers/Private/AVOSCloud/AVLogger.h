@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v3.1.2.6/AVOSCloud.framework/Headers/AVLogger.h
+../../../AVOSCloud/AVLogger.h

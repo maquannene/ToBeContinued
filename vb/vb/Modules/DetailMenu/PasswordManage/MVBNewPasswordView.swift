@@ -24,7 +24,12 @@ class MVBNewPasswordView: UIView {
         detailContentTextView.text = detailContent
     }
     
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, withEvent: event)
+        return view
+    }
+    
     deinit {
-        println("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit")
     }
 }

@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v3.1.2.6/AVOSCloud.framework/Headers/AVConstants.h
+../../../AVOSCloud/AVConstants.h

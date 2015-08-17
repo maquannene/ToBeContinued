@@ -23,12 +23,12 @@ class MVBHeroTableViewCell: UITableViewCell {
     }
 
     func configure(heroModel: MVBHeroModel!) {
-        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as! String), forState: UIControlState.Normal, placeholderImage: UIImage(named: "loading.png"), options: SDWebImageOptions(0)) { (image, error, cacheType, url) -> Void in
+        self.heroImageButton.sd_setBackgroundImageWithURL(NSURL(string: heroModel.getHeroImageUrl() as String), forState: UIControlState.Normal, placeholderImage: UIImage(named: "loading.png"), options: SDWebImageOptions(rawValue: 0)) { (image, error, cacheType, url) -> Void in
         }
-        self.heroNameLabel.text = heroModel.localized_name! as? String
+        self.heroNameLabel.text = heroModel.localized_name! as String
     }
     deinit {
-        println("\(self.dynamicType) deinit \(heroNameLabel.text)")
+        print("\(self.dynamicType) deinit \(heroNameLabel.text)", appendNewline: false)
     }
 }
 

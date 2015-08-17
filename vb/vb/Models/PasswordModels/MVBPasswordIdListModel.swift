@@ -16,9 +16,9 @@ class MVBPasswordIdListModel: AVObject {
     
     convenience init(identifier: String) {
         self.init()
-        var list = NSMutableArray()
-        self.setObject(list, forKey: kList)
-        self.setObject(identifier, forKey: kIdentifier)
+        let list = NSMutableArray()
+        self[kList] = list
+        self[kIdentifier] = identifier
     }
 }
 
