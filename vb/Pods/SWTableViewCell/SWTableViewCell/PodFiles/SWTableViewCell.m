@@ -230,10 +230,7 @@ static NSString * const kTableViewPanState = @"state";
                 {
                     if([self.delegate swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:self])
                     {
-                        //  modify: maquan 屏蔽pan的时候收起button
-                        {
-//                        [self hideUtilityButtonsAnimated:YES];
-                        }
+                        [self hideUtilityButtonsAnimated:YES];
                     }
                 }
             }
@@ -417,9 +414,7 @@ static NSString * const kTableViewPanState = @"state";
     else
     {
         // Scroll back to center
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideUtilityButtonsAnimated:YES];
-        });
+        [self hideUtilityButtonsAnimated:YES];
     }
 }
 
@@ -785,8 +780,6 @@ static NSString * const kTableViewPanState = @"state";
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    //  这个共存处理很重要。短距离快速pan之后立刻tap  tap不会生效
-    //  非常非常重要。
     if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
         || (gestureRecognizer == self.longPressGestureRecognizer && otherGestureRecognizer == self.containingTableView.panGestureRecognizer))
     {
@@ -803,6 +796,5 @@ static NSString * const kTableViewPanState = @"state";
 {
     return ![touch.view isKindOfClass:[UIControl class]];
 }
-
 
 @end

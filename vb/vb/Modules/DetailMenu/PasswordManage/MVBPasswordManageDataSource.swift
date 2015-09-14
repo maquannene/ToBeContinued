@@ -115,7 +115,7 @@ extension MVBPasswordManageDataSource {
     */
     func queryAddPasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
         //  将新的密码记录写入AVOSCloud
-        record.saveInBackgroundWithBlock { [unowned self] (succeed: ObjCBool, error: NSError!) -> Void in
+        record.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed.boolValue == false { complete?(succeed: false); return }
             //  写完成功后要再将密码记录的objectId写入passwordIdList并且保存
             self.passwordIdList!.addObject(record.objectId, forKey: "list")
@@ -123,7 +123,7 @@ extension MVBPasswordManageDataSource {
             self.passwordIdList!.save()
             //  将新建的record加入缓存中
             self.passwordDataList.addObject(record)
-            complete?(succeed: succeed.boolValue)
+            complete?(succeed: succeed)
         }
     }
     
@@ -135,7 +135,7 @@ extension MVBPasswordManageDataSource {
     */
     func queryDeletePasswordRecord(index: Int!, complete: MVBPasswordDataOparateCompleteClosure?) {
         let record: MVBPasswordRecordModel! = fetchPasswordRecord(index)
-        record.deleteInBackgroundWithBlock { [unowned self] (succeed: ObjCBool, error: NSError!) -> Void in
+        record.deleteInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed.boolValue == false { complete?(succeed: false); return }
             //  删除成功后要将密码记录的objectId从passwordIdLis中删除并保存
             self.passwordIdList!.removeObject(record.objectId, forKey: "list")
@@ -143,7 +143,7 @@ extension MVBPasswordManageDataSource {
             self.passwordIdList!.save()
             //  将要删除的record从缓存中删除
             self.passwordDataList.removeObjectAtIndex(index)
-            complete?(succeed: succeed.boolValue)
+            complete?(succeed: succeed)
         }
     }
     
@@ -154,8 +154,8 @@ extension MVBPasswordManageDataSource {
     - parameter complete: 完成回调
     */
     func queryUpdatePasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
-        record.saveInBackgroundWithBlock { (succeed: ObjCBool, error: NSError!) -> Void in
-            complete?(succeed: succeed.boolValue)
+        record.saveInBackgroundWithBlock { (succeed: Bool, error: NSError!) -> Void in
+            (complete?(succeed: succeed))!
         }
     }
     

@@ -13,7 +13,7 @@ enum MVBDetailBaseViewControllerCustomType {
 class MVBDetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?
-
+    
     //  子类继承这个便利构造
     convenience init(type: MVBDetailBaseViewControllerCustomType) {
         self.init()
@@ -22,7 +22,7 @@ class MVBDetailBaseViewController: UIViewController {
             mainNavi = navi
         }
     }
-    
+
     class func initWithNavi() -> Self {
         let instance = self.init()
         let navi: UINavigationController = UINavigationController(rootViewController: instance)

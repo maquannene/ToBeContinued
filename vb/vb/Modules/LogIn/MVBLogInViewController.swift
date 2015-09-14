@@ -118,9 +118,11 @@ extension MVBLogInViewController: WeiboSDKDelegate {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
         self.model = MVBLogInViewModel.AlreadyLogIn
-        SVProgressHUD.showSuccessWithStatus("登陆成功", maskType: SVProgressHUDMaskType.Black)
+        SVProgressHUD.showSuccessWithStatus("登陆成功")
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-            SVProgressHUD.showWithStatus("读取个人信息...", maskType: SVProgressHUDMaskType.Black)
+            SVProgressHUD.showWithStatus("读取个人信息...")
+            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
         }
     }

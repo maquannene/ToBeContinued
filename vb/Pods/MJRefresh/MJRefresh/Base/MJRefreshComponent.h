@@ -11,6 +11,7 @@
 #import "MJRefreshConst.h"
 #import "UIView+MJExtension.h"
 #import "UIScrollView+MJExtension.h"
+#import "UIScrollView+MJRefresh.h"
 
 /** 刷新控件的状态 */
 typedef enum {
@@ -76,6 +77,7 @@ typedef void (^MJRefreshComponentRefreshingBlock)();
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change;
 /** 当scrollView的拖拽状态发生改变的时候调用 */
 - (void)scrollViewPanStateDidChange:(NSDictionary *)change;
+
 
 #pragma mark - 其他
 /** 拉拽的百分比(交给子类重写) */

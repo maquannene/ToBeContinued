@@ -11,7 +11,7 @@
 @interface MQPullToRefreshView ()
 
 {
-  @private
+@private
     UIScrollView *_scrollView;
     BOOL _show;
 }
@@ -80,10 +80,10 @@
         [self scrollViewDidScroll:[[change valueForKey:NSKeyValueChangeNewKey] CGPointValue]];
     }
     if ([keyPath isEqualToString:@"contentSize"]) {
-//        NSLog(@"  contentSize = %@", NSStringFromCGSize([[change valueForKey:NSKeyValueChangeNewKey] CGSizeValue]));
+        //        NSLog(@"  contentSize = %@", NSStringFromCGSize([[change valueForKey:NSKeyValueChangeNewKey] CGSizeValue]));
     }
     if ([keyPath isEqualToString:@"frame"]) {
-//        NSLog(@"  frame = %@", NSStringFromCGRect([[change valueForKey:NSKeyValueChangeNewKey] CGRectValue]));
+        //        NSLog(@"  frame = %@", NSStringFromCGRect([[change valueForKey:NSKeyValueChangeNewKey] CGRectValue]));
     }
 }
 
@@ -116,7 +116,7 @@
         }
     }
     else {
-    
+        
     }
 }
 
@@ -218,7 +218,7 @@
             default:
                 break;
         }
-
+        
         if ([_delegate respondsToSelector:@selector(pullToRefreshView:didChangeState:)]) {
             [_delegate pullToRefreshView:self didChangeState:state];
         }

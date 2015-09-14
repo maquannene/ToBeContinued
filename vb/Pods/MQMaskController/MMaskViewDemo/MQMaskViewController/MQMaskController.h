@@ -37,9 +37,9 @@ typedef void(^MQMaskControllerCloseAnimationState)(UIView *maskView, UIView* con
 
 @interface MQMaskController : NSObject
 
-@property (assign, nonatomic) id<MQMaskControllerDelegate> delegate;
-@property (retain, nonatomic, readonly) UIView *maskView;               //  可设置遮罩层颜色
-@property (retain, nonatomic) UIView *contentView;                      //  内容
+@property (nonatomic, assign) id<MQMaskControllerDelegate> delegate;
+@property (nonatomic, retain, readonly) UIView *maskView;               //  可设置遮罩层颜色
+@property (nonatomic, retain) UIView *contentView;                      //  内容
 
 /**
  *  条件初始化一个遮罩。

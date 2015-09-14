@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## AVOSCloud
+## AVOSCloudDynamic
 
 Copyright 2015 LeanCloud, Inc. See https://leancloud.cn/terms.html
 

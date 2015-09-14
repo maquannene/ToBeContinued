@@ -13,10 +13,10 @@
 
 @interface MQMaskController () <UIGestureRecognizerDelegate>
 
-@property (assign, nonatomic) BOOL contentViewCenter;       //  内容是否显示在中心。
-@property (assign, nonatomic) BOOL isShowAnimated;
-@property (copy, nonatomic) MQMaskControllerShowAnimationState showAnimationState;
-@property (copy, nonatomic) MQMaskControllerCloseAnimationState closeAnimationState;
+@property (nonatomic, assign) BOOL contentViewCenter;       //  内容是否显示在中心。
+@property (nonatomic, assign) BOOL isShowAnimated;
+@property (nonatomic, copy) MQMaskControllerShowAnimationState showAnimationState;
+@property (nonatomic, copy) MQMaskControllerCloseAnimationState closeAnimationState;
 
 @end
 
@@ -24,7 +24,6 @@
 
 - (void)dealloc
 {
-    _delegate = nil;
     [_maskView release];
     _maskView = nil;
     [_contentView release];
@@ -45,6 +44,9 @@
         _contentViewCenter = NO;
         
         _maskView = [[UIView alloc] init];
+        _maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        _maskView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
         //  8.0+ 和 8.0-加的地方不一样。
         if (kMQMaskControllerSystemVersion < 8.0) {
             [[[[UIApplication sharedApplication].keyWindow subviews] objectAtIndex:0] addSubview:_maskView];
@@ -259,7 +261,8 @@
     
     [UIView animateKeyframesWithDuration:animateDuration delay:0.0 options:(UIViewKeyframeAnimationOptionLayoutSubviews) animations:^{
         //  重新设置maskView的大小
-        _maskView.frame = CGRectMake(0, 0, getInterfaceScreenSize().width, getInterfaceScreenSize().height);
+//        _maskView.frame = CGRectMake(0, 0, getInterfaceScreenSize().width, getInterfaceScreenSize().height);
+        //  设置了UIViewAutoresizingFlexibleWidth 和 UIViewAutoresizingFlexibleHeight 就不用转屏的时候在设置frame了
         
         //  重新设置contentView的位置
         if (_contentViewCenter) {
@@ -283,11 +286,9 @@ CGSize getInterfaceScreenSize() {
         screenSize.width = isCurrentOrientationPortrait ? width : height;
         screenSize.height = isCurrentOrientationPortrait ? height : width;
     }
-    
-    if (kMQMaskControllerSystemVersion >= 8.0 && kMQMaskControllerSystemVersion < 9.0) {
-        screenSize = [[UIScreen mainScreen]bounds].size;
+    if (kMQMaskControllerSystemVersion >= 8.0 && kMQMaskControllerSystemVersion < 10.0) {
+        screenSize = [UIApplication sharedApplication].keyWindow.frame.size;
     }
-    
     return screenSize;
 }
 

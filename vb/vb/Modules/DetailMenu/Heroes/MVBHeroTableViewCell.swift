@@ -28,7 +28,7 @@ class MVBHeroTableViewCell: UITableViewCell {
         self.heroNameLabel.text = heroModel.localized_name! as String
     }
     deinit {
-        print("\(self.dynamicType) deinit \(heroNameLabel.text)", appendNewline: false)
+        print("\(self.dynamicType) deinit \(heroNameLabel.text)", terminator: "")
     }
 }
 

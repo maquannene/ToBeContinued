@@ -1,1 +1,0 @@
-../../../MQMaskController/MMaskViewDemo/MQMaskViewController/MQMaskController.h

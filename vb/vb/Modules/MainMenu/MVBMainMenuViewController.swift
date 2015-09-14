@@ -50,7 +50,7 @@ class MVBMainMenuViewController: UIViewController {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", appendNewline: false)
+        print("\(self.dynamicType) deinit", terminator: "")
     }
 }
 
@@ -62,7 +62,8 @@ extension MVBMainMenuViewController {
             if index == 1 {
                 let appDelegate = MVBAppDelegate.MVBApp()
                 WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: "logOut")
-                SVProgressHUD.showWithStatus("正在退出...", maskType: SVProgressHUDMaskType.Black)
+                SVProgressHUD.showWithStatus("正在退出...")
+                SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             }
         }
     }
@@ -81,6 +82,23 @@ extension MVBMainMenuViewController {
     
     @IBAction func accountManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.AccountManage)
+    }
+    
+    //  动画开关控制
+    @IBAction func specialEffectsAction(sender: AnyObject) {
+        if let switchBtn = sender as? UISwitch {
+            if switchBtn.on {
+                self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
+                    let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
+                    block(drawerVc, drawerSide, percentVisible)
+                }
+            }
+            else {
+                self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, pecentVisiable) -> Void in
+                
+                }
+            }
+        }
     }
 }
 

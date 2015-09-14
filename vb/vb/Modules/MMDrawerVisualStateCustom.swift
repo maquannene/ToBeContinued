@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-// MARK: MMDrawer的动画
+// MARK: MMDrawer的自定义动画类，扩展自MMDrawerVisualState
 extension MMDrawerVisualState {
     class func MVBCustomDrawerVisualState() -> MMDrawerControllerDrawerVisualStateBlock {
         return { (drawerController: MMDrawerController!, drawerSide: MMDrawerSide, percentVisible: CGFloat) -> Void in

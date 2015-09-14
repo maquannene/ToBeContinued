@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
- let kList = "list"
+let kList = "list"
 let kIdentifier = "identifier"
 
 class MVBPasswordIdListModel: AVObject {

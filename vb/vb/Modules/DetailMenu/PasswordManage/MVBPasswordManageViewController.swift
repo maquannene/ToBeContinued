@@ -72,7 +72,8 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
             switch netWorkState {
             case AFNetworkReachabilityStatus.NotReachable:
                 print("网络不可用")
-                SVProgressHUD.showInfoWithStatus("网络不可用", maskType: SVProgressHUDMaskType.Black)
+                SVProgressHUD.showInfoWithStatus("网络不可用")
+                SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             case AFNetworkReachabilityStatus.ReachableViaWWAN:
                 print("3G")
             case AFNetworkReachabilityStatus.ReachableViaWiFi:
@@ -84,7 +85,7 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", appendNewline: false)
+        print("\(self.dynamicType) deinit", terminator: "")
     }
 }
 
