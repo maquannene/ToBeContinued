@@ -39,7 +39,7 @@ PODS:
   - FDFullscreenPopGesture (1.1)
   - JSONModel (0.13.0)
   - MJExtension (2.5.10)
-  - MJRefresh (2.4.9)
+  - MJRefresh (2.4.10)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -106,7 +106,7 @@ SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
   MJExtension: 944fb5a12bceb9b866914527f66101566e66292b
-  MJRefresh: be84acb912d0a66364f76a75426698a39528e2ed
+  MJRefresh: e52328552ed9cbfce3501e3820b18bf7643c65cc
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c7f562d11a70ddfb13ee66923301ee655829dcc
   MQPullToRefresh: 2bfd5eef831a77bb5a7beff747a65587d30c34c2

@@ -729,18 +729,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vb/AppDelegate/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/vb/AppDelegate/AVOSCloud/Static",
-					"$(PROJECT_DIR)/Static",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/AVOSCloud/Static",
-					"$(PROJECT_DIR)/vb",
-					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud/Static",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
 				GCC_WARN_UNUSED_FUNCTION = NO;
@@ -792,18 +781,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vb/AppDelegate/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/vb/AppDelegate/AVOSCloud/Static",
-					"$(PROJECT_DIR)/Static",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/AVOSCloud/Static",
-					"$(PROJECT_DIR)/vb",
-					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud/Dynamic",
-					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud/Static",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
 				GCC_WARN_UNUSED_FUNCTION = NO;
