@@ -37,7 +37,7 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - FDFullscreenPopGesture (1.1)
-  - JSONModel (0.13.0)
+  - Kingfisher (1.5.0)
   - MJExtension (2.5.10)
   - MJRefresh (2.4.10)
   - MMDrawerController (0.5.7):
@@ -52,8 +52,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
-  - MQMaskController
-  - MQPullToRefresh
+  - MQMaskController (0.0.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -68,12 +67,12 @@ DEPENDENCIES:
   - BlocksKit
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
-  - JSONModel (~> 0.13)
+  - Kingfisher (~> 1.5)
   - MJExtension
   - MJRefresh
   - MMDrawerController (~> 0.5.7)
-  - MQMaskController (from `../vb/vb/Utils/Podspec/MQMaskController.podspec`)
-  - MQPullToRefresh (from `../vb/vb/Utils/Podspec/MQPullToRefresh.podspec`)
+  - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`,
+    commit `6b313578e296ac772e9c5dbe18975094ce741360`)
   - SDWebImage (~> 3.6)
   - SVProgressHUD (HEAD)
   - SWTableViewCell (~> 0.3.7)
@@ -84,9 +83,8 @@ EXTERNAL SOURCES:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
   MQMaskController:
-    :podspec: ../vb/vb/Utils/Podspec/MQMaskController.podspec
-  MQPullToRefresh:
-    :podspec: ../vb/vb/Utils/Podspec/MQPullToRefresh.podspec
+    :commit: 6b313578e296ac772e9c5dbe18975094ce741360
+    :git: https://github.com/wuhanness/MQMaskViewController.git
 
 CHECKOUT OPTIONS:
   FDFullscreenPopGesture:
@@ -95,21 +93,17 @@ CHECKOUT OPTIONS:
   MQMaskController:
     :commit: 6b313578e296ac772e9c5dbe18975094ce741360
     :git: https://github.com/wuhanness/MQMaskViewController.git
-  MQPullToRefresh:
-    :commit: dda31ccddaa5af8a643a9f487399a59ef85f573c
-    :git: https://github.com/wuhanness/MQPullToRefresh.git
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   AVOSCloudDynamic: 0888752ccfea4ec8d2ab21433a4ef784ee456436
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  JSONModel: 5a431961fd11a46840b17cc2bf5ba0b31d210fb3
+  Kingfisher: cbb280faba0e9ae0a73d2c51072f7dd94ccfe640
   MJExtension: 944fb5a12bceb9b866914527f66101566e66292b
   MJRefresh: e52328552ed9cbfce3501e3820b18bf7643c65cc
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  MQMaskController: 7c7f562d11a70ddfb13ee66923301ee655829dcc
-  MQPullToRefresh: 2bfd5eef831a77bb5a7beff747a65587d30c34c2
+  MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579

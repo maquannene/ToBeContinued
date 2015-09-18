@@ -13,7 +13,7 @@ class MVBMainStructureManage: NSObject {
     //  左侧主菜单页面
     lazy var mainMenuViewController: MVBMainMenuViewController = MVBMainMenuViewController()
     //  中间主菜单页面
-    lazy var mainViewController: MVBMainViewController = MVBMainViewController(type: MVBDetailBaseViewControllerCustomType.withNavi)
+    lazy var mainViewController: MVBMainViewController = MVBMainViewController.initWithNavi()
     //
     var heroesManageVc: MVBHeroesViewController?
     //
@@ -60,9 +60,9 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             centerViewController = mainViewController.mainNavi!
         case MVBMainMenuViewControllerOperate.PasswordManage:
             if passwordManageVc == nil {
-                passwordManageVc = MVBPasswordManageViewController()
+                passwordManageVc = UIStoryboard(name: "MVBPasswordManange", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBPasswordManageViewController!
             }
-            centerViewController = passwordManageVc!
+            centerViewController = UINavigationController(rootViewController: passwordManageVc!)
         case MVBMainMenuViewControllerOperate.HeroesManage:
             if heroesManageVc == nil {
                 heroesManageVc = MVBHeroesViewController()
@@ -72,7 +72,7 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             if accountManangeVc == nil {
                 accountManangeVc = MVBAccountManageViewController.initWithNavi()
             }
-            centerViewController = accountManangeVc!
+            centerViewController = accountManangeVc!.mainNavi!
         }
         if centerViewController == drawerController!.centerViewController {
             drawerController!.closeDrawerAnimated(true) {

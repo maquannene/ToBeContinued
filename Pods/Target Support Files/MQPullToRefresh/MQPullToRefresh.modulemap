@@ -1,6 +1,0 @@
-framework module MQPullToRefresh {
-  umbrella header "MQPullToRefresh-umbrella.h"
-
-  export *
-  module * { export * }
-}

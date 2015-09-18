@@ -6,22 +6,9 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-enum MVBDetailBaseViewControllerCustomType {
-    case withNavi
-}
-
 class MVBDetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?
-    
-    //  子类继承这个便利构造
-    convenience init(type: MVBDetailBaseViewControllerCustomType) {
-        self.init()
-        if type == MVBDetailBaseViewControllerCustomType.withNavi {
-            let navi: UINavigationController = UINavigationController(rootViewController: self)
-            mainNavi = navi
-        }
-    }
 
     class func initWithNavi() -> Self {
         let instance = self.init()
