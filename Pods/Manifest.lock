@@ -36,6 +36,9 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - Cent (4.0.0):
+    - Dollar (~> 4.0.0)
+  - Dollar (4.0.0)
   - FDFullscreenPopGesture (1.1)
   - Kingfisher (1.5.0)
   - MJExtension (2.5.10)
@@ -65,6 +68,8 @@ DEPENDENCIES:
   - AFNetworking (~> 2.2)
   - AVOSCloudDynamic
   - BlocksKit
+  - Cent
+  - Dollar
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
   - Kingfisher (~> 1.5)
@@ -98,6 +103,8 @@ SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   AVOSCloudDynamic: 0888752ccfea4ec8d2ab21433a4ef784ee456436
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Cent: a674456a40de3bc9171b9fcca76b2d5234a96242
+  Dollar: 95326da9e4c50735b23c011d4b3db8000cdc776c
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   Kingfisher: cbb280faba0e9ae0a73d2c51072f7dd94ccfe640
   MJExtension: 944fb5a12bceb9b866914527f66101566e66292b

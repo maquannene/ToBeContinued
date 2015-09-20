@@ -785,6 +785,7 @@ static NSString * const kTableViewPanState = @"state";
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
+    //  change: maquan
     //  这个共存处理很重要。短距离快速pan之后立刻tap  tap不会生效
     //  非常非常重要。
     if ((gestureRecognizer == self.containingTableView.panGestureRecognizer && otherGestureRecognizer == self.longPressGestureRecognizer)
