@@ -175,7 +175,7 @@ typedef struct _BKBlock {
 	NSParameterAssert(block);
 	NSMethodSignature *blockSignature = [[self class] typeSignatureForBlock:block];
 	if (![[self class] isSignature:methodSignature compatibleWithSignature:blockSignature]) {
-		@throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempted to create block invocation with incompatible signatures" userInfo:@{A2IncompatibleMethodSignatureKey: methodSignature}];
+//		@throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempted to create block invocation with incompatible signatures" userInfo:@{A2IncompatibleMethodSignatureKey: methodSignature}];
 	}
 	return (self = [self initWithBlock:block methodSignature:methodSignature blockSignature:blockSignature]);
 }

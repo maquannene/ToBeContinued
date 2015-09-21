@@ -20,8 +20,6 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     var newPasswordVc: MQMaskController?
     var operateCellIndex: Int = -1
     
-    var newPasswordBtn: UIButton?
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -39,22 +37,18 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
 //        self.fd_interactivePopDisabled = true
 //        self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = getScreenSize().width
         //  基础设置
-        self.automaticallyAdjustsScrollViewInsets = false
+        view.backgroundColor = UIColor.redColor()
+        automaticallyAdjustsScrollViewInsets = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewPasswrodAction:")
         
-        view.backgroundColor = UIColor.greenColor()
-        newPasswordBtn = UIButton(type: UIButtonType.ContactAdd)
-        newPasswordBtn!.frame = CGRectMake(0, 0, 44, 44)
-        newPasswordBtn!.addTarget(self, action: "addNewPasswrodAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(newPasswordBtn!)
-        
-        //  ViewModel
+        //  初始化数据源
         dataSource = MVBPasswordManageDataSource()
         
-        //  配置下拉刷新
+        //  设置tableView
         configurePullToRefresh()
+        passwordListTableView.tableFooterView = UIView()
+        passwordListTableView.header.beginRefreshing()
         
-        //  自动刷新
-        passwordListTableView!.header.beginRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,7 +87,7 @@ extension MVBPasswordManageViewController {
         dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
             //  成功后继续请求每个id对应的具体data
             if succeed == true {
-                self.dataSource?.queryPasswordDataList({ [unowned self] (succeed) -> Void in
+                self.dataSource?.queryPasswordDataList { [unowned self] (succeed) -> Void in
                     SVProgressHUD.dismiss()
                     if succeed == true {
                         self.passwordListTableView!.reloadData()
@@ -101,11 +95,11 @@ extension MVBPasswordManageViewController {
                     else {
                         SVProgressHUD.showErrorWithStatus("加载失败")
                     }
-                })
+                }
             }
             //  失败有两种可能：没网；新的用户，并没有id列表
             else {
-                self.dataSource!.queryCreatePasswordIdList({ (succeed) -> Void in
+                self.dataSource!.queryCreatePasswordIdList { (succeed) -> Void in
                     SVProgressHUD.dismiss()
                     if succeed == true {
                         
@@ -113,7 +107,7 @@ extension MVBPasswordManageViewController {
                     else {
                         SVProgressHUD.showErrorWithStatus("加载失败")
                     }
-                })
+                }
             }
         }
     }
@@ -124,18 +118,18 @@ extension MVBPasswordManageViewController {
             self.dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
                 //  成功后继续请求每个id对应的具体data
                 if succeed == true {
-                    self.dataSource?.queryPasswordDataList({ [unowned self] (succeed) -> Void in
+                    self.dataSource?.queryPasswordDataList { [unowned self] (succeed) -> Void in
                         if succeed == true {
                             self.passwordListTableView!.reloadData()
                         }
                         self.passwordListTableView!.header.endRefreshing()
-                    })
+                    }
                 }
                     //  失败有两种可能：没网；新的用户，并没有id列表
                 else {
-                    self.dataSource!.queryCreatePasswordIdList({ [unowned self] (succeed) -> Void in
+                    self.dataSource!.queryCreatePasswordIdList { [unowned self] (succeed) -> Void in
                         self.passwordListTableView!.header.endRefreshing()
-                    })
+                    }
                 }
             }
         }
@@ -150,7 +144,9 @@ extension MVBPasswordManageViewController {
     func addNewPasswrodAction(sender: AnyObject!) {
         let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
         newPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
+        newPasswordView.createButton.setTitle("创建", forState: UIControlState.Normal)
         newPasswordView.createButton.addTarget(self, action: "confirmCreateNewPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newPasswordView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
         newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: false, delayTime: 0)
         //  设置初始状态
         newPasswordVc!.maskView.backgroundColor = UIColor.clearColor()
@@ -190,13 +186,18 @@ extension MVBPasswordManageViewController {
         let contentView = newPasswordVc!.contentView as! MVBNewPasswordView
         let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(operateCellIndex)
         recordModel.update(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
-        dataSource!.queryUpdatePasswordRecord(recordModel, complete: { [unowned self] (succeed) -> Void in
+        dataSource!.queryUpdatePasswordRecord(recordModel) { [unowned self] (succeed) -> Void in
             self.dataSource!.expandingIndexPath = nil
             self.dataSource!.expandedIndexPath = nil
             self.passwordListTableView!.reloadData()
-            self.newPasswordVc!.dismissWithAnimated(true) {}
-        })
+            self.newPasswordVc!.dismissWithAnimated(true, completion: nil)
+        }
     }
+    
+    func cancelAction(sender: AnyObject!) {
+        self.newPasswordVc!.dismissWithAnimated(true, completion: nil)
+    }
+    
 }
 
 //  MARK: UITableViewDelegate
@@ -298,7 +299,9 @@ extension MVBPasswordManageViewController: SWTableViewCellDelegate {
                 let detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
                 detailPasswordView.configureData(recordModel.title, detailContent: recordModel.detailContent)
                 detailPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
+                detailPasswordView.createButton.setTitle("更新", forState: UIControlState.Normal)
                 detailPasswordView.createButton.addTarget(self, action: "confirmUpdataPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+                detailPasswordView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
                 newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailPasswordView, contentCenter: false, delayTime: 0)
                 //  设置初始状态
                 newPasswordVc!.delegate = self

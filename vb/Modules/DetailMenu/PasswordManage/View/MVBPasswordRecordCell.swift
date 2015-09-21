@@ -9,6 +9,7 @@
 class MVBPasswordRecordCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    lazy var line: CALayer = CALayer()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -16,6 +17,17 @@ class MVBPasswordRecordCell: SWTableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        line.backgroundColor = UIColor.grayColor().CGColor
+        layer.addSublayer(line)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        line.frame = CGRect(x: 0, y: self.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
     }
     
     deinit {

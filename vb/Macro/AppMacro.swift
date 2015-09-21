@@ -11,8 +11,9 @@
 let kMVBSinaSDKAppKey = "1325571405"                                            //  key
 let kMVBSinaSDKRedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
 let kMVBSinaSDKAutorizeInfo = "kMVBSinaSDKAutorizeInfo"
-let kMVBSinaSDKAccessToken = "kMVBSinaSDKAccessToken"
 let kMVBSinaSDKUserID = "kMVBSinaSDKUserID"
+let kMVBSinaSDKAccessToken = "kMVBSinaSDKAccessToken"
+let kMVBLogInWeibo = "kMVBLogInWeibo."
 
 //  avoscloud sdk
 let kMVBAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"

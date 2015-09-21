@@ -8,15 +8,21 @@
 //
 
 class MVBNewPasswordView: UIView {
-   
-    @IBOutlet weak var createButton: UIButton!
-    
+
     @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var detailContentTextView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        createButton.layer.borderColor = UIColor.blackColor().CGColor
+        createButton.layer.cornerRadius = 5
+        createButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.blackColor().CGColor
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.borderWidth = 1
     }
     
     func configureData(title: String, detailContent: String) {

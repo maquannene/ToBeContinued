@@ -13,6 +13,28 @@ class MVBAppDelegate: UIResponder {
     var mainVc: UIViewController!
     var userModel: MVBUserModel?
     
+    var thirdLogInIdentifier: String? {
+        get {
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                return authorizeInfo[kMVBLogInWeibo]
+            }
+            return nil
+        }
+        set {
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
+                authorizeInfo[kMVBLogInWeibo] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
+            else {
+                var authorizeInfo = Dictionary<String, String>()
+                authorizeInfo[kMVBLogInWeibo] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
+        }
+    }
+    
     var userID: String? {
         get {
             if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
@@ -55,6 +77,12 @@ class MVBAppDelegate: UIResponder {
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
+    }
+    
+    //  第三方平台标示 + userID = 存储到云上的唯一标示
+    var uniqueCloudKey: String? {
+        guard let userID = self.userID else { return nil }
+        return thirdLogInIdentifier! + userID
     }
     
     class func MVBApp() -> MVBAppDelegate! {
@@ -100,6 +128,7 @@ extension MVBAppDelegate: UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        thirdLogInIdentifier = kMVBLogInWeibo
         return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
     }
     
@@ -138,6 +167,10 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     func clearUserInfo() {
         MVBAppDelegate.MVBApp().accessToken = nil
         MVBAppDelegate.MVBApp().userID = nil
+        MVBAppDelegate.MVBApp().thirdLogInIdentifier = nil
+        //  移除存储三个唯一值信息的字典
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBSinaSDKAutorizeInfo)
+        //  移除个人信息的字典
         NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBUserInfoKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     }

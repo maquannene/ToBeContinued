@@ -99,23 +99,19 @@ extension MVBLogInViewController: WeiboSDKDelegate {
     //   收到一个来自微博客户端程序的响应。设置userInfo和
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
         if let _response = response as? WBAuthorizeResponse {
-            var authorizeInfo = Dictionary<String, String>()
             if let accessToken = _response.accessToken {
-                authorizeInfo[kMVBSinaSDKAccessToken] = accessToken
+                MVBAppDelegate.MVBApp().accessToken = accessToken
             }
             else {
                 return
             }
             
             if let userID = _response.userID {
-                authorizeInfo[kMVBSinaSDKUserID] = userID
+                MVBAppDelegate.MVBApp().userID = userID
             }
             else {
                 return
             }
-            
-            NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
-            NSUserDefaults.standardUserDefaults().synchronize()
         }
         self.model = MVBLogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功")

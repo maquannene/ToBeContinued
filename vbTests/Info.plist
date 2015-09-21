@@ -4,7 +4,7 @@
 <dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>weibosdk2.5</string>
+		<string>weibosdk</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

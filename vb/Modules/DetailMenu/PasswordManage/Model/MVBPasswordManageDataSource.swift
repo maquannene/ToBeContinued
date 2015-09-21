@@ -29,7 +29,7 @@ extension MVBPasswordManageDataSource {
     - parameter complete: 完成回调
     */
     func queryPasswordIdList(complete: MVBPasswordDataOparateCompleteClosure?) {
-        let identifier: String = MVBAppDelegate.MVBApp().userID! + NSStringFromClass(MVBPasswordIdListModel.self)
+        let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBPasswordIdListModel.self)
         let query: AVQuery = AVQuery(className: "MVBPasswordIdListModel")
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
@@ -39,17 +39,17 @@ extension MVBPasswordManageDataSource {
             }
             else {
                 if (objects != nil && objects.count > 0) {
-                    if let objc = objects[0] as? MVBPasswordIdListModel  {
+                    if let objc = objects[0] as? MVBPasswordIdListModel {
                         //  取passwordIdList
                         self.passwordIdList = MVBPasswordIdListModel(withoutDataWithObjectId: objc.objectId)
-                        self.passwordIdList!.fetchInBackgroundWithBlock({ (object, error) -> Void in
+                        self.passwordIdList!.fetchInBackgroundWithBlock { (object, error) -> Void in
                             if error != nil {
                                 complete?(succeed: false)
                             }
                             else {
                                 complete?(succeed: true)
                             }
-                        })
+                        }
                     }
                     else {
                         complete?(succeed: false)
@@ -68,7 +68,7 @@ extension MVBPasswordManageDataSource {
     - parameter complete: 完成回调
     */
     func queryCreatePasswordIdList(complete: MVBPasswordDataOparateCompleteClosure?) {
-        let identifier: String = MVBAppDelegate.MVBApp().userID! + NSStringFromClass(MVBPasswordIdListModel.self)
+        let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBPasswordIdListModel.self)
         self.passwordIdList = MVBPasswordIdListModel(identifier: identifier)
         self.passwordIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed.boolValue)

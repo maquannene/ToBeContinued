@@ -8,6 +8,24 @@
 
 class MVBPasswordRecordDetailCell: UITableViewCell {
 
+    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    deinit {
+        print("\(self.dynamicType) deinit")
+    }
+    
 }
 
 // MARK: Public
