@@ -6,7 +6,6 @@ pod 'AFNetworking', '~> 2.2'
 pod 'SDWebImage', '~> 3.6'
 pod 'SVProgressHUD', :head
 pod 'BlocksKit'
-pod 'AVOSCloudDynamic'
 pod 'Kingfisher', '~> 1.5'
 pod 'MMDrawerController', '~> 0.5.7'
 pod 'MJExtension'

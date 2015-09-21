@@ -36,7 +36,9 @@
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
-		D4B337D01BA68E73005F88BD /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B337CB1BA68BC2005F88BD /* AVOSCloud.framework */; };
+		D4B712F31BAFC6D200166806 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F21BAFC6D200166806 /* AVOSCloud.framework */; settings = {ASSET_TAGS = (); }; };
+		D4B712F51BAFC72900166806 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F41BAFC72900166806 /* libsqlite3.tbd */; };
+		D4B712F71BAFC77200166806 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F61BAFC77200166806 /* libicucore.tbd */; };
 		D4DE75A11B57560D007E31F0 /* MMDrawerVisualStateCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */; };
 		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
 		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
@@ -113,7 +115,9 @@
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D46EFAFE1BA5CF3200DB73BE /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
-		D4B337CB1BA68BC2005F88BD /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVOSCloud.framework; path = /Users/quanma/githubUpdate/swift/vb/vb/vb/Utils/SDK/AVOSCloud/Dynamic/AVOSCloud.framework; sourceTree = "<absolute>"; };
+		D4B712F21BAFC6D200166806 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		D4B712F41BAFC72900166806 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D4B712F61BAFC77200166806 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMDrawerVisualStateCustom.swift; sourceTree = "<group>"; };
 		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
 		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
@@ -151,12 +155,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B712F71BAFC77200166806 /* libicucore.tbd in Frameworks */,
+				D4B712F51BAFC72900166806 /* libsqlite3.tbd in Frameworks */,
 				D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */,
 				D4FD3BC51B209D1700F73D43 /* libWeiboSDK.a in Frameworks */,
 				D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */,
 				D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */,
 				D4121E831B075DC200612CA3 /* CoreText.framework in Frameworks */,
-				D4B337D01BA68E73005F88BD /* AVOSCloud.framework in Frameworks */,
+				D4B712F31BAFC6D200166806 /* AVOSCloud.framework in Frameworks */,
 				D4121E811B075DBA00612CA3 /* CoreTelephony.framework in Frameworks */,
 				D4121E7F1B075DAE00612CA3 /* Security.framework in Frameworks */,
 				D4121E7D1B075DA700612CA3 /* SystemConfiguration.framework in Frameworks */,
@@ -172,6 +178,8 @@
 		9114F6F747F82872356B1F1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4B712F61BAFC77200166806 /* libicucore.tbd */,
+				D4B712F41BAFC72900166806 /* libsqlite3.tbd */,
 				D4121E881B075DDC00612CA3 /* CoreGraphics.framework */,
 				D4121E861B075DD600612CA3 /* Foundation.framework */,
 				D4121E841B075DCC00612CA3 /* UIKit.framework */,
@@ -290,6 +298,7 @@
 		D41C80021B1BEF2600987D42 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				D4B712F11BAFC6D200166806 /* AVOSCloud */,
 				D4FD3BB91B209D1700F73D43 /* libWeiboSDK */,
 			);
 			path = SDK;
@@ -399,6 +408,14 @@
 				D44A6B141B2886A7003C4834 /* AppMacroObjc.m */,
 			);
 			path = Macro;
+			sourceTree = "<group>";
+		};
+		D4B712F11BAFC6D200166806 /* AVOSCloud */ = {
+			isa = PBXGroup;
+			children = (
+				D4B712F21BAFC6D200166806 /* AVOSCloud.framework */,
+			);
+			path = AVOSCloud;
 			sourceTree = "<group>";
 		};
 		D4E17B4A1B286A6300228B4A /* Resources */ = {
@@ -756,7 +773,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
 				GCC_WARN_UNUSED_FUNCTION = NO;
@@ -787,6 +807,39 @@
 					"\"${PODS_ROOT}/Headers/Public/SVPullToRefresh\"",
 					"-isystem",
 					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"BlocksKit\"",
+					"-framework",
+					"\"Cent\"",
+					"-framework",
+					"\"Dollar\"",
+					"-framework",
+					"\"FDFullscreenPopGesture\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"MMDrawerController\"",
+					"-framework",
+					"\"MQMaskController\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SWTableViewCell\"",
+					"-framework",
+					"\"UIActivityIndicator_for_SDWebImage\"",
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -808,7 +861,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vb/Utils/SDK/AVOSCloud",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "vb/vb-Prefix.pch";
 				GCC_WARN_UNUSED_FUNCTION = NO;
@@ -839,6 +895,39 @@
 					"\"${PODS_ROOT}/Headers/Public/SVPullToRefresh\"",
 					"-isystem",
 					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"BlocksKit\"",
+					"-framework",
+					"\"Cent\"",
+					"-framework",
+					"\"Dollar\"",
+					"-framework",
+					"\"FDFullscreenPopGesture\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"MMDrawerController\"",
+					"-framework",
+					"\"MQMaskController\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SWTableViewCell\"",
+					"-framework",
+					"\"UIActivityIndicator_for_SDWebImage\"",
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -46,7 +46,6 @@
 @import AVOSCloud;
 @import SWTableViewCell;
 @import MQMaskController;
-//@import MQPullToRefresh;
 @import FDFullscreenPopGesture;
 @import Dollar;
 @import Cent;

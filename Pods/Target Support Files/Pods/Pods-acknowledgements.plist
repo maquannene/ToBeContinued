@@ -41,14 +41,6 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright 2015 LeanCloud, Inc. See https://leancloud.cn/terms.html</string>
-			<key>Title</key>
-			<string>AVOSCloudDynamic</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>//
 //  LICENSE
 //  BlocksKit
