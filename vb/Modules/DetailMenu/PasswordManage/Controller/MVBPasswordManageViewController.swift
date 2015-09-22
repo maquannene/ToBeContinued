@@ -10,8 +10,8 @@
 class MVBPasswordManageViewController: MVBDetailBaseViewController {
     
     struct Static {
-        static let pwRecordCellId = "MVBPasswordRecordCell"
-        static let pwRecordDetailCellId = "MVBPasswordRecordDetailCell"
+        static let pwRecordCellId = MVBPasswordRecordCell.ClassName
+        static let pwRecordDetailCellId = MVBPasswordRecordDetailCell.ClassName
     }
 
     @IBOutlet weak var passwordListTableView: UITableView!
@@ -39,7 +39,7 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
         //  基础设置
         view.backgroundColor = UIColor.redColor()
         automaticallyAdjustsScrollViewInsets = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewPasswrodAction:")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewPasswordAction:")
         
         //  初始化数据源
         dataSource = MVBPasswordManageDataSource()
@@ -47,8 +47,10 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
         //  设置tableView
         configurePullToRefresh()
         passwordListTableView.tableFooterView = UIView()
+        passwordListTableView.registerNib(UINib(nibName: Static.pwRecordCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.pwRecordCellId)
+        passwordListTableView.registerNib(UINib(nibName: Static.pwRecordDetailCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.pwRecordDetailCellId)
         passwordListTableView.header.beginRefreshing()
-        
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -141,7 +143,7 @@ extension MVBPasswordManageViewController {
     /**
     新增密码条目
     */
-    func addNewPasswrodAction(sender: AnyObject!) {
+    func addNewPasswordAction(sender: AnyObject!) {
         let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
         newPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
         newPasswordView.createButton.setTitle("创建", forState: UIControlState.Normal)
@@ -163,6 +165,77 @@ extension MVBPasswordManageViewController {
         }
         newPasswordVc!.showWithAnimated(true, completion: nil)
         newPasswordView.titleTextView.becomeFirstResponder()
+    }
+    
+    /**
+    编辑密码条目
+    */
+    func editPasswordAction(indexPath: NSIndexPath) {
+        if passwordListTableView!.editing == false {
+            passwordListTableView!.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        operateCellIndex = indexPath.row //  记录操作的哪个cell
+        let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(operateCellIndex)
+        let detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
+        detailPasswordView.configureData(recordModel.title, detailContent: recordModel.detailContent)
+        detailPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
+        detailPasswordView.createButton.setTitle("更新", forState: UIControlState.Normal)
+        detailPasswordView.createButton.addTarget(self, action: "confirmUpdataPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        detailPasswordView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailPasswordView, contentCenter: false, delayTime: 0)
+        //  设置初始状态
+        newPasswordVc!.delegate = self
+        newPasswordVc!.maskView.backgroundColor = UIColor.clearColor()
+        //  设置显示动画
+        newPasswordVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
+            self.newPasswordVc!.contentView.frame = CGRectOffset(detailPasswordView.frame, 0, 260)
+            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+        }
+        //  显示关闭动画
+        newPasswordVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
+            self.newPasswordVc!.contentView.frame = CGRectOffset(detailPasswordView.frame, 0, -260)
+            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+        }
+        newPasswordVc!.showWithAnimated(true, completion: nil)
+        detailPasswordView.titleTextView.becomeFirstResponder()
+    }
+    
+    /**
+    删除密码条目
+    */
+    func deletePasswordAction(indexPath: NSIndexPath) {
+        dataSource!.queryDeletePasswordRecord(indexPath.row) { [unowned self] (succeed) -> Void in
+            self.passwordListTableView!.beginUpdates()
+            self.passwordListTableView!.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            if self.dataSource!.expandedIndexPath != nil {
+                self.passwordListTableView!.deleteRowsAtIndexPaths([self.dataSource!.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
+            }
+            self.dataSource!.expandedIndexPath = nil
+            self.dataSource!.expandingIndexPath = nil
+            self.passwordListTableView!.endUpdates()
+        }
+    }
+    
+    func showDetailPasswordAction(sender: AnyObject!) {
+        let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(dataSource!.expandingIndexPath!.row)
+        let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[1] as! MVBPasswordDetailView
+        newPasswordView.frame = CGRectMake(0, self.view.h, self.view.frame.width, 0)
+        newPasswordView.contentText = recordModel.detailContent
+        newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: false, delayTime: 0)
+        //  设置初始状态
+        newPasswordVc!.maskView.backgroundColor = UIColor.clearColor()
+        newPasswordVc!.delegate = self
+        //  设置显示动画
+        newPasswordVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
+            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, -self.newPasswordVc!.contentView.h)
+            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+        }
+        //  显示关闭动画
+        newPasswordVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
+            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, self.newPasswordVc!.contentView.h)
+            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+        }
+        newPasswordVc!.showWithAnimated(true, completion: nil)
     }
     
     /**
@@ -213,12 +286,14 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
         //  如果点击的是detailCell 就不响应点击
-        if cell.reuseIdentifier == MVBPasswordManageViewController.Static.pwRecordDetailCellId {
+        if let _ = cell as? MVBPasswordRecordDetailCell {
             return
         }
         
-        //  如果点击的是titleCell 就先看当前有没有侧滑出的，如果有侧滑出的，就先收起侧滑；没有侧滑出的就响应展开。
+        //  如果点击的是titleCell 就先判断有没有侧滑滑出的
+        //  如果有侧滑出的，就先收起侧滑；没有侧滑出的就响应展开。
         let visiableCells: NSArray = tableView.visibleCells
         for cell in visiableCells {
             if (cell is MVBPasswordRecordCell && !cell.isUtilityButtonsHidden())  {
@@ -249,6 +324,7 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
         }
         tableView.endUpdates()
         
+        //  如果点击的是最下面的，就滚到最下面。
         if dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.row == dataSource!.passwordDataList.count {
             tableView.scrollToRowAtIndexPath(dataSource!.expandedIndexPath!, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
@@ -273,13 +349,15 @@ extension MVBPasswordManageViewController: UITableViewDataSource {
         if (dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: MVBPasswordRecordDetailCell = tableView.dequeueReusableCellWithIdentifier(MVBPasswordManageViewController.Static.pwRecordDetailCellId) as! MVBPasswordRecordDetailCell
             detailCell.configureWithRecord(record)
+            detailCell.indexPath = actualIndexPath
+            detailCell.detailButton.addTarget(self, action: "showDetailPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
             return detailCell
         }
         else {
             let titleCell: MVBPasswordRecordCell = tableView.dequeueReusableCellWithIdentifier(MVBPasswordManageViewController.Static.pwRecordCellId) as! MVBPasswordRecordCell
+            titleCell.configureWithRecord(record)
             titleCell.indexPath = actualIndexPath
             titleCell.delegate = self
-            titleCell.configureWithRecord(record)
             return titleCell
         }
     }
@@ -291,46 +369,11 @@ extension MVBPasswordManageViewController: SWTableViewCellDelegate {
         if let recordCell = cell as? MVBPasswordRecordCell {
             //  点击编辑按键
             if index == 0 {
-                if passwordListTableView!.editing == false {
-                    passwordListTableView!.deselectRowAtIndexPath(recordCell.indexPath, animated: true)
-                }
-                operateCellIndex = recordCell.indexPath.row //  记录操作的哪个cell
-                let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(recordCell.indexPath.row)
-                let detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
-                detailPasswordView.configureData(recordModel.title, detailContent: recordModel.detailContent)
-                detailPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
-                detailPasswordView.createButton.setTitle("更新", forState: UIControlState.Normal)
-                detailPasswordView.createButton.addTarget(self, action: "confirmUpdataPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
-                detailPasswordView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
-                newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailPasswordView, contentCenter: false, delayTime: 0)
-                //  设置初始状态
-                newPasswordVc!.delegate = self
-                newPasswordVc!.maskView.backgroundColor = UIColor.clearColor()
-                //  设置显示动画
-                newPasswordVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
-                    self.newPasswordVc!.contentView.frame = CGRectOffset(detailPasswordView.frame, 0, 260)
-                    self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
-                }
-                //  显示关闭动画
-                newPasswordVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
-                    self.newPasswordVc!.contentView.frame = CGRectOffset(detailPasswordView.frame, 0, -260)
-                    self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
-                }
-                newPasswordVc!.showWithAnimated(true, completion: nil)
-                detailPasswordView.titleTextView.becomeFirstResponder()
+                editPasswordAction(recordCell.indexPath)
             }
             //  点击删除按键
             if index == 1 {
-                dataSource!.queryDeletePasswordRecord(recordCell.indexPath.row, complete: { [unowned self] (succeed) -> Void in
-                    self.passwordListTableView!.beginUpdates()
-                    self.passwordListTableView!.deleteRowsAtIndexPaths([recordCell.indexPath], withRowAnimation: UITableViewRowAnimation.None)
-                    if self.dataSource!.expandedIndexPath != nil {
-                        self.passwordListTableView!.deleteRowsAtIndexPaths([self.dataSource!.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
-                    }
-                    self.dataSource!.expandedIndexPath = nil
-                    self.dataSource!.expandingIndexPath = nil
-                    self.passwordListTableView!.endUpdates()
-                })
+                deletePasswordAction(recordCell.indexPath)
             }
         }
     }

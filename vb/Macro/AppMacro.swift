@@ -8,12 +8,15 @@
 //
 
 //  sina sdk
-let kMVBSinaSDKAppKey = "1325571405"                                            //  key
-let kMVBSinaSDKRedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
-let kMVBSinaSDKAutorizeInfo = "kMVBSinaSDKAutorizeInfo"
-let kMVBSinaSDKUserID = "kMVBSinaSDKUserID"                                     //  userID
-let kMVBSinaSDKAccessToken = "kMVBSinaSDKAccessToken"                           //  token
-let kMVBLogInWeibo = "kMVBLogInWeibo."                                          //  微博登陆前缀
+
+struct MVBWeiboSDK {
+    static let AppKey = "1325571405"                                            //  key
+    static let RedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
+    static let AutorizeInfo = "MVBWeiboSDKAutorizeInfo"                         //  
+    static let UserIDKey = "MVBWeiboSDKUserIDKey"                               //  userID
+    static let AccessTokenKey = "MVBWeiboSDKAccessTokenKey"                     //  token
+    static let LogFromWeibo = "MVBWeiboSDKLogFromWeibo"                         //  微博登陆前缀
+}
 
 //  avoscloud sdk
 let kMVBAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"

@@ -14,7 +14,6 @@ class MVBPasswordManageDataSource: NSObject {
     lazy var passwordDataList: NSMutableArray = NSMutableArray()                //  存储密码信息列表的缓存数组
     var expandingIndexPath: NSIndexPath?                                        //  展开的cell的IndexPath
     var expandedIndexPath: NSIndexPath?                                         //  被展开（扩展区域）的indexPath
-    weak var tableViewCellDelegate: SWTableViewCellDelegate?
     
     deinit {
         print("\(self.dynamicType) deinit")

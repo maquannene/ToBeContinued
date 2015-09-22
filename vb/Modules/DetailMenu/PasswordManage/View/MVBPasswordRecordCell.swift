@@ -9,7 +9,9 @@
 class MVBPasswordRecordCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-    lazy var line: CALayer = CALayer()
+    @IBOutlet weak var titleImageView: UIImageView!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var lineLeftGap: NSLayoutConstraint!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -21,13 +23,10 @@ class MVBPasswordRecordCell: SWTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        line.backgroundColor = UIColor.grayColor().CGColor
-        layer.addSublayer(line)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        line.frame = CGRect(x: 0, y: self.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
     }
     
     deinit {
@@ -40,7 +39,7 @@ extension MVBPasswordRecordCell {
     func configureWithRecord(record: MVBPasswordRecordModel) -> Void {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
-        self.textLabel!.text = "title: \(record.title)"
+        self.contentLabel!.text = record.title
         self.rightUtilityButtons = rightButtons() as [AnyObject]
         self.setRightUtilityButtons(self.rightUtilityButtons, withButtonWidth: 70)
     }
@@ -55,3 +54,5 @@ extension MVBPasswordRecordCell {
         return rightButtons
     }
 }
+
+

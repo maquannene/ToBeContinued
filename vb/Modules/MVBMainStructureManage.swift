@@ -25,7 +25,7 @@ class MVBMainStructureManage: NSObject {
         super.init()
         //  左侧
         mainMenuViewController.delegate = self
-        
+    
         //  抽屉控制器
         drawerController = MMDrawerController(centerViewController: mainViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
         drawerController!.maximumLeftDrawerWidth = 260

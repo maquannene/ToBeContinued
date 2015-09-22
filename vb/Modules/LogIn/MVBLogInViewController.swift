@@ -71,7 +71,7 @@ class MVBLogInViewController: UIViewController {
             return
         }
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
-        request.redirectURI = kMVBSinaSDKRedirectURL
+        request.redirectURI = MVBWeiboSDK.RedirectURL
         request.scope = "all"
         WeiboSDK.sendRequest(request)
     }
@@ -98,21 +98,14 @@ extension MVBLogInViewController: WeiboSDKDelegate {
     
     //   收到一个来自微博客户端程序的响应。设置userInfo和
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
-        if let _response = response as? WBAuthorizeResponse {
-            if let accessToken = _response.accessToken {
-                MVBAppDelegate.MVBApp().accessToken = accessToken
-            }
-            else {
-                return
-            }
-            
-            if let userID = _response.userID {
-                MVBAppDelegate.MVBApp().userID = userID
-            }
-            else {
-                return
-            }
-        }
+        guard
+            let _response = response as? WBAuthorizeResponse,
+            let accessToken = _response.accessToken,
+            let userID = _response.userID else { return }
+        
+        MVBAppDelegate.MVBApp().accessToken = accessToken
+        MVBAppDelegate.MVBApp().userID = userID
+        
         self.model = MVBLogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)

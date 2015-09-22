@@ -15,21 +15,21 @@ class MVBAppDelegate: UIResponder {
     
     var thirdLogInIdentifier: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                return authorizeInfo[kMVBLogInWeibo]
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                return authorizeInfo[MVBWeiboSDK.LogFromWeibo]
             }
             return nil
         }
         set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                authorizeInfo[kMVBLogInWeibo] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                authorizeInfo[MVBWeiboSDK.LogFromWeibo] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
             else {
                 var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[kMVBLogInWeibo] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+                authorizeInfo[MVBWeiboSDK.LogFromWeibo] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
@@ -37,21 +37,21 @@ class MVBAppDelegate: UIResponder {
     
     var userID: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                return authorizeInfo[kMVBSinaSDKUserID]
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                return authorizeInfo[MVBWeiboSDK.UserIDKey]
             }
             return nil
         }
         set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                authorizeInfo[kMVBSinaSDKUserID] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                authorizeInfo[MVBWeiboSDK.UserIDKey] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
             else {
                 var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[kMVBSinaSDKUserID] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+                authorizeInfo[MVBWeiboSDK.UserIDKey] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
@@ -59,21 +59,21 @@ class MVBAppDelegate: UIResponder {
     
     var accessToken: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                return authorizeInfo[kMVBSinaSDKAccessToken]
+            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                return authorizeInfo[MVBWeiboSDK.AccessTokenKey]
             }
             return nil
         }
         set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(kMVBSinaSDKAutorizeInfo) as? Dictionary {
-                authorizeInfo[kMVBSinaSDKAccessToken] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
+                authorizeInfo[MVBWeiboSDK.AccessTokenKey] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
             else {
                 var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[kMVBSinaSDKAccessToken] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: kMVBSinaSDKAutorizeInfo)
+                authorizeInfo[MVBWeiboSDK.AccessTokenKey] = newValue
+                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }
         }
@@ -82,7 +82,7 @@ class MVBAppDelegate: UIResponder {
     //  第三方平台标示 + userID = 存储到云上的唯一标示
     var uniqueCloudKey: String? {
         guard let userID = self.userID else { return nil }
-        return thirdLogInIdentifier! + userID
+        return thirdLogInIdentifier! + "." + userID + "."
     }
     
     class func MVBApp() -> MVBAppDelegate! {
@@ -95,7 +95,7 @@ extension MVBAppDelegate {
     private func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(false)
-        WeiboSDK.registerApp(kMVBSinaSDKAppKey)
+        WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
         //  AVOSCloud sdk
         MVBPasswordIdListModel.registerSubclass()
         MVBPasswordRecordModel.registerSubclass()
@@ -105,6 +105,10 @@ extension MVBAppDelegate {
 
 extension MVBAppDelegate: UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        /**/
+        test()
+        /**/
         
         let key = String(kCFBundleVersionKey)
         //先去沙盒中取出上次使用的版本号
@@ -128,7 +132,7 @@ extension MVBAppDelegate: UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        thirdLogInIdentifier = kMVBLogInWeibo
+        thirdLogInIdentifier = MVBWeiboSDK.LogFromWeibo
         return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
     }
     
@@ -169,7 +173,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
         MVBAppDelegate.MVBApp().userID = nil
         MVBAppDelegate.MVBApp().thirdLogInIdentifier = nil
         //  移除存储三个唯一值信息的字典
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBSinaSDKAutorizeInfo)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(MVBWeiboSDK.AutorizeInfo)
         //  移除个人信息的字典
         NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBUserInfoKey)
         NSUserDefaults.standardUserDefaults().synchronize()
@@ -212,4 +216,18 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
 //    }
 //}
 
+extension MVBAppDelegate {
+    func test() {
+        let x = MVBPasswordRecordCell.self
+        let classString = NSStringFromClass(MVBPasswordRecordCell)
+        let anyobjectype : AnyObject.Type = NSClassFromString(classString)!
+        let nsobjectype : NSObject.Type = anyobjectype as! NSObject.Type
+        let rec: AnyObject = nsobjectype.init()
+        print(rec)
+        
+        let y = self.ClassName
+        let z = MVBPasswordRecordCell.ClassName
+        
+    }
+}
 
