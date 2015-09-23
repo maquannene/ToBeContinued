@@ -8,7 +8,7 @@
 
 class MVBPasswordRecordDetailCell: UITableViewCell {
 
-    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+//    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!

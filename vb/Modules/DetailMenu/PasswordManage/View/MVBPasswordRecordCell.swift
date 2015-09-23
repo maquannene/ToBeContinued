@@ -28,7 +28,7 @@ class MVBPasswordRecordCell: SWTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-    
+
     deinit {
         print("\(self.dynamicType) deinit")
     }

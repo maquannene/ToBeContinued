@@ -216,6 +216,9 @@ extension MVBPasswordManageViewController {
         }
     }
     
+    /**
+    显示详细密码页面
+    */
     func showDetailPasswordAction(sender: AnyObject!) {
         let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(dataSource!.expandingIndexPath!.row)
         let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[1] as! MVBPasswordDetailView
@@ -349,14 +352,12 @@ extension MVBPasswordManageViewController: UITableViewDataSource {
         if (dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: MVBPasswordRecordDetailCell = tableView.dequeueReusableCellWithIdentifier(MVBPasswordManageViewController.Static.pwRecordDetailCellId) as! MVBPasswordRecordDetailCell
             detailCell.configureWithRecord(record)
-            detailCell.indexPath = actualIndexPath
             detailCell.detailButton.addTarget(self, action: "showDetailPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)
             return detailCell
         }
         else {
             let titleCell: MVBPasswordRecordCell = tableView.dequeueReusableCellWithIdentifier(MVBPasswordManageViewController.Static.pwRecordCellId) as! MVBPasswordRecordCell
             titleCell.configureWithRecord(record)
-            titleCell.indexPath = actualIndexPath
             titleCell.delegate = self
             return titleCell
         }
@@ -366,15 +367,14 @@ extension MVBPasswordManageViewController: UITableViewDataSource {
 //  MARK: SWTableViewCellDelegate
 extension MVBPasswordManageViewController: SWTableViewCellDelegate {
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        if let recordCell = cell as? MVBPasswordRecordCell {
-            //  点击编辑按键
-            if index == 0 {
-                editPasswordAction(recordCell.indexPath)
-            }
-            //  点击删除按键
-            if index == 1 {
-                deletePasswordAction(recordCell.indexPath)
-            }
+        let indexPath = self.passwordListTableView.indexPathForCell(cell)
+        //  点击编辑按键
+        if index == 0 {
+            editPasswordAction(indexPath!)
+        }
+        //  点击删除按键
+        if index == 1 {
+            deletePasswordAction(indexPath!)
         }
     }
     

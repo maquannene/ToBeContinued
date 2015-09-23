@@ -18,7 +18,7 @@ class MVBPasswordDetailView: UIView {
                 attributes: [NSFontAttributeName: contentLabel.font],
                 context: nil).size
             contentLabel.text = newValue
-            self.h = size.height + 40
+            self.h = size.height + 40 + 1
         }
         
         get {
