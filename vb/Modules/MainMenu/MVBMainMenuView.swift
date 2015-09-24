@@ -9,11 +9,18 @@
 class MVBMainMenuView: UIView {
     
     @IBOutlet var headBackgroundImageView: UIImageView!
+    
     @IBOutlet var headImageView: UIImageView!
+    
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var detailScrollView: UIScrollView!
+    
     @IBOutlet weak var beyondViewRightGap: NSLayoutConstraint!
+    
     @IBOutlet weak var headBgRightGap: NSLayoutConstraint!
+    
+//    @IBOutlet var descriptionLabel: UILabel!
     override func awakeFromNib() {
         self.baseConfigure()
     }

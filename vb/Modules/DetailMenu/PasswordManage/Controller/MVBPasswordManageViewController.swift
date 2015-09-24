@@ -222,7 +222,7 @@ extension MVBPasswordManageViewController {
     func showDetailPasswordAction(sender: AnyObject!) {
         let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(dataSource!.expandingIndexPath!.row)
         let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[1] as! MVBPasswordDetailView
-        newPasswordView.frame = CGRectMake(0, self.view.h, self.view.frame.width, 0)
+        newPasswordView.frame = CGRectMake(10, self.view.h, self.view.frame.width - 20, 0)
         newPasswordView.contentText = recordModel.detailContent
         newPasswordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newPasswordView, contentCenter: false, delayTime: 0)
         //  设置初始状态
@@ -230,13 +230,13 @@ extension MVBPasswordManageViewController {
         newPasswordVc!.delegate = self
         //  设置显示动画
         newPasswordVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
-            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, -self.newPasswordVc!.contentView.h)
+            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, -(self.newPasswordVc!.contentView.h + 10))
             self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
         }
         //  显示关闭动画
         newPasswordVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
-            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, self.newPasswordVc!.contentView.h)
-            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+            self.newPasswordVc!.contentView.frame = CGRectOffset(newPasswordView.frame, 0, self.newPasswordVc!.contentView.h + 10)
+//            self.newPasswordVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
         }
         newPasswordVc!.showWithAnimated(true, completion: nil)
     }

@@ -43,7 +43,7 @@ class MVBLogInViewController: UIViewController {
         self.view.backgroundColor = UIColor.brownColor()
         self.backgroundImageView!.image = UIImage(named: "LogInImage")
         self.userImageView.clipsToBounds = true
-        self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
+//        self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -29,8 +29,8 @@ class MVBPasswordDetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 10
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.lightGrayColor().CGColor
+//        layer.borderWidth = 1
+//        layer.borderColor = UIColor.lightGrayColor().CGColor
     }
     
     deinit {
