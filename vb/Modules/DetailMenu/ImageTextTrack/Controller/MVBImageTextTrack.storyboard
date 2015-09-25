@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Jrq-Ir-Fhw">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Image Text Track View Controller-->
+        <scene sceneID="3Lw-yo-vqa">
+            <objects>
+                <viewController storyboardIdentifier="MVBPasswordManageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jrq-Ir-Fhw" customClass="MVBImageTextTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PjH-lN-nzl"/>
+                        <viewControllerLayoutGuide type="bottom" id="TUK-7G-Bck"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YAD-ex-rNh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-Pc-CdB">
+                                <rect key="frame" x="20" y="40" width="560" height="540"/>
+                                <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="MVBImageTextTrackLayout" customModule="vb" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MVBImageTextTrackCell" id="gb2-oz-fO8" customClass="MVBImageTextTrackCell" customModule="vb" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts4-Sw-fpI">
+                                                    <rect key="frame" x="0.0" y="218.5" width="214" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-cS-MZj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" id="Bg6-Tw-ht7"/>
+                                            <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" id="MdT-gu-xRK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ts4-Sw-fpI" secondAttribute="trailing" id="PaI-Mp-1ih"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ts4-Sw-fpI" secondAttribute="bottom" id="cOc-iZ-2xI"/>
+                                            <constraint firstItem="Ts4-Sw-fpI" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="mGj-v3-E1Q"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" id="wYb-mI-hcE"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="xNn-rT-lT6"/>
+                                        </constraints>
+                                        <size key="customSize" width="214" height="239"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="tDQ-cS-MZj" id="sGc-Ma-9fX"/>
+                                            <outlet property="textLabel" destination="Ts4-Sw-fpI" id="AyM-DD-yd5"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Jrq-Ir-Fhw" id="wJY-X7-nBV"/>
+                                    <outlet property="delegate" destination="Jrq-Ir-Fhw" id="1pa-2u-RBb"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="PtS-Pc-CdB" firstAttribute="leading" secondItem="YAD-ex-rNh" secondAttribute="leading" constant="20" id="MqW-sG-UZZ"/>
+                            <constraint firstAttribute="trailing" secondItem="PtS-Pc-CdB" secondAttribute="trailing" constant="20" id="P8C-Rd-Zh9"/>
+                            <constraint firstItem="PtS-Pc-CdB" firstAttribute="top" secondItem="PjH-lN-nzl" secondAttribute="bottom" constant="20" id="R75-FV-zQM"/>
+                            <constraint firstItem="TUK-7G-Bck" firstAttribute="top" secondItem="PtS-Pc-CdB" secondAttribute="bottom" constant="20" id="doA-j5-OqC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="PtS-Pc-CdB" id="pOu-vg-jdo"/>
+                        <outlet property="layout" destination="vgQ-X3-bCS" id="nn7-Gx-Vpa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="490" y="-135"/>
+        </scene>
+    </scenes>
+</document>

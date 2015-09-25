@@ -9,6 +9,7 @@
 enum MVBMainMenuViewControllerOperate: Int {
     case Main
     case PasswordManage
+    case ImageTextTrack
     case HeroesManage
     case AccountManage
     case LogOut
@@ -75,6 +76,10 @@ extension MVBMainMenuViewController {
     @IBAction func passwordManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.PasswordManage)
     }
+
+    @IBAction func imageTextTrackAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.ImageTextTrack)
+    }
     
     @IBAction func heroesManageAction(sender: AnyObject) {
         delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
@@ -109,10 +114,8 @@ extension MVBMainMenuViewController: UIScrollViewDelegate {
             if scrollView.contentOffset.y < -80 {
                 scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: -80)
             }
-            
             mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, -scrollView.contentOffset.y / 2)
         }
-            
         else {
             mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
         }

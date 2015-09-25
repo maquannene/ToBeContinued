@@ -14,10 +14,15 @@ class MVBMainStructureManage: NSObject {
     lazy var mainMenuViewController: MVBMainMenuViewController = MVBMainMenuViewController()
     //  中间主菜单页面
     lazy var mainViewController: MVBMainViewController = MVBMainViewController.initWithNavi()
+    
+    //  第一部分
+    var passwordManageVc: MVBPasswordManageViewController?
+    
+    //  第二部分： 图文迹
+    var imageTextTrackVc: MVBImageTextTrackViewController?
+    
     //
     var heroesManageVc: MVBHeroesViewController?
-    //
-    var passwordManageVc: MVBPasswordManageViewController?
     //  
     var accountManangeVc: MVBAccountManageViewController?
     
@@ -60,7 +65,7 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             centerViewController = mainViewController.mainNavi!
         case MVBMainMenuViewControllerOperate.PasswordManage:
             if passwordManageVc == nil {
-                passwordManageVc = UIStoryboard(name: "MVBPasswordManange", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBPasswordManageViewController!
+                passwordManageVc = UIStoryboard(name: "MVBPasswordManage", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBPasswordManageViewController!
             }
             if let navi = passwordManageVc!.navigationController as UINavigationController? {
                 centerViewController = navi
@@ -68,6 +73,12 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             else {
                 centerViewController = UINavigationController(rootViewController: passwordManageVc!)
             }
+            
+        case MVBMainMenuViewControllerOperate.ImageTextTrack:
+            if imageTextTrackVc == nil {
+                imageTextTrackVc = UIStoryboard(name: "MVBImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBImageTextTrackViewController!
+            }
+            centerViewController = imageTextTrackVc!
         case MVBMainMenuViewControllerOperate.HeroesManage:
             if heroesManageVc == nil {
                 heroesManageVc = MVBHeroesViewController()
@@ -79,6 +90,7 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             }
             centerViewController = accountManangeVc!.mainNavi!
         }
+        
         if centerViewController == drawerController!.centerViewController {
             drawerController!.closeDrawerAnimated(true) {
                 (finsih) -> Void in
