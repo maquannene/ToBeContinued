@@ -69,25 +69,5 @@
             </objects>
             <point key="canvasLocation" x="-3482" y="-329"/>
         </scene>
-        <!--新建密码-->
-        <scene sceneID="ITC-dT-56n">
-            <objects>
-                <viewController storyboardIdentifier="MVBNewPasswordConfigViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zai-Mo-qfz" customClass="MVBNewPasswordConfigViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TiQ-uf-80K"/>
-                        <viewControllerLayoutGuide type="bottom" id="lvC-sN-lNm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xJn-fa-wHu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="新建密码" id="VYo-Lp-uUW"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hs7-td-888" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2019" y="1144"/>
-        </scene>
     </scenes>
 </document>

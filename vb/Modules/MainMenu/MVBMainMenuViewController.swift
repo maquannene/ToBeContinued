@@ -41,7 +41,7 @@ class MVBMainMenuViewController: UIViewController {
             mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: SDWebImageOptions(rawValue: ~SDWebImageOptions.CacheMemoryOnly.rawValue))
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
-//            mainMenuView!.descriptionLabel.text = userModel._description as? String
+            mainMenuView!.describeLbel.text = userModel._description as? String
         }
         else {
             let delegate = MVBAppDelegate.MVBApp()
@@ -106,12 +106,15 @@ extension MVBMainMenuViewController {
 extension MVBMainMenuViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
-            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeScale(
-                -scrollView.contentOffset.y / mainMenuView!.headBackgroundImageView.h * 2 + 1,
-                -scrollView.contentOffset.y / mainMenuView!.headBackgroundImageView.h * 2 + 1)
+            if scrollView.contentOffset.y < -80 {
+                scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: -80)
+            }
+            
+            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, -scrollView.contentOffset.y / 2)
         }
+            
         else {
-            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeScale(1, 1)
+            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
         }
     }
 }

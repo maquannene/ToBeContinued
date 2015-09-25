@@ -28,7 +28,7 @@ class MVBMainStructureManage: NSObject {
     
         //  抽屉控制器
         drawerController = MMDrawerController(centerViewController: mainViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
-        drawerController!.maximumLeftDrawerWidth = 260
+        drawerController!.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
         //  注意这里闭包引起的循环引用问题。self 的 drawerController 的一个 closure 持有self 导致循环引用。使用无主引用解决此问题
@@ -62,7 +62,12 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             if passwordManageVc == nil {
                 passwordManageVc = UIStoryboard(name: "MVBPasswordManange", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBPasswordManageViewController!
             }
-            centerViewController = UINavigationController(rootViewController: passwordManageVc!)
+            if let navi = passwordManageVc!.navigationController as UINavigationController? {
+                centerViewController = navi
+            }
+            else {
+                centerViewController = UINavigationController(rootViewController: passwordManageVc!)
+            }
         case MVBMainMenuViewControllerOperate.HeroesManage:
             if heroesManageVc == nil {
                 heroesManageVc = MVBHeroesViewController()

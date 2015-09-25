@@ -9,18 +9,14 @@
 class MVBMainMenuView: UIView {
     
     @IBOutlet var headBackgroundImageView: UIImageView!
-    
     @IBOutlet var headImageView: UIImageView!
-    
     @IBOutlet var nameLabel: UILabel!
-    
+    @IBOutlet var describeLbel: UILabel!
     @IBOutlet weak var detailScrollView: UIScrollView!
-    
-    @IBOutlet weak var beyondViewRightGap: NSLayoutConstraint!
-    
-    @IBOutlet weak var headBgRightGap: NSLayoutConstraint!
-    
-//    @IBOutlet var descriptionLabel: UILabel!
+    //  下面这四条约束都是会自动改变的
+    @IBOutlet weak var autoLeftGap: NSLayoutConstraint!     //  这条约束是右侧的标杆。detailScrollView 和 containerView的右侧都和它对齐
+    @IBOutlet weak var centerX: NSLayoutConstraint!
+
     override func awakeFromNib() {
         self.baseConfigure()
     }
@@ -32,8 +28,8 @@ class MVBMainMenuView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        headBgRightGap.constant = -(getScreenSize().width - self.frame.width)
-        beyondViewRightGap.constant = -(getScreenSize().width - self.frame.width)
+        autoLeftGap.constant = -(UIWindow.windowSize().width - self.frame.width)
+        centerX.constant = (UIWindow.windowSize().width - w) / 2 - 30
     }
     
     deinit {
