@@ -85,8 +85,6 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
                     min($0, $1)
                 }
                 column = yOffsets.indexOf(x)!
-                print(column)
-
             }
         }
     }
@@ -100,7 +98,6 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         }
         return layoutAttributes
     }
-    
     
 }
 

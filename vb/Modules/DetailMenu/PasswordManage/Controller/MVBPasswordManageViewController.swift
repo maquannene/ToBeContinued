@@ -15,7 +15,7 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
     }
 
     @IBOutlet weak var passwordListTableView: UITableView!
-    var dataSource: MVBPasswordManageDataSource?
+    var dataSource: MVBPasswordManageDataSource!
 
     var newPasswordVc: MQMaskController?
     var operateCellIndex: Int = -1
@@ -86,13 +86,13 @@ extension MVBPasswordManageViewController {
         
         SVProgressHUD.showWithStatus("加载列表")
         //  先获取id列表
-        dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
+        dataSource.queryPasswordIdList { [unowned self] (succeed) -> Void in
             //  成功后继续请求每个id对应的具体data
             if succeed == true {
                 self.dataSource?.queryPasswordDataList { [unowned self] (succeed) -> Void in
                     SVProgressHUD.dismiss()
                     if succeed == true {
-                        self.passwordListTableView!.reloadData()
+                        self.passwordListTableView.reloadData()
                     }
                     else {
                         SVProgressHUD.showErrorWithStatus("加载失败")
@@ -101,7 +101,7 @@ extension MVBPasswordManageViewController {
             }
             //  失败有两种可能：没网；新的用户，并没有id列表
             else {
-                self.dataSource!.queryCreatePasswordIdList { (succeed) -> Void in
+                self.dataSource.queryCreatePasswordIdList { (succeed) -> Void in
                     SVProgressHUD.dismiss()
                     if succeed == true {
                         
@@ -115,23 +115,21 @@ extension MVBPasswordManageViewController {
     }
     
     func configurePullToRefresh() {
-        passwordListTableView!.header = MJRefreshNormalHeader() {
-            //  先获取id列表
-            self.dataSource!.queryPasswordIdList { [unowned self] (succeed) -> Void in
-                //  成功后继续请求每个id对应的具体data
-                if succeed == true {
-                    self.dataSource?.queryPasswordDataList { [unowned self] (succeed) -> Void in
-                        if succeed == true {
-                            self.passwordListTableView!.reloadData()
-                        }
-                        self.passwordListTableView!.header.endRefreshing()
+        passwordListTableView.header = MJRefreshNormalHeader() {            
+            //  如果获取失败，就创建新的
+            self.dataSource.queryPasswordIdList { [unowned self] succeed in
+                guard succeed == true else {
+                    self.dataSource.queryCreatePasswordIdList { [unowned self] succeed in
+                        self.passwordListTableView.header.endRefreshing()
                     }
+                    return
                 }
-                    //  失败有两种可能：没网；新的用户，并没有id列表
-                else {
-                    self.dataSource!.queryCreatePasswordIdList { [unowned self] (succeed) -> Void in
-                        self.passwordListTableView!.header.endRefreshing()
-                    }
+                
+                //  获取成功，就逐条请求存储的password存在缓存中
+                self.dataSource.queryPasswordDataList { [unowned self] succeed in
+                    guard succeed == true else { self.passwordListTableView.header.endRefreshing(); return }
+                    self.passwordListTableView.reloadData()
+                    self.passwordListTableView.header.endRefreshing()
                 }
             }
         }
@@ -171,11 +169,11 @@ extension MVBPasswordManageViewController {
     编辑密码条目
     */
     func editPasswordAction(indexPath: NSIndexPath) {
-        if passwordListTableView!.editing == false {
-            passwordListTableView!.deselectRowAtIndexPath(indexPath, animated: true)
+        if passwordListTableView.editing == false {
+            passwordListTableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         operateCellIndex = indexPath.row //  记录操作的哪个cell
-        let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(operateCellIndex)
+        let recordModel: MVBPasswordRecordModel = dataSource.fetchPasswordRecord(operateCellIndex)
         let detailPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[0] as! MVBNewPasswordView
         detailPasswordView.configureData(recordModel.title, detailContent: recordModel.detailContent)
         detailPasswordView.frame = CGRectMake(0, -260, self.view.frame.width, 260)
@@ -204,15 +202,15 @@ extension MVBPasswordManageViewController {
     删除密码条目
     */
     func deletePasswordAction(indexPath: NSIndexPath) {
-        dataSource!.queryDeletePasswordRecord(indexPath.row) { [unowned self] (succeed) -> Void in
-            self.passwordListTableView!.beginUpdates()
-            self.passwordListTableView!.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-            if self.dataSource!.expandedIndexPath != nil {
-                self.passwordListTableView!.deleteRowsAtIndexPaths([self.dataSource!.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
+        dataSource.queryDeletePasswordRecord(indexPath.row) { [unowned self] (succeed) -> Void in
+            self.passwordListTableView.beginUpdates()
+            self.passwordListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            if self.dataSource.expandedIndexPath != nil {
+                self.passwordListTableView.deleteRowsAtIndexPaths([self.dataSource.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
             }
-            self.dataSource!.expandedIndexPath = nil
-            self.dataSource!.expandingIndexPath = nil
-            self.passwordListTableView!.endUpdates()
+            self.dataSource.expandedIndexPath = nil
+            self.dataSource.expandingIndexPath = nil
+            self.passwordListTableView.endUpdates()
         }
     }
     
@@ -220,7 +218,7 @@ extension MVBPasswordManageViewController {
     显示详细密码页面
     */
     func showDetailPasswordAction(sender: AnyObject!) {
-        let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(dataSource!.expandingIndexPath!.row)
+        let recordModel: MVBPasswordRecordModel = dataSource.fetchPasswordRecord(dataSource.expandingIndexPath!.row)
         let newPasswordView = NSBundle.mainBundle().loadNibNamed("MVBNewPasswordView", owner: nil, options: nil)[1] as! MVBPasswordDetailView
         newPasswordView.frame = CGRectMake(10, self.view.h, self.view.frame.width - 20, 0)
         newPasswordView.contentText = recordModel.detailContent
@@ -246,10 +244,10 @@ extension MVBPasswordManageViewController {
     */
     func confirmCreateNewPasswordAction(sender: AnyObject!) {
         let contentView = newPasswordVc!.contentView as! MVBNewPasswordView
-        dataSource!.queryAddPasswordRecord(MVBPasswordRecordModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
-            self.dataSource!.expandingIndexPath = nil
-            self.dataSource!.expandedIndexPath = nil
-            self.passwordListTableView!.reloadData()
+        dataSource.queryAddPasswordRecord(MVBPasswordRecordModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
+            self.dataSource.expandingIndexPath = nil
+            self.dataSource.expandedIndexPath = nil
+            self.passwordListTableView.reloadData()
             self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
             })
         })
@@ -260,12 +258,12 @@ extension MVBPasswordManageViewController {
     */
     func confirmUpdataPasswordAction(sender: AnyObject!) {
         let contentView = newPasswordVc!.contentView as! MVBNewPasswordView
-        let recordModel: MVBPasswordRecordModel = dataSource!.fetchPasswordRecord(operateCellIndex)
+        let recordModel: MVBPasswordRecordModel = dataSource.fetchPasswordRecord(operateCellIndex)
         recordModel.update(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
-        dataSource!.queryUpdatePasswordRecord(recordModel) { [unowned self] (succeed) -> Void in
-            self.dataSource!.expandingIndexPath = nil
-            self.dataSource!.expandedIndexPath = nil
-            self.passwordListTableView!.reloadData()
+        dataSource.queryUpdatePasswordRecord(recordModel) { [unowned self] (succeed) -> Void in
+            self.dataSource.expandingIndexPath = nil
+            self.dataSource.expandedIndexPath = nil
+            self.passwordListTableView.reloadData()
             self.newPasswordVc!.dismissWithAnimated(true, completion: nil)
         }
     }
@@ -280,7 +278,7 @@ extension MVBPasswordManageViewController {
 extension MVBPasswordManageViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         //  如果是站看的详细cell
-        if (dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
+        if (dataSource.expandedIndexPath != nil && dataSource.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             return 60
         }
         return 60
@@ -306,30 +304,30 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
         }
         
         //  最后响应点击展开
-        let actualIndexPath = dataSource!.convertToActualIndexPath(indexPath)
-        let theExpandedIndexPath: NSIndexPath? = dataSource!.expandedIndexPath
+        let actualIndexPath = dataSource.convertToActualIndexPath(indexPath)
+        let theExpandedIndexPath: NSIndexPath? = dataSource.expandedIndexPath
         
-        if dataSource!.expandingIndexPath != nil && actualIndexPath.compare(dataSource!.expandingIndexPath!) == NSComparisonResult.OrderedSame {
-            dataSource!.expandingIndexPath = nil
-            dataSource!.expandedIndexPath = nil
+        if dataSource.expandingIndexPath != nil && actualIndexPath.compare(dataSource.expandingIndexPath!) == NSComparisonResult.OrderedSame {
+            dataSource.expandingIndexPath = nil
+            dataSource.expandedIndexPath = nil
         }
         else {
-            dataSource!.expandingIndexPath = actualIndexPath
-            dataSource!.expandedIndexPath = NSIndexPath(forRow: dataSource!.expandingIndexPath!.row + 1, inSection: dataSource!.expandingIndexPath!.section)
+            dataSource.expandingIndexPath = actualIndexPath
+            dataSource.expandedIndexPath = NSIndexPath(forRow: dataSource.expandingIndexPath!.row + 1, inSection: dataSource.expandingIndexPath!.section)
         }
         
         tableView.beginUpdates()
         if theExpandedIndexPath != nil {
             tableView.deleteRowsAtIndexPaths([theExpandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
         }
-        if dataSource!.expandedIndexPath != nil {
-            tableView.insertRowsAtIndexPaths([dataSource!.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
+        if dataSource.expandedIndexPath != nil {
+            tableView.insertRowsAtIndexPaths([dataSource.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
         }
         tableView.endUpdates()
         
         //  如果点击的是最下面的，就滚到最下面。
-        if dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.row == dataSource!.passwordDataList.count {
-            tableView.scrollToRowAtIndexPath(dataSource!.expandedIndexPath!, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        if dataSource.expandedIndexPath != nil && dataSource.expandedIndexPath!.row == dataSource.passwordDataList.count {
+            tableView.scrollToRowAtIndexPath(dataSource.expandedIndexPath!, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
     }
 }
@@ -337,19 +335,19 @@ extension MVBPasswordManageViewController: UITableViewDelegate {
 // MARK: UITableViewDataSource
 extension MVBPasswordManageViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataSource!.expandedIndexPath != nil {
-            return dataSource!.passwordDataList.count + 1
+        if dataSource.expandedIndexPath != nil {
+            return dataSource.passwordDataList.count + 1
         }
         else {
-            return dataSource!.passwordDataList.count
+            return dataSource.passwordDataList.count
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let actualIndexPath = dataSource!.convertToActualIndexPath(indexPath)
-        let record: MVBPasswordRecordModel = dataSource!.passwordDataList[actualIndexPath.row] as! MVBPasswordRecordModel
+        let actualIndexPath = dataSource.convertToActualIndexPath(indexPath)
+        let record: MVBPasswordRecordModel = dataSource.passwordDataList[actualIndexPath.row] as! MVBPasswordRecordModel
         //  如果是展开的detailCell
-        if (dataSource!.expandedIndexPath != nil && dataSource!.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
+        if (dataSource.expandedIndexPath != nil && dataSource.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: MVBPasswordRecordDetailCell = tableView.dequeueReusableCellWithIdentifier(MVBPasswordManageViewController.Static.pwRecordDetailCellId) as! MVBPasswordRecordDetailCell
             detailCell.configureWithRecord(record)
             detailCell.detailButton.addTarget(self, action: "showDetailPasswordAction:", forControlEvents: UIControlEvents.TouchUpInside)

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
   
-typealias MVBPasswordDataOparateCompleteClosure = (succeed: Bool!) -> Void
+typealias MVBQureyDataCompleteClosure = (succeed: Bool!) -> Void
   
 class MVBPasswordManageDataSource: NSObject {
     
@@ -20,53 +20,48 @@ class MVBPasswordManageDataSource: NSObject {
     }
 }
 
-// MARK: Public
+//  MARK: Public
 extension MVBPasswordManageDataSource {
     /**
     请求获取包含每个密码对象objectId的列表（先找到列表，再fetch）
     
     - parameter complete: 完成回调
     */
-    func queryPasswordIdList(complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryPasswordIdList(complete: MVBQureyDataCompleteClosure?) {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBPasswordIdListModel.self)
-        let query: AVQuery = AVQuery(className: "MVBPasswordIdListModel")
+        let query: AVQuery = AVQuery(className: MVBPasswordIdListModel.ClassName)
         //  根据identifier 识别符查询list
-        query.whereKey("identifier", equalTo: identifier)
+        query.whereKey(kIdentifier, equalTo: identifier)
         query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
-            if error != nil {
-                complete?(succeed: false)
-            }
-            else {
-                if (objects != nil && objects.count > 0) {
-                    if let objc = objects[0] as? MVBPasswordIdListModel {
-                        //  取passwordIdList
-                        self.passwordIdList = MVBPasswordIdListModel(withoutDataWithObjectId: objc.objectId)
-                        self.passwordIdList!.fetchInBackgroundWithBlock { (object, error) -> Void in
-                            if error != nil {
-                                complete?(succeed: false)
-                            }
-                            else {
-                                complete?(succeed: true)
-                            }
-                        }
-                    }
-                    else {
-                        complete?(succeed: false)
-                    }
-                }
-                else {
-                    complete?(succeed: false)
-                }
-            }
+            
+            guard error == nil else { complete?(succeed: false); return }
+            
+            guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
+            
+            guard let objc = objects[0] as? MVBPasswordIdListModel else { complete?(succeed: false); return }
+            
+            self.passwordIdList = objc
+            
+            complete?(succeed: true)
+            
+////                        self.passwordIdList = MVBPasswordIdListModel(withoutDataWithObjectId: objc.objectId)
+////                        self.passwordIdList!.fetchInBackgroundWithBlock { (object, error) -> Void in
+////                            if error != nil {
+////                                complete?(succeed: false)
+////                            }
+////                            else {
+////                                complete?(succeed: true)
+////                            }
+////                        }
         }
     }
     
     /**
-    第一次使用 请求创建密码列类对象的id列表
+    第一次使用 请求创建密码列表对象的id列表
     
     - parameter complete: 完成回调
     */
-    func queryCreatePasswordIdList(complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryCreatePasswordIdList(complete: MVBQureyDataCompleteClosure?) {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBPasswordIdListModel.self)
         self.passwordIdList = MVBPasswordIdListModel(identifier: identifier)
         self.passwordIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
@@ -79,7 +74,7 @@ extension MVBPasswordManageDataSource {
     
     - parameter complete: 完成回调
     */
-    func queryPasswordDataList(complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryPasswordDataList(complete: MVBQureyDataCompleteClosure?) {
         let fetchGroup: dispatch_group_t = dispatch_group_create()
         let newPasswordDataList = NSMutableArray()
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
@@ -114,7 +109,7 @@ extension MVBPasswordManageDataSource {
     - parameter recrod:   密码项的类对象
     - parameter complete: 完成回调
     */
-    func queryAddPasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryAddPasswordRecord(record: MVBPasswordRecordModel, complete: MVBQureyDataCompleteClosure?) {
         //  将新的密码记录写入AVOSCloud
         record.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed.boolValue == false { complete?(succeed: false); return }
@@ -134,7 +129,7 @@ extension MVBPasswordManageDataSource {
     - parameter index:    要删除的index
     - parameter complete: 删除完成回调
     */
-    func queryDeletePasswordRecord(index: Int!, complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryDeletePasswordRecord(index: Int!, complete: MVBQureyDataCompleteClosure?) {
         let record: MVBPasswordRecordModel! = fetchPasswordRecord(index)
         record.deleteInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed.boolValue == false { complete?(succeed: false); return }
@@ -154,7 +149,7 @@ extension MVBPasswordManageDataSource {
     - parameter record:   需要更新的密码对象
     - parameter complete: 完成回调
     */
-    func queryUpdatePasswordRecord(record: MVBPasswordRecordModel, complete: MVBPasswordDataOparateCompleteClosure?) {
+    func queryUpdatePasswordRecord(record: MVBPasswordRecordModel, complete: MVBQureyDataCompleteClosure?) {
         record.saveInBackgroundWithBlock { (succeed: Bool, error: NSError!) -> Void in
             (complete?(succeed: succeed))!
         }

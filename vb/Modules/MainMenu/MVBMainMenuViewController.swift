@@ -59,14 +59,14 @@ class MVBMainMenuViewController: UIViewController {
 extension MVBMainMenuViewController {
     
     @IBAction func logOutAction(sender: AnyObject) {
-        UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
-            if index == 1 {
+//        UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
+//            if index == 1 {
                 let appDelegate = MVBAppDelegate.MVBApp()
                 WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: "logOut")
                 SVProgressHUD.showWithStatus("正在退出...")
                 SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-            }
-        }
+//            }
+//        }
     }
     
     @IBAction func backMainAction(sender: AnyObject) {
@@ -135,7 +135,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             SVProgressHUD.dismiss()
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
-            self.mm_drawerController!.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.mm_drawerController!.dismissViewControllerAnimated(false, completion: { () -> Void in
                 self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
             })
         }

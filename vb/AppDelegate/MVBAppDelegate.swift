@@ -99,6 +99,8 @@ extension MVBAppDelegate {
         //  AVOSCloud sdk
         MVBPasswordIdListModel.registerSubclass()
         MVBPasswordRecordModel.registerSubclass()
+        MVBImageTextTrackIdListModel.registerSubclass()
+        MVBImageTextTrackModel.registerSubclass()
         AVOSCloud.setApplicationId(kMVBAVCloudSDKAppID, clientKey: kMVBAVCloudSDKAppKey)
     }
 }

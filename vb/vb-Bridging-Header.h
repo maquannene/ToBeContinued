@@ -9,7 +9,7 @@
 //#import "JSONModelLib.h"
 //
 ////  WeiboSDK
-#import "WeiboSDK.h"
+#import "WeiboSDK.h"        //  pod 引入的好像不是动态库，虽然有framework
 //
 ////  SDWebImage
 //#import "UIImageView+WebCache.h"

@@ -15,8 +15,8 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     
     var imageTextTrack: MVBImageTextTrackModel? {
         didSet {
-            imageView.image = UIImage(named: "08.jpg")
-            textLabel.text = "hahaha"
+            imageView.image = imageTextTrack!.image
+            textLabel.text = imageTextTrack!.text
         }
     }
     

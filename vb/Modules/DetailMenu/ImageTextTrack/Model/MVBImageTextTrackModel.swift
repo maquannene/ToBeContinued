@@ -11,22 +11,33 @@ let kText = "text"
 
 class MVBImageTextTrackModel: AVObject {
 
-    var image: String!
+    class func allImageTextTrack() -> [MVBImageTextTrackModel] {
+        var imageTextTracks = [MVBImageTextTrackModel]()
+        for index in 1 ... 13 {
+            let imageTextTrack = MVBImageTextTrackModel(image: UIImage(named: "\(index).jpg"), text: "xxxx")
+            imageTextTracks.append(imageTextTrack)
+        }
+        return imageTextTracks
+    }
+    
+    var image: UIImage!
     var text: String!
     
-    convenience init(image: String?, text: String?) {
+    convenience init(image: UIImage?, text: String?) {
         self.init()
-        update(image: image, text: text)
+        self.image = image
+        self.text = text
+//        update(image: image, text: text)
     }
     
-    func update(image image: String?, text: String?) {
-        if image != nil {
-            self.setObject(image, forKey: kImage)
-        }
-        if text != nil {
-            self.setObject(text, forKey: kText)
-        }
-    }
+//    func update(image image: UIImage?, text: String?) {
+//        if image != nil {
+//            self.setObject(image, forKey: kImage)
+//        }
+//        if text != nil {
+//            self.setObject(text, forKey: kText)
+//        }
+//    }
     
 }
 
