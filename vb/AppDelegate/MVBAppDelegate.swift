@@ -220,16 +220,15 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
 
 extension MVBAppDelegate {
     func test() {
-        let x = MVBPasswordRecordCell.self
-        let classString = NSStringFromClass(MVBPasswordRecordCell)
-        let anyobjectype : AnyObject.Type = NSClassFromString(classString)!
-        let nsobjectype : NSObject.Type = anyobjectype as! NSObject.Type
-        let rec: AnyObject = nsobjectype.init()
-        print(rec)
-        
-        let y = self.ClassName
-        let z = MVBPasswordRecordCell.ClassName
-        
+//        let x = MVBPasswordRecordCell.self
+//        let classString = NSStringFromClass(MVBPasswordRecordCell)
+//        let anyobjectype : AnyObject.Type = NSClassFromString(classString)!
+//        let nsobjectype : NSObject.Type = anyobjectype as! NSObject.Type
+//        let rec: AnyObject = nsobjectype.init()
+//        print(rec)
+//        
+//        let y = self.ClassName
+//        let z = MVBPasswordRecordCell.ClassName
     }
 }
 

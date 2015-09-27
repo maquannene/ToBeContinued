@@ -79,45 +79,11 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
 
 //  MARK: Private
 extension MVBPasswordManageViewController {
-    func reloadData() {
-        if (dataSource!.passwordIdList != nil) {
-            return
-        }
-        
-        SVProgressHUD.showWithStatus("加载列表")
-        //  先获取id列表
-        dataSource.queryPasswordIdList { [unowned self] (succeed) -> Void in
-            //  成功后继续请求每个id对应的具体data
-            if succeed == true {
-                self.dataSource?.queryPasswordDataList { [unowned self] (succeed) -> Void in
-                    SVProgressHUD.dismiss()
-                    if succeed == true {
-                        self.passwordListTableView.reloadData()
-                    }
-                    else {
-                        SVProgressHUD.showErrorWithStatus("加载失败")
-                    }
-                }
-            }
-            //  失败有两种可能：没网；新的用户，并没有id列表
-            else {
-                self.dataSource.queryCreatePasswordIdList { (succeed) -> Void in
-                    SVProgressHUD.dismiss()
-                    if succeed == true {
-                        
-                    }
-                    else {
-                        SVProgressHUD.showErrorWithStatus("加载失败")
-                    }
-                }
-            }
-        }
-    }
     
     func configurePullToRefresh() {
         passwordListTableView.header = MJRefreshNormalHeader() {            
             //  如果获取失败，就创建新的
-            self.dataSource.queryPasswordIdList { [unowned self] succeed in
+            self.dataSource.queryFindPasswordIdList { [unowned self] succeed in
                 guard succeed == true else {
                     self.dataSource.queryCreatePasswordIdList { [unowned self] succeed in
                         self.passwordListTableView.header.endRefreshing()

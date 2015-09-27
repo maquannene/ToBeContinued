@@ -53,8 +53,8 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
     }
     
     override func prepareLayout() {
-        if layoutAttributesCache.isEmpty {
-            
+//        if layoutAttributesCache.isEmpty {
+        
             //  每个cell的宽度
             let cellWidth = width / CGFloat(numberOfColumns)
             
@@ -86,7 +86,7 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
                 }
                 column = yOffsets.indexOf(x)!
             }
-        }
+//        }
     }
     
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

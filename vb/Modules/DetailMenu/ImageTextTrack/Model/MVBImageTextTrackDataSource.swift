@@ -27,7 +27,7 @@ extension MVBImageTextTrackDataSource {
     
     - parameter complete: 完成回调
     */
-    func queryImageTextTrackIdList(complete: MVBQureyDataCompleteClosure?) {
+    func queryFindImageTextTrackIdList(complete: MVBQureyDataCompleteClosure?) {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBImageTextTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
@@ -92,6 +92,19 @@ extension MVBImageTextTrackDataSource {
             self.imageTextTrackList = newImageTextTrackList
             complete?(succeed: success)
         })
+    }
+    
+    func queryAddImageTextTrack(track: MVBImageTextTrackModel, complete: MVBQureyDataCompleteClosure?) {
+        track.saveInBackgroundWithBlock { [unowned self] succeed, error in
+            guard succeed.boolValue == true else { complete?(succeed: false); return }
+            //  存储完track后 先将对应的id存入imageTextTrackIdList并且保存
+            self.imageTextTrackIdList!.addObject(track.objectId, forKey: "list")
+            self.imageTextTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
+            self.imageTextTrackIdList!.save()
+            //  再将新建track加入缓存中
+            self.imageTextTrackList.addObject(track)
+            complete?(succeed: succeed)
+        }
     }
     
 }

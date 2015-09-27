@@ -55,6 +55,7 @@ PODS:
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
   - MQMaskController (0.0.1)
+  - NYXImagesKit (2.3)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -77,6 +78,7 @@ DEPENDENCIES:
   - MMDrawerController (~> 0.5.7)
   - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`,
     commit `6b313578e296ac772e9c5dbe18975094ce741360`)
+  - NYXImagesKit
   - SDWebImage (~> 3.6)
   - SVProgressHUD (HEAD)
   - SWTableViewCell (~> 0.3.7)
@@ -115,6 +117,7 @@ SPEC CHECKSUMS:
   MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
+  NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579

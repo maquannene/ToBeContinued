@@ -6,38 +6,30 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-let kImage = "image"
-let kText = "text"
-
 class MVBImageTextTrackModel: AVObject {
-
-    class func allImageTextTrack() -> [MVBImageTextTrackModel] {
-        var imageTextTracks = [MVBImageTextTrackModel]()
-        for index in 1 ... 13 {
-            let imageTextTrack = MVBImageTextTrackModel(image: UIImage(named: "\(index).jpg"), text: "xxxx")
-            imageTextTracks.append(imageTextTrack)
-        }
-        return imageTextTracks
-    }
     
-    var image: UIImage!
-    var text: String!
+    var imageUrl: String!
+//    var imageSize: NSValue!
+    var imageWidht: NSNumber!
+    var imageHeight: NSNumber!
+    var text: String?
     
-    convenience init(image: UIImage?, text: String?) {
+    convenience init(imageUrl: String!, text: String?, imageSize: CGSize!) {
         self.init()
-        self.image = image
-        self.text = text
-//        update(image: image, text: text)
+        update(imageUrl, text: text, imageSize: imageSize)
     }
     
-//    func update(image image: UIImage?, text: String?) {
-//        if image != nil {
-//            self.setObject(image, forKey: kImage)
-//        }
-//        if text != nil {
-//            self.setObject(text, forKey: kText)
-//        }
-//    }
+    func update(imageUrl: String!, text: String?, imageSize: CGSize!) {
+        //  这个AVObject 中的值必须用这个种setObject:forKey的方法，否者没法存储在云上
+        self.setObject(imageUrl, forKey: "imageUrl")
+        if text != nil {
+            self.setObject(text, forKey: "text")
+        }
+//        self.setObject(NSValue(CGSize: imageSize), forKey: "imageSize")
+        self.setObject(imageSize.width, forKey: "imageWidht")
+        self.setObject(imageSize.height, forKey: "imageHeight")
+        print("123")
+    }
     
 }
 

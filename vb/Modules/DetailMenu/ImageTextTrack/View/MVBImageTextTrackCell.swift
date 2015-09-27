@@ -15,7 +15,10 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     
     var imageTextTrack: MVBImageTextTrackModel? {
         didSet {
-            imageView.image = imageTextTrack!.image
+//            imageView.sd_setImageWithURL(NSURL(string: (imageTextTrack?.imageUrl)!))
+            imageView.sd_setImageWithURL(NSURL(string: (imageTextTrack?.imageUrl)!)) { image, error, cacheType, url in
+                print("缓存策略:\(cacheType.rawValue)")
+            }
             textLabel.text = imageTextTrack!.text
         }
     }

@@ -23,11 +23,11 @@ class MVBPasswordManageDataSource: NSObject {
 //  MARK: Public
 extension MVBPasswordManageDataSource {
     /**
-    请求获取包含每个密码对象objectId的列表（先找到列表，再fetch）
+    请求查找包含每个密码对象objectId的列表（先找到列表，再fetch）
     
     - parameter complete: 完成回调
     */
-    func queryPasswordIdList(complete: MVBQureyDataCompleteClosure?) {
+    func queryFindPasswordIdList(complete: MVBQureyDataCompleteClosure?) {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBPasswordIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBPasswordIdListModel.ClassName)
         //  根据identifier 识别符查询list
@@ -112,7 +112,7 @@ extension MVBPasswordManageDataSource {
     func queryAddPasswordRecord(record: MVBPasswordRecordModel, complete: MVBQureyDataCompleteClosure?) {
         //  将新的密码记录写入AVOSCloud
         record.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
-            if succeed.boolValue == false { complete?(succeed: false); return }
+            guard succeed.boolValue == true else { complete?(succeed: false); return }
             //  写完成功后要再将密码记录的objectId写入passwordIdList并且保存
             self.passwordIdList!.addObject(record.objectId, forKey: "list")
             self.passwordIdList!.fetchWhenSave = true    //  保存的同时获取新的值
