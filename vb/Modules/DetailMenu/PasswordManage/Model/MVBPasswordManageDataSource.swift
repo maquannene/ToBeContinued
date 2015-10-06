@@ -95,7 +95,7 @@ extension MVBPasswordManageDataSource {
             if success == true {
                 //  对数据根据时间进行排序
                 newPasswordDataList.sortUsingComparator {
-                    return ($0 as! MVBPasswordRecordModel).createdAt.compare(($1 as! MVBPasswordRecordModel).createdAt)
+                    return ($1 as! MVBPasswordRecordModel).createdAt.compare(($0 as! MVBPasswordRecordModel).createdAt)
                 }
             }
             self.passwordDataList = newPasswordDataList
@@ -118,7 +118,7 @@ extension MVBPasswordManageDataSource {
             self.passwordIdList!.fetchWhenSave = true    //  保存的同时获取新的值
             self.passwordIdList!.save()
             //  将新建的record加入缓存中
-            self.passwordDataList.addObject(record)
+            self.passwordDataList.insertObject(record, atIndex: 0)
             complete?(succeed: succeed)
         }
     }

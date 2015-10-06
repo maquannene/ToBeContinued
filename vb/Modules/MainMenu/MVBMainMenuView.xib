@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -23,6 +23,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xCb-pq-pGq" userLabel="headBackgroundImageView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                    <animations/>
                     <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="160" id="j4h-jh-Jz4"/>
@@ -33,6 +34,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Swb-IR-e8R" userLabel="headImageView">
                     <rect key="frame" x="130" y="40" width="60" height="60"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="1G8-Fm-ncW"/>
                         <constraint firstAttribute="width" secondItem="Swb-IR-e8R" secondAttribute="height" multiplier="1:1" id="A9o-tF-gL6"/>
@@ -40,12 +42,14 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7S-7C-ibK">
                     <rect key="frame" x="141" y="134" width="37.5" height="17"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wL-21-3T5">
                     <rect key="frame" x="139" y="110" width="42.5" height="19.5"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -58,12 +62,14 @@
                             <subviews>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pm8-F8-2TU">
                                     <rect key="frame" x="20" y="149" width="51" height="31"/>
+                                    <animations/>
                                     <connections>
                                         <action selector="specialEffectsAction:" destination="-1" eventType="valueChanged" id="fmu-fq-sZc"/>
                                     </connections>
                                 </switch>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8j-vi-6o7">
                                     <rect key="frame" x="77" y="142.5" width="88" height="44"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Z6e-34-s8C"/>
                                         <constraint firstAttribute="width" constant="88" id="lV5-5U-Vzj"/>
@@ -78,6 +84,7 @@
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GqA-R4-rXt" userLabel="passwordView">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                    <animations/>
                                     <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <constraints>
@@ -89,6 +96,7 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUQ-bz-966" userLabel="imagetextView">
                                     <rect key="frame" x="0.0" y="60" width="320" height="60"/>
+                                    <animations/>
                                     <color key="backgroundColor" red="0.80082251130000004" green="0.69965598829999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <connections>
@@ -96,6 +104,7 @@
                                     </connections>
                                 </view>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="TUQ-bz-966" firstAttribute="top" secondItem="GqA-R4-rXt" secondAttribute="bottom" id="0NB-JW-Mrr"/>
@@ -113,6 +122,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstItem="60D-Sb-YfR" firstAttribute="leading" secondItem="BjR-k7-7ke" secondAttribute="leading" id="OO8-GX-mBF"/>
                         <constraint firstItem="60D-Sb-YfR" firstAttribute="top" secondItem="BjR-k7-7ke" secondAttribute="top" id="Zuq-Cw-tUz"/>
@@ -124,6 +134,7 @@
                     </connections>
                 </scrollView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="xCb-pq-pGq" firstAttribute="leading" secondItem="0vN-CH-dCv" secondAttribute="leading" id="30J-6s-Kr5"/>

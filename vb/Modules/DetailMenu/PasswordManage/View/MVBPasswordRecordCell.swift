@@ -9,7 +9,8 @@
 class MVBPasswordRecordCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-    lazy var separateLine: CALayer = CALayer()
+    lazy var topSeparateLine: CALayer = CALayer()
+    lazy var bottomSeparateLine: CALayer = CALayer()
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -23,13 +24,16 @@ class MVBPasswordRecordCell: SWTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        separateLine.backgroundColor = UIColor.grayColor().CGColor
-        layer.addSublayer(separateLine)
+        topSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        layer.addSublayer(topSeparateLine)
+        bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        layer.addSublayer(bottomSeparateLine)
     }
     
     override func layoutSubviews() {
-        separateLine.frame = CGRectMake(0, h - 0.5, w, 0.5)
         super.layoutSubviews()
+        topSeparateLine.frame = CGRectMake(0, 0, w, 0.5)
+        bottomSeparateLine.frame = CGRectMake(0, h - 0.5, w, 0.5)
     }
 
     deinit {

@@ -9,7 +9,6 @@
 class MVBImageTextTrackModel: AVObject {
     
     var imageUrl: String!
-//    var imageSize: NSValue!
     var imageWidht: NSNumber!
     var imageHeight: NSNumber!
     var text: String?
@@ -22,10 +21,9 @@ class MVBImageTextTrackModel: AVObject {
     func update(imageUrl: String!, text: String?, imageSize: CGSize!) {
         //  这个AVObject 中的值必须用这个种setObject:forKey的方法，否者没法存储在云上
         self.setObject(imageUrl, forKey: "imageUrl")
-        if text != nil {
+        if text !=  nil {
             self.setObject(text, forKey: "text")
         }
-//        self.setObject(NSValue(CGSize: imageSize), forKey: "imageSize")
         self.setObject(imageSize.width, forKey: "imageWidht")
         self.setObject(imageSize.height, forKey: "imageHeight")
         print("123")

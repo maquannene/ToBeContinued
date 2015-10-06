@@ -99,9 +99,7 @@ extension MVBMainMenuViewController {
                 }
             }
             else {
-                self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, pecentVisiable) -> Void in
-                
-                }
+                self.mm_drawerController.setDrawerVisualStateBlock(nil)
             }
         }
     }
@@ -133,11 +131,14 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
         if request.tag == "logOut" {
             MVBAppDelegate.MVBApp().clearUserInfo()
             SVProgressHUD.dismiss()
+            //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
-            self.mm_drawerController!.dismissViewControllerAnimated(false, completion: { () -> Void in
+            AVFile.clearAllCachedFiles()
+            
+            self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
-            })
+            }
         }
         if request.tag == "getUserInfo" {
             MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)

@@ -44,7 +44,7 @@ class MVBMainStructureManage: NSObject {
     }
     
     func displayMainStructureFrom(presentingVc: UIViewController) {
-        presentingVc.presentViewController(drawerController!, animated: true) { Bool in
+        presentingVc.presentViewController(drawerController!, animated: true) {
             self.drawerController!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         }
     }
@@ -98,12 +98,10 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
         }
         
         if centerViewController == drawerController!.centerViewController {
-            drawerController!.closeDrawerAnimated(true) {
-                (finsih) -> Void in
-            }
+            self.drawerController!.closeDrawerAnimated(true, completion: nil)
         }
         else {
-            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { (finish) -> Void in
+            drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
                 self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
                 self.drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { (finish) -> Void in
                     self.drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All

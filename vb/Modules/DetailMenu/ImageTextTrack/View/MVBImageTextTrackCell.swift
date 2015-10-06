@@ -12,16 +12,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
-    
-    var imageTextTrack: MVBImageTextTrackModel? {
-        didSet {
-//            imageView.sd_setImageWithURL(NSURL(string: (imageTextTrack?.imageUrl)!))
-            imageView.sd_setImageWithURL(NSURL(string: (imageTextTrack?.imageUrl)!)) { image, error, cacheType, url in
-                print("缓存策略:\(cacheType.rawValue)")
-            }
-            textLabel.text = imageTextTrack!.text
-        }
-    }
+    var imageTextTrack: MVBImageTextTrackModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,3 +21,20 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     }
     
 }
+
+//  MARK: Public
+extension MVBImageTextTrackCell {
+    func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
+        self.imageTextTrack = imageTextTrack
+//        let fileImage = AVFile(URL: imageTextTrack.imageUrl)
+//        print(self)
+//        fileImage.getThumbnail(true, width: Int32(w), height: Int32(h)) { [weak self] image, error in
+//            guard let strongSelf = self else { return }
+//            guard strongSelf.imageTextTrack!.imageUrl == fileImage.url else { return }
+//            strongSelf.imageView.image = image
+//        }
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl))
+        textLabel.text = imageTextTrack.text
+    }
+}
+

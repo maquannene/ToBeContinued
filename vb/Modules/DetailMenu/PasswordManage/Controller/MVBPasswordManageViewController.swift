@@ -81,7 +81,9 @@ class MVBPasswordManageViewController: MVBDetailBaseViewController {
 extension MVBPasswordManageViewController {
     
     func configurePullToRefresh() {
-        passwordListTableView.header = MJRefreshNormalHeader() {            
+        //  注意这一句的内存泄露 如果不加 [unowned self] 就会内存泄露
+        //  泄漏原因为retain cycle 即 self->passwordListTableView->header->refreshingBlock->self
+        passwordListTableView.header = MJRefreshNormalHeader() { [unowned self] in
             //  如果获取失败，就创建新的
             self.dataSource.queryFindPasswordIdList { [unowned self] succeed in
                 guard succeed == true else {
@@ -213,9 +215,10 @@ extension MVBPasswordManageViewController {
         dataSource.queryAddPasswordRecord(MVBPasswordRecordModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
             self.dataSource.expandingIndexPath = nil
             self.dataSource.expandedIndexPath = nil
-            self.passwordListTableView.reloadData()
-            self.newPasswordVc!.dismissWithAnimated(true, completion: { () -> Void in
-            })
+//            self.passwordListTableView.reloadData()
+            self.newPasswordVc!.dismissWithAnimated(true) {
+                self.passwordListTableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+            }
         })
     }
     

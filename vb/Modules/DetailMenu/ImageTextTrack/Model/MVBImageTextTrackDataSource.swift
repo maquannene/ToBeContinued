@@ -86,7 +86,7 @@ extension MVBImageTextTrackDataSource {
             if success == true {
                 //  对数据根据时间进行排序
                 newImageTextTrackList.sortUsingComparator {
-                    return ($0 as! MVBImageTextTrackModel).createdAt.compare(($1 as! MVBImageTextTrackModel).createdAt)
+                    return ($1 as! MVBImageTextTrackModel).createdAt.compare(($0 as! MVBImageTextTrackModel).createdAt)
                 }
             }
             self.imageTextTrackList = newImageTextTrackList
@@ -102,7 +102,7 @@ extension MVBImageTextTrackDataSource {
             self.imageTextTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
             self.imageTextTrackIdList!.save()
             //  再将新建track加入缓存中
-            self.imageTextTrackList.addObject(track)
+            self.imageTextTrackList.insertObject(track, atIndex: 0)
             complete?(succeed: succeed)
         }
     }
