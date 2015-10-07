@@ -32,7 +32,9 @@ extension MVBImageTextTrackDataSource {
         let query: AVQuery = AVQuery(className: MVBImageTextTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
         query.whereKey(kIdentifier, equalTo: identifier)
-        query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
+        query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) -> Void in
+            
+            guard let strongSelf = self else { return }
             
             guard error == nil else { complete?(succeed: false); return }
             
@@ -40,7 +42,7 @@ extension MVBImageTextTrackDataSource {
             
             guard let objc = objects[0] as? MVBImageTextTrackIdListModel else { complete?(succeed: false); return }
             
-            self.imageTextTrackIdList = objc
+            strongSelf.imageTextTrackIdList = objc
                 
             complete?(succeed: true)
  
@@ -95,14 +97,15 @@ extension MVBImageTextTrackDataSource {
     }
     
     func queryAddImageTextTrack(track: MVBImageTextTrackModel, complete: MVBQureyDataCompleteClosure?) {
-        track.saveInBackgroundWithBlock { [unowned self] succeed, error in
+        track.saveInBackgroundWithBlock { [weak self] succeed, error in
+            guard let strongSelf = self else { return }
             guard succeed.boolValue == true else { complete?(succeed: false); return }
             //  存储完track后 先将对应的id存入imageTextTrackIdList并且保存
-            self.imageTextTrackIdList!.addObject(track.objectId, forKey: "list")
-            self.imageTextTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
-            self.imageTextTrackIdList!.save()
+            strongSelf.imageTextTrackIdList!.addObject(track.objectId, forKey: "list")
+            strongSelf.imageTextTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
+            strongSelf.imageTextTrackIdList!.save()
             //  再将新建track加入缓存中
-            self.imageTextTrackList.insertObject(track, atIndex: 0)
+            strongSelf.imageTextTrackList.insertObject(track, atIndex: 0)
             complete?(succeed: succeed)
         }
     }

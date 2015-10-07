@@ -48,28 +48,23 @@ class MVBLogInViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         let appDelegate = MVBAppDelegate.MVBApp()
-        if appDelegate.accessToken != nil && appDelegate.userID != nil {
-            self.model = MVBLogInViewModel.AlreadyLogIn
-            //  如果开启时是登陆过的，直接加载头像
-            userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
-        }
-        else {
+        guard appDelegate.accessToken != nil && appDelegate.userID != nil && appDelegate.userModel != nil else {
             self.model = MVBLogInViewModel.NotLogIn
-
+            return
         }
+        self.model = MVBLogInViewModel.AlreadyLogIn
+        //  如果开启时是登陆过的，直接加载头像
+        userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
     }
     
     override func viewDidAppear(animated: Bool) {
         let appDelegate = MVBAppDelegate.MVBApp()
-        if appDelegate.accessToken != nil && appDelegate.userID != nil {
-            self.successLogIn()
-        }
+        guard appDelegate.accessToken != nil && appDelegate.userID != nil && appDelegate.userModel != nil else { return }
+        self.successLogIn()
     }
     
     @IBAction func logInAction(sender: AnyObject) {
-        if model == MVBLogInViewModel.AlreadyLogIn {
-            return
-        }
+        guard model != MVBLogInViewModel.AlreadyLogIn else { return }
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
         request.redirectURI = MVBWeiboSDK.RedirectURL
         request.scope = "all"
@@ -118,6 +113,7 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 }
 
 extension MVBLogInViewController: WBHttpRequestDelegate {
+    
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         //  设置userModel
         MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
@@ -128,6 +124,7 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
         //  成功登陆
         self.successLogIn()
     }
+    
 }
 
 

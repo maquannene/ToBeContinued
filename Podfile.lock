@@ -39,6 +39,7 @@ PODS:
     - Dollar (~> 4.0.1)
   - Dollar (4.0.1)
   - FDFullscreenPopGesture (1.1)
+  - JTSImageViewController (1.5.1)
   - Kingfisher (1.6.0)
   - MJExtension (2.5.12)
   - MJRefresh (2.4.11)
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - Dollar
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
+  - JTSImageViewController
   - Kingfisher (~> 1.5)
   - MJExtension
   - MJRefresh
@@ -112,6 +114,7 @@ SPEC CHECKSUMS:
   Cent: 74e3f5a7e8543317b0724c272d279e8219cbaedb
   Dollar: a058e2659e0d3261307c12630dbc2fd8e32f80bf
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   Kingfisher: 3308d487e5c2a0fba9c1054fc3b8c45923e03c40
   MJExtension: 5ab633484e431f777387c70b676c80f993361f1b
   MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186

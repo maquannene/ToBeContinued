@@ -153,11 +153,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
             }
             else {
                 let param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
-                WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json",
-                    httpMethod: "GET",
-                    params: param,
-                    delegate: delegate,
-                    withTag: tag)
+                let _ = WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json", httpMethod: "GET", params: param, delegate: delegate, withTag: tag)
             }
         }
     }

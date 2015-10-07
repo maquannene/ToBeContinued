@@ -123,10 +123,6 @@ extension MVBMainMenuViewController: UIScrollViewDelegate {
 // MARK: WBHttpRequestDelegate
 extension MVBMainMenuViewController: WBHttpRequestDelegate {
     
-    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-        
-    }
-    
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         if request.tag == "logOut" {
             MVBAppDelegate.MVBApp().clearUserInfo()
@@ -134,7 +130,6 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
-            AVFile.clearAllCachedFiles()
             
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)

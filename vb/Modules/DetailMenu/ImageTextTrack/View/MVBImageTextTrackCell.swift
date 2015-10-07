@@ -16,6 +16,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         layer.borderColor = UIColor.blackColor().CGColor
         layer.borderWidth = 1
     }

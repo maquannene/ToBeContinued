@@ -46,20 +46,23 @@ extension MVBImageTextTrackViewController {
     func configurePullToRefresh() {
         collectionView!.header = MJRefreshNormalHeader() { [unowned self] in
             //  首先试图获取存有每条imageTextTrack 的 id 列表
-            self.dataSource.queryFindImageTextTrackIdList {
+            self.dataSource.queryFindImageTextTrackIdList { [weak self] in
+                guard let strongSelf = self else { return }
                 guard $0 == true else {
                     //  如果获取失败，就创建新的
-                    self.dataSource.queryCreateImageTextTrackIdList { [unowned self] succeed in
-                        self.collectionView!.header.endRefreshing()
+                    strongSelf.dataSource.queryCreateImageTextTrackIdList { [weak self] succeed in
+                        guard let strongSelf = self else { return }
+                        strongSelf.collectionView!.header.endRefreshing()
                     }
                     return
                 }
                 
                 //  获取成功，就逐条请求存储的imageTextTrack存在缓存中
-                self.dataSource.queryImageTextTrackList { [unowned self] succeed in
-                    guard succeed == true else { self.collectionView!.header.endRefreshing(); return }
-                    self.collectionView.reloadData()
-                    self.collectionView!.header.endRefreshing()
+                strongSelf.dataSource.queryImageTextTrackList { [weak self] succeed in
+                    guard let strongSelf = self else { return }
+                    guard succeed == true else { strongSelf.collectionView!.header.endRefreshing(); return }
+                    strongSelf.collectionView.reloadData()
+                    strongSelf.collectionView!.header.endRefreshing()
                 }
             }
         }
@@ -99,19 +102,19 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
         let imageData = UIImageJPEGRepresentation(image, 0.000001)
         let imageFile = AVFile(name: "maquan", data: imageData)
         
+        //  存储图片到云端
         imageFile.saveInBackgroundWithBlock( { [unowned self] succeed, error in
             print("image Url: \(imageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(imageData!.length) size: \(imageFile.size)")
             //  存完了就删除硬盘缓存，因为暂时没有理由需要硬盘缓存
             imageFile.clearCachedFile()
+            //  这一步非常重要，将已经保存在云上的图片再存入disk cache一份，cell加载时就不用再用网络下载了
+            let newImage = UIImage(data: imageData!)    //  这里用data 还原的 image 大小还是有问题
+            SDWebImageManager.sharedManager().saveImageToCache(newImage, forURL: NSURL(string: imageFile.url))
+            //  将新生成的textTrackModel再存到云端
             let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: imageFile.url, text: "编号：\(self.dataSource.imageTextTrackList.count + 1)", imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
-                if let strongSelf = self {
-                    //  这一步非常重要，将已经保存在云上的图片再存入disk cache一份，这样就不用每次都要从云端下载图片了
-                    let newImage = UIImage(data: imageData!)    //  这里用data 还原的 image 大小还是有问题
-                    SDWebImageManager.sharedManager().saveImageToCache(newImage, forURL: NSURL(string: imageFile.url))
-                    //  插入图片
-                    strongSelf.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
-                }
+                guard let strongSelf = self else { return }
+                strongSelf.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
             }
         }) { process in
             print("上传照片进度： \(process)")
@@ -134,11 +137,29 @@ extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
         let rect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTextTrack.imageWidht.doubleValue, height:imageTextTrack.imageHeight.doubleValue), boundingRect)
         return rect.height
     }
-    
+
+}
+
+extension MVBImageTextTrackViewController: JTSImageViewControllerAccessibilityDelegate {
+    func accessibilityLabelForImageViewer(imageViewer: JTSImageViewController!) -> String! {
+        return imageViewer.imageInfo.title
+    }
 }
 
 //  MARK: UICollectionViewDelegate
 extension MVBImageTextTrackViewController: UICollectionViewDelegate {
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MVBImageTextTrackCell else { return }
+        let imageInfo = JTSImageInfo()
+        imageInfo.image = cell.imageView.image
+        imageInfo.title = cell.imageTextTrack.text
+        imageInfo.referenceRect = cell.imageView.frame
+        imageInfo.referenceView = cell
+        let imageViewerController = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.Blurred)
+        imageViewerController.accessibilityDelegate = self
+        imageViewerController.showFromViewController(self, transition: JTSImageViewControllerTransition.FromOriginalPosition)
+    }
     
 }
 
