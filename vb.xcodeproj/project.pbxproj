@@ -74,6 +74,10 @@
 		D4EA2EB61BAC509900E48135 /* MVBPasswordRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA2EB01BAC509900E48135 /* MVBPasswordRecordCell.swift */; settings = {ASSET_TAGS = (); }; };
 		D4EA2EB71BAC509900E48135 /* MVBPasswordRecordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA2EB11BAC509900E48135 /* MVBPasswordRecordDetailCell.swift */; settings = {ASSET_TAGS = (); }; };
 		D4EA2EBB1BAC52F100E48135 /* MVBPasswordManage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4EA2EBA1BAC52F100E48135 /* MVBPasswordManage.storyboard */; settings = {ASSET_TAGS = (); }; };
+		D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */; settings = {ASSET_TAGS = (); }; };
+		D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +171,10 @@
 		D4EA2EB01BAC509900E48135 /* MVBPasswordRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordCell.swift; sourceTree = "<group>"; };
 		D4EA2EB11BAC509900E48135 /* MVBPasswordRecordDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPasswordRecordDetailCell.swift; sourceTree = "<group>"; };
 		D4EA2EBA1BAC52F100E48135 /* MVBPasswordManage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBPasswordManage.storyboard; sourceTree = "<group>"; };
+		D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPictureBrowser.podspec; sourceTree = "<group>"; };
+		D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackDisplayCell.swift; sourceTree = "<group>"; };
+		D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserCell.swift; sourceTree = "<group>"; };
+		D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +318,7 @@
 		D41C7FFA1B1BEF2600987D42 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D4F36EAB1BC6C227006DCF94 /* MQPictureBrowser */,
 				D41C7FFE1B1BEF2600987D42 /* VbLibrary */,
 			);
 			path = Library;
@@ -338,6 +347,7 @@
 			children = (
 				D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */,
 				D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */,
+				D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */,
 			);
 			path = Podspec;
 			sourceTree = "<group>";
@@ -465,6 +475,7 @@
 			children = (
 				D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */,
 				D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */,
+				D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,6 +540,15 @@
 				D40709391BB145300098867E /* MVBPasswordRecordDetailCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D4F36EAB1BC6C227006DCF94 /* MQPictureBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */,
+				D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */,
+			);
+			path = MQPictureBrowser;
 			sourceTree = "<group>";
 		};
 		FC9F7212BF61B2CF41494C5F /* Pods */ = {
@@ -616,6 +636,7 @@
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
 				D4EA2EB51BAC509900E48135 /* MVBNewPasswordView.xib in Resources */,
 				D45E89861B36CD1500AFF9F8 /* MVBMainMenuView.xib in Resources */,
+				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
 				D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */,
 				D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */,
 				D407093A1BB145300098867E /* MVBPasswordRecordDetailCell.xib in Resources */,
@@ -696,6 +717,7 @@
 				D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */,
 				D4E48EC31BB63ED90042FC74 /* MVBPasswordRecordModel.swift in Sources */,
 				D45E89881B36CD1500AFF9F8 /* MVBMainStructureManage.swift in Sources */,
+				D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */,
 				D4E48EC71BB646760042FC74 /* MVBImageTextTrackDataSource.swift in Sources */,
 				D4EA2EA41BAC505C00E48135 /* MVBAcconutTableViewCell.swift in Sources */,
 				D48982E01BB535A600A3D881 /* MVBImageTextTrackCell.swift in Sources */,
@@ -707,9 +729,11 @@
 				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
 				D48982E41BB53B4A00A3D881 /* MVBImageTextTrackModel.swift in Sources */,
 				D4EA2EA51BAC505C00E48135 /* MVBAccountManageDataSource.swift in Sources */,
+				D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */,
 				D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */,
 				D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */,
 				D4EA2EB31BAC509900E48135 /* MVBPasswordManageDataSource.swift in Sources */,
+				D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */,
 				D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */,
 				D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */,
 				D4B679BB1BB4EDC1002E7B32 /* UIScreen_Extension.swift in Sources */,

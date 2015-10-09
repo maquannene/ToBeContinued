@@ -45,7 +45,6 @@
 @import MJRefresh;
 @import AVOSCloud;
 @import SWTableViewCell;
-@import JTSImageViewController;
 @import MQMaskController;
 @import FDFullscreenPopGesture;
 @import Dollar;

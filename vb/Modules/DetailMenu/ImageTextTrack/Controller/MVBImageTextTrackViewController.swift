@@ -10,14 +10,10 @@ import AVFoundation
 
 class MVBImageTextTrackViewController: UIViewController {
     
-    var imageUrl: String?
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var layout: MVBImageTextTrackLayout!
     var dataSource: MVBImageTextTrackDataSource!
-    
-    //  模拟数据源数组
-//    lazy var imageTextTracks: [MVBImageTextTrackModel] = MVBImageTextTrackModel.allImageTextTrack()
+    weak var imageTextTrackBrowserVc: MQPictureBrowserController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +22,6 @@ class MVBImageTextTrackViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "getImage:")
         
         layout.delegate = self
         layout.numberOfColumns = 2
@@ -80,14 +74,6 @@ extension MVBImageTextTrackViewController {
         presentViewController(imagePickerVc, animated: true, completion: nil)
     }
     
-    func getImage(sender: AnyObject!) {
-        let fileImage = AVFile(URL: imageUrl)
-        fileImage.getThumbnail(true, width: 100, height: 100) { image, error in
-            let imageView = UIImageView(image: image)
-            print(image)
-        }
-    }
-    
 }
 
 extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -127,6 +113,34 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
     
 }
 
+extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource {
+    
+    func pictureBrowserController(controller: MQPictureBrowserController, willShowPictureFromImageViewAtIndex index: Int) -> UIImageView? {
+        if let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
+            return cell.imageView
+        }
+        return nil
+    }
+    
+    func pictureBrowserController(controller: MQPictureBrowserController, willHidePictureToImageViewAtIndex index: Int) -> UIImageView? {
+        if let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
+            return cell.imageView
+        }
+        return nil
+    }
+    
+    func numberOfItemsInPictureBrowserController(controller: MQPictureBrowserController) -> Int {
+        return dataSource.imageTextTrackList.count
+    }
+    
+    func pictureBrowserController(controller: MQPictureBrowserController, cellForItemAtIndex index: Int) -> MQPictureBrowserCell {
+        let picturebrowserCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
+        picturebrowserCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel)
+        return picturebrowserCell
+    }
+    
+}
+
 //  MARK: MVBImageTextTrackLayoutDelegate
 extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
     
@@ -140,25 +154,15 @@ extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
 
 }
 
-extension MVBImageTextTrackViewController: JTSImageViewControllerAccessibilityDelegate {
-    func accessibilityLabelForImageViewer(imageViewer: JTSImageViewController!) -> String! {
-        return imageViewer.imageInfo.title
-    }
-}
-
 //  MARK: UICollectionViewDelegate
 extension MVBImageTextTrackViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MVBImageTextTrackCell else { return }
-        let imageInfo = JTSImageInfo()
-        imageInfo.image = cell.imageView.image
-        imageInfo.title = cell.imageTextTrack.text
-        imageInfo.referenceRect = cell.imageView.frame
-        imageInfo.referenceView = cell
-        let imageViewerController = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.Blurred)
-        imageViewerController.accessibilityDelegate = self
-        imageViewerController.showFromViewController(self, transition: JTSImageViewControllerTransition.FromOriginalPosition)
+        let vc = MQPictureBrowserController()
+        vc.dataSource = self
+        vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
+        vc.presentFromViewController(self, atIndexPicture: indexPath.item)
+        imageTextTrackBrowserVc = vc
     }
     
 }

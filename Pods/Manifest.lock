@@ -39,7 +39,6 @@ PODS:
     - Dollar (~> 4.0.1)
   - Dollar (4.0.1)
   - FDFullscreenPopGesture (1.1)
-  - JTSImageViewController (1.5.1)
   - Kingfisher (1.6.0)
   - MJExtension (2.5.12)
   - MJRefresh (2.4.11)
@@ -56,7 +55,6 @@ PODS:
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
   - MQMaskController (0.0.1)
-  - NYXImagesKit (2.3)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -73,14 +71,12 @@ DEPENDENCIES:
   - Dollar
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
-  - JTSImageViewController
   - Kingfisher (~> 1.5)
   - MJExtension
   - MJRefresh
   - MMDrawerController (~> 0.5.7)
   - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`,
     commit `6b313578e296ac772e9c5dbe18975094ce741360`)
-  - NYXImagesKit
   - SDWebImage (~> 3.6)
   - SVProgressHUD (HEAD)
   - SWTableViewCell (~> 0.3.7)
@@ -114,13 +110,11 @@ SPEC CHECKSUMS:
   Cent: 74e3f5a7e8543317b0724c272d279e8219cbaedb
   Dollar: a058e2659e0d3261307c12630dbc2fd8e32f80bf
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   Kingfisher: 3308d487e5c2a0fba9c1054fc3b8c45923e03c40
   MJExtension: 5ab633484e431f777387c70b676c80f993361f1b
   MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
-  NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
