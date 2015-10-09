@@ -68,11 +68,11 @@
                                     </connections>
                                 </switch>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8j-vi-6o7">
-                                    <rect key="frame" x="77" y="142.5" width="88" height="44"/>
+                                    <rect key="frame" x="77" y="142" width="60" height="44"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Z6e-34-s8C"/>
-                                        <constraint firstAttribute="width" constant="88" id="lV5-5U-Vzj"/>
+                                        <constraint firstAttribute="width" constant="60" id="lV5-5U-Vzj"/>
                                     </constraints>
                                     <state key="normal" title="LogOut">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,6 +103,14 @@
                                         <outletCollection property="gestureRecognizers" destination="IbO-Ak-Mkd" appends="YES" id="uAI-h2-rv3"/>
                                     </connections>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdK-dQ-q4W">
+                                    <rect key="frame" x="149" y="149" width="64" height="30"/>
+                                    <animations/>
+                                    <state key="normal" title="clearDisk"/>
+                                    <connections>
+                                        <action selector="clearDiskMemory:" destination="-1" eventType="touchUpInside" id="vS9-uo-Cz5"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>

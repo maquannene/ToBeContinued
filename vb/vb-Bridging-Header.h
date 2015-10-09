@@ -38,6 +38,7 @@
 @import UIKit;
 @import AFNetworking;
 @import SDWebImage;
+@import Kingfisher;
 @import SVProgressHUD;
 @import BlocksKit;
 @import MMDrawerController;

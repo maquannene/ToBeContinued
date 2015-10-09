@@ -26,7 +26,12 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 extension MVBImageTextTrackCell {
     func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
         self.imageTextTrack = imageTextTrack
-        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl))
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl)!)
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: 0), progress: { (receivedSize, expectedSize) -> Void in
+                print("当前图片:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+            }) { (image, error, cacheType, url) -> Void in
+                
+        }
         textLabel.text = imageTextTrack.text
     }
 }

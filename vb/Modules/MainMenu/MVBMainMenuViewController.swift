@@ -39,7 +39,7 @@ class MVBMainMenuViewController: UIViewController {
     
     func configurUserInfo() {
         if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!), placeholderImage: nil, options: SDWebImageOptions(rawValue: ~SDWebImageOptions.CacheMemoryOnly.rawValue))
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!))
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
             mainMenuView!.describeLbel.text = userModel._description as? String
@@ -67,6 +67,12 @@ extension MVBMainMenuViewController {
                 SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
 //            }
 //        }
+    }
+    
+    @IBAction func clearDiskMemory(sender: AnyObject) {
+        //  清理硬盘缓存
+        SDImageCache.sharedImageCache().clearDisk()
+        SDImageCache.sharedImageCache().clearMemory()
     }
     
     @IBAction func backMainAction(sender: AnyObject) {

@@ -92,10 +92,10 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
         imageFile.saveInBackgroundWithBlock( { [unowned self] succeed, error in
             print("image Url: \(imageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(imageData!.length) size: \(imageFile.size)")
             //  存完了就删除硬盘缓存，因为暂时没有理由需要硬盘缓存
-            imageFile.clearCachedFile()
             //  这一步非常重要，将已经保存在云上的图片再存入disk cache一份，cell加载时就不用再用网络下载了
             let newImage = UIImage(data: imageData!)    //  这里用data 还原的 image 大小还是有问题
             SDWebImageManager.sharedManager().saveImageToCache(newImage, forURL: NSURL(string: imageFile.url))
+            imageFile.clearCachedFile()
             //  将新生成的textTrackModel再存到云端
             let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: imageFile.url, text: "编号：\(self.dataSource.imageTextTrackList.count + 1)", imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
@@ -115,16 +115,16 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
 
 extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource {
     
-    func pictureBrowserController(controller: MQPictureBrowserController, willShowPictureFromImageViewAtIndex index: Int) -> UIImageView? {
+    func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo? {
         if let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
-            return cell.imageView
+            return (cell.imageView, collectionView)
         }
         return nil
     }
     
-    func pictureBrowserController(controller: MQPictureBrowserController, willHidePictureToImageViewAtIndex index: Int) -> UIImageView? {
+    func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo? {
         if let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
-            return cell.imageView
+            return (cell.imageView, collectionView)
         }
         return nil
     }
@@ -158,7 +158,7 @@ extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
 extension MVBImageTextTrackViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let vc = MQPictureBrowserController()
+        let vc = MQPictureBrowserController(animationModel: MQPictureBorwserAnimationModel.PictureMoveAndBackgroundFadeOut)
         vc.dataSource = self
         vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
