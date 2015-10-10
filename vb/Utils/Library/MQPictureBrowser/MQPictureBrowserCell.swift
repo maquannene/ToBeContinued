@@ -93,6 +93,10 @@ class MQPictureBrowserCell: UICollectionViewCell {
         }
     }
     
+    deinit {
+        print("\(self.dynamicType) deinit", terminator: "")
+    }
+    
 }
 
 //  MARK: Private

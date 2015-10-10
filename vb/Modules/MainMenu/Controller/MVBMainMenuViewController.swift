@@ -71,6 +71,7 @@ extension MVBMainMenuViewController {
         //  清理硬盘缓存
         SDImageCache.sharedImageCache().clearDisk()
         SDImageCache.sharedImageCache().clearMemory()
+        SDImageCache.sharedImageCache().cleanDisk()
     }
     
     @IBAction func backMainAction(sender: AnyObject) {

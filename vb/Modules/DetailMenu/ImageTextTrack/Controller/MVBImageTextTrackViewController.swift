@@ -14,21 +14,24 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var layout: MVBImageTextTrackLayout!
     var dataSource: MVBImageTextTrackDataSource!
     weak var imageTextTrackBrowserVc: MQPictureBrowserController?
+    var addMenuMaskVC: MQMaskController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.redColor()
         automaticallyAdjustsScrollViewInsets = false
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
         
         layout.delegate = self
-        layout.numberOfColumns = 2
+        layout.numberOfColumns = 4
         dataSource = MVBImageTextTrackDataSource()
         
         configurePullToRefresh()
         collectionView.header.beginRefreshing()
+    }
+    
+    deinit {
+        print("\(self.dynamicType) deinit", terminator: "")
     }
     
 }
@@ -68,8 +71,26 @@ extension MVBImageTextTrackViewController {
 extension MVBImageTextTrackViewController {
     
     func addImageTextTrackAction(sender: AnyObject!) {
+        let addMenuView = NSBundle.mainBundle().loadNibNamed("MVBImageTextTrack", owner: nil, options: nil)[0] as! MVBImageTextTrackAddMenuView
+        addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
+        addMenuView.fromPictureAlbumButton.addTarget(self, action: "addFromPictureAlbumButtonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuView.fromCameraButton.addTarget(self, action: "addFromCameraButtonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
+        addMenuMaskVC!.showWithAnimated(true, completion: nil)
+    }
+    
+    func addFromPictureAlbumButtonAction(sender: AnyObject!) {
+        addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
         let imagePickerVc = UIImagePickerController()
         imagePickerVc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerVc.delegate = self
+        presentViewController(imagePickerVc, animated: true, completion: nil)
+    }
+    
+    func addFromCameraButtonAction(sender: AnyObject!) {
+        addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
+        let imagePickerVc = UIImagePickerController()
+        imagePickerVc.sourceType = UIImagePickerControllerSourceType.Camera
         imagePickerVc.delegate = self
         presentViewController(imagePickerVc, animated: true, completion: nil)
     }
@@ -84,20 +105,18 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             return
         }
 
-        //  压缩图像
-        let imageData = UIImageJPEGRepresentation(image, 0.000001)
+        let imageData = UIImageJPEGRepresentation(image, 0)
         let imageFile = AVFile(name: "maquan", data: imageData)
-        
         //  存储图片到云端
-        imageFile.saveInBackgroundWithBlock( { [unowned self] succeed, error in
-            print("image Url: \(imageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(imageData!.length) size: \(imageFile.size)")
-            //  存完了就删除硬盘缓存，因为暂时没有理由需要硬盘缓存
-            //  这一步非常重要，将已经保存在云上的图片再存入disk cache一份，cell加载时就不用再用网络下载了
-            let newImage = UIImage(data: imageData!)    //  这里用data 还原的 image 大小还是有问题
-            SDWebImageManager.sharedManager().saveImageToCache(newImage, forURL: NSURL(string: imageFile.url))
-            imageFile.clearCachedFile()
+        imageFile.saveInBackgroundWithBlock( { [unowned self, weak imageFile] succeed, error in
+            guard let weakImageFile = imageFile else { return }
+            print("image Url: \(weakImageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(imageData!.length) size: \(weakImageFile.size() / 1024) KB")
+            //  很重要,将imageData存到SDImageCache的disk cache中
+            NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(weakImageFile.url), contents: imageData, attributes: nil)
+            //  将本地的AVCacheFile缓存清理掉
+            weakImageFile.clearCachedFile()
             //  将新生成的textTrackModel再存到云端
-            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: imageFile.url, text: "编号：\(self.dataSource.imageTextTrackList.count + 1)", imageSize: image.size)
+            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, text: "编号：\(self.dataSource.imageTextTrackList.count + 1)", imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
                 guard let strongSelf = self else { return }
                 strongSelf.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
@@ -107,6 +126,7 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
+
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }

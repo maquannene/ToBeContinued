@@ -74,12 +74,13 @@ extension MVBImageTextTrackDataSource {
         for objectId in imageTextTrackIdList!.list {
             dispatch_group_enter(fetchGroup)
             let imageTextTrack: MVBImageTextTrackModel = MVBImageTextTrackModel(withoutDataWithObjectId: objectId as! String)
-            imageTextTrack.fetchInBackgroundWithBlock{ (object, error) -> Void in
+            imageTextTrack.fetchInBackgroundWithBlock{ [weak imageTextTrack] (object, error) -> Void in
+                guard let weakImageTextTrack = imageTextTrack else { return }
                 if error != nil {
                     success = false
                 }
                 else {
-                    newImageTextTrackList.addObject(imageTextTrack)
+                    newImageTextTrackList.addObject(weakImageTextTrack)
                 }
                 dispatch_group_leave(fetchGroup)
             }

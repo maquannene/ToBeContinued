@@ -15,4 +15,8 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
         super.configure(self.imageTextTrack.imageUrl, imageSize: CGSize(width: imageTextTrack.imageWidht.doubleValue, height: imageTextTrack.imageHeight.doubleValue))
     }
     
+    deinit {
+        print("\(self.dynamicType) deinit", terminator: "")
+    }
+    
 }

@@ -84,11 +84,24 @@
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GqA-R4-rXt" userLabel="passwordView">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文迹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7B-yW-edu">
+                                            <rect key="frame" x="20" y="0.0" width="200" height="60"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <animations/>
                                     <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="3gV-yG-9nz"/>
+                                        <constraint firstItem="Y7B-yW-edu" firstAttribute="leading" secondItem="GqA-R4-rXt" secondAttribute="leading" constant="20" id="BCd-gx-GAK"/>
+                                        <constraint firstAttribute="bottom" secondItem="Y7B-yW-edu" secondAttribute="bottom" id="a1w-67-cnO"/>
+                                        <constraint firstAttribute="trailing" secondItem="Y7B-yW-edu" secondAttribute="trailing" constant="100" id="bwX-fN-GuK"/>
+                                        <constraint firstItem="Y7B-yW-edu" firstAttribute="top" secondItem="GqA-R4-rXt" secondAttribute="top" id="kPd-po-SbE"/>
                                     </constraints>
                                     <connections>
                                         <outletCollection property="gestureRecognizers" destination="ZNT-OE-zZr" appends="YES" id="xKJ-kn-Hj6"/>
@@ -96,9 +109,24 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUQ-bz-966" userLabel="imagetextView">
                                     <rect key="frame" x="0.0" y="60" width="320" height="60"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图迹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3z-Oq-DxV">
+                                            <rect key="frame" x="20" y="0.0" width="200" height="60"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <animations/>
                                     <color key="backgroundColor" red="0.80082251130000004" green="0.69965598829999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="s3z-Oq-DxV" secondAttribute="bottom" id="4mx-ME-uvj"/>
+                                        <constraint firstItem="s3z-Oq-DxV" firstAttribute="leading" secondItem="TUQ-bz-966" secondAttribute="leading" constant="20" id="8ae-AE-aNf"/>
+                                        <constraint firstItem="s3z-Oq-DxV" firstAttribute="top" secondItem="TUQ-bz-966" secondAttribute="top" id="Df1-PY-rmY"/>
+                                        <constraint firstAttribute="trailing" secondItem="s3z-Oq-DxV" secondAttribute="trailing" constant="100" id="xoO-dv-gyu"/>
+                                    </constraints>
                                     <connections>
                                         <outletCollection property="gestureRecognizers" destination="IbO-Ak-Mkd" appends="YES" id="uAI-h2-rv3"/>
                                     </connections>
@@ -171,7 +199,7 @@
                 <outlet property="headImageView" destination="Swb-IR-e8R" id="Pz5-TF-IaX"/>
                 <outlet property="nameLabel" destination="7wL-21-3T5" id="E99-ej-qHI"/>
             </connections>
-            <point key="canvasLocation" x="890" y="-24"/>
+            <point key="canvasLocation" x="490" y="-4"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr" userLabel="passwordManage">
             <connections>

@@ -20,7 +20,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-Pc-CdB">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.94919902146464641" green="0.94919902146464641" blue="0.94919902146464641" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="MVBImageTextTrackLayout" customModule="vb" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MVBImageTextTrackCell" id="gb2-oz-fO8" customClass="MVBImageTextTrackCell" customModule="vb" customModuleProvider="target">
@@ -31,33 +31,48 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-cS-MZj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
+                                                    <rect key="frame" x="10" y="10" width="194" height="219"/>
                                                     <animations/>
+                                                    <color key="backgroundColor" red="0.93671085858585856" green="0.93671085858585856" blue="0.93671085858585856" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts4-Sw-fpI">
-                                                    <rect key="frame" x="0.0" y="218.5" width="214" height="20.5"/>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts4-Sw-fpI">
+                                                    <rect key="frame" x="0.0" y="218" width="214" height="20.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tE9-B6-wz7">
+                                                    <rect key="frame" x="32" y="109" width="150" height="20"/>
+                                                    <animations/>
+                                                    <color key="tintColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="DHW-J9-O8G"/>
+                                                        <constraint firstAttribute="width" constant="150" id="vJF-Ri-pjE"/>
+                                                    </constraints>
+                                                    <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </progressView>
                                             </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" id="Bg6-Tw-ht7"/>
-                                            <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" id="MdT-gu-xRK"/>
+                                            <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" constant="10" id="Bg6-Tw-ht7"/>
+                                            <constraint firstItem="tE9-B6-wz7" firstAttribute="centerY" secondItem="gb2-oz-fO8" secondAttribute="centerY" id="DU6-RN-hTM"/>
+                                            <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" constant="10" id="MdT-gu-xRK"/>
                                             <constraint firstAttribute="trailing" secondItem="Ts4-Sw-fpI" secondAttribute="trailing" id="PaI-Mp-1ih"/>
+                                            <constraint firstItem="tE9-B6-wz7" firstAttribute="left" relation="greaterThanOrEqual" secondItem="gb2-oz-fO8" secondAttribute="left" constant="20" id="Zwl-c3-aYI"/>
                                             <constraint firstAttribute="bottom" secondItem="Ts4-Sw-fpI" secondAttribute="bottom" id="cOc-iZ-2xI"/>
+                                            <constraint firstItem="tE9-B6-wz7" firstAttribute="centerX" secondItem="gb2-oz-fO8" secondAttribute="centerX" id="gxD-pO-PH0"/>
                                             <constraint firstItem="Ts4-Sw-fpI" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="mGj-v3-E1Q"/>
-                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" id="wYb-mI-hcE"/>
-                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="xNn-rT-lT6"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" constant="10" id="wYb-mI-hcE"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" constant="10" id="xNn-rT-lT6"/>
                                         </constraints>
                                         <size key="customSize" width="214" height="239"/>
                                         <connections>
                                             <outlet property="imageView" destination="tDQ-cS-MZj" id="sGc-Ma-9fX"/>
+                                            <outlet property="progressView" destination="tE9-B6-wz7" id="jv7-fO-uay"/>
                                             <outlet property="textLabel" destination="Ts4-Sw-fpI" id="AyM-DD-yd5"/>
                                         </connections>
                                     </collectionViewCell>
@@ -85,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="-135"/>
+            <point key="canvasLocation" x="100" y="-153"/>
         </scene>
     </scenes>
 </document>

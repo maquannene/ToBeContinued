@@ -25,15 +25,11 @@
 		D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */; };
 		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */; };
-		D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89741B36CD1500AFF9F8 /* MVBMainMenuView.swift */; };
-		D45E89861B36CD1500AFF9F8 /* MVBMainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45E89751B36CD1500AFF9F8 /* MVBMainMenuView.xib */; };
-		D45E89871B36CD1500AFF9F8 /* MVBMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89761B36CD1500AFF9F8 /* MVBMainMenuViewController.swift */; };
 		D45E89881B36CD1500AFF9F8 /* MVBMainStructureManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89771B36CD1500AFF9F8 /* MVBMainStructureManage.swift */; };
-		D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89931B3700B300AFF9F8 /* MVBHeroesViewController.swift */; };
-		D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89941B3700B300AFF9F8 /* MVBHeroTableViewCell.swift */; };
-		D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45E89951B3700B300AFF9F8 /* MVBHeroTableViewCell.xib */; };
 		D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */; };
 		D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */; };
+		D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */; settings = {ASSET_TAGS = (); }; };
+		D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */; settings = {ASSET_TAGS = (); }; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */; settings = {ASSET_TAGS = (); }; };
@@ -59,10 +55,16 @@
 		D4BDF11A1BC8A1490053966A /* MVBNoteTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D4BDF11B1BC8A1490053966A /* MVBNoteTrackDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */; settings = {ASSET_TAGS = (); }; };
 		D4BDF11C1BC8A1490053966A /* MVBNoteTrackDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1241BC8E6260053966A /* MVBMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF11E1BC8E6260053966A /* MVBMainMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1251BC8E6260053966A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1201BC8E6260053966A /* MVBUserModel.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1261BC8E6260053966A /* MVBMainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1221BC8E6260053966A /* MVBMainMenuView.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1271BC8E6260053966A /* MVBMainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1231BC8E6260053966A /* MVBMainMenuView.xib */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1301BC8E6B50053966A /* MVBHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1291BC8E6B50053966A /* MVBHeroesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1311BC8E6B50053966A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF12B1BC8E6B50053966A /* MVBHeroesInfoModel.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1321BC8E6B50053966A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF12C1BC8E6B50053966A /* MVBHeroModel.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1331BC8E6B50053966A /* MVBHeroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF12E1BC8E6B50053966A /* MVBHeroTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D4BDF1341BC8E6B50053966A /* MVBHeroTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF12F1BC8E6B50053966A /* MVBHeroTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D4DE75A11B57560D007E31F0 /* MMDrawerVisualStateCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */; };
-		D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */; };
-		D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B411B28695300228B4A /* MVBHeroModel.swift */; };
-		D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B441B28695300228B4A /* MVBUserModel.swift */; };
 		D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E17B4B1B286A7F00228B4A /* Images.xcassets */; };
 		D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B4D1B286BC100228B4A /* AppMacro.swift */; };
 		D4E48EBF1BB6388F0042FC74 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */; settings = {ASSET_TAGS = (); }; };
@@ -122,17 +124,13 @@
 		D44A6B131B288696003C4834 /* AppMacroObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacroObjc.h; sourceTree = "<group>"; };
 		D44A6B141B2886A7003C4834 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
-		D45E89741B36CD1500AFF9F8 /* MVBMainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainMenuView.swift; sourceTree = "<group>"; };
-		D45E89751B36CD1500AFF9F8 /* MVBMainMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBMainMenuView.xib; sourceTree = "<group>"; };
-		D45E89761B36CD1500AFF9F8 /* MVBMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainMenuViewController.swift; sourceTree = "<group>"; };
 		D45E89771B36CD1500AFF9F8 /* MVBMainStructureManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainStructureManage.swift; sourceTree = "<group>"; };
-		D45E89931B3700B300AFF9F8 /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
-		D45E89941B3700B300AFF9F8 /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
-		D45E89951B3700B300AFF9F8 /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
 		D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
 		D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MVBDetailBaseViewController.swift; path = Main/MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D46EFAFE1BA5CF3200DB73BE /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
+		D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackAddMenuView.swift; sourceTree = "<group>"; };
+		D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrack.xib; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackViewController.swift; sourceTree = "<group>"; };
 		D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBImageTextTrack.storyboard; sourceTree = "<group>"; };
@@ -156,10 +154,16 @@
 		D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBNoteTrackCell.xib; sourceTree = "<group>"; };
 		D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackDetailCell.swift; sourceTree = "<group>"; };
 		D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBNoteTrackDetailCell.xib; sourceTree = "<group>"; };
+		D4BDF11E1BC8E6260053966A /* MVBMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainMenuViewController.swift; sourceTree = "<group>"; };
+		D4BDF1201BC8E6260053966A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
+		D4BDF1221BC8E6260053966A /* MVBMainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainMenuView.swift; sourceTree = "<group>"; };
+		D4BDF1231BC8E6260053966A /* MVBMainMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBMainMenuView.xib; sourceTree = "<group>"; };
+		D4BDF1291BC8E6B50053966A /* MVBHeroesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesViewController.swift; sourceTree = "<group>"; };
+		D4BDF12B1BC8E6B50053966A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
+		D4BDF12C1BC8E6B50053966A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
+		D4BDF12E1BC8E6B50053966A /* MVBHeroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroTableViewCell.swift; sourceTree = "<group>"; };
+		D4BDF12F1BC8E6B50053966A /* MVBHeroTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBHeroTableViewCell.xib; sourceTree = "<group>"; };
 		D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMDrawerVisualStateCustom.swift; sourceTree = "<group>"; };
-		D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroesInfoModel.swift; sourceTree = "<group>"; };
-		D4E17B411B28695300228B4A /* MVBHeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHeroModel.swift; sourceTree = "<group>"; };
-		D4E17B441B28695300228B4A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
 		D4E17B4B1B286A7F00228B4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4E17B4D1B286BC100228B4A /* AppMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMacro.swift; sourceTree = "<group>"; };
 		D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
@@ -258,7 +262,6 @@
 			children = (
 				D488BF031B28685A0050C2E2 /* AppDelegate */,
 				D45E89701B36CD1500AFF9F8 /* Modules */,
-				D4121E081B072EAA00612CA3 /* Models */,
 				D488BF191B2868F50050C2E2 /* Macro */,
 				D41C7FF91B1BEF2600987D42 /* Utils */,
 				D4E17B4A1B286A6300228B4A /* Resources */,
@@ -292,16 +295,6 @@
 				D4121DF81B07184400612CA3 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D4121E081B072EAA00612CA3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				D4E17B441B28695300228B4A /* MVBUserModel.swift */,
-				D4E17B401B28695300228B4A /* MVBHeroesInfoModel.swift */,
-				D4E17B411B28695300228B4A /* MVBHeroModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		D41C7FF91B1BEF2600987D42 /* Utils */ = {
@@ -375,9 +368,9 @@
 		D45E89731B36CD1500AFF9F8 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D45E89761B36CD1500AFF9F8 /* MVBMainMenuViewController.swift */,
-				D45E89741B36CD1500AFF9F8 /* MVBMainMenuView.swift */,
-				D45E89751B36CD1500AFF9F8 /* MVBMainMenuView.xib */,
+				D4BDF11D1BC8E6260053966A /* Controller */,
+				D4BDF1211BC8E6260053966A /* View */,
+				D4BDF11F1BC8E6260053966A /* Model */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -398,9 +391,9 @@
 		D45E89921B3700B300AFF9F8 /* Heroes */ = {
 			isa = PBXGroup;
 			children = (
-				D45E89931B3700B300AFF9F8 /* MVBHeroesViewController.swift */,
-				D45E89941B3700B300AFF9F8 /* MVBHeroTableViewCell.swift */,
-				D45E89951B3700B300AFF9F8 /* MVBHeroTableViewCell.xib */,
+				D4BDF1281BC8E6B50053966A /* Controller */,
+				D4BDF12D1BC8E6B50053966A /* View */,
+				D4BDF12A1BC8E6B50053966A /* Model */,
 			);
 			path = Heroes;
 			sourceTree = "<group>";
@@ -466,6 +459,8 @@
 				D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */,
 				D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */,
 				D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */,
+				D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */,
+				D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,8 +477,8 @@
 			isa = PBXGroup;
 			children = (
 				D4BDF1021BC8A1490053966A /* Controller */,
-				D4BDF1051BC8A1490053966A /* Model */,
 				D4BDF1091BC8A1490053966A /* View */,
+				D4BDF1051BC8A1490053966A /* Model */,
 			);
 			path = NoteTrack;
 			sourceTree = "<group>";
@@ -517,6 +512,57 @@
 				D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */,
 				D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */,
 				D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D4BDF11D1BC8E6260053966A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF11E1BC8E6260053966A /* MVBMainMenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D4BDF11F1BC8E6260053966A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF1201BC8E6260053966A /* MVBUserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D4BDF1211BC8E6260053966A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF1221BC8E6260053966A /* MVBMainMenuView.swift */,
+				D4BDF1231BC8E6260053966A /* MVBMainMenuView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D4BDF1281BC8E6B50053966A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF1291BC8E6B50053966A /* MVBHeroesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D4BDF12A1BC8E6B50053966A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF12B1BC8E6B50053966A /* MVBHeroesInfoModel.swift */,
+				D4BDF12C1BC8E6B50053966A /* MVBHeroModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D4BDF12D1BC8E6B50053966A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D4BDF12E1BC8E6B50053966A /* MVBHeroTableViewCell.swift */,
+				D4BDF12F1BC8E6B50053966A /* MVBHeroTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -627,18 +673,19 @@
 			files = (
 				D4BDF11C1BC8A1490053966A /* MVBNoteTrackDetailCell.xib in Resources */,
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
+				D4BDF1271BC8E6260053966A /* MVBMainMenuView.xib in Resources */,
 				D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */,
 				D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */,
 				D4BDF1171BC8A1490053966A /* MVBNewNoteTrackView.xib in Resources */,
 				D4E48EBF1BB6388F0042FC74 /* Photos.xcassets in Resources */,
+				D4BDF1341BC8E6B50053966A /* MVBHeroTableViewCell.xib in Resources */,
 				D4BDF11A1BC8A1490053966A /* MVBNoteTrackCell.xib in Resources */,
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
-				D45E899F1B3700B300AFF9F8 /* MVBHeroTableViewCell.xib in Resources */,
 				D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
-				D45E89861B36CD1500AFF9F8 /* MVBMainMenuView.xib in Resources */,
 				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
 				D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */,
+				D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */,
 				D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,21 +745,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BDF1331BC8E6B50053966A /* MVBHeroTableViewCell.swift in Sources */,
 				D4BDF1161BC8A1490053966A /* MVBNewNoteTrackView.swift in Sources */,
 				D4BDF1191BC8A1490053966A /* MVBNoteTrackCell.swift in Sources */,
-				D45E89851B36CD1500AFF9F8 /* MVBMainMenuView.swift in Sources */,
-				D4E17B491B28695300228B4A /* MVBUserModel.swift in Sources */,
 				D4BDF1141BC8A1490053966A /* MVBNoteTrackDataSource.swift in Sources */,
+				D4BDF1261BC8E6260053966A /* MVBMainMenuView.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
-				D45E89871B36CD1500AFF9F8 /* MVBMainMenuViewController.swift in Sources */,
-				D4E17B451B28695300228B4A /* MVBHeroesInfoModel.swift in Sources */,
 				D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */,
 				D40709361BB104F20098867E /* UIView_Extension.swift in Sources */,
-				D45E899E1B3700B300AFF9F8 /* MVBHeroTableViewCell.swift in Sources */,
 				D4BDF1121BC8A1490053966A /* MVBNoteTrackViewController.swift in Sources */,
 				D4BDF1131BC8A1490053966A /* MVBNoteTrackIdListModel.swift in Sources */,
 				D4DE75A11B57560D007E31F0 /* MMDrawerVisualStateCustom.swift in Sources */,
+				D4BDF1311BC8E6B50053966A /* MVBHeroesInfoModel.swift in Sources */,
+				D4BDF1241BC8E6260053966A /* MVBMainMenuViewController.swift in Sources */,
 				D4BDF1151BC8A1490053966A /* MVBNoteTrackModel.swift in Sources */,
+				D4BDF1321BC8E6B50053966A /* MVBHeroModel.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
@@ -734,13 +781,14 @@
 				D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */,
 				D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */,
 				D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */,
+				D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */,
 				D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */,
+				D4BDF1301BC8E6B50053966A /* MVBHeroesViewController.swift in Sources */,
 				D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */,
-				D45E899D1B3700B300AFF9F8 /* MVBHeroesViewController.swift in Sources */,
 				D4B679BB1BB4EDC1002E7B32 /* UIScreen_Extension.swift in Sources */,
 				D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */,
 				D4EA2EA71BAC505C00E48135 /* MVBAccountRecordView.swift in Sources */,
-				D4E17B461B28695300228B4A /* MVBHeroModel.swift in Sources */,
+				D4BDF1251BC8E6260053966A /* MVBUserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

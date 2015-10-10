@@ -29,6 +29,10 @@ class MVBImageTextTrackModel: AVObject {
         print("123")
     }
     
+    deinit {
+        print("\(self.dynamicType) deinit", terminator: "")
+    }
+    
 }
 
 extension MVBImageTextTrackModel: AVSubclassing {
