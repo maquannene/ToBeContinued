@@ -23,9 +23,7 @@ class MVBMainMenuViewController: UIViewController {
     
     weak var delegate: MVBMainMenuViewControllerDelegate?
     weak var mainMenuView: MVBMainMenuView? {
-        get {
-            return self.view as? MVBMainMenuView
-        }
+        return self.view as? MVBMainMenuView
     }
     
     override func loadView() {

@@ -1,12 +1,12 @@
 //
-//  MVBPasswordDetailView.swift
+//  MVBNoteTrackDetailView.swift
 //  vb
 //
 //  Created by 马权 on 9/22/15.
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-class MVBPasswordDetailView: UIView {
+class MVBNoteTrackDetailView: UIView {
 
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -18,7 +18,7 @@ class MVBPasswordDetailView: UIView {
                 attributes: [NSFontAttributeName: contentLabel.font],
                 context: nil).size
             contentLabel.text = newValue
-            self.h = size.height + 40 + 1
+            self.h = size.height + 40 + 0.1
         }
         
         get {

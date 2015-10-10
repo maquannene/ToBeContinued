@@ -1,12 +1,12 @@
 //
-//  MVBPasswordRecordCell.swift
+//  MVBNoteTrackCell.swift
 //  vb
 //
 //  Created by 马权 on 6/19/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-class MVBPasswordRecordCell: SWTableViewCell {
+class MVBNoteTrackCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     lazy var topSeparateLine: CALayer = CALayer()
@@ -42,18 +42,18 @@ class MVBPasswordRecordCell: SWTableViewCell {
 }
 
 // MARK: Public
-extension MVBPasswordRecordCell {
-    func configureWithRecord(record: MVBPasswordRecordModel) -> Void {
+extension MVBNoteTrackCell {
+    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
-        self.contentLabel!.text = record.title
+        self.contentLabel!.text = noteTrackModel.title
         self.rightUtilityButtons = rightButtons() as [AnyObject]
         self.setRightUtilityButtons(self.rightUtilityButtons, withButtonWidth: 70)
     }
 }
 
 // MARK: Private
-extension MVBPasswordRecordCell {
+extension MVBNoteTrackCell {
     private func rightButtons() -> NSArray {
         let rightButtons: NSMutableArray = NSMutableArray()
         rightButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), title: "编辑")

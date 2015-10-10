@@ -1,13 +1,13 @@
 
 //
-//  MVBNewPasswordView.swift
+//  MVBNewNoteTrackView.swift
 //  vb
 //
 //  Created by 马权 on 6/29/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-class MVBNewPasswordView: UIView {
+class MVBNewNoteTrackView: UIView {
 
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var createButton: UIButton!

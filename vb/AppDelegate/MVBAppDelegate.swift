@@ -97,11 +97,11 @@ extension MVBAppDelegate {
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
         //  AVOSCloud sdk
-        MVBPasswordIdListModel.registerSubclass()
-        MVBPasswordRecordModel.registerSubclass()
+        MVBNoteTrackIdListModel.registerSubclass()
+        MVBNoteTrackModel.registerSubclass()
         MVBImageTextTrackIdListModel.registerSubclass()
         MVBImageTextTrackModel.registerSubclass()
-        AVOSCloud.setApplicationId(kMVBAVCloudSDKAppID, clientKey: kMVBAVCloudSDKAppKey)
+        AVOSCloud.setApplicationId(MVBAVCloudSDKAppID, clientKey: MVBAVCloudSDKAppKey)
     }
 }
 
@@ -148,7 +148,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
     func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?) {
         let appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
         if self.userID != nil && self.accessToken != nil {
-            if let userData = NSUserDefaults.standardUserDefaults().valueForKey(kMVBUserInfoKey) as? NSData {
+            if let userData = NSUserDefaults.standardUserDefaults().valueForKey(MVBUserInfoKey) as? NSData {
                 self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
             }
             else {
@@ -162,7 +162,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
         self.userModel = MVBUserModel(keyValues: jsonString)
         //  归档
         let userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
-        NSUserDefaults.standardUserDefaults().setObject(userData, forKey: kMVBUserInfoKey)
+        NSUserDefaults.standardUserDefaults().setObject(userData, forKey: MVBUserInfoKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
@@ -173,7 +173,7 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
         //  移除存储三个唯一值信息的字典
         NSUserDefaults.standardUserDefaults().removeObjectForKey(MVBWeiboSDK.AutorizeInfo)
         //  移除个人信息的字典
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kMVBUserInfoKey)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(MVBUserInfoKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 

@@ -16,7 +16,7 @@ class MVBMainStructureManage: NSObject {
     lazy var mainViewController: MVBMainViewController = MVBMainViewController.initWithNavi()
     
     //  第一部分
-    var passwordManageVc: MVBPasswordManageViewController?
+    var noteTrackVc: MVBNoteTrackViewController?
     
     //  第二部分： 图文迹
     var imageTextTrackVc: MVBImageTextTrackViewController?
@@ -64,14 +64,14 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
         case MVBMainMenuViewControllerOperate.Main:
             centerViewController = mainViewController.mainNavi!
         case MVBMainMenuViewControllerOperate.PasswordManage:
-            if passwordManageVc == nil {
-                passwordManageVc = UIStoryboard(name: "MVBPasswordManage", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBPasswordManageViewController!
+            if noteTrackVc == nil {
+                noteTrackVc = UIStoryboard(name: "MVBNoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBNoteTrackViewController!
             }
-            if let navi = passwordManageVc!.navigationController as UINavigationController? {
+            if let navi = noteTrackVc!.navigationController as UINavigationController? {
                 centerViewController = navi
             }
             else {
-                centerViewController = UINavigationController(rootViewController: passwordManageVc!)
+                centerViewController = UINavigationController(rootViewController: noteTrackVc!)
             }
             
         case MVBMainMenuViewControllerOperate.ImageTextTrack:

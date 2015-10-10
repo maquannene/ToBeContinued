@@ -1,12 +1,12 @@
 //
-//  MVBPasswordRecordDetailCell.swift
+//  MVBNoteTrackDetailCell.swift
 //  vb
 //
 //  Created by 马权 on 7/16/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-class MVBPasswordRecordDetailCell: UITableViewCell {
+class MVBNoteTrackDetailCell: UITableViewCell {
 
 //    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     @IBOutlet weak var titleImageView: UIImageView!
@@ -56,15 +56,15 @@ class MVBPasswordRecordDetailCell: UITableViewCell {
 }
 
 // MARK: Public
-extension MVBPasswordRecordDetailCell {
-    func configureWithRecord(record: MVBPasswordRecordModel) -> Void {
+extension MVBNoteTrackDetailCell {
+    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
         selectionStyle = UITableViewCellSelectionStyle.None
         detailButtonWidth.constant = 0
         detailButtonRightGap.constant = 0
         //  重新设置了约束，要更新约束布局。
         setNeedsUpdateConstraints()
         updateConstraintsIfNeeded()
-        contentLabel!.text = record.detailContent
+        contentLabel!.text = noteTrackModel.detailContent
         //  这两句非常重要。让contentLabel内加入文本后重新排列文字，并且刷新字号。
         //  这样在layoutSubview中调用isTruncated才正确。
         contentLabel!.setNeedsLayout()

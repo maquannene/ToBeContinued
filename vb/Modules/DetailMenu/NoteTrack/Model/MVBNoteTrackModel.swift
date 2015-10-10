@@ -1,5 +1,5 @@
 //
-//  MVBPasswordRecordModel.swift
+//  MVBNoteTrackModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
@@ -9,7 +9,7 @@
 let kTitle = "title"
 let kDetailContent = "detailContent"
 
-class MVBPasswordRecordModel: AVObject {
+class MVBNoteTrackModel: AVObject {
     
     var title: String!
     var detailContent: String!
@@ -29,8 +29,8 @@ class MVBPasswordRecordModel: AVObject {
     }
 }
 
-extension MVBPasswordRecordModel: AVSubclassing {
+extension MVBNoteTrackModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBPasswordRecordModel"
+        return "MVBNoteTrackModel"
     }
 }

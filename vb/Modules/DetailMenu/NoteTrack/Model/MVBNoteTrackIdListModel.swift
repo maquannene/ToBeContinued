@@ -1,5 +1,5 @@
 //
-//  MVBPasswordIdListModel.swift
+//  MVBNoteTrackIdListModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
@@ -11,7 +11,7 @@ let kIdentifier = "identifier"
 
 //  记录着所有 密码Id 的list 类。通过每个用户的唯一kIdentifier来查找
 
-class MVBPasswordIdListModel: AVObject {
+class MVBNoteTrackIdListModel: AVObject {
     
     var identifier: String!
     var list: NSMutableArray!
@@ -24,8 +24,8 @@ class MVBPasswordIdListModel: AVObject {
     }
 }
 
-extension MVBPasswordIdListModel: AVSubclassing {
+extension MVBNoteTrackIdListModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBPasswordIdListModel"
+        return "MVBNoteTrackIdListModel"
     }
 }

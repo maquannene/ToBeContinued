@@ -38,9 +38,7 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
     private var contentHeight: CGFloat = 0
     
     private var width: CGFloat {
-        get {
-            return self.collectionView!.w
-        }
+        return self.collectionView!.w
     }
     
     override class func layoutAttributesClass() -> AnyClass {
