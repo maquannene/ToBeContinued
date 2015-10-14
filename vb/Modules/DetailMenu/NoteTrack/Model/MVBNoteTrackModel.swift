@@ -6,13 +6,10 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-let kTitle = "title"
-let kDetailContent = "detailContent"
-
 class MVBNoteTrackModel: AVObject {
     
-    var title: String!
-    var detailContent: String!
+    @NSManaged var title: String!
+    @NSManaged var detailContent: String!
     
     convenience init(title: String?, detailContent: String?) {
         self.init()
@@ -20,12 +17,8 @@ class MVBNoteTrackModel: AVObject {
     }
     
     func update(title title: String?, detailContent: String?) {
-        if title != nil {
-            self.setObject(title, forKey: kTitle)
-        }
-        if detailContent != nil {
-            self.setObject(detailContent, forKey: kDetailContent)
-        }
+        self.title = title
+        self.detailContent = detailContent
     }
 }
 

@@ -10,14 +10,14 @@
 
 class MVBImageTextTrackIdListModel: AVObject {
     
-    var identifier: String!
-    var list: NSMutableArray!
+    @NSManaged var identifier: String!
+    @NSManaged var list: NSMutableArray!
     
     convenience init(identifier: String) {
         self.init()
         let list = NSMutableArray()
-        self[kList] = list
-        self[kIdentifier] = identifier
+        self.list = list
+        self.identifier = identifier
     }
 }
 

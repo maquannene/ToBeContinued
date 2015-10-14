@@ -34,13 +34,14 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 extension MVBImageTextTrackCell {
     func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
         self.imageTextTrack = imageTextTrack
-        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: SDWebImageOptions.RetryFailed.rawValue | 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
             guard let weakSelf = self else { return }
-            print("当前图片:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+            print("当前图片Text:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
             weakSelf.progressView.hidden = false
             weakSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }) { [weak self] (image, error, cacheType, url) -> Void in
                 guard let weakSelf = self else { return }
+                guard error == nil else { return }
                 weakSelf.progressView.hidden = true
         }
         textLabel.text = imageTextTrack.text

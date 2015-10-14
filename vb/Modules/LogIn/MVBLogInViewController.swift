@@ -48,19 +48,21 @@ class MVBLogInViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         let appDelegate = MVBAppDelegate.MVBApp()
-        guard appDelegate.accessToken != nil && appDelegate.userID != nil && appDelegate.userModel != nil else {
-            self.model = MVBLogInViewModel.NotLogIn
-            return
+        if appDelegate.accessToken != nil && appDelegate.userID != nil {
+            self.model = MVBLogInViewModel.AlreadyLogIn
         }
-        self.model = MVBLogInViewModel.AlreadyLogIn
-        //  如果开启时是登陆过的，直接加载头像
-        userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
+        else {
+            self.model = MVBLogInViewModel.NotLogIn
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
-        let appDelegate = MVBAppDelegate.MVBApp()
-        guard appDelegate.accessToken != nil && appDelegate.userID != nil && appDelegate.userModel != nil else { return }
-        self.successLogIn()
+        //  如果登陆过，就紧接着获取个人信息
+        if self.model == MVBLogInViewModel.AlreadyLogIn {
+            SVProgressHUD.showWithStatus("读取个人信息...")
+            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
+            MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
+        }
     }
     
     @IBAction func logInAction(sender: AnyObject) {
@@ -87,11 +89,8 @@ class MVBLogInViewController: UIViewController {
 }
 
 extension MVBLogInViewController: WeiboSDKDelegate {
-    func didReceiveWeiboRequest(request: WBBaseRequest!) {
-        
-    }
-    
-    //   收到一个来自微博客户端程序的响应。设置userInfo和
+
+    //   收到一个来自微博客户端程序的响应。 这里是用weibo 登陆成功后的response 设置userInfo和
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
         guard
             let _response = response as? WBAuthorizeResponse,
@@ -101,15 +100,22 @@ extension MVBLogInViewController: WeiboSDKDelegate {
         MVBAppDelegate.MVBApp().accessToken = accessToken
         MVBAppDelegate.MVBApp().userID = userID
         
+        //  这里的回调 是 晚于 viewWillApper
+        //  所以这里要单独进行个人信息获取
         self.model = MVBLogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             SVProgressHUD.showWithStatus("读取个人信息...")
             SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-            MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)
+            MVBAppDelegate.MVBApp().getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
         }
     }
+    
+    func didReceiveWeiboRequest(request: WBBaseRequest!) {
+        
+    }
+    
 }
 
 extension MVBLogInViewController: WBHttpRequestDelegate {

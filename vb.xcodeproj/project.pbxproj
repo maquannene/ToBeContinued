@@ -495,8 +495,8 @@
 		D4BDF1051BC8A1490053966A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D4BDF1061BC8A1490053966A /* MVBNoteTrackIdListModel.swift */,
 				D4BDF1071BC8A1490053966A /* MVBNoteTrackDataSource.swift */,
+				D4BDF1061BC8A1490053966A /* MVBNoteTrackIdListModel.swift */,
 				D4BDF1081BC8A1490053966A /* MVBNoteTrackModel.swift */,
 			);
 			path = Model;

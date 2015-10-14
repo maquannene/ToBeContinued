@@ -31,7 +31,7 @@ extension MVBNoteTrackDataSource {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBNoteTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
-        query.whereKey(kIdentifier, equalTo: identifier)
+        query.whereKey("identifier", equalTo: identifier)
         query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
             
             guard error == nil else { complete?(succeed: false); return }

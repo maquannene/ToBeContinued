@@ -31,7 +31,7 @@ extension MVBImageTextTrackDataSource {
         let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBImageTextTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
-        query.whereKey(kIdentifier, equalTo: identifier)
+        query.whereKey("identifier", equalTo: identifier)
         query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) -> Void in
             
             guard let strongSelf = self else { return }

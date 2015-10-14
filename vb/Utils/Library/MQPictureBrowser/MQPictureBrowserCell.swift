@@ -35,6 +35,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
         scrollView.directionalLockEnabled = true
         scrollView.clipsToBounds = false
         scrollView.delegate = self
+        scrollView.minimumZoomScale = 1
         addSubview(scrollView)
         scrollView.addSubview(imageView)
         
@@ -47,6 +48,10 @@ class MQPictureBrowserCell: UICollectionViewCell {
         addGestureRecognizer(tapGesture)
         
         tapGesture.requireGestureRecognizerToFail(doubleTapGesture)
+    }
+    
+    override func prepareForReuse() {
+        scrollView.setZoomScale(1, animated: false)
     }
     
     func tapAction(gesture: UITapGestureRecognizer) {
@@ -123,16 +128,16 @@ extension MQPictureBrowserCell {
     func configure(image: UIImage) {
         imageView.image = image
         self.imageSize = image.size
-        baseConfigure()
+        defaultConfigure()
     }
     
     func configure(imageUrl: String, imageSize: CGSize) {
         imageView.sd_setImageWithURL(NSURL(string: imageUrl)!)
         self.imageSize = imageSize
-        baseConfigure()
+        defaultConfigure()
     }
     
-    func baseConfigure() {
+    func defaultConfigure() {
         let imageActualSize = calculateImageActualRectInCell(self.imageSize).size
         //  如果高度超过了屏幕的高度
         if (imageActualSize.height > self.frame.height) {
@@ -146,7 +151,6 @@ extension MQPictureBrowserCell {
             //  设置滚动
             scrollView.frame =  CGRect(origin: CGPointZero, size: imageActualSize)
         }
-        scrollView.minimumZoomScale = 1
         scrollView.contentSize = imageActualSize
         imageView.frame = CGRect(origin: CGPointZero, size: imageActualSize)
         scrollView.center = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)

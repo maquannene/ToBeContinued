@@ -23,7 +23,7 @@ class MVBImageTextTrackViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
         
         layout.delegate = self
-        layout.numberOfColumns = 4
+        layout.numberOfColumns = 3
         dataSource = MVBImageTextTrackDataSource()
         
         configurePullToRefresh()
@@ -116,7 +116,7 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             //  将本地的AVCacheFile缓存清理掉
             weakImageFile.clearCachedFile()
             //  将新生成的textTrackModel再存到云端
-            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, text: "编号：\(self.dataSource.imageTextTrackList.count + 1)", imageSize: image.size)
+            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, text: nil, imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
                 guard let strongSelf = self else { return }
                 strongSelf.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])

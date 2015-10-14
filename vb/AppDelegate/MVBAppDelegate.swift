@@ -15,10 +15,8 @@ class MVBAppDelegate: UIResponder {
     
     var thirdLogInIdentifier: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                return authorizeInfo[MVBWeiboSDK.LogFromWeibo]
-            }
-            return nil
+            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
+            return authorizeInfo[MVBWeiboSDK.LogFromWeibo]
         }
         set {
             if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
@@ -37,10 +35,8 @@ class MVBAppDelegate: UIResponder {
     
     var userID: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                return authorizeInfo[MVBWeiboSDK.UserIDKey]
-            }
-            return nil
+            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
+            return authorizeInfo[MVBWeiboSDK.UserIDKey]
         }
         set {
             if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
@@ -59,10 +55,8 @@ class MVBAppDelegate: UIResponder {
     
     var accessToken: String? {
         get {
-            if let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                return authorizeInfo[MVBWeiboSDK.AccessTokenKey]
-            }
-            return nil
+            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
+            return authorizeInfo[MVBWeiboSDK.AccessTokenKey]
         }
         set {
             if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
@@ -97,7 +91,7 @@ extension MVBAppDelegate {
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
         //  AVOSCloud sdk
-        MVBNoteTrackIdListModel.registerSubclass()
+        MVBNoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
         MVBNoteTrackModel.registerSubclass()
         MVBImageTextTrackIdListModel.registerSubclass()
         MVBImageTextTrackModel.registerSubclass()
@@ -119,9 +113,6 @@ extension MVBAppDelegate: UIApplicationDelegate {
         _ = NSBundle.mainBundle().infoDictionary?[key] as! String
         
         self.registThirdSDK()
-        
-        //  获取用户信息
-        self.getUserInfo(self, tag: nil)
         
         //  主视图控制器
         self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MVBLogInViewController") as! MVBLogInViewController)
@@ -145,16 +136,18 @@ extension MVBAppDelegate: UIApplicationDelegate {
 
 extension MVBAppDelegate: WBHttpRequestDelegate {
     
-    func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?) {
+    func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?, fromCache: Bool = false) -> Bool {
         let appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
-        if self.userID != nil && self.accessToken != nil {
-            if let userData = NSUserDefaults.standardUserDefaults().valueForKey(MVBUserInfoKey) as? NSData {
-                self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
-            }
-            else {
-                let param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
-                let _ = WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json", httpMethod: "GET", params: param, delegate: delegate, withTag: tag)
-            }
+        guard self.userID != nil && self.accessToken != nil else { return false }
+        if fromCache {
+            guard let userData = NSUserDefaults.standardUserDefaults().valueForKey(MVBUserInfoKey) as? NSData else { return false }
+            self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
+            return true
+        }
+        else {
+            let param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
+            let _ = WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json", httpMethod: "GET", params: param, delegate: delegate, withTag: tag)
+            return true
         }
     }
     

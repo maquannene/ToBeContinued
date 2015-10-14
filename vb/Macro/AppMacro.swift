@@ -12,7 +12,8 @@
 struct MVBWeiboSDK {
     static let AppKey = "1325571405"                                            //  key
     static let RedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
-    static let AutorizeInfo = "MVBWeiboSDKAutorizeInfo"                         //  
+    
+    static let AutorizeInfo = "MVBWeiboSDKAutorizeInfo"                         //  认证信息key，保存了下面三项
     static let UserIDKey = "MVBWeiboSDKUserIDKey"                               //  userID
     static let AccessTokenKey = "MVBWeiboSDKAccessTokenKey"                     //  token
     static let LogFromWeibo = "MVBWeiboSDKLogFromWeibo"                         //  微博登陆前缀

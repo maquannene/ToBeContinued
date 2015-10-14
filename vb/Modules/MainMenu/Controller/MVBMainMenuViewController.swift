@@ -44,7 +44,7 @@ class MVBMainMenuViewController: UIViewController {
         }
         else {
             let delegate = MVBAppDelegate.MVBApp()
-            delegate.getUserInfo(self, tag: "getUserInfo")
+            delegate.getUserInfo(self, tag: "getUserInfo")  //  
         }
     }
     
