@@ -121,14 +121,19 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 extension MVBLogInViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+        let appDelegate = MVBAppDelegate.MVBApp()
         //  设置userModel
-        MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
+        appDelegate.setUserInfoWithJsonString(result!)
         //  登陆获取信息成功后设置头像
-        userImageView!.sd_setImageWithURL(NSURL(string: MVBAppDelegate.MVBApp().userModel!.avatar_large as String!))
+        userImageView!.sd_setImageWithURL(NSURL(string: appDelegate.userModel!.avatar_large as String!))
         //  隐藏进度条
         SVProgressHUD.dismiss()
         //  成功登陆
         self.successLogIn()
+    }
+    
+    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+//        let x: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
     }
     
 }

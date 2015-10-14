@@ -34,6 +34,7 @@
                                                     <rect key="frame" x="10" y="10" width="194" height="219"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.93671085858585856" green="0.93671085858585856" blue="0.93671085858585856" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts4-Sw-fpI">
                                                     <rect key="frame" x="0.0" y="218" width="214" height="20.5"/>
@@ -42,7 +43,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tE9-B6-wz7">
+                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tE9-B6-wz7">
                                                     <rect key="frame" x="32" y="109" width="150" height="20"/>
                                                     <animations/>
                                                     <color key="tintColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,6 +58,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <animations/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" constant="10" id="Bg6-Tw-ht7"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="centerY" secondItem="gb2-oz-fO8" secondAttribute="centerY" id="DU6-RN-hTM"/>
@@ -72,8 +74,10 @@
                                         <size key="customSize" width="214" height="239"/>
                                         <connections>
                                             <outlet property="imageView" destination="tDQ-cS-MZj" id="sGc-Ma-9fX"/>
+                                            <outlet property="longPressGesture" destination="tIn-Ow-P2f" id="lez-ii-abP"/>
                                             <outlet property="progressView" destination="tE9-B6-wz7" id="jv7-fO-uay"/>
                                             <outlet property="textLabel" destination="Ts4-Sw-fpI" id="AyM-DD-yd5"/>
+                                            <outletCollection property="gestureRecognizers" destination="tIn-Ow-P2f" appends="YES" id="VkI-gF-rm6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -94,13 +98,14 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="collectionView" destination="PtS-Pc-CdB" id="pOu-vg-jdo"/>
+                        <outlet property="imageTextTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
                         <outlet property="layout" destination="vgQ-X3-bCS" id="nn7-Gx-Vpa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="tIn-Ow-P2f"/>
             </objects>
-            <point key="canvasLocation" x="100" y="-153"/>
+            <point key="canvasLocation" x="-62" y="-186"/>
         </scene>
     </scenes>
 </document>

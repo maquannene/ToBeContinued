@@ -170,13 +170,14 @@ extension MVBAppDelegate: WBHttpRequestDelegate {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 
-    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-
-    }
-    
-    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-        self.setUserInfoWithJsonString(result)
-    }
+//    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+//        let x = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? MVBUserModel
+//        print(x)
+//    }
+//    
+//    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+//        self.setUserInfoWithJsonString(result)
+//    }
 }
 
 //extension MVBAppDelegate {

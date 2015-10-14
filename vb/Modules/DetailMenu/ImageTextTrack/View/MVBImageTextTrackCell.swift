@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol MVBImageTextTrackCellDelegate: NSObjectProtocol {
+    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell) -> Void
+}
+
 class MVBImageTextTrackCell: UICollectionViewCell {
     
+    weak var delegate: MVBImageTextTrackCellDelegate?
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var longPressGesture: UILongPressGestureRecognizer!
     weak var imageTextTrack: MVBImageTextTrackModel!
     
     override func awakeFromNib() {
@@ -22,6 +28,12 @@ class MVBImageTextTrackCell: UICollectionViewCell {
         imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
         progressView.layer.cornerRadius = 3
+        
+        longPressGesture.addTarget(self, action: "longpressAction:")
+    }
+    
+    func longpressAction(sender: AnyObject) {
+        delegate?.imageTextTrackCellDidLongPress(self)
     }
     
     deinit {
@@ -34,15 +46,18 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 extension MVBImageTextTrackCell {
     func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
         self.imageTextTrack = imageTextTrack
+        let captureUrlStr = self.imageTextTrack.imageUrl
         imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: SDWebImageOptions.RetryFailed.rawValue | 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
-            guard let weakSelf = self else { return }
+            guard let strongSelf = self else { return }
+            guard captureUrlStr == strongSelf.imageTextTrack.imageUrl else { return }
             print("当前图片Text:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
-            weakSelf.progressView.hidden = false
-            weakSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
+            strongSelf.progressView.hidden = false
+            strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }) { [weak self] (image, error, cacheType, url) -> Void in
-                guard let weakSelf = self else { return }
+                guard let strongSelf = self else { return }
+                guard url.absoluteString == strongSelf.imageTextTrack.imageUrl else { return }  //  回调验证
                 guard error == nil else { return }
-                weakSelf.progressView.hidden = true
+                strongSelf.progressView.hidden = true
         }
         textLabel.text = imageTextTrack.text
     }
