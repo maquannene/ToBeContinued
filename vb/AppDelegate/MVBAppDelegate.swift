@@ -11,92 +11,12 @@ class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
     var mainVc: UIViewController!
-    var userModel: MVBUserModel?
-    
-    var thirdLogInIdentifier: String? {
-        get {
-            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
-            return authorizeInfo[MVBWeiboSDK.LogFromWeibo]
-        }
-        set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                authorizeInfo[MVBWeiboSDK.LogFromWeibo] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-            else {
-                var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[MVBWeiboSDK.LogFromWeibo] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-        }
-    }
-    
-    var userID: String? {
-        get {
-            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
-            return authorizeInfo[MVBWeiboSDK.UserIDKey]
-        }
-        set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                authorizeInfo[MVBWeiboSDK.UserIDKey] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-            else {
-                var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[MVBWeiboSDK.UserIDKey] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-        }
-    }
-    
-    var accessToken: String? {
-        get {
-            guard let authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary else { return nil }
-            return authorizeInfo[MVBWeiboSDK.AccessTokenKey]
-        }
-        set {
-            if var authorizeInfo: [String: String] = NSUserDefaults.standardUserDefaults().objectForKey(MVBWeiboSDK.AutorizeInfo) as? Dictionary {
-                authorizeInfo[MVBWeiboSDK.AccessTokenKey] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-            else {
-                var authorizeInfo = Dictionary<String, String>()
-                authorizeInfo[MVBWeiboSDK.AccessTokenKey] = newValue
-                NSUserDefaults.standardUserDefaults().setObject(authorizeInfo, forKey: MVBWeiboSDK.AutorizeInfo)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-        }
-    }
-    
-    //  第三方平台标示 + userID = 存储到云上的唯一标示
-    var uniqueCloudKey: String? {
-        guard let userID = self.userID else { return nil }
-        return thirdLogInIdentifier! + "." + userID + "."
-    }
-    
+    lazy var dataSource: MVBAppDataSource = MVBAppDataSource()
+
     class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
     }
-}
-
-// MARK: Private
-extension MVBAppDelegate {
-    private func registThirdSDK() {
-        //  sina sdk
-        WeiboSDK.enableDebugMode(true)
-        WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
-        //  AVOSCloud sdk
-        MVBNoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
-        MVBNoteTrackModel.registerSubclass()
-        MVBImageTextTrackIdListModel.registerSubclass()
-        MVBImageTextTrackModel.registerSubclass()
-        AVOSCloud.setApplicationId(MVBAVCloudSDKAppID, clientKey: MVBAVCloudSDKAppKey)
-    }
+    
 }
 
 extension MVBAppDelegate: UIApplicationDelegate {
@@ -125,7 +45,7 @@ extension MVBAppDelegate: UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        thirdLogInIdentifier = MVBWeiboSDK.LogFromWeibo
+        dataSource.thirdLogInIdentifier = MVBWeiboSDK.LogFromWeibo
         return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
     }
     
@@ -134,50 +54,19 @@ extension MVBAppDelegate: UIApplicationDelegate {
     }
 }
 
-extension MVBAppDelegate: WBHttpRequestDelegate {
-    
-    func getUserInfo(delegate: WBHttpRequestDelegate?, tag: String?, fromCache: Bool = false) -> Bool {
-        let appDelegate: MVBAppDelegate = MVBAppDelegate.MVBApp()
-        guard self.userID != nil && self.accessToken != nil else { return false }
-        if fromCache {
-            guard let userData = NSUserDefaults.standardUserDefaults().valueForKey(MVBUserInfoKey) as? NSData else { return false }
-            self.userModel = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? MVBUserModel
-            return true
-        }
-        else {
-            let param: [String: AnyObject] = ["access_token": appDelegate.accessToken!, "uid": appDelegate.userID!]
-            let _ = WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json", httpMethod: "GET", params: param, delegate: delegate, withTag: tag)
-            return true
-        }
+// MARK: Private
+extension MVBAppDelegate {
+    private func registThirdSDK() {
+        //  sina sdk
+        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
+        //  AVOSCloud sdk
+        MVBNoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
+        MVBNoteTrackModel.registerSubclass()
+        MVBImageTextTrackIdListModel.registerSubclass()
+        MVBImageTextTrackModel.registerSubclass()
+        AVOSCloud.setApplicationId(MVBAVCloudSDKAppID, clientKey: MVBAVCloudSDKAppKey)
     }
-    
-    func setUserInfoWithJsonString(jsonString: String!) {
-        self.userModel = MVBUserModel(keyValues: jsonString)
-        //  归档
-        let userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
-        NSUserDefaults.standardUserDefaults().setObject(userData, forKey: MVBUserInfoKey)
-        NSUserDefaults.standardUserDefaults().synchronize()
-    }
-    
-    func clearUserInfo() {
-        MVBAppDelegate.MVBApp().accessToken = nil
-        MVBAppDelegate.MVBApp().userID = nil
-        MVBAppDelegate.MVBApp().thirdLogInIdentifier = nil
-        //  移除存储三个唯一值信息的字典
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(MVBWeiboSDK.AutorizeInfo)
-        //  移除个人信息的字典
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(MVBUserInfoKey)
-        NSUserDefaults.standardUserDefaults().synchronize()
-    }
-
-//    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-//        let x = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? MVBUserModel
-//        print(x)
-//    }
-//    
-//    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
-//        self.setUserInfoWithJsonString(result)
-//    }
 }
 
 //extension MVBAppDelegate {

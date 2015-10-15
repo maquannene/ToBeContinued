@@ -7,11 +7,15 @@
 //
 
 #import "UIView+MQRecursiveLevelLog.h"
+#import "AppMacroObjc.h"
 
 @implementation UIView (MQRecursiveLevelLog)
 
 - (void)recursiveLevelLog:(MQRecursiveLevelLogType)logType maxLevel:(NSInteger)maxLevel {
     [self recursiveLevelLog:logType currentLevel:0 maxLevel:maxLevel];
+    onExit {
+    
+    };
 }
 
 - (void)recursiveLevelLog:(MQRecursiveLevelLogType)logType currentLevel:(NSInteger)currentLevel maxLevel:(NSInteger)maxLevel {

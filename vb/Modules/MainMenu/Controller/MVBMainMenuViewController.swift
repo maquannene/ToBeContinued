@@ -36,15 +36,15 @@ class MVBMainMenuViewController: UIViewController {
     }
     
     func configurUserInfo() {
-        if let userModel = MVBAppDelegate.MVBApp().userModel as MVBUserModel? {
+        if let userModel = MVBAppDelegate.MVBApp().dataSource.userModel as MVBUserModel? {
             mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!))
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
             mainMenuView!.describeLbel.text = userModel._description as? String
         }
         else {
-            let delegate = MVBAppDelegate.MVBApp()
-            delegate.getUserInfo(self, tag: "getUserInfo")  //  
+            let appDataSource = MVBAppDelegate.MVBApp().dataSource
+            appDataSource.getUserInfo(self, tag: "getUserInfo")  //
         }
     }
     
@@ -59,8 +59,8 @@ extension MVBMainMenuViewController {
     @IBAction func logOutAction(sender: AnyObject) {
 //        UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
 //            if index == 1 {
-                let appDelegate = MVBAppDelegate.MVBApp()
-                WeiboSDK.logOutWithToken(appDelegate.accessToken!, delegate: self, withTag: "logOut")
+                let appDataSource = MVBAppDelegate.MVBApp().dataSource
+                WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
                 SVProgressHUD.showWithStatus("正在退出...")
                 SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
 //            }
@@ -130,7 +130,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
         if request.tag == "logOut" {
-            MVBAppDelegate.MVBApp().clearUserInfo()
+            MVBAppDelegate.MVBApp().dataSource.clearUserInfo()
             SVProgressHUD.dismiss()
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
@@ -141,7 +141,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             }
         }
         if request.tag == "getUserInfo" {
-            MVBAppDelegate.MVBApp().setUserInfoWithJsonString(result!)
+            MVBAppDelegate.MVBApp().dataSource.setUserInfoWithJsonString(result!)
             configurUserInfo()
         }
     }

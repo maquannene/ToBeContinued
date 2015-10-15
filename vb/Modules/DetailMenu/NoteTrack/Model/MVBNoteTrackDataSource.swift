@@ -28,7 +28,7 @@ extension MVBNoteTrackDataSource {
     - parameter complete: 完成回调
     */
     func queryFindNoteTrackIdList(complete: MVBQureyDataCompleteClosure?) {
-        let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
+        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBNoteTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
@@ -52,7 +52,7 @@ extension MVBNoteTrackDataSource {
     - parameter complete: 完成回调
     */
     func queryCreateNoteTrackIdList(complete: MVBQureyDataCompleteClosure?) {
-        let identifier: String = MVBAppDelegate.MVBApp().uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
+        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
         self.noteTrackIdList = MVBNoteTrackIdListModel(identifier: identifier)
         self.noteTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed.boolValue)

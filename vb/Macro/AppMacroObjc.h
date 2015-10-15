@@ -11,11 +11,11 @@
 
 typedef void(^VoidBlock)(void);
 
-#define onExit \
-__strong VoidBlock block __attribute__((cleanup(cleanUpBlock), unused)) = ^
-
 static inline void cleanUpBlock(__strong VoidBlock *block) {
     (*block)();
 }
+
+#define onExit \
+__strong VoidBlock block __attribute__((cleanup(cleanUpBlock), unused)) = ^
 
 #endif
