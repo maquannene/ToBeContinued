@@ -60,7 +60,7 @@ extension MVBNoteTrackDataSource {
     }
     
     /**
-    根据noteTrackIdList的id列表重新生成noteTrackDataList
+    根据noteTrackIdList的id列表重新生成noteTrackModelList
     
     - parameter complete: 完成回调
     */

@@ -8,19 +8,21 @@
 
 class MVBImageTextTrackModel: AVObject {
     
-    @NSManaged var imageUrl: String!
+    @NSManaged var imageFileUrl: String!
+    @NSManaged var imageFileObjectId: String!
     @NSManaged var imageWidht: NSNumber!
     @NSManaged var imageHeight: NSNumber!
     @NSManaged var text: String?
     
-    convenience init(imageUrl: String!, text: String?, imageSize: CGSize!) {
+    convenience init(imageFileUrl: String!, imageFileObjectId: String!, text: String?, imageSize: CGSize!) {
         self.init()
-        update(imageUrl, text: text, imageSize: imageSize)
+        update(imageFileUrl, imageFileObjectId: imageFileObjectId, text: text, imageSize: imageSize)
     }
     
-    func update(imageUrl: String!, text: String?, imageSize: CGSize!) {
+    func update(imageFileUrl: String!, imageFileObjectId: String!, text: String?, imageSize: CGSize!) {
         //  这个AVObject 中的值必须用这个种setObject:forKey的方法，否者没法存储在云上
-        self.imageUrl = imageUrl
+        self.imageFileUrl = imageFileUrl
+        self.imageFileObjectId = imageFileObjectId
         self.text = text
         self.imageWidht = imageSize.width
         self.imageHeight = imageSize.height

@@ -111,4 +111,39 @@ extension MVBImageTextTrackDataSource {
         }
     }
     
+//    func queryAddImageTextTrack(track:)
+    
+    
+    func queryDeleteImageTextTrack(index: Int!, complete: MVBQureyDataCompleteClosure?) {
+        let track: MVBImageTextTrackModel! = fetchImageTextTrackModel(index)
+        //  根据id初始化一个imageFile 然后删除
+        let imageFile = AVFile()
+        imageFile.objectId = track.imageFileObjectId
+        imageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
+            print(success)
+        }
+        
+        track.deleteInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
+            guard let strongSelf = self else { return }
+            guard succeed.boolValue == true else { complete?(succeed: false); return }
+            //  删除成功后要将密码记录的objectId从noteTrackIdLis中删除并保存
+            strongSelf.imageTextTrackIdList!.removeObject(track.objectId, forKey: "list")
+            strongSelf.imageTextTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
+            strongSelf.imageTextTrackIdList!.save()
+            //  将要删除的track从缓存中删除
+            strongSelf.imageTextTrackList.removeObjectAtIndex(index)
+            complete?(succeed: succeed)
+        }
+    }
+    
+    /**
+    从缓存中取某条图文迹
+    
+    - parameter index: 下标号
+    - returns: 图文迹Model
+    */
+    func fetchImageTextTrackModel(index: Int!) -> MVBImageTextTrackModel! {
+        return imageTextTrackList[index] as! MVBImageTextTrackModel
+    }
+    
 }

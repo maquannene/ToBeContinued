@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MVBImageTextTrackCellDelegate: NSObjectProtocol {
-    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell) -> Void
+    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
 class MVBImageTextTrackCell: UICollectionViewCell {
@@ -33,7 +33,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     }
     
     func longpressAction(sender: AnyObject) {
-        delegate?.imageTextTrackCellDidLongPress(self)
+        delegate?.imageTextTrackCellDidLongPress(self, gesture: sender as! UIGestureRecognizer)
     }
     
     deinit {

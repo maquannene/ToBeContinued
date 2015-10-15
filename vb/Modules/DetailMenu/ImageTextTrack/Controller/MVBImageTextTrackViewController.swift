@@ -110,6 +110,7 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
 
         let imageData = UIImageJPEGRepresentation(image, 0)
         let imageFile = AVFile(name: "maquan", data: imageData)
+        
         //  存储图片到云端
         imageFile.saveInBackgroundWithBlock( { [unowned self, weak imageFile] succeed, error in
             guard let weakImageFile = imageFile else { return }
@@ -119,10 +120,10 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             //  将本地的AVCacheFile缓存清理掉
             weakImageFile.clearCachedFile()
             //  将新生成的textTrackModel再存到云端
-            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, text: nil, imageSize: image.size)
+            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, imageFileId: weakImageFile.objectId, text: nil, imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
                 guard let strongSelf = self else { return }
-                strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
+                strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
             }
         }) { process in
             print("上传照片进度： \(process)")
@@ -181,9 +182,19 @@ extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
 //  MARK: UICollectionViewDelegate
 extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTextTrackCellDelegate {
 
-    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell) {
-        let index = imageTextTrackCollectionView.indexPathForCell(imageTextTrackCell)
-        
+    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell, gesture: UIGestureRecognizer) {
+        let index = imageTextTrackCollectionView.indexPathForItemAtPoint(gesture.locationInView(imageTextTrackCollectionView))!.item
+        let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.Default) { [unowned self] (action) -> Void in
+            self.dataSource.queryDeleteImageTextTrack(index, complete: { [weak self] (succeed) -> Void in
+                guard let strongSelf = self else { return }
+                strongSelf.imageTextTrackCollectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+            })
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+        let alertController = UIAlertController(title: nil, message: "删除图文迹", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

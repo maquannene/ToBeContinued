@@ -50,12 +50,12 @@ class MQPictureBrowserController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.clearColor()
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         collectionViewFlowLayout.itemSize = self.view.frame.size
         
         collectionView.frame = self.view.bounds
+        collectionView.backgroundColor = UIColor.clearColor()
         collectionView.pagingEnabled = true
         collectionView.alwaysBounceVertical = false
         collectionView.delegate = self
@@ -81,7 +81,7 @@ extension MQPictureBrowserController {
         viewController.presentViewController(self, animated: false) {
             
             if self.animationModel == MQPictureBorwserAnimationModel.None {
-                self.view.backgroundColor = UIColor.blackColor()
+                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
                 self.view.addSubview(self.collectionView)
             }
             else {
@@ -90,7 +90,7 @@ extension MQPictureBrowserController {
                 if let showAnimationInfo = self.dataSource.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
                     
                     if self.animationModel == MQPictureBorwserAnimationModel.PictureMove {
-                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)        //  初始化背景为黑色
+                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)        //  初始化背景为黑色
                         self.view.addSubview(self.tmpImageView)                                         //  先将动画图片加在self.view上
                         self.tmpImageView.image = showAnimationInfo.imageView.image                     //  设置动画图片内容
                         let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
@@ -124,7 +124,7 @@ extension MQPictureBrowserController {
                         let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
                         self.tmpImageView.frame = beginRect                                                 //  设置动画其实坐标
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)        //  初始化背景为黑色
+                            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)        //  初始化背景为黑色
                             let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
                                 let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
                                 return self.view.convertRect(imageActualRect, fromView: cell)
@@ -148,7 +148,7 @@ extension MQPictureBrowserController {
 
                 }
                 else {
-                    self.view.backgroundColor = UIColor.blackColor()
+                    self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
                     self.view.addSubview(self.collectionView)
                 }
             }

@@ -50,6 +50,9 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
     }
     
     override func prepareLayout() {
+        
+        layoutAttributesCache.removeAll()
+        
         //  每个cell的宽度
         let cellWidth = width / CGFloat(numberOfColumns)
         
