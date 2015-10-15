@@ -31,15 +31,15 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
         self.imageTextTrack = imageTextTrack
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有教研正确才能设置进度
-        let captureUrlStr = self.imageTextTrack.imageUrl
-        imageView.sd_setImageWithURL(NSURL(string: self.imageTextTrack.imageUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: SDWebImageOptions.RetryFailed.rawValue | 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        let captureUrlStr = self.imageTextTrack.imageFileUrl
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageFileUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: SDWebImageOptions.RetryFailed.rawValue | 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
             guard let strongSelf = self else { return }
-            guard captureUrlStr == strongSelf.imageTextTrack.imageUrl else { return }
+            guard captureUrlStr == strongSelf.imageTextTrack.imageFileUrl else { return }
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }) { [weak self] (image, error, cacheType, url) -> Void in
                 guard let strongSelf = self else { return }
-                guard url.absoluteString == strongSelf.imageTextTrack.imageUrl else { return }  //  回调验证
+                guard url.absoluteString == strongSelf.imageTextTrack.imageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
                 strongSelf.progressView.hidden = true
         }

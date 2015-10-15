@@ -74,10 +74,8 @@
                                         <size key="customSize" width="214" height="239"/>
                                         <connections>
                                             <outlet property="imageView" destination="tDQ-cS-MZj" id="sGc-Ma-9fX"/>
-                                            <outlet property="longPressGesture" destination="tIn-Ow-P2f" id="lez-ii-abP"/>
                                             <outlet property="progressView" destination="tE9-B6-wz7" id="jv7-fO-uay"/>
                                             <outlet property="textLabel" destination="Ts4-Sw-fpI" id="AyM-DD-yd5"/>
-                                            <outletCollection property="gestureRecognizers" destination="tIn-Ow-P2f" appends="YES" id="VkI-gF-rm6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -103,7 +101,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="tIn-Ow-P2f"/>
             </objects>
             <point key="canvasLocation" x="-62" y="-186"/>
         </scene>

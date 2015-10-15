@@ -17,6 +17,8 @@ class MVBNewNoteTrackView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 10
+        self.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
         createButton.layer.borderColor = UIColor.blackColor().CGColor
         createButton.layer.cornerRadius = 5
         createButton.layer.borderWidth = 1

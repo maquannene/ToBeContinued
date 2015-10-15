@@ -25,7 +25,7 @@ class MVBImageTextTrackViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
         
         layout.delegate = self
-        layout.numberOfColumns = 3
+        layout.numberOfColumns = 1
         dataSource = MVBImageTextTrackDataSource()
         
         configurePullToRefresh()
@@ -120,7 +120,7 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             //  将本地的AVCacheFile缓存清理掉
             weakImageFile.clearCachedFile()
             //  将新生成的textTrackModel再存到云端
-            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageUrl: weakImageFile.url, imageFileId: weakImageFile.objectId, text: nil, imageSize: image.size)
+            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageFileUrl: weakImageFile.url, imageFileObjectId: weakImageFile.objectId, text: nil, imageSize: image.size)
             self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
                 guard let strongSelf = self else { return }
                 strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
@@ -137,8 +137,8 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
     
 }
 
-//  MARK: MQPictureBrowserControllerDataSource
-extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource {
+//  MARK: MQPictureBrowserControllerDataSource MQPictureBrowserControllerDelegate
+extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource, MQPictureBrowserControllerDelegate {
     
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo? {
         if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
@@ -158,12 +158,15 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource 
         return dataSource.imageTextTrackList.count
     }
     
-    func pictureBrowserController(controller: MQPictureBrowserController, cellForItemAtIndex index: Int) -> MQPictureBrowserCell {
+    func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell {
         let picturebrowserCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
         picturebrowserCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel)
         return picturebrowserCell
     }
     
+    func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
+        imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+    }
 }
 
 //  MARK: MVBImageTextTrackLayoutDelegate
@@ -200,6 +203,7 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = MQPictureBrowserController(animationModel: MQPictureBorwserAnimationModel.PictureMoveAndBackgroundFadeOut)
         vc.dataSource = self
+        vc.delegate = self
         vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         imageTextTrackBrowserVc = vc

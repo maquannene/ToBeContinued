@@ -17,7 +17,7 @@
                 <action selector="heroesManageAction:" destination="-1" id="tun-YL-goK"/>
             </connections>
         </tapGestureRecognizer>
-        <view contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MVBMainMenuView" customModule="vb" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MVBMainMenuView" customModule="vb" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>

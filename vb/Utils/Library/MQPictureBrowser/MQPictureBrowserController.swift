@@ -11,11 +11,16 @@ import UIKit
 typealias ShowAnimationInfo = (imageView: UIImageView, fromView: UIView)
 typealias HideAnimationInfo = (imageView: UIImageView, toView: UIView)
 
+
+@objc protocol MQPictureBrowserControllerDelegate: NSObjectProtocol {
+    optional func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
+}
+
 protocol MQPictureBrowserControllerDataSource: NSObjectProtocol {
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo?
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo?
     func numberOfItemsInPictureBrowserController(controller: MQPictureBrowserController) -> Int
-    func pictureBrowserController(controller: MQPictureBrowserController, cellForItemAtIndex index: Int) -> MQPictureBrowserCell
+    func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
 }
 
 public enum MQPictureBorwserAnimationModel {
@@ -29,7 +34,8 @@ class MQPictureBrowserController: UIViewController {
 
     var collectionView: UICollectionView!
     var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    weak var dataSource: MQPictureBrowserControllerDataSource!
+    weak var dataSource: MQPictureBrowserControllerDataSource?
+    weak var delegate: MQPictureBrowserControllerDelegate?
     lazy var tmpImageView = UIImageView()
     var animationModel: MQPictureBorwserAnimationModel = MQPictureBorwserAnimationModel.None
     
@@ -87,7 +93,7 @@ extension MQPictureBrowserController {
             else {
                 self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.None, animated: false)
 
-                if let showAnimationInfo = self.dataSource.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
+                if let showAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
                     
                     if self.animationModel == MQPictureBorwserAnimationModel.PictureMove {
                         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)        //  初始化背景为黑色
@@ -100,7 +106,7 @@ extension MQPictureBrowserController {
                                 let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
                                 return self.view.convertRect(imageActualRect, fromView: cell)
                             }
-                            let cell = self.dataSource.pictureBrowserController(self, cellForItemAtIndex: index)
+                            let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
                             var endRect = CGRectZero
                             if cell.superview == nil {
                                 self.collectionView.addSubview(cell)
@@ -129,7 +135,7 @@ extension MQPictureBrowserController {
                                 let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
                                 return self.view.convertRect(imageActualRect, fromView: cell)
                             }
-                            let cell = self.dataSource.pictureBrowserController(self, cellForItemAtIndex: index)
+                            let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
                             var endRect = CGRectZero
                             if cell.superview == nil {
                                 self.collectionView.addSubview(cell)
@@ -165,7 +171,7 @@ extension MQPictureBrowserController {
             dismissViewControllerAnimated(false, completion: nil)
         }
         else {
-            if let hideAnimationInfo = self.dataSource.pictureBrowserController(self, animationInfoOfHidePictureAtIndex: currentPictureIndex) as HideAnimationInfo? {
+            if let hideAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfHidePictureAtIndex: currentPictureIndex) as HideAnimationInfo? {
                 
                 if animationModel == MQPictureBorwserAnimationModel.PictureMove {
                     hideAnimationInfo.toView.addSubview(self.tmpImageView)                          //  先将临时动画视图加载toView上
@@ -175,7 +181,7 @@ extension MQPictureBrowserController {
                         let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
                         return hideAnimationInfo.toView.convertRect(imageActualRect, fromView: cell)
                     }
-                    let cell = self.dataSource.pictureBrowserController(self, cellForItemAtIndex: currentPictureIndex)
+                    let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
                     var beginRect = CGRectZero
                     if cell.superview == nil {
                         self.collectionView.addSubview(cell)
@@ -207,7 +213,7 @@ extension MQPictureBrowserController {
                         return self.view.convertRect(imageActualRect, fromView: cell)
                     }
                     
-                    let cell = self.dataSource.pictureBrowserController(self, cellForItemAtIndex: currentPictureIndex)
+                    let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
                     var beginRect = CGRectZero
                     if cell.superview == nil {
                         self.collectionView.addSubview(cell)
@@ -246,16 +252,21 @@ extension MQPictureBrowserController: MQPictureBrowserCellDelegate {
 
 extension MQPictureBrowserController: UICollectionViewDelegate {
     
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        guard let imageTextCell = cell as? MQPictureBrowserCell else { return }
+        delegate?.pictureBrowserController?(self, willDisplayCell: imageTextCell, forItemAtIndex: indexPath.item)
+    }
+    
 }
 
 extension MQPictureBrowserController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.numberOfItemsInPictureBrowserController(self)
+        return dataSource!.numberOfItemsInPictureBrowserController(self)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = dataSource.pictureBrowserController(self, cellForItemAtIndex: indexPath.item)
+        let cell = dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: indexPath.item)
         cell.delegate = self
         return cell
     }

@@ -22,27 +22,24 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjo-k7-uTt" userLabel="detail">
-                    <rect key="frame" x="10" y="60" width="300" height="432"/>
+                    <rect key="frame" x="10" y="60" width="300" height="446"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2Z-b8-BjH" userLabel="取消">
-                    <rect key="frame" x="170" y="509" width="140" height="44"/>
+                    <rect key="frame" x="170" y="523" width="140" height="30"/>
                     <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="FG7-db-6hm"/>
-                    </constraints>
                     <state key="normal" title="取消"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzs-Wy-bzp" userLabel="创建">
-                    <rect key="frame" x="10" y="509" width="140" height="44"/>
+                    <rect key="frame" x="10" y="523" width="140" height="30"/>
                     <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="zqS-1I-JgH"/>
+                        <constraint firstAttribute="height" constant="30" id="zqS-1I-JgH"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                 </button>
@@ -59,6 +56,7 @@
                 <constraint firstItem="Hzs-Wy-bzp" firstAttribute="width" secondItem="I2Z-b8-BjH" secondAttribute="width" id="cfJ-nr-BET"/>
                 <constraint firstItem="bjo-k7-uTt" firstAttribute="width" secondItem="Dlm-vD-4XA" secondAttribute="width" id="fh1-D5-zpj"/>
                 <constraint firstItem="Dlm-vD-4XA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="gAb-EW-Pvv"/>
+                <constraint firstItem="I2Z-b8-BjH" firstAttribute="height" secondItem="Hzs-Wy-bzp" secondAttribute="height" id="i0l-WW-NgA"/>
                 <constraint firstAttribute="trailing" secondItem="Dlm-vD-4XA" secondAttribute="trailing" constant="10" id="kXn-yN-tGf"/>
                 <constraint firstItem="Hzs-Wy-bzp" firstAttribute="leading" secondItem="bjo-k7-uTt" secondAttribute="leading" id="mEx-Bs-edM"/>
                 <constraint firstItem="bjo-k7-uTt" firstAttribute="centerX" secondItem="Dlm-vD-4XA" secondAttribute="centerX" id="rx6-1v-3am"/>
