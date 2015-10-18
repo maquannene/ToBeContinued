@@ -26,21 +26,30 @@ protocol MQPictureBrowserControllerDataSource: NSObjectProtocol {
 public enum MQPictureBorwserAnimationModel {
     case None
     case PictureMove
-    case PictureMoveAndBackgroundFadeOut
+    case PictureMoveAndBackgroundFadeOut                //  default
 }
 
 
 class MQPictureBrowserController: UIViewController {
 
     var collectionView: UICollectionView!
-    var collectionViewFlowLayout: UICollectionViewFlowLayout!
     weak var dataSource: MQPictureBrowserControllerDataSource?
     weak var delegate: MQPictureBrowserControllerDelegate?
-    lazy var tmpImageView = UIImageView()
-    var animationModel: MQPictureBorwserAnimationModel = MQPictureBorwserAnimationModel.None
+    var animationModel: MQPictureBorwserAnimationModel = .None
+    var cellGap: CGFloat = 0
+    
+    private var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    private lazy var tmpImageView = UIImageView()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.collectionViewFlowLayout)
+        animationModel = .PictureMoveAndBackgroundFadeOut
     }
     
     convenience init(animationModel: MQPictureBorwserAnimationModel) {
@@ -48,17 +57,15 @@ class MQPictureBrowserController: UIViewController {
         self.animationModel = animationModel
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.collectionViewFlowLayout)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewFlowLayout.minimumLineSpacing = 0
+        
+        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        
+        collectionViewFlowLayout.minimumLineSpacing = cellGap
         collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        collectionViewFlowLayout.itemSize = self.view.frame.size
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: cellGap / 2, bottom: 0, right: cellGap / 2)
+        collectionViewFlowLayout.itemSize = CGSize(width: self.view.w - cellGap, height: self.view.h)
         
         collectionView.frame = self.view.bounds
         collectionView.backgroundColor = UIColor.clearColor()
@@ -67,8 +74,10 @@ class MQPictureBrowserController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.hidden = true
-        
         view.addSubview(collectionView)
+        
+        tmpImageView.clipsToBounds = true
+        tmpImageView.layer.cornerRadius = 7.5
     }
     
     deinit {
@@ -86,17 +95,17 @@ extension MQPictureBrowserController {
         
         viewController.presentViewController(self, animated: false) {
             
-            if self.animationModel == MQPictureBorwserAnimationModel.None {
-                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+            if self.animationModel == .None {
+                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
                 self.view.addSubview(self.collectionView)
             }
             else {
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.None, animated: false)
+                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
 
                 if let showAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
                     
-                    if self.animationModel == MQPictureBorwserAnimationModel.PictureMove {
-                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)        //  初始化背景为黑色
+                    if self.animationModel == .PictureMove {
+                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)        //  初始化背景为黑色
                         self.view.addSubview(self.tmpImageView)                                         //  先将动画图片加在self.view上
                         self.tmpImageView.image = showAnimationInfo.imageView.image                     //  设置动画图片内容
                         let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
@@ -123,14 +132,14 @@ extension MQPictureBrowserController {
                         })
                     }
                     
-                    if self.animationModel == MQPictureBorwserAnimationModel.PictureMoveAndBackgroundFadeOut {
+                    if self.animationModel == .PictureMoveAndBackgroundFadeOut {
                         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)            //  初始化背景为白色
                         self.view.addSubview(self.tmpImageView)                                             //  先将动画图片加在self.view上
                         self.tmpImageView.image = showAnimationInfo.imageView.image                         //  设置动画图片内容
                         let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
                         self.tmpImageView.frame = beginRect                                                 //  设置动画其实坐标
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)        //  初始化背景为黑色
+                            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)        //  初始化背景为黑色
                             let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
                                 let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
                                 return self.view.convertRect(imageActualRect, fromView: cell)
@@ -154,7 +163,7 @@ extension MQPictureBrowserController {
 
                 }
                 else {
-                    self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+                    self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
                     self.view.addSubview(self.collectionView)
                 }
             }
@@ -167,13 +176,13 @@ extension MQPictureBrowserController {
             currentPictureIndex = self.collectionView.indexPathForCell(cell)!.item
         }
         
-        if animationModel == MQPictureBorwserAnimationModel.None {
+        if animationModel == .None {
             dismissViewControllerAnimated(false, completion: nil)
         }
         else {
             if let hideAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfHidePictureAtIndex: currentPictureIndex) as HideAnimationInfo? {
                 
-                if animationModel == MQPictureBorwserAnimationModel.PictureMove {
+                if animationModel == .PictureMove {
                     hideAnimationInfo.toView.addSubview(self.tmpImageView)                          //  先将临时动画视图加载toView上
                     self.tmpImageView.image = hideAnimationInfo.imageView.image                     //  设置动画图片内容
 
@@ -203,7 +212,7 @@ extension MQPictureBrowserController {
                     }
                 }
                 
-                if animationModel == MQPictureBorwserAnimationModel.PictureMoveAndBackgroundFadeOut {
+                if animationModel == .PictureMoveAndBackgroundFadeOut {
                     self.view.addSubview(self.tmpImageView)
                     self.tmpImageView.image = hideAnimationInfo.imageView.image
                     self.collectionView.hidden = true

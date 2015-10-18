@@ -111,7 +111,7 @@ extension MVBNoteTrackViewController {
     */
     func addNewNoteTrackAction(sender: AnyObject!) {
         let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
-        newNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 20, self.view.frame.width - 40, 240)
+        newNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         newNoteTrackView.createButton.setTitle("创建", forState: UIControlState.Normal)
         newNoteTrackView.createButton.addTarget(self, action: "confirmCreateNewNoteTrackAction:", forControlEvents: UIControlEvents.TouchUpInside)
         newNoteTrackView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -122,12 +122,12 @@ extension MVBNoteTrackViewController {
         //  设置显示动画
         newNoteTrackVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(newNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0.5)
         }
         //  显示关闭动画
         newNoteTrackVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(newNoteTrackView.frame, self.view.w - 20, 0)
-             self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+             self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
         }
         newNoteTrackVc!.showWithAnimated(true, completion: nil)
         newNoteTrackView.titleTextView.becomeFirstResponder()
@@ -144,7 +144,7 @@ extension MVBNoteTrackViewController {
         let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
         let detailNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
         detailNoteTrackView.configureData(noteTrackModel.title, detailContent: noteTrackModel.detailContent)
-        detailNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 20, self.view.frame.width - 40, 240)
+        detailNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         detailNoteTrackView.createButton.setTitle("更新", forState: UIControlState.Normal)
         detailNoteTrackView.createButton.addTarget(self, action: "confirmUpdataNoteTrackAction:", forControlEvents: UIControlEvents.TouchUpInside)
         detailNoteTrackView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -155,12 +155,12 @@ extension MVBNoteTrackViewController {
         //  设置显示动画
         newNoteTrackVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(detailNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0.8)
         }
         //  显示关闭动画
         newNoteTrackVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(detailNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
         }
         newNoteTrackVc!.showWithAnimated(true, completion: nil)
         detailNoteTrackView.titleTextView.becomeFirstResponder()

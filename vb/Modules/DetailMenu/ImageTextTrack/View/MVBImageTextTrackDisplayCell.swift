@@ -20,6 +20,8 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
         progressView = UIProgressView()
         progressView.tintColor = UIColor.grayColor()
         addSubview(progressView)
+        imageView.layer.cornerRadius = 7.5
+        imageView.clipsToBounds = true
     }
 
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {

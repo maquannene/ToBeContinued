@@ -9,7 +9,7 @@
 
 class MVBNewNoteTrackView: UIView {
 
-    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -17,14 +17,14 @@ class MVBNewNoteTrackView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 10
-        self.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
-        createButton.layer.borderColor = UIColor.blackColor().CGColor
-        createButton.layer.cornerRadius = 5
-        createButton.layer.borderWidth = 1
-        cancelButton.layer.borderColor = UIColor.blackColor().CGColor
-        cancelButton.layer.cornerRadius = 5
-        cancelButton.layer.borderWidth = 1
+        backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 1)
+        layer.cornerRadius = 10
+        layer.borderColor = RGBA(red: 237, green: 238, blue: 239, alpha: 1).CGColor
+        layer.borderWidth = 1
+        layer.shadowColor = UIColor.grayColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 10
+        layer.shadowOpacity = 0.8
     }
     
     func configureData(title: String, detailContent: String) {

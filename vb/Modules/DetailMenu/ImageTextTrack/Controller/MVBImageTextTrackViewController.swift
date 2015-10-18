@@ -201,9 +201,10 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let vc = MQPictureBrowserController(animationModel: MQPictureBorwserAnimationModel.PictureMoveAndBackgroundFadeOut)
+        let vc = MQPictureBrowserController(animationModel: .PictureMoveAndBackgroundFadeOut)
         vc.dataSource = self
         vc.delegate = self
+        vc.cellGap = 10
         vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         imageTextTrackBrowserVc = vc

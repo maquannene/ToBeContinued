@@ -49,9 +49,15 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         return CGSize(width: width, height: contentHeight)
     }
     
+    
+    //  prepareLayout中计算每个cell的布局放在缓存cache中
     override func prepareLayout() {
         
+        super.prepareLayout()
+        
         layoutAttributesCache.removeAll()
+        
+        contentHeight = 0
         
         //  每个cell的宽度
         let cellWidth = width / CGFloat(numberOfColumns)
@@ -84,6 +90,7 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         }
     }
     
+    //  从缓存中获取当前rect 要展示的[attributes]
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         for attributes in layoutAttributesCache {
@@ -92,6 +99,11 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
             }
         }
         return layoutAttributes
+    }
+    
+    //  从缓存中获取indexPath的attributes
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        return layoutAttributesCache[indexPath.item]
     }
     
 }

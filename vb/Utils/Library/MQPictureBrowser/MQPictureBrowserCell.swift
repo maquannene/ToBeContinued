@@ -18,10 +18,12 @@ class MQPictureBrowserCell: UICollectionViewCell {
     lazy var scrollView = UIScrollView()
     lazy var imageView = UIImageView()
     weak var delegate: MQPictureBrowserCellDelegate?
-    var doubleTapGesture: UITapGestureRecognizer!
-    var tapGesture: UITapGestureRecognizer!
-    var doubleTapGestureLock: Bool = false
     var imageSize: CGSize = CGSizeZero
+    
+    private var doubleTapGesture: UITapGestureRecognizer!
+    private var tapGesture: UITapGestureRecognizer!
+    private var doubleTapGestureLock: Bool = false
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -78,7 +80,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 //  放大到最大
                 self.scrollView.bounds = self.bounds
-                self.scrollView.center = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+                self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
                 self.scrollView.zoomToRect(CGRect(x: x, y: y, width: w, height: h), animated: false)
                 }) {
                     self.doubleTapGestureLock = !$0
@@ -90,7 +92,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
                     //  缩小到最小
                     self.scrollView.setZoomScale(1, animated: false)
                     self.scrollView.bounds = CGRect(origin: CGPointZero, size: imageActualSize)
-                    self.scrollView.center = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+                    self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
                 }) {
                     self.doubleTapGestureLock = !$0
             }
@@ -112,7 +114,7 @@ extension MQPictureBrowserCell {
         let boundingRect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: CGFloat(MAXFLOAT))
         let imageActualSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageSize.width, height:imageSize.height), boundingRect).size
         if self.frame.height < imageActualSize.height {
-            return CGRect(origin: CGPointZero, size: imageActualSize)
+            return CGRect(origin: CGPoint(x: 0, y: 0), size: imageActualSize)
         }
         else {
             return CGRect(origin: CGPoint(x: 0, y: (self.frame.size.height - imageActualSize.height) / 2), size: imageActualSize)
@@ -148,7 +150,8 @@ extension MQPictureBrowserCell {
             let maxScale = self.frame.height / imageActualSize.height
             scrollView.maximumZoomScale = maxScale
             //  设置滚动
-            scrollView.frame =  CGRect(origin: CGPointZero, size: imageActualSize)
+            scrollView.bounds =  CGRect(origin: CGPointZero, size: imageActualSize)
+            self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
         }
         scrollView.contentSize = imageActualSize
         imageView.frame = CGRect(origin: CGPointZero, size: imageActualSize)
@@ -166,7 +169,7 @@ extension MQPictureBrowserCell: UIScrollViewDelegate {
     func scrollViewDidZoom(scrollView: UIScrollView) {
         guard doubleTapGestureLock == false else { return }
         scrollView.bounds.size = CGSizeMake(scrollView.bounds.width, scrollView.contentSize.height)
-        scrollView.bounds = CGRect(origin: CGPoint(x: scrollView.bounds.origin.x, y: 0), size: CGSizeMake(scrollView.bounds.width, scrollView.contentSize.height))
+        scrollView.bounds = CGRect(origin: CGPoint(x: scrollView.bounds.origin.x, y: 0), size: scrollView.bounds.size)
     }
     
 }

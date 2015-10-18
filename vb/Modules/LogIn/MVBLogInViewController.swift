@@ -64,7 +64,12 @@ class MVBLogInViewController: UIViewController {
             MVBAppDelegate.MVBApp().dataSource.getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
         }
     }
-    
+
+}
+
+//  MARK: Aciton
+extension MVBLogInViewController {
+
     @IBAction func logInAction(sender: AnyObject) {
         guard model != MVBLogInViewModel.AlreadyLogIn else { return }
         let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
@@ -79,15 +84,17 @@ class MVBLogInViewController: UIViewController {
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.LayoutSubviews, animations: { () -> Void in
             self.view.layoutIfNeeded()
             self.userImageView.alpha = 1
-        }) { (finish) -> Void in
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-                self.structureManage = MVBMainStructureManage()
-                self.structureManage!.displayMainStructureFrom(self)
-            }
+            }) { (finish) -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                    self.structureManage = MVBMainStructureManage()
+                    self.structureManage!.displayMainStructureFrom(self)
+                }
         }
     }
+    
 }
 
+//  MARK: WeiboSDKDelegate
 extension MVBLogInViewController: WeiboSDKDelegate {
 
     //   收到一个来自微博客户端程序的响应。 这里是用weibo 登陆成功后的response 设置userInfo和
@@ -118,6 +125,8 @@ extension MVBLogInViewController: WeiboSDKDelegate {
     
 }
 
+
+//  MARK: WBHttpRequestDelegate
 extension MVBLogInViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
