@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-cS-MZj">
-                                                    <rect key="frame" x="10" y="10" width="194" height="219"/>
+                                                    <rect key="frame" x="5" y="5" width="204" height="229"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.93671085858585856" green="0.93671085858585856" blue="0.93671085858585856" alpha="1" colorSpace="calibratedRGB"/>
                                                     <gestureRecognizers/>
@@ -60,16 +60,16 @@
                                         <animations/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" constant="10" id="Bg6-Tw-ht7"/>
+                                            <constraint firstAttribute="bottom" secondItem="tDQ-cS-MZj" secondAttribute="bottom" constant="5" id="Bg6-Tw-ht7"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="centerY" secondItem="gb2-oz-fO8" secondAttribute="centerY" id="DU6-RN-hTM"/>
-                                            <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" constant="10" id="MdT-gu-xRK"/>
+                                            <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" constant="5" id="MdT-gu-xRK"/>
                                             <constraint firstAttribute="trailing" secondItem="Ts4-Sw-fpI" secondAttribute="trailing" id="PaI-Mp-1ih"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="left" relation="greaterThanOrEqual" secondItem="gb2-oz-fO8" secondAttribute="left" constant="20" id="Zwl-c3-aYI"/>
                                             <constraint firstAttribute="bottom" secondItem="Ts4-Sw-fpI" secondAttribute="bottom" id="cOc-iZ-2xI"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="centerX" secondItem="gb2-oz-fO8" secondAttribute="centerX" id="gxD-pO-PH0"/>
                                             <constraint firstItem="Ts4-Sw-fpI" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="mGj-v3-E1Q"/>
-                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" constant="10" id="wYb-mI-hcE"/>
-                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" constant="10" id="xNn-rT-lT6"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" constant="5" id="wYb-mI-hcE"/>
+                                            <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" constant="5" id="xNn-rT-lT6"/>
                                         </constraints>
                                         <size key="customSize" width="214" height="239"/>
                                         <connections>

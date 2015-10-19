@@ -31,22 +31,21 @@ class MVBImageTextTrackLayoutAttributes: UICollectionViewLayoutAttributes {
 class MVBImageTextTrackLayout: UICollectionViewLayout {
     
     var delegate: MVBImageTextTrackLayoutDelegate!
-    var numberOfColumns = 1
-    var cellPadding: CGFloat = 0
+    var numberOfColumns: Int = 1
+    var cellWidth: CGFloat = 0
+    var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     private var layoutAttributesCache = [MVBImageTextTrackLayoutAttributes]()
     private var contentHeight: CGFloat = 0
-    
-    private var width: CGFloat {
-        return self.collectionView!.w
-    }
+    private var contentWidth: CGFloat = 0
     
     override class func layoutAttributesClass() -> AnyClass {
         return MVBImageTextTrackLayoutAttributes.self
     }
     
+    
     override func collectionViewContentSize() -> CGSize {
-        return CGSize(width: width, height: contentHeight)
+        return CGSize(width: contentWidth, height: contentHeight)
     }
     
     
@@ -56,38 +55,36 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         super.prepareLayout()
         
         layoutAttributesCache.removeAll()
-        
         contentHeight = 0
-        
-        //  每个cell的宽度
-        let cellWidth = width / CGFloat(numberOfColumns)
+        contentWidth = 0
         
         var xOffsets = [CGFloat]()
         for column in 0..<numberOfColumns {
-            xOffsets.append(CGFloat(column) * cellWidth)
+            xOffsets.append(CGFloat(column) * cellWidth + sectionInset.left)
         }
         
-        var yOffsets = [CGFloat](count: numberOfColumns, repeatedValue: 0)
+        var yOffsets = [CGFloat](count: numberOfColumns, repeatedValue: sectionInset.top)
         
         var column = 0
         
         for item in 0..<collectionView!.numberOfItemsInSection(0) {
             let indexPath = NSIndexPath(forItem: item, inSection: 0)
-            let imageWidth = cellWidth - (cellPadding * 2)
-            let imageHeight = delegate.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: imageWidth)
-            let cellHeight = cellPadding + imageHeight + cellPadding
-            
+            let cellHeight = delegate.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
             let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeight)
             let attributes = MVBImageTextTrackLayoutAttributes(forCellWithIndexPath: indexPath)
             attributes.frame = frame
             layoutAttributesCache.append(attributes)
             contentHeight = max(contentHeight, CGRectGetMaxY(frame))
+            contentWidth = max(contentWidth, CGRectGetMaxX(frame))
             yOffsets[column] = yOffsets[column] + cellHeight
             let x = yOffsets.reduce(yOffsets[0]){
                 min($0, $1)
             }
             column = yOffsets.indexOf(x)!
         }
+
+        contentHeight += sectionInset.bottom
+        contentWidth += sectionInset.right
     }
     
     //  从缓存中获取当前rect 要展示的[attributes]

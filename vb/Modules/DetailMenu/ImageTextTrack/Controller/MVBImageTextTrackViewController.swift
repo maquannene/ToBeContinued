@@ -25,7 +25,10 @@ class MVBImageTextTrackViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
         
         layout.delegate = self
-        layout.numberOfColumns = 1
+        layout.numberOfColumns = 2
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
+        
         dataSource = MVBImageTextTrackDataSource()
         
         configurePullToRefresh()

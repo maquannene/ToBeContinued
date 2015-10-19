@@ -12,7 +12,6 @@ class MVBNewNoteTrackView: UIView {
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    
     @IBOutlet weak var detailContentTextView: UITextView!
     
     override func awakeFromNib() {

@@ -287,10 +287,10 @@ extension MVBNoteTrackViewController: UITableViewDelegate {
         
         tableView.beginUpdates()
         if theExpandedIndexPath != nil {
-            tableView.deleteRowsAtIndexPaths([theExpandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
+            tableView.deleteRowsAtIndexPaths([theExpandedIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
         if dataSource.expandedIndexPath != nil {
-            tableView.insertRowsAtIndexPaths([dataSource.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.None)
+            tableView.insertRowsAtIndexPaths([dataSource.expandedIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
         tableView.endUpdates()
         

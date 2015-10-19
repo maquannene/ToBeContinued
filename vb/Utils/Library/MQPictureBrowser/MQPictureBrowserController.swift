@@ -24,7 +24,6 @@ protocol MQPictureBrowserControllerDataSource: NSObjectProtocol {
 }
 
 public enum MQPictureBorwserAnimationModel {
-    case None
     case PictureMove
     case PictureMoveAndBackgroundFadeOut                //  default
 }
@@ -35,11 +34,13 @@ class MQPictureBrowserController: UIViewController {
     var collectionView: UICollectionView!
     weak var dataSource: MQPictureBrowserControllerDataSource?
     weak var delegate: MQPictureBrowserControllerDelegate?
-    var animationModel: MQPictureBorwserAnimationModel = .None
+    var animationModel: MQPictureBorwserAnimationModel = .PictureMoveAndBackgroundFadeOut
     var cellGap: CGFloat = 0
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private lazy var tmpImageView = UIImageView()
+    private lazy var blurEffect = UIBlurEffect(style: .Dark)
+    private var blurEffectView: UIVisualEffectView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,6 +51,8 @@ class MQPictureBrowserController: UIViewController {
         collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.collectionViewFlowLayout)
         animationModel = .PictureMoveAndBackgroundFadeOut
+        
+        blurEffectView = UIVisualEffectView(effect: blurEffect) //  毛玻璃效果
     }
     
     convenience init(animationModel: MQPictureBorwserAnimationModel) {
@@ -60,7 +63,9 @@ class MQPictureBrowserController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        view.addSubview(blurEffectView)
+        
+        self.view.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
         
         collectionViewFlowLayout.minimumLineSpacing = cellGap
         collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -78,6 +83,10 @@ class MQPictureBrowserController: UIViewController {
         
         tmpImageView.clipsToBounds = true
         tmpImageView.layer.cornerRadius = 7.5
+        
+        blurEffectView.alpha = 0
+        blurEffectView.frame = self.view.bounds
+        
     }
     
     deinit {
@@ -95,77 +104,71 @@ extension MQPictureBrowserController {
         
         viewController.presentViewController(self, animated: false) {
             
-            if self.animationModel == .None {
-                self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-                self.view.addSubview(self.collectionView)
+            self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+
+            if let showAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
+                
+                if self.animationModel == .PictureMove {
+                    self.blurEffectView.alpha = 0
+                    self.view.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 1)
+                    self.view.addSubview(self.tmpImageView)                                         //  先将动画图片加在self.view上
+                    self.tmpImageView.image = showAnimationInfo.imageView.image                     //  设置动画图片内容
+                    let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
+                    self.tmpImageView.frame = beginRect                                             //  设置动画其实坐标
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
+                            let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
+                            return self.view.convertRect(imageActualRect, fromView: cell)
+                        }
+                        let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
+                        var endRect = CGRectZero
+                        if cell.superview == nil {
+                            self.collectionView.addSubview(cell)
+                            endRect = caculateEndRect(cell: cell)
+                            cell.removeFromSuperview()
+                        }
+                        else {
+                            endRect = caculateEndRect(cell: cell)
+                        }
+                        self.tmpImageView.frame = endRect
+                        }, completion: { (success) -> Void in
+                            self.collectionView.hidden = false
+                            self.tmpImageView.removeFromSuperview()
+                    })
+                }
+                
+                if self.animationModel == .PictureMoveAndBackgroundFadeOut {
+                    self.view.addSubview(self.tmpImageView)                                             //  先将动画图片加在self.view上
+                    self.tmpImageView.image = showAnimationInfo.imageView.image                         //  设置动画图片内容
+                    let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
+                    self.tmpImageView.frame = beginRect                                                 //  设置动画其实坐标
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.blurEffectView.alpha = 0.9
+                        let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
+                            let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
+                            return self.view.convertRect(imageActualRect, fromView: cell)
+                        }
+                        let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
+                        var endRect = CGRectZero
+                        if cell.superview == nil {
+                            self.collectionView.addSubview(cell)
+                            endRect = caculateEndRect(cell: cell)
+                            cell.removeFromSuperview()
+                        }
+                        else {
+                            endRect = caculateEndRect(cell: cell)
+                        }
+                        self.tmpImageView.frame = endRect
+                        }, completion: { (success) -> Void in
+                            self.collectionView.hidden = false
+                            self.tmpImageView.removeFromSuperview()
+                    })
+                }
+
             }
             else {
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
-
-                if let showAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfShowPictureAtIndex: index) as ShowAnimationInfo? {
-                    
-                    if self.animationModel == .PictureMove {
-                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)        //  初始化背景为黑色
-                        self.view.addSubview(self.tmpImageView)                                         //  先将动画图片加在self.view上
-                        self.tmpImageView.image = showAnimationInfo.imageView.image                     //  设置动画图片内容
-                        let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
-                        self.tmpImageView.frame = beginRect                                             //  设置动画其实坐标
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
-                                let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
-                                return self.view.convertRect(imageActualRect, fromView: cell)
-                            }
-                            let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
-                            var endRect = CGRectZero
-                            if cell.superview == nil {
-                                self.collectionView.addSubview(cell)
-                                endRect = caculateEndRect(cell: cell)
-                                cell.removeFromSuperview()
-                            }
-                            else {
-                                endRect = caculateEndRect(cell: cell)
-                            }
-                            self.tmpImageView.frame = endRect
-                            }, completion: { (success) -> Void in
-                                self.collectionView.hidden = false
-                                self.tmpImageView.removeFromSuperview()
-                        })
-                    }
-                    
-                    if self.animationModel == .PictureMoveAndBackgroundFadeOut {
-                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)            //  初始化背景为白色
-                        self.view.addSubview(self.tmpImageView)                                             //  先将动画图片加在self.view上
-                        self.tmpImageView.image = showAnimationInfo.imageView.image                         //  设置动画图片内容
-                        let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
-                        self.tmpImageView.frame = beginRect                                                 //  设置动画其实坐标
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)        //  初始化背景为黑色
-                            let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
-                                let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
-                                return self.view.convertRect(imageActualRect, fromView: cell)
-                            }
-                            let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: index)
-                            var endRect = CGRectZero
-                            if cell.superview == nil {
-                                self.collectionView.addSubview(cell)
-                                endRect = caculateEndRect(cell: cell)
-                                cell.removeFromSuperview()
-                            }
-                            else {
-                                endRect = caculateEndRect(cell: cell)
-                            }
-                            self.tmpImageView.frame = endRect
-                            }, completion: { (success) -> Void in
-                                self.collectionView.hidden = false
-                                self.tmpImageView.removeFromSuperview()
-                        })
-                    }
-
-                }
-                else {
-                    self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-                    self.view.addSubview(self.collectionView)
-                }
+                self.view.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+                self.view.addSubview(self.collectionView)
             }
         }
     }
@@ -176,76 +179,71 @@ extension MQPictureBrowserController {
             currentPictureIndex = self.collectionView.indexPathForCell(cell)!.item
         }
         
-        if animationModel == .None {
-            dismissViewControllerAnimated(false, completion: nil)
-        }
-        else {
-            if let hideAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfHidePictureAtIndex: currentPictureIndex) as HideAnimationInfo? {
-                
-                if animationModel == .PictureMove {
-                    hideAnimationInfo.toView.addSubview(self.tmpImageView)                          //  先将临时动画视图加载toView上
-                    self.tmpImageView.image = hideAnimationInfo.imageView.image                     //  设置动画图片内容
-
-                    let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
-                        let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
-                        return hideAnimationInfo.toView.convertRect(imageActualRect, fromView: cell)
-                    }
-                    let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
-                    var beginRect = CGRectZero
-                    if cell.superview == nil {
-                        self.collectionView.addSubview(cell)
-                        beginRect = caculateEndRect(cell: cell)
-                        cell.removeFromSuperview()
-                    }
-                    else {
-                        beginRect = caculateEndRect(cell: cell)
-                    }
-                    self.tmpImageView.frame = beginRect
+        if let hideAnimationInfo = self.dataSource!.pictureBrowserController(self, animationInfoOfHidePictureAtIndex: currentPictureIndex) as HideAnimationInfo? {
             
-                    dismissViewControllerAnimated(false) {
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            let endRect = hideAnimationInfo.toView.convertRect(hideAnimationInfo.imageView.frame, fromView: hideAnimationInfo.imageView.superview)
-                            self.tmpImageView.frame = endRect                                           //  设置最终位置
-                            }, completion: { (success) -> Void in
-                                self.tmpImageView.removeFromSuperview()
-                        })
-                    }
+            if animationModel == .PictureMove {
+                hideAnimationInfo.toView.addSubview(self.tmpImageView)                          //  先将临时动画视图加载toView上
+                self.tmpImageView.image = hideAnimationInfo.imageView.image                     //  设置动画图片内容
+
+                let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
+                    let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
+                    return hideAnimationInfo.toView.convertRect(imageActualRect, fromView: cell)
                 }
-                
-                if animationModel == .PictureMoveAndBackgroundFadeOut {
-                    self.view.addSubview(self.tmpImageView)
-                    self.tmpImageView.image = hideAnimationInfo.imageView.image
-                    self.collectionView.hidden = true
-                    
-                    let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
-                        let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
-                        return self.view.convertRect(imageActualRect, fromView: cell)
-                    }
-                    
-                    let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
-                    var beginRect = CGRectZero
-                    if cell.superview == nil {
-                        self.collectionView.addSubview(cell)
-                        beginRect = caculateEndRect(cell: cell)
-                        cell.removeFromSuperview()
-                    }
-                    else {
-                        beginRect = caculateEndRect(cell: cell)
-                    }
-                    self.tmpImageView.frame = beginRect
+                let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
+                var beginRect = CGRectZero
+                if cell.superview == nil {
+                    self.collectionView.addSubview(cell)
+                    beginRect = caculateEndRect(cell: cell)
+                    cell.removeFromSuperview()
+                }
+                else {
+                    beginRect = caculateEndRect(cell: cell)
+                }
+                self.tmpImageView.frame = beginRect
+        
+                dismissViewControllerAnimated(false) {
                     UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-                        let endRect = self.view.convertRect(hideAnimationInfo.imageView.frame, fromView: hideAnimationInfo.imageView.superview)
-                        self.tmpImageView.frame = endRect
+                        let endRect = hideAnimationInfo.toView.convertRect(hideAnimationInfo.imageView.frame, fromView: hideAnimationInfo.imageView.superview)
+                        self.tmpImageView.frame = endRect                                           //  设置最终位置
                         }, completion: { (success) -> Void in
-                            self.dismissViewControllerAnimated(false, completion: nil)
+                            self.tmpImageView.removeFromSuperview()
                     })
                 }
+            }
+            
+            if animationModel == .PictureMoveAndBackgroundFadeOut {
+                self.view.addSubview(self.tmpImageView)
+                self.tmpImageView.image = hideAnimationInfo.imageView.image
+                self.collectionView.hidden = true
+                
+                let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
+                    let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
+                    return self.view.convertRect(imageActualRect, fromView: cell)
+                }
+                
+                let cell = self.dataSource!.pictureBrowserController(self, pictureCellForItemAtIndex: currentPictureIndex)
+                var beginRect = CGRectZero
+                if cell.superview == nil {
+                    self.collectionView.addSubview(cell)
+                    beginRect = caculateEndRect(cell: cell)
+                    cell.removeFromSuperview()
+                }
+                else {
+                    beginRect = caculateEndRect(cell: cell)
+                }
+                self.tmpImageView.frame = beginRect
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.blurEffectView.alpha = 0
+                    let endRect = self.view.convertRect(hideAnimationInfo.imageView.frame, fromView: hideAnimationInfo.imageView.superview)
+                    self.tmpImageView.frame = endRect
+                    }, completion: { (success) -> Void in
+                        self.dismissViewControllerAnimated(false, completion: nil)
+                })
+            }
 
-            }
-            else {
-                dismissViewControllerAnimated(false, completion: nil)
-            }
+        }
+        else {
+            dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
