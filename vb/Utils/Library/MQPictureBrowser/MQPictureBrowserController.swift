@@ -41,6 +41,7 @@ class MQPictureBrowserController: UIViewController {
     private lazy var tmpImageView = UIImageView()
     private lazy var blurEffect = UIBlurEffect(style: .Dark)
     private var blurEffectView: UIVisualEffectView!
+    private var hideStatusBar: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -48,6 +49,7 @@ class MQPictureBrowserController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
         collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.collectionViewFlowLayout)
         animationModel = .PictureMoveAndBackgroundFadeOut
@@ -83,10 +85,19 @@ class MQPictureBrowserController: UIViewController {
         
         tmpImageView.clipsToBounds = true
         tmpImageView.layer.cornerRadius = 7.5
+        tmpImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
         blurEffectView.alpha = 0
         blurEffectView.frame = self.view.bounds
         
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return hideStatusBar
+    }
+    
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Fade
     }
     
     deinit {
@@ -99,8 +110,9 @@ class MQPictureBrowserController: UIViewController {
 extension MQPictureBrowserController {
     
     func presentFromViewController(viewController: UIViewController!, atIndexPicture index: Int = 0) {
-        
-        self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+    
+        self.hideStatusBar = true
+        self.setNeedsStatusBarAppearanceUpdate()
         
         viewController.presentViewController(self, animated: false) {
             
@@ -174,6 +186,7 @@ extension MQPictureBrowserController {
     }
     
     func dismiss() {
+        
         var currentPictureIndex = 0
         if let cell = self.collectionView.visibleCells()[0] as? MQPictureBrowserCell {
             currentPictureIndex = self.collectionView.indexPathForCell(cell)!.item

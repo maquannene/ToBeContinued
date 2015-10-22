@@ -20,12 +20,9 @@ class MVBImageTextTrackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        automaticallyAdjustsScrollViewInsets = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addImageTextTrackAction:")
-        
+    
         layout.delegate = self
-        layout.numberOfColumns = 2
+        layout.numberOfColumns = 1
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
         
@@ -75,7 +72,7 @@ extension MVBImageTextTrackViewController {
 //  MARK: Action
 extension MVBImageTextTrackViewController {
     
-    func addImageTextTrackAction(sender: AnyObject!) {
+    @IBAction func addImageTextTrackAction(sender: AnyObject!) {
         let addMenuView = NSBundle.mainBundle().loadNibNamed("MVBImageTextTrack", owner: nil, options: nil)[0] as! MVBImageTextTrackAddMenuView
         addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
         addMenuView.fromPictureAlbumButton.addTarget(self, action: "addFromPictureAlbumButtonAction:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -168,6 +165,7 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
+        
         imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
     }
 }
@@ -175,12 +173,14 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
 //  MARK: MVBImageTextTrackLayoutDelegate
 extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
     
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo {
         print(indexPath.item)
         let imageTextTrack = dataSource.imageTextTrackList[indexPath.item] as! MVBImageTextTrackModel
-        let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
-        let rect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTextTrack.imageWidht.doubleValue, height:imageTextTrack.imageHeight.doubleValue), boundingRect)
-        return rect.height
+        let imageWidht = cellWidth - 10 //  转成imageWidth进行计算
+        let boundingRect = CGRect(x: 0, y: 0, width: imageWidht, height: CGFloat(MAXFLOAT))
+        let imageRect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTextTrack.imageWidht.doubleValue, height:imageTextTrack.imageHeight.doubleValue), boundingRect)
+        let cellHeight = imageRect.height + 10  //  回归cellHeight
+        return cellHeight > 300 ? (300, true) : (cellHeight, false)
     }
 
 }

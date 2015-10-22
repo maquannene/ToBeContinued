@@ -111,9 +111,6 @@ extension MVBImageTextTrackDataSource {
         }
     }
     
-//    func queryAddImageTextTrack(track:)
-    
-    
     func queryDeleteImageTextTrack(index: Int!, complete: MVBQureyDataCompleteClosure?) {
         let track: MVBImageTextTrackModel! = fetchImageTextTrackModel(index)
         //  根据id初始化一个imageFile 然后删除

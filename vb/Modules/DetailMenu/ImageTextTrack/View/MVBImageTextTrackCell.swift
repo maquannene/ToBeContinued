@@ -18,6 +18,8 @@ class MVBImageTextTrackCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var longImageIcon: UILabel!
+    
     var longPressGesture: UILongPressGestureRecognizer!
     weak var imageTextTrack: MVBImageTextTrackModel!
     
@@ -31,6 +33,12 @@ class MVBImageTextTrackCell: UICollectionViewCell {
         
         longPressGesture = UILongPressGestureRecognizer(target: self, action: "longpressAction:")
         addGestureRecognizer(longPressGesture)
+    }
+    
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+        let attributes = layoutAttributes as! MVBImageTextTrackLayoutAttributes
+        longImageIcon.hidden = !attributes.longImage
     }
     
     func longpressAction(sender: AnyObject) {

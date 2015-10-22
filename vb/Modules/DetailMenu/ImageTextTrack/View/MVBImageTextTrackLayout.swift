@@ -6,25 +6,30 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
+typealias CellHeightInfo = (cellHeight: CGFloat, longCell: Bool)
+
 protocol MVBImageTextTrackLayoutDelegate {
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
+    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
 }
 
 class MVBImageTextTrackLayoutAttributes: UICollectionViewLayoutAttributes {
     
+    var longImage: Bool = false
+    
     override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = super.copyWithZone(zone) as! UICollectionViewLayoutAttributes
+        let copy = super.copyWithZone(zone) as! MVBImageTextTrackLayoutAttributes
+        copy.longImage = longImage
         return copy
     }
     
-//    override func isEqual(object: AnyObject?) -> Bool {
-//        if let attributes = object as? UICollectionViewLayoutAttributes {
-//            if attributes.photoHeight == photoHeight {
-//                return super.isEqual(object)
-//            }
-//        }
-//        return false
-//    }
+    override func isEqual(object: AnyObject?) -> Bool {
+        if let attributes = object as? MVBImageTextTrackLayoutAttributes {
+            if attributes.longImage == longImage {
+                return super.isEqual(object)
+            }
+        }
+        return false
+    }
     
 }
 
@@ -69,14 +74,15 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         
         for item in 0..<collectionView!.numberOfItemsInSection(0) {
             let indexPath = NSIndexPath(forItem: item, inSection: 0)
-            let cellHeight = delegate.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
-            let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeight)
+            let cellHeightInfo = delegate.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
+            let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeightInfo.cellHeight)
             let attributes = MVBImageTextTrackLayoutAttributes(forCellWithIndexPath: indexPath)
             attributes.frame = frame
+            attributes.longImage = cellHeightInfo.longCell
             layoutAttributesCache.append(attributes)
             contentHeight = max(contentHeight, CGRectGetMaxY(frame))
             contentWidth = max(contentWidth, CGRectGetMaxX(frame))
-            yOffsets[column] = yOffsets[column] + cellHeight
+            yOffsets[column] = yOffsets[column] + cellHeightInfo.cellHeight
             let x = yOffsets.reduce(yOffsets[0]){
                 min($0, $1)
             }

@@ -78,18 +78,14 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             if imageTextTrackVc == nil {
                 imageTextTrackVc = UIStoryboard(name: "MVBImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBImageTextTrackViewController!
             }
-            if let navi = imageTextTrackVc!.navigationController as UINavigationController? {
-                centerViewController = navi
-            }
-            else {
-                centerViewController = UINavigationController(rootViewController: imageTextTrackVc!)
-            }
+            centerViewController = imageTextTrackVc!
             
         case MVBMainMenuViewControllerOperate.HeroesManage:
             if heroesManageVc == nil {
                 heroesManageVc = MVBHeroesViewController()
             }
             centerViewController = heroesManageVc!
+            
         case MVBMainMenuViewControllerOperate.AccountManage:
             if accountManangeVc == nil {
                 accountManangeVc = MVBAccountManageViewController.initWithNavi()

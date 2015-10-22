@@ -35,6 +35,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
         scrollView.alwaysBounceHorizontal = true
         scrollView.directionalLockEnabled = true
         scrollView.clipsToBounds = false
+        scrollView.directionalLockEnabled = true
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1
         addSubview(scrollView)
