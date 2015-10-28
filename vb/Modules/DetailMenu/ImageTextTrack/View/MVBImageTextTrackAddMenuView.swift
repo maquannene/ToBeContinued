@@ -10,16 +10,22 @@ import UIKit
 
 class MVBImageTextTrackAddMenuView: UIView {
 
-    @IBOutlet weak var fromPictureAlbumButton: UIButton!
+    @IBOutlet weak var fromPictureAlbumButton: UIButton! {
+        didSet {
+            fromPictureAlbumButton.layer.borderColor = UIColor.blackColor().CGColor
+            fromPictureAlbumButton.layer.borderWidth = 1
+        }
+    }
     
-    @IBOutlet weak var fromCameraButton: UIButton!
+    @IBOutlet weak var fromCameraButton: UIButton! {
+        didSet {
+            fromCameraButton.layer.borderColor = UIColor.blackColor().CGColor
+            fromCameraButton.layer.borderWidth = 1
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        fromPictureAlbumButton.layer.borderColor = UIColor.blackColor().CGColor
-        fromPictureAlbumButton.layer.borderWidth = 1
-        fromCameraButton.layer.borderColor = UIColor.blackColor().CGColor
-        fromCameraButton.layer.borderWidth = 1
     }
 
 }

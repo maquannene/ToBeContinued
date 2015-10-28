@@ -11,7 +11,6 @@ import UIKit
 typealias ShowAnimationInfo = (imageView: UIImageView, fromView: UIView)
 typealias HideAnimationInfo = (imageView: UIImageView, toView: UIView)
 
-
 @objc protocol MQPictureBrowserControllerDelegate: NSObjectProtocol {
     optional func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
 }
@@ -39,7 +38,7 @@ class MQPictureBrowserController: UIViewController {
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private lazy var tmpImageView = UIImageView()
-    private lazy var blurEffect = UIBlurEffect(style: .Dark)
+    private lazy var blurEffect = UIBlurEffect(style: .ExtraLight)
     private var blurEffectView: UIVisualEffectView!
     private var hideStatusBar: Bool = false
     

@@ -44,10 +44,10 @@ CGFloat const MMDrawerBezelRange = 20.0f;
 CGFloat const MMDrawerPanVelocityXAnimationThreshold = 200.0f;
 
 /** The amount of overshoot that is panned linearly. The remaining percentage nonlinearly asymptotes to the max percentage. */
-CGFloat const MMDrawerOvershootLinearRangePercentage = 0.75f;
+CGFloat const MMDrawerOvershootLinearRangePercentage = 1;   //  change: maquan  侧面最大拖拽越界比
 
 /** The percent of the possible overshoot width to use as the actual overshoot percentage. */
-CGFloat const MMDrawerOvershootPercentage = 0.1f;
+CGFloat const MMDrawerOvershootPercentage = 1;  //  change: maquan  侧面最大拖拽越界比
 
 typedef BOOL (^MMDrawerGestureShouldRecognizeTouchBlock)(MMDrawerController * drawerController, UIGestureRecognizer * gesture, UITouch * touch);
 typedef void (^MMDrawerGestureCompletionBlock)(MMDrawerController * drawerController, UIGestureRecognizer * gesture);
@@ -1146,8 +1146,10 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
         CATransform3D transform = CATransform3DIdentity;
         UIViewController * sideDrawerViewController = [self sideDrawerViewControllerForSide:drawerSide];
         if(drawerSide == MMDrawerSideLeft) {
-            transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);
-            transform = CATransform3DTranslate(transform, self.maximumLeftDrawerWidth*(percentVisible-1.f)/2, 0.f, 0.f);
+            //  屏蔽这个动画，此动画用来设置centerViewcontroller的缩放
+            //  change: maquan
+//            transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);
+//            transform = CATransform3DTranslate(transform, self.maximumLeftDrawerWidth*(percentVisible-1.f)/2, 0.f, 0.f);
         }
         else if(drawerSide == MMDrawerSideRight){
             transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);

@@ -6,7 +6,7 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-import UIKit
+import SDWebImage
 
 protocol MVBImageTextTrackCellDelegate: NSObjectProtocol {
     func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell, gesture: UIGestureRecognizer) -> Void
@@ -15,22 +15,32 @@ protocol MVBImageTextTrackCellDelegate: NSObjectProtocol {
 class MVBImageTextTrackCell: UICollectionViewCell {
     
     weak var delegate: MVBImageTextTrackCellDelegate?
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
+    
     @IBOutlet weak var longImageIcon: UILabel!
     
+    @IBOutlet weak var textLabel: UILabel!
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.layer.cornerRadius = 5
+            imageView.layer.borderColor = RGBA(red: 235.0, green: 235.0, blue: 235.0, alpha: 1).CGColor
+            imageView.layer.borderWidth = 1
+            imageView.clipsToBounds = true
+        }
+    }
+    
+    @IBOutlet weak var progressView: UIProgressView! {
+        didSet {
+            progressView.layer.cornerRadius = 3
+        }
+    }
+    
     var longPressGesture: UILongPressGestureRecognizer!
+    
     weak var imageTextTrack: MVBImageTextTrackModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageView.layer.cornerRadius = 5
-        imageView.layer.borderColor = RGBA(red: 235.0, green: 235.0, blue: 235.0, alpha: 1).CGColor
-        imageView.layer.borderWidth = 1
-        imageView.clipsToBounds = true
-        progressView.layer.cornerRadius = 3
-        
         longPressGesture = UILongPressGestureRecognizer(target: self, action: "longpressAction:")
         addGestureRecognizer(longPressGesture)
     }
@@ -41,7 +51,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
         longImageIcon.hidden = !attributes.longImage
     }
     
-    func longpressAction(sender: AnyObject) {
+    @objc private func longpressAction(sender: AnyObject) {
         delegate?.imageTextTrackCellDidLongPress(self, gesture: sender as! UIGestureRecognizer)
     }
     
@@ -53,6 +63,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 
 //  MARK: Public
 extension MVBImageTextTrackCell {
+    
     func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
         self.imageTextTrack = imageTextTrack
         let captureUrlStr = self.imageTextTrack.imageFileUrl
@@ -70,5 +81,6 @@ extension MVBImageTextTrackCell {
         }
         textLabel.text = imageTextTrack.text
     }
+    
 }
 

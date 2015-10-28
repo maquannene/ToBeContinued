@@ -417,9 +417,11 @@ static NSString * const kTableViewPanState = @"state";
         // Scroll back to center
 //        [self hideUtilityButtonsAnimated:YES];
         //  change: maquan
+        //  ``
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideUtilityButtonsAnimated:YES];
         });
+        //  ``
     }
 }
 

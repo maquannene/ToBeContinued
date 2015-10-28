@@ -6,6 +6,8 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
+import AVOSCloud
+
 //  记录着所有 图文迹 的list 类。通过每个用户的唯一kIdentifier来查找
 
 class MVBImageTextTrackIdListModel: AVObject {

@@ -7,28 +7,35 @@
 //
 
 import AVFoundation
+import SDWebImage
+import MJRefresh
+import AVOSCloud
+import MQMaskController
 
 class MVBImageTextTrackViewController: UIViewController {
     
-    @IBOutlet weak var imageTextTrackCollectionView: UICollectionView!
-    @IBOutlet weak var layout: MVBImageTextTrackLayout!
-    var dataSource: MVBImageTextTrackDataSource!
+    var dataSource: MVBImageTextTrackViewModel!
     weak var imageTextTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
     
-    var progressDic: [String:CGFloat] = [:]
+    @IBOutlet weak var imageTextTrackCollectionView: UICollectionView! {
+        didSet {
+            configurePullToRefresh()
+        }
+    }
+    
+    @IBOutlet weak var layout: MVBImageTextTrackLayout! {
+        didSet {
+            layout.delegate = self
+            layout.numberOfColumns = 1
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        layout.delegate = self
-        layout.numberOfColumns = 1
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        dataSource = MVBImageTextTrackViewModel()
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
-        
-        dataSource = MVBImageTextTrackDataSource()
-        
-        configurePullToRefresh()
         imageTextTrackCollectionView.header.beginRefreshing()
     }
     
@@ -81,7 +88,7 @@ extension MVBImageTextTrackViewController {
         addMenuMaskVC!.showWithAnimated(true, completion: nil)
     }
     
-    func addFromPictureAlbumButtonAction(sender: AnyObject!) {
+    @objc private func addFromPictureAlbumButtonAction(sender: AnyObject!) {
         addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
         let imagePickerVc = UIImagePickerController()
         imagePickerVc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
@@ -89,7 +96,7 @@ extension MVBImageTextTrackViewController {
         presentViewController(imagePickerVc, animated: true, completion: nil)
     }
     
-    func addFromCameraButtonAction(sender: AnyObject!) {
+    @objc private func addFromCameraButtonAction(sender: AnyObject!) {
         addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
         let imagePickerVc = UIImagePickerController()
         imagePickerVc.sourceType = UIImagePickerControllerSourceType.Camera
@@ -142,14 +149,14 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo? {
         if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
-            return (cell.imageView, imageTextTrackCollectionView)
+            return (cell.imageView, cell)
         }
         return nil
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo? {
         if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
-            return (cell.imageView, imageTextTrackCollectionView)
+            return (cell.imageView, cell)
         }
         return nil
     }
@@ -165,7 +172,7 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
-        
+//        guard !imageTextTrackCollectionView.indexPathsForVisibleItems().contains(NSIndexPath(forItem: index, inSection: 0)) else { return }
         imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
     }
 }

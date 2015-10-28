@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackDataSource.swift
+//  MVBImageTextTrackViewModel.swift
 //  vb
 //
 //  Created by 马权 on 9/26/15.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVOSCloud
 
-class MVBImageTextTrackDataSource: NSObject {
+class MVBImageTextTrackViewModel: NSObject {
 
     var imageTextTrackIdList: MVBImageTextTrackIdListModel?
     lazy var imageTextTrackList: NSMutableArray = NSMutableArray()          //  存储当前imageTextTrack的缓存列表
@@ -20,7 +21,7 @@ class MVBImageTextTrackDataSource: NSObject {
 }
 
 //  MARK: Public
-extension MVBImageTextTrackDataSource {
+extension MVBImageTextTrackViewModel {
     
     /**
     请求获取包含每个imageTextTrack对象objectId的列表（先找到列表，再fetch）

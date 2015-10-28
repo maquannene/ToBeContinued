@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MMDrawerController
+
 class MVBMainStructureManage: NSObject {
     
     //  抽屉
@@ -37,10 +39,7 @@ class MVBMainStructureManage: NSObject {
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
         //  注意这里闭包引起的循环引用问题。self 的 drawerController 的一个 closure 持有self 导致循环引用。使用无主引用解决此问题
-        drawerController!.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
-            let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
-            block(drawerVc, drawerSide, percentVisible)
-        }
+        drawerController!.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
     }
     
     func displayMainStructureFrom(presentingVc: UIViewController) {

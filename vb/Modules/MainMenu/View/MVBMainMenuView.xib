@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
                 <action selector="heroesManageAction:" destination="-1" id="tun-YL-goK"/>
             </connections>
         </tapGestureRecognizer>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MVBMainMenuView" customModule="vb" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MVBMainMenuView" customModule="vb" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -40,7 +40,7 @@
                         <constraint firstAttribute="width" secondItem="Swb-IR-e8R" secondAttribute="height" multiplier="1:1" id="A9o-tF-gL6"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7S-7C-ibK">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="h7S-7C-ibK">
                     <rect key="frame" x="141" y="134" width="37.5" height="17"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -60,7 +60,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60D-Sb-YfR" userLabel="containerView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                             <subviews>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pm8-F8-2TU">
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pm8-F8-2TU">
                                     <rect key="frame" x="20" y="149" width="51" height="31"/>
                                     <animations/>
                                     <connections>
@@ -182,6 +182,7 @@
                 <constraint firstItem="xCb-pq-pGq" firstAttribute="top" secondItem="0vN-CH-dCv" secondAttribute="top" id="KaB-1H-Nbk"/>
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="top" secondItem="h7S-7C-ibK" secondAttribute="bottom" constant="10" id="WMV-xn-jXz"/>
                 <constraint firstItem="60D-Sb-YfR" firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="Xfh-OO-JfZ"/>
+                <constraint firstItem="h7S-7C-ibK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0vN-CH-dCv" secondAttribute="leading" constant="10" id="dhi-2T-eZ3"/>
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="leading" secondItem="0vN-CH-dCv" secondAttribute="leading" id="eFS-se-ZiA"/>
                 <constraint firstItem="60D-Sb-YfR" firstAttribute="leading" secondItem="0vN-CH-dCv" secondAttribute="leading" id="eNl-tQ-ibk"/>
                 <constraint firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="eqw-Td-Qt4"/>
@@ -199,7 +200,7 @@
                 <outlet property="headImageView" destination="Swb-IR-e8R" id="Pz5-TF-IaX"/>
                 <outlet property="nameLabel" destination="7wL-21-3T5" id="E99-ej-qHI"/>
             </connections>
-            <point key="canvasLocation" x="490" y="-4"/>
+            <point key="canvasLocation" x="200" y="-12"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr" userLabel="passwordManage">
             <connections>

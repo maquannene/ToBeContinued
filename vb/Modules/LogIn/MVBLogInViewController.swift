@@ -7,6 +7,7 @@
 //
 
 import SVProgressHUD
+import SDWebImage
 
 enum MVBLogInViewModel : Int {
     case NotLogIn
@@ -133,6 +134,20 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
         let appDataSource = MVBAppDelegate.MVBApp().dataSource
         //  设置userModel
         appDataSource.setUserInfoWithJsonString(result!)
+        
+        //  授权过期判定。
+        if appDataSource.userModel?.id == nil && appDataSource.accessToken != nil {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showErrorWithStatus("授权登陆过期\n请重新登陆授权")
+            self.model = .NotLogIn
+            
+            appDataSource.clearUserInfo()
+            //  清理硬盘缓存
+            SDImageCache.sharedImageCache().clearDisk()
+            SDImageCache.sharedImageCache().clearMemory()
+            return
+        }
+        
         //  登陆获取信息成功后设置头像
         userImageView!.sd_setImageWithURL(NSURL(string: appDataSource.userModel!.avatar_large as String!))
         //  隐藏进度条

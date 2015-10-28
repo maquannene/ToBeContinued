@@ -8,13 +8,12 @@
 
 class MVBNoteTrackDetailCell: UITableViewCell {
 
-//    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
-    
     @IBOutlet weak var detailButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var detailButtonRightGap: NSLayoutConstraint!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -43,20 +42,21 @@ class MVBNoteTrackDetailCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = UIColor.cyanColor()
     }
-    
-    deinit {
-        print("\(self.dynamicType) deinit")
-    }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         hasDetailButton = contentLabel.isTruncated()
+    }
+    
+    deinit {
+        print("\(self.dynamicType) deinit")
     }
 
 }
 
 // MARK: Public
 extension MVBNoteTrackDetailCell {
+    
     func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
         selectionStyle = UITableViewCellSelectionStyle.None
         detailButtonWidth.constant = 0

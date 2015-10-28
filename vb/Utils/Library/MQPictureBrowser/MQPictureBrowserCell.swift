@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SDWebImage
 
 protocol MQPictureBrowserCellDelegate: NSObjectProtocol {
     func pictureBrowserCellTap(pictureBrowserCell: MQPictureBrowserCell)
@@ -56,11 +57,11 @@ class MQPictureBrowserCell: UICollectionViewCell {
         scrollView.setZoomScale(1, animated: false)
     }
     
-    func tapAction(gesture: UITapGestureRecognizer) {
+    @objc private func tapAction(gesture: UITapGestureRecognizer) {
         delegate?.pictureBrowserCellTap(self)
     }
     
-    func dobleTapAction(gesture: UITapGestureRecognizer) {
+    @objc private func dobleTapAction(gesture: UITapGestureRecognizer) {
 
         guard scrollView.maximumZoomScale != 1 else { return }
         guard doubleTapGestureLock == false else { return }

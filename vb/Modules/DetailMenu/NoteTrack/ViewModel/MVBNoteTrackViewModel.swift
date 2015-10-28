@@ -1,14 +1,16 @@
-  //
-//  MVBNoteTrackDataSource.swift
+//
+//  MVBNoteTrackViewModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
+ 
+import AVOSCloud
   
 typealias MVBQureyDataCompleteClosure = (succeed: Bool!) -> Void
   
-class MVBNoteTrackDataSource: NSObject {
+class MVBNoteTrackViewModel: NSObject {
     
     var noteTrackIdList: MVBNoteTrackIdListModel?
     lazy var noteTrackModelList: NSMutableArray = NSMutableArray()                //  存储密码信息列表的缓存数组
@@ -18,10 +20,11 @@ class MVBNoteTrackDataSource: NSObject {
     deinit {
         print("\(self.dynamicType) deinit")
     }
+    
 }
 
 //  MARK: Public
-extension MVBNoteTrackDataSource {
+extension MVBNoteTrackViewModel {
     /**
     请求查找包含每个密码对象objectId的列表（先找到列表，再fetch）
     

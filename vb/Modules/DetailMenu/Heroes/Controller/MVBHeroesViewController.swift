@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import SDWebImage
+import AFNetworking
+
 let kDota2DevApiKey = "key"
 let kDota2DevApiValue = "5E09D57E6D09BE20A1DF727134A89871"
 let kDota2HeroesLanguageKey = "language"

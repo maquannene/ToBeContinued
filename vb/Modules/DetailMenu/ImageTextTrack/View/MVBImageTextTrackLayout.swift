@@ -88,7 +88,7 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
             }
             column = yOffsets.indexOf(x)!
         }
-
+        
         contentHeight += sectionInset.bottom
         contentWidth += sectionInset.right
     }

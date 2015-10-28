@@ -589,7 +589,6 @@
 		5F216CE1F7B9380A30CDB2E9DD3B74B7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		5FEBF3DE246C7B3A203ED515A3DDAF91 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		60419E484E0AC045FB9D3C30440963D2 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+MJRefresh.m"; path = "MJRefresh/UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
-		6053F8D5098A9A0CB0EA7539CCD577C2 /* WeiboSDK.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = WeiboSDK.bundle; path = libWeiboSDK/WeiboSDK.bundle; sourceTree = "<group>"; };
 		60BDDE087AA244C9DB2A3EECD79004C8 /* NSObject+MJClass.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJClass.m"; path = "MJExtension/NSObject+MJClass.m"; sourceTree = "<group>"; };
 		60E6F909491C14BAC4F100736C7B2C31 /* MJRefreshGifHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshGifHeader.h; path = MJRefresh/Custom/Header/MJRefreshGifHeader.h; sourceTree = "<group>"; };
 		616B55C2D5D5FCE3991C8E30C03FEE33 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -1223,14 +1222,6 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		4506945E9B46195D2901453DE25E6997 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6053F8D5098A9A0CB0EA7539CCD577C2 /* WeiboSDK.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		455F703BD82AF33856B90A8C54E751A5 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1596,7 +1587,6 @@
 				1652DB8B3DE1FCCD14D78AE3665E8DD4 /* WeiboSDK.h */,
 				3FD994A10445640CD7E1BBCC941CEDB3 /* WeiboUser.h */,
 				E798725659EF9746B27CF03EE1EFACAE /* Frameworks */,
-				4506945E9B46195D2901453DE25E6997 /* Resources */,
 			);
 			path = WeiboSDK;
 			sourceTree = "<group>";

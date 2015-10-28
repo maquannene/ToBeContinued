@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import SWTableViewCell
+
 class MVBNoteTrackCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)

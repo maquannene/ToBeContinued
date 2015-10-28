@@ -6,6 +6,8 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
+import SDWebImage
+
 class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
 
     var imageTextTrack: MVBImageTextTrackModel!

@@ -6,6 +6,8 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
+import AVOSCloud
+
 class MVBImageTextTrackModel: AVObject {
     
     @NSManaged var imageFileUrl: String!

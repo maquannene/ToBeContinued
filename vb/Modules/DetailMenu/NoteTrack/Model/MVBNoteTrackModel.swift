@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import AVOSCloud
+
 class MVBNoteTrackModel: AVObject {
     
     @NSManaged var title: String!

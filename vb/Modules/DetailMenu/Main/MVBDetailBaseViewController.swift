@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MMDrawerController
+
 class MVBDetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?

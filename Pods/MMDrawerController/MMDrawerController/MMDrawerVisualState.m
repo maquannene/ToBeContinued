@@ -123,11 +123,15 @@
             sideDrawerViewController = drawerController.leftDrawerViewController;
             CGFloat distance = MAX(drawerController.maximumLeftDrawerWidth,drawerController.visibleLeftDrawerWidth);
             if (percentVisible <= 1.f) {
-                transform = CATransform3DMakeTranslation((-distance)/parallaxFactor+(distance*percentVisible/parallaxFactor), 0.0, 0.0);
+//                transform = CATransform3DMakeTranslation((-distance)/parallaxFactor+(distance*percentVisible/parallaxFactor), 0.0, 0.0);
+                //  change: maquan
+                //  ``
+                transform = CATransform3DMakeTranslation(((-distance)/parallaxFactor+(distance*percentVisible/parallaxFactor)) * 0.5, 0.0, 0.0);
+                //  ``
             }
             else{
-                transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);
-                transform = CATransform3DTranslate(transform, drawerController.maximumLeftDrawerWidth*(percentVisible-1.f)/2, 0.f, 0.f);
+//                transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);
+//                transform = CATransform3DTranslate(transform, drawerController.maximumLeftDrawerWidth*(percentVisible-1.f)/2, 0.f, 0.f);
             }
         }
         else if(drawerSide == MMDrawerSideRight){

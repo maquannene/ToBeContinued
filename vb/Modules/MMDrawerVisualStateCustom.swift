@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MMDrawerController
+
 // MARK: MMDrawer的自定义动画类，扩展自MMDrawerVisualState
 extension MMDrawerVisualState {
     class func MVBCustomDrawerVisualState() -> MMDrawerControllerDrawerVisualStateBlock {

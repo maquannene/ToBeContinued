@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import SVProgressHUD
+import AFNetworking
+import MJRefresh
+import SWTableViewCell
+import MQMaskController
+
 //  MARK: LeftCycle
 class MVBNoteTrackViewController: MVBDetailBaseViewController {
     
@@ -13,12 +19,16 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
         static let noteTrackCellId = MVBNoteTrackCell.ClassName
         static let noteTrackDetailCellId = MVBNoteTrackDetailCell.ClassName
     }
-
-    @IBOutlet weak var noteTrackListTableView: UITableView!
-    var dataSource: MVBNoteTrackDataSource!
-
+    
+    var dataSource: MVBNoteTrackViewModel!
     var newNoteTrackVc: MQMaskController?
     var operateCellIndex: Int = -1
+    
+    @IBOutlet weak var noteTrackListTableView: UITableView! {
+        didSet {
+            configurePullToRefresh()
+        }
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -40,17 +50,15 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
         view.backgroundColor = UIColor.redColor()
         automaticallyAdjustsScrollViewInsets = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewNoteTrackAction:")
-        
         //  初始化数据源
-        dataSource = MVBNoteTrackDataSource()
+        dataSource = MVBNoteTrackViewModel()
         
-        //  设置tableView
-        configurePullToRefresh()
         noteTrackListTableView.tableFooterView = UIView()
         noteTrackListTableView.registerNib(UINib(nibName: Static.noteTrackCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.noteTrackCellId)
         noteTrackListTableView.registerNib(UINib(nibName: Static.noteTrackDetailCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.noteTrackDetailCellId)
+        
+        //  设置tableView
         noteTrackListTableView.header.beginRefreshing()
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,6 +110,7 @@ extension MVBNoteTrackViewController {
             }
         }
     }
+    
 }
 
 //  MARK: Action
@@ -109,7 +118,7 @@ extension MVBNoteTrackViewController {
     /**
     新增密码条目
     */
-    func addNewNoteTrackAction(sender: AnyObject!) {
+    @objc private func addNewNoteTrackAction(sender: AnyObject!) {
         let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
         newNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         newNoteTrackView.createButton.setTitle("创建", forState: UIControlState.Normal)
@@ -136,7 +145,7 @@ extension MVBNoteTrackViewController {
     /**
     编辑密码条目
     */
-    func editNoteTrackAction(indexPath: NSIndexPath) {
+    @objc private func editNoteTrackAction(indexPath: NSIndexPath) {
         if noteTrackListTableView.editing == false {
             noteTrackListTableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
@@ -169,7 +178,7 @@ extension MVBNoteTrackViewController {
     /**
     删除密码条目
     */
-    func deleteNoteTrackAction(indexPath: NSIndexPath) {
+    @objc private func deleteNoteTrackAction(indexPath: NSIndexPath) {
         dataSource.queryDeleteNoteTrackModel(indexPath.row) { [unowned self] (succeed) -> Void in
             self.noteTrackListTableView.beginUpdates()
             self.noteTrackListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
@@ -185,7 +194,7 @@ extension MVBNoteTrackViewController {
     /**
     显示详细密码页面
     */
-    func showDetailNoteTrackAction(sender: AnyObject!) {
+    @objc private func showDetailNoteTrackAction(sender: AnyObject!) {
         let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(dataSource.expandingIndexPath!.row)
         let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[1] as! MVBNoteTrackDetailView
         newNoteTrackView.frame = CGRectMake(10, self.view.h, self.view.frame.width - 20, 0)
@@ -210,7 +219,7 @@ extension MVBNoteTrackViewController {
     /**
     确认新增密码条目事件
     */
-    func confirmCreateNewNoteTrackAction(sender: AnyObject!) {
+    @objc private func confirmCreateNewNoteTrackAction(sender: AnyObject!) {
         let contentView = newNoteTrackVc!.contentView as! MVBNewNoteTrackView
         dataSource.queryAddNoteTrack(MVBNoteTrackModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
             self.dataSource.expandingIndexPath = nil
@@ -225,7 +234,7 @@ extension MVBNoteTrackViewController {
     /**
     确认更新密码条目事件
     */
-    func confirmUpdataNoteTrackAction(sender: AnyObject!) {
+    @objc private func confirmUpdataNoteTrackAction(sender: AnyObject!) {
         let contentView = newNoteTrackVc!.contentView as! MVBNewNoteTrackView
         let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
         noteTrackModel.update(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
@@ -237,7 +246,7 @@ extension MVBNoteTrackViewController {
         }
     }
     
-    func cancelAction(sender: AnyObject!) {
+    @objc private func cancelAction(sender: AnyObject!) {
         self.newNoteTrackVc!.dismissWithAnimated(true, completion: nil)
     }
     

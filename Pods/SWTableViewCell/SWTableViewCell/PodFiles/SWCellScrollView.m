@@ -20,7 +20,9 @@
 //    }
     
     //  change: maquan
+    //  ``
     return YES;
+    //  ``
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -41,11 +43,13 @@
 //    return YES;
     
     //  change: maquan  收起right button后快速tap tap要相应需共存
+    //  ``
     if ([otherGestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
         return YES;
     }
     //  其他情况不共存 所以上面那个代理就不需要再判断pan是否成立。 如果是上下就触发 tableview的pan  左右 触发cell的scrollview上的pan
     return NO;
+    //  ``
 }
 
 @end

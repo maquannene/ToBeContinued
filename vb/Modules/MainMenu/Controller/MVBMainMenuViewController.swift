@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MMDrawerController
+import SVProgressHUD
+import SDWebImage
+
 enum MVBMainMenuViewControllerOperate: Int {
     case Main
     case PasswordManage
@@ -104,7 +108,7 @@ extension MVBMainMenuViewController {
                 }
             }
             else {
-                self.mm_drawerController.setDrawerVisualStateBlock(nil)
+                self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
             }
         }
     }

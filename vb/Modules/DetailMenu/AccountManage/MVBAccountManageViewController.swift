@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+import MQMaskController
+
 let kAccountCell = "kAccountCell"
 
 class MVBAccountManageViewController: MVBDetailBaseViewController {
@@ -39,7 +41,7 @@ class MVBAccountManageViewController: MVBDetailBaseViewController {
         self.view.addSubview(accountListView!)
     }
     
-    func addRecordAction(sender: AnyObject!) -> Void {
+    @objc private func addRecordAction(sender: AnyObject!) -> Void {
         let recordView = NSBundle.mainBundle().loadNibNamed("MVBAccountRecordView", owner: nil, options: nil)[0] as! MVBAccountRecordView
         recordView.frame = CGRectMake(0, 0, self.view.frame.width, 260)
         recordVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: recordView, contentCenter: true, delayTime: 0)
