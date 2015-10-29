@@ -12,18 +12,24 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-//    if (gestureRecognizer == self.panGestureRecognizer) {
-//        CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:gestureRecognizer.view];
-//        return fabs(translation.y) <= fabs(translation.x);
-//    } else {
-//        return YES;
-//    }
-    
-    //  change: maquan
-    //  ``
-    return YES;
-    //  ``
+    if (gestureRecognizer == self.panGestureRecognizer) {
+        CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:gestureRecognizer.view];
+        return fabs(translation.y) <= fabs(translation.x);
+    } else {
+        return YES;
+    }
 }
+
+//  change: maquan
+//  ``  这里响应速度是最快的，放这里处理最好。
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([self.superview respondsToSelector:NSSelectorFromString(@"slideGestureRecognizerShouldReceiveTouch")] &&
+        gestureRecognizer == self.panGestureRecognizer) {
+        return [[self.superview performSelector:NSSelectorFromString(@"slideGestureRecognizerShouldReceiveTouch")] boolValue];
+    }
+    return YES;
+}
+//  ``
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
 //    // Find out if the user is actively scrolling the tableView of which this is a member.
