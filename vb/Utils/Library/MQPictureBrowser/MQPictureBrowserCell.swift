@@ -25,13 +25,21 @@ class MQPictureBrowserCell: UICollectionViewCell {
     private var tapGesture: UITapGestureRecognizer!
     private var doubleTapGestureLock: Bool = false
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        baseConfigure()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        baseConfigure()
+    }
+    
+    func baseConfigure() {
         scrollView.alwaysBounceVertical = true
         scrollView.alwaysBounceHorizontal = true
         scrollView.directionalLockEnabled = true
@@ -102,7 +110,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
     
 }

@@ -200,7 +200,7 @@
                 <outlet property="headImageView" destination="Swb-IR-e8R" id="Pz5-TF-IaX"/>
                 <outlet property="nameLabel" destination="7wL-21-3T5" id="E99-ej-qHI"/>
             </connections>
-            <point key="canvasLocation" x="200" y="-12"/>
+            <point key="canvasLocation" x="118" y="-12"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr" userLabel="passwordManage">
             <connections>

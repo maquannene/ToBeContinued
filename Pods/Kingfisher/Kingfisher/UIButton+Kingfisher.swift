@@ -201,13 +201,16 @@ public extension UIButton {
                     progressBlock(receivedSize: receivedSize, totalSize: totalSize)
                 })
             }
-            }) { (image, error, cacheType, imageURL) -> () in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if (imageURL == self.kf_webURLForState(state) && image != nil) {
-                        self.setImage(image, forState: state)
+            }) {[weak self] (image, error, cacheType, imageURL) -> () in
+                
+                dispatch_async_safely_main_queue {
+                    if let sSelf = self {
+                        if (imageURL == sSelf.kf_webURLForState(state) && image != nil) {
+                            sSelf.setImage(image, forState: state)
+                        }
+                        completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
                     }
-                    completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
-                })
+                }
         }
         
         return task
@@ -448,13 +451,15 @@ public extension UIButton {
                     progressBlock(receivedSize: receivedSize, totalSize: totalSize)
                 })
             }
-            }) { (image, error, cacheType, imageURL) -> () in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if (imageURL == self.kf_backgroundWebURLForState(state) && image != nil) {
-                        self.setBackgroundImage(image, forState: state)
+            }) { [weak self] (image, error, cacheType, imageURL) -> () in
+                dispatch_async_safely_main_queue {
+                    if let sSelf = self {
+                        if (imageURL == sSelf.kf_backgroundWebURLForState(state) && image != nil) {
+                            sSelf.setBackgroundImage(image, forState: state)
+                        }
+                        completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
                     }
-                    completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
-                })
+                }
         }
         
         return task
@@ -530,7 +535,7 @@ public extension UIButton {
                       placeholderImage: UIImage?,
                                options: KingfisherOptions) -> RetrieveImageTask
     {
-        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: nil, completionHandler: nil)
+        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: nil, completionHandler: nil)
     }
     
     @available(*, deprecated=1.2, message="Use -kf_setImageWithURL:forState:placeholderImage:optionsInfo:completionHandler: instead.")
@@ -540,7 +545,7 @@ public extension UIButton {
                                options: KingfisherOptions,
                      completionHandler: CompletionHandler?) -> RetrieveImageTask
     {
-        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: nil, completionHandler: completionHandler)
+        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: nil, completionHandler: completionHandler)
     }
     
     @available(*, deprecated=1.2, message="Use -kf_setImageWithURL:forState:placeholderImage:optionsInfo:progressBlock:completionHandler: instead.")
@@ -551,7 +556,7 @@ public extension UIButton {
                          progressBlock: DownloadProgressBlock?,
                      completionHandler: CompletionHandler?) -> RetrieveImageTask
     {
-        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: progressBlock, completionHandler: completionHandler)
+        return kf_setImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: progressBlock, completionHandler: completionHandler)
     }
     
     @available(*, deprecated=1.2, message="Use -kf_setBackgroundImageWithURL:forState:placeholderImage:optionsInfo: instead.")
@@ -560,7 +565,7 @@ public extension UIButton {
                                 placeholderImage: UIImage?,
                                          options: KingfisherOptions) -> RetrieveImageTask
     {
-        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: nil, completionHandler: nil)
+        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: nil, completionHandler: nil)
     }
     
     @available(*, deprecated=1.2, message="Use -kf_setBackgroundImageWithURL:forState:placeholderImage:optionsInfo:completionHandler: instead.")
@@ -570,7 +575,7 @@ public extension UIButton {
                                          options: KingfisherOptions,
                                completionHandler: CompletionHandler?) -> RetrieveImageTask
     {
-        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: nil, completionHandler: completionHandler)
+        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: nil, completionHandler: completionHandler)
     }
     
     
@@ -582,7 +587,7 @@ public extension UIButton {
                                    progressBlock: DownloadProgressBlock?,
                                completionHandler: CompletionHandler?) -> RetrieveImageTask
     {
-        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options: options], progressBlock: progressBlock, completionHandler: completionHandler)
+        return kf_setBackgroundImageWithURL(URL, forState: state, placeholderImage: placeholderImage, optionsInfo: [.Options(options)], progressBlock: progressBlock, completionHandler: completionHandler)
     }
 }
 

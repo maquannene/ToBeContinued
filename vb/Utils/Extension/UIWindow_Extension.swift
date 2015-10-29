@@ -7,7 +7,9 @@
 //
 
 extension UIWindow {
+    
     public class func windowSize() -> CGSize! {
         return UIApplication.sharedApplication().keyWindow!.frame.size
     }
+    
 }

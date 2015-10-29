@@ -53,7 +53,7 @@ class MVBMainMenuViewController: UIViewController {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
 }
 
@@ -106,9 +106,11 @@ extension MVBMainMenuViewController {
                     let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
                     block(drawerVc, drawerSide, percentVisible)
                 }
+                mainMenuView!.clipsToBounds = true
             }
             else {
                 self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
+                mainMenuView!.clipsToBounds = false
             }
         }
     }

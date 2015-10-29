@@ -18,7 +18,7 @@ class MVBNoteTrackViewModel: NSObject {
     var expandedIndexPath: NSIndexPath?                                         //  被展开（扩展区域）的indexPath
     
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
     
 }

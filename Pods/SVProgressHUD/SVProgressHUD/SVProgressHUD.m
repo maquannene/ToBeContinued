@@ -696,6 +696,7 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
         [self.hudView setNeedsDisplay];
     }
     
+    [self updateMask];
 }
 
 - (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle{
@@ -735,8 +736,8 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
             }
         }
 #else
-        if(SVProgressHUDExtensionView){
-            [SVProgressHUDExtensionView addSubview:self.overlayView];
+        if(self.viewForExtension){
+            [self.viewForExtension addSubview:self.overlayView];
         }
 #endif
     } else{
@@ -757,7 +758,6 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
     
     self.stringLabel.text = string;
     [self updateHUDFrame];
-    [self updateMask];
     
     if(progress >= 0){
         self.imageView.image = nil;
@@ -1095,7 +1095,6 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
 #else
         _overlayView = [[UIControl alloc] initWithFrame:[UIScreen mainScreen].bounds];
 #endif
-        _overlayView = [[UIControl alloc] initWithFrame:windowBounds];
         _overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _overlayView.backgroundColor = [UIColor clearColor];
         [_overlayView addTarget:self action:@selector(overlayViewDidReceiveTouchEvent:forEvent:) forControlEvents:UIControlEventTouchDown];

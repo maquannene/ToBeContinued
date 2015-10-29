@@ -183,7 +183,8 @@ public extension ImageCache {
                 switch imageFormat {
                 case .PNG: data = UIImagePNGRepresentation(image)
                 case .JPEG: data = UIImageJPEGRepresentation(image, 1.0)
-                case .Unknown: data = UIImagePNGRepresentation(image.kf_normalizedImage())
+                case .GIF: data = UIImageGIFRepresentation(image)
+                case .Unknown: data = originalData
                 }
                 
                 if let data = data {
@@ -261,56 +262,60 @@ extension ImageCache {
     public func retrieveImageForKey(key: String, options:KingfisherManager.Options, completionHandler: ((UIImage?, CacheType!) -> ())?) -> RetrieveImageDiskTask? {
         // No completion handler. Not start working and early return.
         guard let completionHandler = completionHandler else {
-            return dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {}
+            return nil
         }
         
-        let block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {
-            if let image = self.retrieveImageInMemoryCacheForKey(key) {
-                
-                //Found image in memory cache.
-                if options.shouldDecode {
-                    dispatch_async(self.processQueue, { () -> Void in
-                        let result = image.kf_decodedImage(scale: options.scale)
-                        dispatch_async(options.queue, { () -> Void in
-                            completionHandler(result, .Memory)
-                        })
+        var block: RetrieveImageDiskTask?
+        if let image = self.retrieveImageInMemoryCacheForKey(key) {
+            
+            //Found image in memory cache.
+            if options.shouldDecode {
+                dispatch_async(self.processQueue, { () -> Void in
+                    let result = image.kf_decodedImage(scale: options.scale)
+                    dispatch_async(options.queue, { () -> Void in
+                        completionHandler(result, .Memory)
                     })
-                } else {
-                    completionHandler(image, .Memory)
-                }
+                })
             } else {
-                //Begin to load image from disk
-                dispatch_async(self.ioQueue, { () -> Void in
-                    
-                    if let image = self.retrieveImageInDiskCacheForKey(key, scale: options.scale) {
-                        
+                completionHandler(image, .Memory)
+            }
+        } else {
+            var sSelf: ImageCache! = self
+            block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {
+                
+                // Begin to load image from disk
+                dispatch_async(sSelf.ioQueue, { () -> Void in
+                    if let image = sSelf.retrieveImageInDiskCacheForKey(key, scale: options.scale) {
                         if options.shouldDecode {
-                            dispatch_async(self.processQueue, { () -> Void in
+                            dispatch_async(sSelf.processQueue, { () -> Void in
                                 let result = image.kf_decodedImage(scale: options.scale)
-                                self.storeImage(result!, forKey: key, toDisk: false, completionHandler: nil)
-                                
+                                sSelf.storeImage(result!, forKey: key, toDisk: false, completionHandler: nil)
+
                                 dispatch_async(options.queue, { () -> Void in
                                     completionHandler(result, .Memory)
-                                    return
+                                    sSelf = nil
                                 })
                             })
                         } else {
-                            self.storeImage(image, forKey: key, toDisk: false, completionHandler: nil)
+                            sSelf.storeImage(image, forKey: key, toDisk: false, completionHandler: nil)
                             dispatch_async(options.queue, { () -> Void in
                                 completionHandler(image, .Disk)
+                                sSelf = nil
                             })
                         }
                     } else {
                         // No image found from either memory or disk
                         dispatch_async(options.queue, { () -> Void in
                             completionHandler(nil, nil)
+                            sSelf = nil
                         })
                     }
                 })
             }
+            
+            dispatch_async(dispatch_get_main_queue(), block!)
         }
-        
-        dispatch_async(dispatch_get_main_queue(), block)
+    
         return block
     }
     
@@ -616,11 +621,7 @@ extension ImageCache {
     
     func diskImageForKey(key: String, scale: CGFloat) -> UIImage? {
         if let data = diskImageDataForKey(key) {
-            if let image = UIImage(data: data, scale: scale) {
-                return image
-            } else {
-                return nil
-            }
+            return UIImage.kf_imageWithData(data, scale: scale)
         } else {
             return nil
         }
@@ -645,32 +646,6 @@ extension UIImage {
     var kf_imageCost: Int {
         return Int(size.height * size.width * scale * scale)
     }
-}
-
-private let pngHeader: [UInt8] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
-private let jpgHeaderSOI: [UInt8] = [0xFF, 0xD8]
-private let jpgHeaderIF: [UInt8] = [0xFF, 0xE0]
-
-extension NSData {
-    var kf_imageFormat: ImageFormat {
-        var buffer = [UInt8](count: 8, repeatedValue: 0)
-        self.getBytes(&buffer, length: 8)
-        if buffer == pngHeader {
-            return .PNG
-        } else if buffer[0] == jpgHeaderSOI[0] &&
-                  buffer[1] == jpgHeaderSOI[1] &&
-                  buffer[2] == jpgHeaderIF[0] &&
-                  buffer[3] == buffer[3] & jpgHeaderIF[1]
-        {
-            return .JPEG
-        }
-        
-        return .Unknown
-    }
-}
-
-enum ImageFormat {
-    case Unknown, PNG, JPEG
 }
 
 extension Dictionary {

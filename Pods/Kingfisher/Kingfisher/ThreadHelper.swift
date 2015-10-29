@@ -1,10 +1,10 @@
 //
-//  UIImage+Normalize.swift
+//  ThreadHelper.swift
 //  Kingfisher
 //
-//  Created by Tom Kraina on 15/8/5.
+//  Created by Wei Wang on 15/10/9.
 //
-//  Copyright (c) 2015 Wei Wang. All rights reserved.
+//  Copyright (c) 2015 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import UIKit
-
-extension UIImage {
-    
-    func kf_normalizedImage() -> UIImage {
-        if imageOrientation == .Up {
-            return self
+func dispatch_async_safely_main_queue(block: ()->()) {
+    if NSThread.isMainThread() {
+        block()
+    } else {
+        dispatch_async(dispatch_get_main_queue()) {
+            block()
         }
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        drawInRect(CGRect(origin: CGPointZero, size: size))
-        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return normalizedImage;
     }
 }
-

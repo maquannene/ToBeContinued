@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworking (2.6.0):
-    - AFNetworking/NSURLConnection (= 2.6.0)
-    - AFNetworking/NSURLSession (= 2.6.0)
-    - AFNetworking/Reachability (= 2.6.0)
-    - AFNetworking/Security (= 2.6.0)
-    - AFNetworking/Serialization (= 2.6.0)
-    - AFNetworking/UIKit (= 2.6.0)
-  - AFNetworking/NSURLConnection (2.6.0):
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.0):
+  - AFNetworking/NSURLSession (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.0)
-  - AFNetworking/Security (2.6.0)
-  - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BlocksKit (2.2.5):
@@ -39,9 +39,10 @@ PODS:
     - Dollar (~> 4.0.1)
   - Dollar (4.0.1)
   - FDFullscreenPopGesture (1.1)
-  - Kingfisher (1.6.0)
-  - MJExtension (2.5.12)
-  - MJRefresh (2.4.11)
+  - Kingfisher (1.7.1)
+  - MGSwipeTableCell (1.5.1)
+  - MJExtension (2.5.15)
+  - MJRefresh (2.4.12)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
   - Kingfisher (~> 1.5)
+  - MGSwipeTableCell
   - MJExtension
   - MJRefresh
   - MMDrawerController (~> 0.5.7)
@@ -101,18 +103,19 @@ CHECKOUT OPTIONS:
     :commit: 6b313578e296ac772e9c5dbe18975094ce741360
     :git: https://github.com/wuhanness/MQMaskViewController.git
   WeiboSDK:
-    :commit: 4b228c28402e7cf34363e59f05856249f4421ca4
+    :commit: 2ae2945fff7844abc0ba809a15bd638474a0ed69
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Cent: 74e3f5a7e8543317b0724c272d279e8219cbaedb
   Dollar: a058e2659e0d3261307c12630dbc2fd8e32f80bf
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  Kingfisher: 3308d487e5c2a0fba9c1054fc3b8c45923e03c40
-  MJExtension: 5ab633484e431f777387c70b676c80f993361f1b
-  MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
+  Kingfisher: c65d078cfc202639f2b6ddd49f09f742cef8781a
+  MGSwipeTableCell: a51fa670c01f0aa048f12af040acebf315223137
+  MJExtension: 76967711f6ac61b1dc60ea5e148f88e12cfc8427
+  MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
