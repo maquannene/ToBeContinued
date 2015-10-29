@@ -37,6 +37,6 @@ class MVBNewNoteTrackView: UIView {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
 }

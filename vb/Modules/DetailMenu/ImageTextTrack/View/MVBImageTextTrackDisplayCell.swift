@@ -11,21 +11,32 @@ import SDWebImage
 class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
 
     var imageTextTrack: MVBImageTextTrackModel!
-    var progressView: UIProgressView!
-
+    
+    @IBOutlet weak var progressView: UIProgressView! {
+        didSet {
+            progressView.tintColor = UIColor.grayColor()
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        progressView = UIProgressView()
-        progressView.tintColor = UIColor.grayColor()
-        addSubview(progressView)
-        imageView.layer.cornerRadius = 7.5
-        imageView.clipsToBounds = true
     }
 
+    override func baseConfigure() {
+        super.baseConfigure()
+        imageView.layer.cornerRadius = 7.5
+        imageView.clipsToBounds = true
+        bringSubviewToFront(progressView)
+    }
+    
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         super.applyLayoutAttributes(layoutAttributes)
         progressView.frame = CGRect(x: 20, y: layoutAttributes.frame.height / 2, width: layoutAttributes.frame.width - 40, height: 20)
@@ -52,7 +63,7 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
     
 }

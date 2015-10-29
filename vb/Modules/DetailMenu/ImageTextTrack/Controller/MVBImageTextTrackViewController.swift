@@ -17,6 +17,7 @@ class MVBImageTextTrackViewController: UIViewController {
     var dataSource: MVBImageTextTrackViewModel!
     weak var imageTextTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
+    var willShowClosure: (Void -> Void)?
     
     @IBOutlet weak var imageTextTrackCollectionView: UICollectionView! {
         didSet {
@@ -27,7 +28,7 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var layout: MVBImageTextTrackLayout! {
         didSet {
             layout.delegate = self
-            layout.numberOfColumns = 1
+            layout.numberOfColumns = 2
             layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         }
     }
@@ -40,7 +41,7 @@ class MVBImageTextTrackViewController: UIViewController {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
     
 }
@@ -172,8 +173,8 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
-//        guard !imageTextTrackCollectionView.indexPathsForVisibleItems().contains(NSIndexPath(forItem: index, inSection: 0)) else { return }
-        imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+        guard willShowClosure == nil else { willShowClosure!(); willShowClosure = nil; return }
+        imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
     }
 }
 
@@ -215,9 +216,15 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.dataSource = self
         vc.delegate = self
         vc.cellGap = 10
-        vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
+//        vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
+        vc.collectionView.registerNib(UINib(nibName: "MVBImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         imageTextTrackBrowserVc = vc
+        //  这里设置willShowClosure，willShow的delegate时就不用调用了
+        willShowClosure = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+        }
     }
     
 }

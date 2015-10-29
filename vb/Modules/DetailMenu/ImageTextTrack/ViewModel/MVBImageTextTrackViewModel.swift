@@ -15,7 +15,7 @@ class MVBImageTextTrackViewModel: NSObject {
     lazy var imageTextTrackList: NSMutableArray = NSMutableArray()          //  存储当前imageTextTrack的缓存列表
     
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
     
 }

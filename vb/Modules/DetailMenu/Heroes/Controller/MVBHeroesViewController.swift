@@ -39,7 +39,7 @@ class MVBHeroesViewController: MVBDetailBaseViewController {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
 }
 

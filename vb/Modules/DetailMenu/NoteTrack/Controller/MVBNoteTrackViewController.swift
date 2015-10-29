@@ -81,7 +81,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
     }
 
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
 }
 
@@ -336,6 +336,7 @@ extension MVBNoteTrackViewController: UITableViewDataSource {
             let titleCell: MVBNoteTrackCell = tableView.dequeueReusableCellWithIdentifier(MVBNoteTrackViewController.Static.noteTrackCellId) as! MVBNoteTrackCell
             titleCell.configureWithNoteTrackModel(noteTrackModel)
             titleCell.delegate = self
+            titleCell.slideGestureDelegate = self
             return titleCell
         }
     }
@@ -343,7 +344,8 @@ extension MVBNoteTrackViewController: UITableViewDataSource {
 }
 
 //  MARK: SWTableViewCellDelegate
-extension MVBNoteTrackViewController: SWTableViewCellDelegate {
+extension MVBNoteTrackViewController: SWTableViewCellDelegate, MVBNoteTrackCellSlideGestureDelegate {
+    
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
         let indexPath = self.noteTrackListTableView.indexPathForCell(cell)
         //  点击编辑按键
@@ -355,33 +357,32 @@ extension MVBNoteTrackViewController: SWTableViewCellDelegate {
             deleteNoteTrackAction(indexPath!)
         }
     }
-    
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
 
-    }
-    
-    func swipeableTableViewCell(cell: SWTableViewCell!, scrollingToState state: SWCellState) {
-        if let _ = cell as? MVBNoteTrackCell {
-            if state == SWCellState.CellStateRight {
-
-            }
-            if state == SWCellState.CellStateCenter {
-                
-            }
+    func swipeableTableViewCellDidEndScrolling(cell: SWTableViewCell!) {
+        if cell.isUtilityButtonsHidden() {
+            self.mm_drawerController?.openDrawerGestureModeMask = .All
+        }
+        else {
+            self.mm_drawerController?.openDrawerGestureModeMask = .None
         }
     }
-    
-    func swipeableTableViewCell(cell: SWTableViewCell!, canSwipeToState state: SWCellState) -> Bool {
+
+    func slideGestureRecognizerShouldReceiveTouch() -> NSNumber {
+        for cell in noteTrackListTableView.visibleCells {
+            guard cell is MVBNoteTrackCell else { return true }
+            if !(cell as! MVBNoteTrackCell).isUtilityButtonsHidden() {
+                (cell as! MVBNoteTrackCell).hideUtilityButtonsAnimated(true)
+                return false
+            }
+        }
         return true
     }
     
-    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
-        return true
-    }
 }
 
 // MARK: MQMaskControllerDelegate
 extension MVBNoteTrackViewController: MQMaskControllerDelegate {
+    
     func maskControllerWillDismiss(maskController: MQMaskController!) {
         if let contentView = maskController.contentView as? MVBNewNoteTrackView {
             if contentView.titleTextView.isFirstResponder() {
@@ -392,4 +393,5 @@ extension MVBNoteTrackViewController: MQMaskControllerDelegate {
             }
         }
     }
+    
 }

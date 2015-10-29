@@ -8,6 +8,10 @@
 
 import SWTableViewCell
 
+protocol MVBNoteTrackCellSlideGestureDelegate: NSObjectProtocol {
+    func slideGestureRecognizerShouldReceiveTouch() -> NSNumber
+}
+
 class MVBNoteTrackCell: SWTableViewCell {
 
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -15,6 +19,7 @@ class MVBNoteTrackCell: SWTableViewCell {
     lazy var bottomSeparateLine: CALayer = CALayer()
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
+    weak var slideGestureDelegate: MVBNoteTrackCellSlideGestureDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,12 +44,13 @@ class MVBNoteTrackCell: SWTableViewCell {
     }
 
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
 }
 
 // MARK: Public
 extension MVBNoteTrackCell {
+    
     func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
@@ -52,16 +58,21 @@ extension MVBNoteTrackCell {
         self.rightUtilityButtons = rightButtons() as [AnyObject]
         self.setRightUtilityButtons(self.rightUtilityButtons, withButtonWidth: 70)
     }
+    
 }
 
 // MARK: Private
 extension MVBNoteTrackCell {
+    
     private func rightButtons() -> NSArray {
         let rightButtons: NSMutableArray = NSMutableArray()
         rightButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), title: "编辑")
         rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除")
         return rightButtons
     }
+    
+    func slideGestureRecognizerShouldReceiveTouch() -> NSNumber {
+        return (slideGestureDelegate?.slideGestureRecognizerShouldReceiveTouch())!
+    }
+    
 }
-
-

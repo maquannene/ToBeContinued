@@ -41,6 +41,7 @@
 		D48982E41BB53B4A00A3D881 /* MVBImageTextTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982E31BB53B4A00A3D881 /* MVBImageTextTrackModel.swift */; };
 		D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
+		D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */; };
 		D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B679B81BB4ED3D002E7B32 /* UIWindow_Extension.swift */; };
 		D4B679BB1BB4EDC1002E7B32 /* UIScreen_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B679BA1BB4EDC1002E7B32 /* UIScreen_Extension.swift */; };
 		D4B712F31BAFC6D200166806 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F21BAFC6D200166806 /* AVOSCloud.framework */; };
@@ -141,6 +142,7 @@
 		D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackCell.swift; sourceTree = "<group>"; };
 		D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackLayout.swift; sourceTree = "<group>"; };
 		D48982E31BB53B4A00A3D881 /* MVBImageTextTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackModel.swift; sourceTree = "<group>"; };
+		D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrackDisplayCell.xib; sourceTree = "<group>"; };
 		D4B679B81BB4ED3D002E7B32 /* UIWindow_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindow_Extension.swift; sourceTree = "<group>"; };
 		D4B679BA1BB4EDC1002E7B32 /* UIScreen_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScreen_Extension.swift; sourceTree = "<group>"; };
 		D4B712F21BAFC6D200166806 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */,
 				D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */,
 				D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */,
+				D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */,
 				D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */,
 				D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */,
 			);
@@ -526,11 +529,11 @@
 			children = (
 				D4BDF10A1BC8A1490053966A /* MVBNewNoteTrackView.swift */,
 				D4BDF10B1BC8A1490053966A /* MVBNewNoteTrackView.xib */,
-				D4BDF10C1BC8A1490053966A /* MVBNoteTrackDetailView.swift */,
 				D4BDF10D1BC8A1490053966A /* MVBNoteTrackCell.swift */,
 				D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */,
 				D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */,
 				D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */,
+				D4BDF10C1BC8A1490053966A /* MVBNoteTrackDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
 				D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
+				D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */,
 				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
 				D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */,
 				D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */,
@@ -926,7 +930,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -998,6 +1002,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Debug;
 		};
@@ -1011,7 +1016,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1082,6 +1087,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "vb/vb-Bridging-Header.h";
+				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;
 		};

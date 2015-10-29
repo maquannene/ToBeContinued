@@ -27,7 +27,7 @@ class MVBHeroModel: NSObject {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit", terminator: "")
+        print("\(self.dynamicType) deinit\n", terminator: "")
     }
 }
 

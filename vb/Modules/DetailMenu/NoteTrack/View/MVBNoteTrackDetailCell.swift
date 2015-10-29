@@ -49,7 +49,7 @@ class MVBNoteTrackDetailCell: UITableViewCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit")
+        print("\(self.dynamicType) deinit\n")
     }
 
 }
