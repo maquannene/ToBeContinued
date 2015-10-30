@@ -28,7 +28,7 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var layout: MVBImageTextTrackLayout! {
         didSet {
             layout.delegate = self
-            layout.numberOfColumns = 2
+            layout.numberOfColumns = 1
             layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         }
     }
@@ -63,7 +63,6 @@ extension MVBImageTextTrackViewController {
                     }
                     return
                 }
-                
                 //  获取成功，就逐条请求存储的imageTextTrack存在缓存中
                 strongSelf.dataSource.queryImageTextTrackList { [weak self] succeed in
                     guard let strongSelf = self else { return }
@@ -115,26 +114,9 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
-
-        let imageData = UIImageJPEGRepresentation(image, 0)
-        let imageFile = AVFile(name: "maquan", data: imageData)
-        
-        //  存储图片到云端
-        imageFile.saveInBackgroundWithBlock( { [unowned self, weak imageFile] succeed, error in
-            guard let weakImageFile = imageFile else { return }
-            print("image Url: \(weakImageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(imageData!.length) size: \(weakImageFile.size() / 1024) KB")
-            //  很重要,将imageData存到SDImageCache的disk cache中
-            NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(weakImageFile.url), contents: imageData, attributes: nil)
-            //  将本地的AVCacheFile缓存清理掉
-            weakImageFile.clearCachedFile()
-            //  将新生成的textTrackModel再存到云端
-            let textTrackModel: MVBImageTextTrackModel = MVBImageTextTrackModel(imageFileUrl: weakImageFile.url, imageFileObjectId: weakImageFile.objectId, text: nil, imageSize: image.size)
-            self.dataSource.queryAddImageTextTrack(textTrackModel) { [weak self] success in
-                guard let strongSelf = self else { return }
-                strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
-            }
-        }) { process in
-            print("上传照片进度： \(process)")
+        dataSource.queryAddImageTextTrack(image) { [weak self] (succeed) -> Void in
+            guard let strongSelf = self else { return }
+            strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -167,9 +149,10 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell {
-        let picturebrowserCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
-        picturebrowserCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel)
-        return picturebrowserCell
+        let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
+        let imageTextTrackCell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell
+        imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel, thumbImage: imageTextTrackCell.imageView.image)
+        return imageTextTrackDisplayCell
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
@@ -221,9 +204,10 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         imageTextTrackBrowserVc = vc
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
-        willShowClosure = { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+//        let index = indexPath.item
+        willShowClosure = {
+//            guard let strongSelf = self else { return }
+//            strongSelf.imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
         }
     }
     

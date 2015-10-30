@@ -66,16 +66,16 @@ extension MVBImageTextTrackCell {
     
     func configureCell(imageTextTrack: MVBImageTextTrackModel) -> Void {
         self.imageTextTrack = imageTextTrack
-        let captureUrlStr = self.imageTextTrack.imageFileUrl
-        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.imageFileUrl)!, placeholderImage: nil, options: SDWebImageOptions(rawValue: SDWebImageOptions.RetryFailed.rawValue | 0), progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        let captureUrlStr = self.imageTextTrack.largeImageFileUrl
+        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.thumbImageFileUrl)!, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
             guard let strongSelf = self else { return }
-            guard captureUrlStr == strongSelf.imageTextTrack.imageFileUrl else { return }
+            guard captureUrlStr == strongSelf.imageTextTrack.thumbImageFileUrl else { return }
             print("当前图片Text:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }) { [weak self] (image, error, cacheType, url) -> Void in
                 guard let strongSelf = self else { return }
-                guard url.absoluteString == strongSelf.imageTextTrack.imageFileUrl else { return }  //  回调验证
+                guard url.absoluteString == strongSelf.imageTextTrack.thumbImageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
                 strongSelf.progressView.hidden = true
         }

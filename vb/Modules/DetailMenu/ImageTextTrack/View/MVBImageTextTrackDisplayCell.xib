@@ -29,7 +29,7 @@
             <connections>
                 <outlet property="progressView" destination="SEN-9B-1ff" id="U7w-BC-M4I"/>
             </connections>
-            <point key="canvasLocation" x="-633" y="260"/>
+            <point key="canvasLocation" x="-738" y="205"/>
         </view>
     </objects>
 </document>
