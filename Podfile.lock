@@ -40,7 +40,6 @@ PODS:
   - Dollar (4.0.1)
   - FDFullscreenPopGesture (1.1)
   - Kingfisher (1.7.1)
-  - MGSwipeTableCell (1.5.1)
   - MJExtension (2.5.15)
   - MJRefresh (2.4.12)
   - MMDrawerController (0.5.7):
@@ -56,13 +55,12 @@ PODS:
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
   - MQMaskController (0.0.1)
+  - NYXImagesKit (2.3)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SVProgressHUD (HEAD based on 1.1.3)
   - SWTableViewCell (0.3.7)
-  - UIActivityIndicator-for-SDWebImage (1.2):
-    - SDWebImage (~> 3.7)
   - WeiboSDK (3.1.3)
 
 DEPENDENCIES:
@@ -73,16 +71,15 @@ DEPENDENCIES:
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
   - Kingfisher (~> 1.5)
-  - MGSwipeTableCell
   - MJExtension
   - MJRefresh
   - MMDrawerController (~> 0.5.7)
   - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`,
     commit `6b313578e296ac772e9c5dbe18975094ce741360`)
+  - NYXImagesKit
   - SDWebImage (~> 3.6)
   - SVProgressHUD (HEAD)
   - SWTableViewCell (~> 0.3.7)
-  - UIActivityIndicator-for-SDWebImage
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
 EXTERNAL SOURCES:
@@ -113,15 +110,14 @@ SPEC CHECKSUMS:
   Dollar: a058e2659e0d3261307c12630dbc2fd8e32f80bf
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   Kingfisher: c65d078cfc202639f2b6ddd49f09f742cef8781a
-  MGSwipeTableCell: a51fa670c01f0aa048f12af040acebf315223137
   MJExtension: 76967711f6ac61b1dc60ea5e148f88e12cfc8427
   MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
+  NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
-  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
   WeiboSDK: 5f2a707c4569a64f4641f4171acd712016f24342
 
 COCOAPODS: 0.38.2
