@@ -28,8 +28,8 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var layout: MVBImageTextTrackLayout! {
         didSet {
             layout.delegate = self
-            layout.numberOfColumns = 1
-            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            layout.numberOfColumns = 2
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
     
@@ -150,8 +150,7 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell {
         let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
-        let imageTextTrackCell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell
-        imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel, thumbImage: imageTextTrackCell.imageView.image)
+        imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel)
         return imageTextTrackDisplayCell
     }
     
@@ -199,15 +198,12 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.dataSource = self
         vc.delegate = self
         vc.cellGap = 10
-//        vc.collectionView.registerClass(MVBImageTextTrackDisplayCell.self, forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.collectionView.registerNib(UINib(nibName: "MVBImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         imageTextTrackBrowserVc = vc
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
-//        let index = indexPath.item
         willShowClosure = {
-//            guard let strongSelf = self else { return }
-//            strongSelf.imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+            
         }
     }
     

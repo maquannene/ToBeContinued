@@ -42,8 +42,11 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
         progressView.frame = CGRect(x: 20, y: layoutAttributes.frame.height / 2, width: layoutAttributes.frame.width - 40, height: 20)
     }
     
-    func configurePictureCell(imageTextTrack: MVBImageTextTrackModel, thumbImage: UIImage?) {
+    func configurePictureCell(imageTextTrack: MVBImageTextTrackModel) {
         self.imageTextTrack = imageTextTrack
+    
+        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTextTrack.thumbImageFileUrl)
+
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有教研正确才能设置进度
         let captureUrlStr = self.imageTextTrack.largeImageFileUrl

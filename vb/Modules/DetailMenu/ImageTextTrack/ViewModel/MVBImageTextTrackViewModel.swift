@@ -121,18 +121,18 @@ extension MVBImageTextTrackViewModel {
 
         //  调度组二：上传缩略图
         var thumbImageFile: AVFile?
-        if originImage.size.width > 640 {
-            let boundingRect = CGRect(x: 0, y: 0, width: 640, height: CGFloat(MAXFLOAT))
+        if originImage.size.width > 720 {
+            let boundingRect = CGRect(x: 0, y: 0, width: 720, height: CGFloat(MAXFLOAT))
             let thumbImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
             let thumbImage = originImage.scaleToSize(thumbImageSize)
-            thumbImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(thumbImage!, 0))
+            thumbImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(thumbImage!, 1))
             querySaveImageFile(imageFile: thumbImageFile, group: saveImageGroup, complete: complete)
         }
         
         //  调度组三：上传大图（目前大图就是原图）
         var largeImageFile: AVFile?
         if false {
-            let boundingRect = CGRect(x: 0, y: 0, width: 640, height: CGFloat(MAXFLOAT))
+            let boundingRect = CGRect(x: 0, y: 0, width: 720, height: CGFloat(MAXFLOAT))
             let largeImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
             let largeImage = originImage.scaleToSize(largeImageSize)
             largeImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(largeImage!, 0))
