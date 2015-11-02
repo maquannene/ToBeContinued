@@ -78,6 +78,8 @@
 		D4EA2EA61BAC505C00E48135 /* MVBAccountManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA2EA11BAC505C00E48135 /* MVBAccountManageViewController.swift */; };
 		D4EA2EA71BAC505C00E48135 /* MVBAccountRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA2EA21BAC505C00E48135 /* MVBAccountRecordView.swift */; };
 		D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4EA2EA31BAC505C00E48135 /* MVBAccountRecordView.xib */; };
+		D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */; };
+		D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */; };
 		D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */; };
 		D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */; };
 		D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */; };
@@ -179,6 +181,8 @@
 		D4EA2EA11BAC505C00E48135 /* MVBAccountManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountManageViewController.swift; sourceTree = "<group>"; };
 		D4EA2EA21BAC505C00E48135 /* MVBAccountRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAccountRecordView.swift; sourceTree = "<group>"; };
 		D4EA2EA31BAC505C00E48135 /* MVBAccountRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBAccountRecordView.xib; sourceTree = "<group>"; };
+		D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserView.swift; sourceTree = "<group>"; };
+		D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MQPictureBrowserView.xib; sourceTree = "<group>"; };
 		D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPictureBrowser.podspec; sourceTree = "<group>"; };
 		D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackDisplayCell.swift; sourceTree = "<group>"; };
 		D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserCell.swift; sourceTree = "<group>"; };
@@ -614,6 +618,8 @@
 			isa = PBXGroup;
 			children = (
 				D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */,
+				D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */,
+				D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */,
 				D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */,
 			);
 			path = MQPictureBrowser;
@@ -705,6 +711,7 @@
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
 				D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
+				D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */,
 				D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */,
 				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
 				D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */,
@@ -796,6 +803,7 @@
 				D48982E21BB5391800A3D881 /* MVBImageTextTrackLayout.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
 				D4E48EC51BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift in Sources */,
+				D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */,
 				D418AD471BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift in Sources */,
 				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
 				D417F1D71BCF509800106012 /* MVBAppDataSource.swift in Sources */,

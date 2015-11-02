@@ -156,6 +156,10 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
         self.successLogIn()
     }
     
+    func request(request: WBHttpRequest!, didFailWithError error: NSError!) {
+        SVProgressHUD.showErrorWithStatus("网络错误")
+    }
+    
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
 //        let x: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
     }

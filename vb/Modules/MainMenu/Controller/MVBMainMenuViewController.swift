@@ -55,6 +55,7 @@ class MVBMainMenuViewController: UIViewController {
     deinit {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
+    
 }
 
 // MARK: buttonAction
@@ -114,10 +115,12 @@ extension MVBMainMenuViewController {
             }
         }
     }
+    
 }
 
 // MARK: UIScrollViewDelegate
 extension MVBMainMenuViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
             if scrollView.contentOffset.y < -80 {
@@ -129,6 +132,7 @@ extension MVBMainMenuViewController: UIScrollViewDelegate {
             mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
         }
     }
+    
 }
 
 // MARK: WBHttpRequestDelegate
@@ -150,6 +154,10 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             MVBAppDelegate.MVBApp().dataSource.setUserInfoWithJsonString(result!)
             configurUserInfo()
         }
+    }
+    
+    func request(request: WBHttpRequest!, didFailWithError error: NSError!) {
+        SVProgressHUD.showErrorWithStatus("网络错误")
     }
     
 }

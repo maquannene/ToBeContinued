@@ -190,7 +190,7 @@
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="tZT-mI-fzi"/>
                 <constraint firstItem="Swb-IR-e8R" firstAttribute="top" secondItem="0vN-CH-dCv" secondAttribute="top" constant="40" id="y0j-vF-KoH"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="autoLeftGap" destination="eqw-Td-Qt4" id="6p4-tq-7VM"/>
                 <outlet property="centerX" destination="Gba-ud-pHC" id="1Xp-GQ-orC"/>
@@ -200,7 +200,7 @@
                 <outlet property="headImageView" destination="Swb-IR-e8R" id="Pz5-TF-IaX"/>
                 <outlet property="nameLabel" destination="7wL-21-3T5" id="E99-ej-qHI"/>
             </connections>
-            <point key="canvasLocation" x="118" y="-12"/>
+            <point key="canvasLocation" x="-39" y="-23"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr" userLabel="passwordManage">
             <connections>

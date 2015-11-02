@@ -11,6 +11,8 @@ import SDWebImage
 import MJRefresh
 import AVOSCloud
 import MQMaskController
+import Photos
+import SVProgressHUD
 
 class MVBImageTextTrackViewController: UIViewController {
     
@@ -137,6 +139,22 @@ extension MVBImageTextTrackViewController {
         presentViewController(imagePickerVc, animated: true, completion: nil)
     }
     
+    @objc private func saveImage() {
+        print(imageTextTrackBrowserVc!.collectionView.indexPathsForVisibleItems())
+        let indexPath = imageTextTrackBrowserVc!.collectionView.indexPathsForVisibleItems()[0]
+        guard let cell = imageTextTrackBrowserVc!.collectionView.cellForItemAtIndexPath(indexPath) as? MVBImageTextTrackDisplayCell else { return }
+        guard let image = cell.imageView.image else { return }
+        UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject) {
+        guard didFinishSavingWithError == nil else {
+            SVProgressHUD.showErrorWithStatus("保存失败")
+            return
+        }
+        SVProgressHUD.showSuccessWithStatus("保存成功")
+    }
+    
 }
 
 //  MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -203,6 +221,10 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
         guard willShowClosure == nil else { willShowClosure!(); willShowClosure = nil; return }
         imageTextTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
     }
+    
+//    func pictureBrowserController(controller: MQPictureBrowserController, didDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
+//        
+//    }
 }
 
 //  MARK: MVBImageTextTrackLayoutDelegate
@@ -245,6 +267,7 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.cellGap = 10
         vc.collectionView.registerNib(UINib(nibName: "MVBImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
+        vc.pictureBrowerView.saveButton.addTarget(self, action: "saveImage", forControlEvents: .TouchUpInside)
         imageTextTrackBrowserVc = vc
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
         willShowClosure = {

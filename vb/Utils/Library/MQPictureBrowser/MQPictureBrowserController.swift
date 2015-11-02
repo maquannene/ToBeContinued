@@ -13,6 +13,7 @@ typealias HideAnimationInfo = (imageView: UIImageView, toView: UIView)
 
 @objc protocol MQPictureBrowserControllerDelegate: NSObjectProtocol {
     optional func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
+//    optional func pictureBrowserController(controller: MQPictureBrowserController, didDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
 }
 
 protocol MQPictureBrowserControllerDataSource: NSObjectProtocol {
@@ -35,6 +36,13 @@ class MQPictureBrowserController: UIViewController {
     weak var delegate: MQPictureBrowserControllerDelegate?
     var animationModel: MQPictureBorwserAnimationModel = .PictureMoveAndBackgroundFadeOut
     var cellGap: CGFloat = 0
+    var currentIndex: Int = 0
+    
+    var pictureBrowerView: MQPictureBrowserView {
+        get {
+            return self.view as! MQPictureBrowserView
+        }
+    }
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private lazy var tmpImageView = UIImageView()
@@ -61,10 +69,16 @@ class MQPictureBrowserController: UIViewController {
         self.animationModel = animationModel
     }
     
+    override func loadView() {
+        NSBundle.mainBundle().loadNibNamed("MQPictureBrowserView", owner: self, options: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.frame = CGRectMake(0, 0, UIWindow.windowSize().width, UIWindow.windowSize().height)
         view.addSubview(blurEffectView)
+        view.sendSubviewToBack(blurEffectView)
         
         self.view.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
         
@@ -81,6 +95,7 @@ class MQPictureBrowserController: UIViewController {
         collectionView.dataSource = self
         collectionView.hidden = true
         view.addSubview(collectionView)
+        view.insertSubview(collectionView, aboveSubview: blurEffectView)
         
         tmpImageView.clipsToBounds = true
         tmpImageView.layer.cornerRadius = 7.5
@@ -88,6 +103,8 @@ class MQPictureBrowserController: UIViewController {
         
         blurEffectView.alpha = 0
         blurEffectView.frame = self.view.bounds
+        
+        pictureBrowerView.saveButton.hidden = true
         
     }
     
@@ -144,6 +161,7 @@ extension MQPictureBrowserController {
                         self.tmpImageView.frame = endRect
                         }, completion: { (success) -> Void in
                             self.collectionView.hidden = false
+                            self.pictureBrowerView.saveButton.hidden = false
                             self.tmpImageView.removeFromSuperview()
                     })
                 }
@@ -172,10 +190,10 @@ extension MQPictureBrowserController {
                         self.tmpImageView.frame = endRect
                         }, completion: { (success) -> Void in
                             self.collectionView.hidden = false
+                            self.pictureBrowerView.saveButton.hidden = false
                             self.tmpImageView.removeFromSuperview()
                     })
                 }
-
             }
             else {
                 self.view.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
@@ -227,6 +245,7 @@ extension MQPictureBrowserController {
                 self.view.addSubview(self.tmpImageView)
                 self.tmpImageView.image = hideAnimationInfo.imageView.image
                 self.collectionView.hidden = true
+                self.pictureBrowerView.saveButton.hidden = true
                 
                 let caculateEndRect: (cell: MQPictureBrowserCell) -> CGRect = { cell in
                     let imageActualRect = cell.calculateImageActualRectInCell(cell.imageSize)
@@ -273,6 +292,7 @@ extension MQPictureBrowserController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let imageTextCell = cell as? MQPictureBrowserCell else { return }
+        currentIndex = indexPath.item
         delegate?.pictureBrowserController?(self, willDisplayCell: imageTextCell, forItemAtIndex: indexPath.item)
     }
     
