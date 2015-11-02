@@ -19,8 +19,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRo-Kv-g2h">
-                                <rect key="frame" x="20" y="20" width="22" height="22"/>
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FPn-EW-Gdc"/>
+                                    <constraint firstAttribute="width" constant="44" id="d2D-Wa-EV8"/>
+                                </constraints>
                                 <connections>
                                     <action selector="addImageTextTrackAction:" destination="Jrq-Ir-Fhw" eventType="touchUpInside" id="5Ek-bL-zPM"/>
                                 </connections>
@@ -52,7 +56,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tE9-B6-wz7">
-                                                    <rect key="frame" x="32" y="109" width="150" height="20"/>
+                                                    <rect key="frame" x="32" y="112" width="150" height="20"/>
                                                     <animations/>
                                                     <color key="tintColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -62,7 +66,7 @@
                                                     <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="长图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-43-Vxb">
-                                                    <rect key="frame" x="185" y="219.5" width="24" height="14.5"/>
+                                                    <rect key="frame" x="184" y="219" width="24" height="14.5"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.19381868806651015" green="0.61438889349329906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -80,12 +84,12 @@
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="centerY" secondItem="gb2-oz-fO8" secondAttribute="centerY" id="DU6-RN-hTM"/>
                                             <constraint firstAttribute="trailing" secondItem="tDQ-cS-MZj" secondAttribute="trailing" constant="5" id="MdT-gu-xRK"/>
                                             <constraint firstAttribute="trailing" secondItem="Ts4-Sw-fpI" secondAttribute="trailing" id="PaI-Mp-1ih"/>
-                                            <constraint firstAttribute="trailing" secondItem="1QD-43-Vxb" secondAttribute="trailing" constant="5" id="QnZ-jM-QCf"/>
+                                            <constraint firstAttribute="trailing" secondItem="1QD-43-Vxb" secondAttribute="trailing" constant="6" id="QnZ-jM-QCf"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="left" relation="greaterThanOrEqual" secondItem="gb2-oz-fO8" secondAttribute="left" constant="20" id="Zwl-c3-aYI"/>
                                             <constraint firstAttribute="bottom" secondItem="Ts4-Sw-fpI" secondAttribute="bottom" id="cOc-iZ-2xI"/>
                                             <constraint firstItem="tE9-B6-wz7" firstAttribute="centerX" secondItem="gb2-oz-fO8" secondAttribute="centerX" id="gxD-pO-PH0"/>
                                             <constraint firstItem="Ts4-Sw-fpI" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" id="mGj-v3-E1Q"/>
-                                            <constraint firstAttribute="bottom" secondItem="1QD-43-Vxb" secondAttribute="bottom" constant="5" id="wQ8-WO-u1C"/>
+                                            <constraint firstAttribute="bottom" secondItem="1QD-43-Vxb" secondAttribute="bottom" constant="6" id="wQ8-WO-u1C"/>
                                             <constraint firstItem="tDQ-cS-MZj" firstAttribute="top" secondItem="gb2-oz-fO8" secondAttribute="top" constant="5" id="wYb-mI-hcE"/>
                                             <constraint firstItem="tDQ-cS-MZj" firstAttribute="leading" secondItem="gb2-oz-fO8" secondAttribute="leading" constant="5" id="xNn-rT-lT6"/>
                                         </constraints>
@@ -103,27 +107,52 @@
                                     <outlet property="delegate" destination="Jrq-Ir-Fhw" id="1pa-2u-RBb"/>
                                 </connections>
                             </collectionView>
+                            <progressView opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQL-qx-E4b" userLabel="prgressView">
+                                <rect key="frame" x="0.0" y="23" width="600" height="20"/>
+                                <animations/>
+                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="3hp-Kf-d14"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twi-9J-g4C" userLabel="progressLabel">
+                                <rect key="frame" x="0.0" y="35" width="600" height="20"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rRo-Kv-g2h" firstAttribute="leading" secondItem="YAD-ex-rNh" secondAttribute="leading" constant="20" id="40B-bH-XSK"/>
+                            <constraint firstItem="FQL-qx-E4b" firstAttribute="leading" secondItem="YAD-ex-rNh" secondAttribute="leading" id="2xQ-xk-iv8"/>
+                            <constraint firstItem="rRo-Kv-g2h" firstAttribute="leading" secondItem="YAD-ex-rNh" secondAttribute="leading" id="40B-bH-XSK"/>
+                            <constraint firstItem="twi-9J-g4C" firstAttribute="trailing" secondItem="FQL-qx-E4b" secondAttribute="trailing" id="6WC-su-KD1"/>
                             <constraint firstItem="PtS-Pc-CdB" firstAttribute="top" secondItem="YAD-ex-rNh" secondAttribute="topMargin" constant="64" id="9hk-yp-jcL"/>
+                            <constraint firstItem="twi-9J-g4C" firstAttribute="bottom" secondItem="FQL-qx-E4b" secondAttribute="bottom" id="AoG-YV-iDu"/>
+                            <constraint firstAttribute="trailing" secondItem="FQL-qx-E4b" secondAttribute="trailing" id="KpF-gf-4EO"/>
                             <constraint firstItem="PtS-Pc-CdB" firstAttribute="leading" secondItem="YAD-ex-rNh" secondAttribute="leading" id="MqW-sG-UZZ"/>
                             <constraint firstAttribute="trailing" secondItem="PtS-Pc-CdB" secondAttribute="trailing" id="P8C-Rd-Zh9"/>
+                            <constraint firstItem="twi-9J-g4C" firstAttribute="leading" secondItem="FQL-qx-E4b" secondAttribute="leading" id="Qnv-b7-HnF"/>
+                            <constraint firstItem="twi-9J-g4C" firstAttribute="top" secondItem="FQL-qx-E4b" secondAttribute="top" id="S0n-fL-sKE"/>
                             <constraint firstItem="TUK-7G-Bck" firstAttribute="top" secondItem="PtS-Pc-CdB" secondAttribute="bottom" id="doA-j5-OqC"/>
                             <constraint firstItem="rRo-Kv-g2h" firstAttribute="top" secondItem="YAD-ex-rNh" secondAttribute="top" constant="20" id="e7B-bc-9Ik"/>
+                            <constraint firstItem="FQL-qx-E4b" firstAttribute="top" secondItem="YAD-ex-rNh" secondAttribute="top" constant="-20" id="jOb-x0-3Tm"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imageTextTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
                         <outlet property="layout" destination="vgQ-X3-bCS" id="nn7-Gx-Vpa"/>
+                        <outlet property="updateProgressLabel" destination="twi-9J-g4C" id="K6N-y5-mYM"/>
+                        <outlet property="updateProgressTop" destination="jOb-x0-3Tm" id="K8x-3R-d8o"/>
+                        <outlet property="updateProgressView" destination="FQL-qx-E4b" id="WPS-Ds-F3T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="-244"/>
+            <point key="canvasLocation" x="-1133" y="-282"/>
         </scene>
     </scenes>
 </document>

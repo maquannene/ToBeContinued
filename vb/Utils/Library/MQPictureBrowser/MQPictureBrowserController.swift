@@ -40,7 +40,7 @@ class MQPictureBrowserController: UIViewController {
     private lazy var tmpImageView = UIImageView()
     private lazy var blurEffect = UIBlurEffect(style: .ExtraLight)
     private var blurEffectView: UIVisualEffectView!
-    private var hideStatusBar: Bool = false
+    private var statusBarHidden: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -92,7 +92,7 @@ class MQPictureBrowserController: UIViewController {
     }
     
     override func prefersStatusBarHidden() -> Bool {
-        return hideStatusBar
+        return statusBarHidden
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
@@ -110,7 +110,7 @@ extension MQPictureBrowserController {
     
     func presentFromViewController(viewController: UIViewController!, atIndexPicture index: Int = 0) {
     
-        self.hideStatusBar = true
+        self.statusBarHidden = true
         self.setNeedsStatusBarAppearanceUpdate()
         
         viewController.presentViewController(self, animated: false) {

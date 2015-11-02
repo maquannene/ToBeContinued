@@ -18,6 +18,11 @@ class MVBImageTextTrackViewController: UIViewController {
     weak var imageTextTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
     var willShowClosure: (Void -> Void)?
+    var statusBarHidden: Bool = false
+    
+    @IBOutlet weak var updateProgressView: UIProgressView!
+    @IBOutlet weak var updateProgressLabel: UILabel!
+    @IBOutlet weak var updateProgressTop: NSLayoutConstraint!
     
     @IBOutlet weak var imageTextTrackCollectionView: UICollectionView! {
         didSet {
@@ -33,11 +38,39 @@ class MVBImageTextTrackViewController: UIViewController {
         }
     }
     
+    var updateProgressShow: Bool {
+        set {
+            statusBarHidden = newValue
+            if newValue == true {
+                updateProgressTop.constant = 0
+            }
+            else {
+                updateProgressTop.constant = -20
+            }
+            self.view.setNeedsUpdateConstraints()
+            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
+                self.setNeedsStatusBarAppearanceUpdate()
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+        }
+        get {
+            return updateProgressTop.constant == 0
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = MVBImageTextTrackViewModel()
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
         imageTextTrackCollectionView.header.beginRefreshing()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return statusBarHidden
+    }
+    
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Slide
     }
     
     deinit {
@@ -114,13 +147,25 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
-        dataSource.queryAddImageTextTrack(image) { [weak self] (succeed) -> Void in
+        dataSource.queryAddImageTextTrack(image, progressClosure: { [weak self] (progress) -> Void in
+            print("大图上传进度: \(progress)")
             guard let strongSelf = self else { return }
-            strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
+            strongSelf.updateProgressShow = true
+            strongSelf.updateProgressView.progress = Float(progress) / Float(100) * 0.9
+            strongSelf.updateProgressLabel.text = "上传进度:\(Float(progress) * 0.9)%"
+            }) { [weak self] (succeed) -> Void in
+                guard let strongSelf = self else { return }
+                guard succeed == true else { strongSelf.updateProgressShow = false; return }
+                strongSelf.updateProgressView.progress = 1
+                strongSelf.updateProgressLabel.text = "长传成功"
+                strongSelf.imageTextTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    strongSelf.updateProgressShow = false
+                })
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }

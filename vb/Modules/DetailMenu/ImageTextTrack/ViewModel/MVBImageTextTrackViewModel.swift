@@ -96,12 +96,11 @@ extension MVBImageTextTrackViewModel {
     
 
     
-    func queryAddImageTextTrack(originImage: UIImage!, complete: MVBQureyDataCompleteClosure?) {
-        
-        typealias saveImageFileType = (imageFile: AVFile!, group: dispatch_group_t!, complete: MVBQureyDataCompleteClosure?) -> Void
-        let querySaveImageFile: saveImageFileType = { (imageFile, group, complete) in
+    func queryAddImageTextTrack(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: MVBQureyDataCompleteClosure?) {
+        typealias saveImageFileClosure = (imageFile: AVFile!, group: dispatch_group_t!, progressClosure: ((progress: Int) -> Void)?, complete: MVBQureyDataCompleteClosure?) -> Void
+        let querySaveImageFile: saveImageFileClosure = { (imageFile, group, progressClosure, complete) in
             dispatch_group_enter(group)
-            imageFile.saveInBackgroundWithBlock { [weak imageFile] (succeed, error) -> Void in
+            imageFile.saveInBackgroundWithBlock({ [weak imageFile] (succeed, error) -> Void in
                 guard succeed == true else { complete?(succeed: false); return }    //  确保上传图片成功
                 guard let weakimageFile = imageFile else { return }
                 //            print("image Url: \(weakimageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(weakimageFile.getData().length) size: \(weakimageFile.size() / 1024) KB")
@@ -110,14 +109,16 @@ extension MVBImageTextTrackViewModel {
                 //  将本地的AVCacheFile缓存清理掉
                 weakimageFile.clearCachedFile()
                 dispatch_group_leave(group)
-            }
+                }, progressBlock: { (progress: Int) -> Void in
+                    progressClosure?(progress: progress)
+            })
         }
         
         let saveImageGroup: dispatch_group_t = dispatch_group_create()
 
         //  调度组一：上传原图
         let originImageFile: AVFile! = AVFile(name: "maquan", data: UIImageJPEGRepresentation(originImage!, 0))
-        querySaveImageFile(imageFile: originImageFile, group: saveImageGroup, complete: complete)
+        querySaveImageFile(imageFile: originImageFile, group: saveImageGroup, progressClosure: progressClosure, complete: complete)
 
         //  调度组二：上传缩略图
         var thumbImageFile: AVFile?
@@ -125,8 +126,8 @@ extension MVBImageTextTrackViewModel {
             let boundingRect = CGRect(x: 0, y: 0, width: 720, height: CGFloat(MAXFLOAT))
             let thumbImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
             let thumbImage = originImage.scaleToSize(thumbImageSize)
-            thumbImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(thumbImage!, 1))
-            querySaveImageFile(imageFile: thumbImageFile, group: saveImageGroup, complete: complete)
+            thumbImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(thumbImage!, 0))
+            querySaveImageFile(imageFile: thumbImageFile, group: saveImageGroup, progressClosure: nil, complete: complete)
         }
         
         //  调度组三：上传大图（目前大图就是原图）
@@ -136,7 +137,7 @@ extension MVBImageTextTrackViewModel {
             let largeImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
             let largeImage = originImage.scaleToSize(largeImageSize)
             largeImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(largeImage!, 0))
-            querySaveImageFile(imageFile: largeImageFile, group: saveImageGroup, complete: complete)
+            querySaveImageFile(imageFile: largeImageFile, group: saveImageGroup, progressClosure: nil, complete: complete)
         }
         
         dispatch_group_notify(saveImageGroup, dispatch_get_main_queue()) { () -> Void in
@@ -163,7 +164,7 @@ extension MVBImageTextTrackViewModel {
         
         //  删除原图
         let originImageFile = AVFile()
-        originImageFile.objectId = track.originImageFileUrl
+        originImageFile.objectId = track.originImageFileObjectId
         originImageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
             print(success)
         }
@@ -178,7 +179,7 @@ extension MVBImageTextTrackViewModel {
         //  删除大图
         if track.largeImageFileUrl != track.originImageFileUrl {
             let largeImageFile = AVFile()
-            largeImageFile.objectId = track.largeImageFileUrl
+            largeImageFile.objectId = track.largeImageFileObjectId
             largeImageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
                 print(success)
             }
