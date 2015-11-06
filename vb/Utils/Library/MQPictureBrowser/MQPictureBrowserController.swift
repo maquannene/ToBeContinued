@@ -39,9 +39,7 @@ class MQPictureBrowserController: UIViewController {
     var currentIndex: Int = 0
     
     var pictureBrowerView: MQPictureBrowserView {
-        get {
-            return self.view as! MQPictureBrowserView
-        }
+        return self.view as! MQPictureBrowserView
     }
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!

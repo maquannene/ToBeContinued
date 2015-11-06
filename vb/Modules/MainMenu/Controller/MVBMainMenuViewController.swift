@@ -55,6 +55,28 @@ class MVBMainMenuViewController: UIViewController {
     deinit {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
+ 
+//    struct ListItem {
+//        var icon: UIImage?
+//        var title: String
+//        var url: NSURL
+//        
+//        static func listItemsFromJSONData(jsonData: NSData?) -> [ListItem] {
+//            guard let jsonData = jsonData,
+//                let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []),
+//                let jsonItems = json as? Array<NSDictionary> else { return [] }
+//            
+//            return jsonItems.flatMap { (itemDesc: NSDictionary) -> ListItem? in
+//                guard let title = itemDesc["title"] as? String,
+//                    let urlString = itemDesc["url"] as? String,
+//                    let url = NSURL(string: urlString)
+//                    else { return nil }
+//                let iconName = itemDesc["icon"] as? String
+//                let icon = iconName.flatMap { UIImage(named: $0) }
+//                return ListItem(icon: icon, title: title, url: url)
+//            }
+//        }
+//    }
     
 }
 
@@ -146,7 +168,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
             
-            self.mm_drawerController!.dismissViewControllerAnimated(false) {
+            self.mm_drawerController!.dismissViewControllerAnimated(true) {
                 self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
             }
         }

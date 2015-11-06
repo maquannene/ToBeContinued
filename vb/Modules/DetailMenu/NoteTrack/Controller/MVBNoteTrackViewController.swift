@@ -22,6 +22,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
     
     var dataSource: MVBNoteTrackViewModel!
     var newNoteTrackVc: MQMaskController?
+    @IBOutlet weak var noNoteTrackTips: UILabel!
     var operateCellIndex: Int = -1
     
     @IBOutlet weak var noteTrackListTableView: UITableView! {
@@ -314,6 +315,7 @@ extension MVBNoteTrackViewController: UITableViewDelegate {
 extension MVBNoteTrackViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        noNoteTrackTips.hidden = dataSource.noteTrackModelList.count > 0;
         if dataSource.expandedIndexPath != nil {
             return dataSource.noteTrackModelList.count + 1
         }

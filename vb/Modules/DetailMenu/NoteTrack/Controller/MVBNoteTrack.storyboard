@@ -26,23 +26,35 @@
                                     <outlet property="delegate" destination="bEv-9s-iZT" id="oM6-pM-WTd"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="记录点什么吧..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1b7-JQ-hpV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1b7-JQ-hpV" secondAttribute="trailing" id="6yq-Ev-70u"/>
+                            <constraint firstItem="1b7-JQ-hpV" firstAttribute="leading" secondItem="knj-C1-prn" secondAttribute="leading" id="AsD-5g-Ybl"/>
                             <constraint firstItem="54Y-cM-1Gw" firstAttribute="top" secondItem="ScL-MO-R6h" secondAttribute="bottom" id="EBV-uo-sAz"/>
+                            <constraint firstAttribute="bottom" secondItem="1b7-JQ-hpV" secondAttribute="bottom" id="KBQ-by-po9"/>
                             <constraint firstItem="54Y-cM-1Gw" firstAttribute="leading" secondItem="knj-C1-prn" secondAttribute="leading" id="Nl0-8l-PtM"/>
                             <constraint firstAttribute="trailing" secondItem="54Y-cM-1Gw" secondAttribute="trailing" id="YSi-Qu-yd6"/>
+                            <constraint firstItem="1b7-JQ-hpV" firstAttribute="top" secondItem="knj-C1-prn" secondAttribute="top" id="e3w-9F-qLH"/>
                             <constraint firstItem="4DL-AM-9BT" firstAttribute="top" secondItem="54Y-cM-1Gw" secondAttribute="bottom" id="hKD-k7-rv6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noNoteTrackTips" destination="1b7-JQ-hpV" id="qkA-8U-ZRY"/>
                         <outlet property="noteTrackListTableView" destination="54Y-cM-1Gw" id="s56-h0-BYJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWI-AC-RNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="334"/>
+            <point key="canvasLocation" x="138" y="299"/>
         </scene>
     </scenes>
 </document>
