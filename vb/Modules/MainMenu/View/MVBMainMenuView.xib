@@ -183,16 +183,16 @@
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="top" secondItem="h7S-7C-ibK" secondAttribute="bottom" constant="10" id="WMV-xn-jXz"/>
                 <constraint firstItem="60D-Sb-YfR" firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="Xfh-OO-JfZ"/>
                 <constraint firstItem="h7S-7C-ibK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0vN-CH-dCv" secondAttribute="leading" constant="10" id="dhi-2T-eZ3"/>
+                <constraint firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="e3w-Oq-Rqu"/>
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="leading" secondItem="0vN-CH-dCv" secondAttribute="leading" id="eFS-se-ZiA"/>
                 <constraint firstItem="60D-Sb-YfR" firstAttribute="leading" secondItem="0vN-CH-dCv" secondAttribute="leading" id="eNl-tQ-ibk"/>
-                <constraint firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="eqw-Td-Qt4"/>
                 <constraint firstItem="7wL-21-3T5" firstAttribute="centerX" secondItem="Swb-IR-e8R" secondAttribute="centerX" id="gUk-9s-FV4"/>
                 <constraint firstItem="BjR-k7-7ke" firstAttribute="trailing" secondItem="xCb-pq-pGq" secondAttribute="trailing" id="tZT-mI-fzi"/>
                 <constraint firstItem="Swb-IR-e8R" firstAttribute="top" secondItem="0vN-CH-dCv" secondAttribute="top" constant="40" id="y0j-vF-KoH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="autoLeftGap" destination="eqw-Td-Qt4" id="6p4-tq-7VM"/>
+                <outlet property="autoRightGap" destination="e3w-Oq-Rqu" id="eok-fc-zBn"/>
                 <outlet property="centerX" destination="Gba-ud-pHC" id="1Xp-GQ-orC"/>
                 <outlet property="describeLbel" destination="h7S-7C-ibK" id="aV1-24-7ha"/>
                 <outlet property="detailScrollView" destination="BjR-k7-7ke" id="xdy-PK-DF6"/>
@@ -200,7 +200,7 @@
                 <outlet property="headImageView" destination="Swb-IR-e8R" id="Pz5-TF-IaX"/>
                 <outlet property="nameLabel" destination="7wL-21-3T5" id="E99-ej-qHI"/>
             </connections>
-            <point key="canvasLocation" x="-39" y="-23"/>
+            <point key="canvasLocation" x="-21" y="-96"/>
         </view>
         <tapGestureRecognizer id="ZNT-OE-zZr" userLabel="passwordManage">
             <connections>

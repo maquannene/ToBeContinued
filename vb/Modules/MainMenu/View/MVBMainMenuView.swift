@@ -14,7 +14,7 @@ class MVBMainMenuView: UIView {
     @IBOutlet var describeLbel: UILabel!
     @IBOutlet weak var detailScrollView: UIScrollView!
     //  下面这四条约束都是会自动改变的
-    @IBOutlet weak var autoLeftGap: NSLayoutConstraint!     //  这条约束是右侧的标杆。detailScrollView 和 containerView的右侧都和它对齐
+    @IBOutlet weak var autoRightGap: NSLayoutConstraint!     //  这条约束是右侧的标杆。detailScrollView 和 containerView的右侧都和它对齐
     @IBOutlet weak var centerX: NSLayoutConstraint!
 
     override func awakeFromNib() {
@@ -28,7 +28,7 @@ class MVBMainMenuView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        autoLeftGap.constant = -(UIWindow.windowSize().width - self.frame.width)
+        autoRightGap.constant = -(UIWindow.windowSize().width - self.frame.width)
         centerX.constant = (UIWindow.windowSize().width - w) / 2 - 30
     }
     
