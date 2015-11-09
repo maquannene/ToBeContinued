@@ -48,22 +48,29 @@ typedef NS_ENUM(NSUInteger, SVProgressHUDAnimationType) {
 @property (assign, nonatomic) SVProgressHUDStyle defaultStyle UI_APPEARANCE_SELECTOR;                   // default is SVProgressHUDStyleLight
 @property (assign, nonatomic) SVProgressHUDMaskType defaultMaskType UI_APPEARANCE_SELECTOR;             // default is SVProgressHUDMaskTypeNone
 @property (assign, nonatomic) SVProgressHUDAnimationType defaultAnimationType UI_APPEARANCE_SELECTOR;   // default is SVProgressHUDAnimationTypeFlat
-@property (assign, nonatomic) CGFloat ringThickness UI_APPEARANCE_SELECTOR;           // default is 2 pt
-@property (assign, nonatomic) CGFloat cornerRadius UI_APPEARANCE_SELECTOR;            // default is 14 pt
-@property (assign, nonatomic) UIOffset offsetFromCenter UI_APPEARANCE_SELECTOR;       // default is 0, 0
+@property (assign, nonatomic) CGSize minimumSize UI_APPEARANCE_SELECTOR;        // default is CGSizeZero, can be used to avoid resizing for a larger message
+@property (assign, nonatomic) CGFloat ringThickness UI_APPEARANCE_SELECTOR;     // default is 2 pt
+@property (assign, nonatomic) CGFloat ringRadius UI_APPEARANCE_SELECTOR;        // default is 18 pt
+@property (assign, nonatomic) CGFloat ringNoTextRadius UI_APPEARANCE_SELECTOR;  // default is 24 pt
+@property (assign, nonatomic) CGFloat cornerRadius UI_APPEARANCE_SELECTOR;      // default is 14 pt
+@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;              // default is [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
+@property (strong, nonatomic) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;  // default is [UIColor whiteColor]
+@property (strong, nonatomic) UIColor *foregroundColor UI_APPEARANCE_SELECTOR;  // default is [UIColor blackColor]
+@property (strong, nonatomic) UIImage *infoImage UI_APPEARANCE_SELECTOR;        // default is the bundled info image provided by Freepik
+@property (strong, nonatomic) UIImage *successImage UI_APPEARANCE_SELECTOR;     // default is the bundled success image provided by Freepik
+@property (strong, nonatomic) UIImage *errorImage UI_APPEARANCE_SELECTOR;       // default is the bundled error image provided by Freepik
+@property (strong, nonatomic) UIView *viewForExtension UI_APPEARANCE_SELECTOR;  // default is nil, only used if #define SV_APP_EXTENSIONS is set
+@property (assign, nonatomic) NSTimeInterval minimumDismissTimeInterval;        // default is 5.0 seconds
 
-@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;                    // default is [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
-@property (strong, nonatomic) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;        // default is [UIColor whiteColor]
-@property (strong, nonatomic) UIColor *foregroundColor UI_APPEARANCE_SELECTOR;        // default is [UIColor blackColor]
-@property (strong, nonatomic) UIImage *infoImage UI_APPEARANCE_SELECTOR;              // default is the bundled info image provided by Freepik
-@property (strong, nonatomic) UIImage *successImage UI_APPEARANCE_SELECTOR;           // default is the bundled success image provided by Freepik
-@property (strong, nonatomic) UIImage *errorImage UI_APPEARANCE_SELECTOR;             // default is the bundled error image provided by Freepik
-@property (strong, nonatomic) UIView *viewForExtension UI_APPEARANCE_SELECTOR;        // default is nil, only used if #define SV_APP_EXTENSIONS is set
+@property (assign, nonatomic) UIOffset offsetFromCenter UI_APPEARANCE_SELECTOR; // default is 0, 0
 
 + (void)setDefaultStyle:(SVProgressHUDStyle)style;                  // default is SVProgressHUDStyleLight
 + (void)setDefaultMaskType:(SVProgressHUDMaskType)maskType;         // default is SVProgressHUDMaskTypeNone
 + (void)setDefaultAnimationType:(SVProgressHUDAnimationType)type;   // default is SVProgressHUDAnimationTypeFlat
-+ (void)setRingThickness:(CGFloat)width;                            // default is 2 pt
++ (void)setMinimumSize:(CGSize)minimumSize;                         // default is CGSizeZero, can be used to avoid resizing for a larger message
++ (void)setRingThickness:(CGFloat)ringThickness;                    // default is 2 pt
++ (void)setRingRadius:(CGFloat)radius;                              // default is 18 pt
++ (void)setRingNoTextRadius:(CGFloat)radius;                        // default is 24 pt
 + (void)setCornerRadius:(CGFloat)cornerRadius;                      // default is 14 pt
 + (void)setFont:(UIFont*)font;                                      // default is [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
 + (void)setForegroundColor:(UIColor*)color;                         // default is [UIColor blackColor], only used for SVProgressHUDStyleCustom
@@ -72,7 +79,7 @@ typedef NS_ENUM(NSUInteger, SVProgressHUDAnimationType) {
 + (void)setSuccessImage:(UIImage*)image;                            // default is the bundled success image provided by Freepik
 + (void)setErrorImage:(UIImage*)image;                              // default is the bundled error image provided by Freepik
 + (void)setViewForExtension:(UIView*)view;                          // default is nil, only used if #define SV_APP_EXTENSIONS is set
-
++ (void)setMinimumDismissTimeInterval:(NSTimeInterval)interval;     // default is 5.0 seconds
 
 #pragma mark - Show Methods
 
@@ -109,6 +116,7 @@ typedef NS_ENUM(NSUInteger, SVProgressHUDAnimationType) {
 
 + (BOOL)isVisible;
 
++ (NSTimeInterval)displayDurationForString:(NSString*)string;
 
 @end
 

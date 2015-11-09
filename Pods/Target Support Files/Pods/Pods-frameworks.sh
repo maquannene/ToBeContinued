@@ -53,7 +53,6 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/AFNetworking.framework'
-  install_framework 'Pods/BlocksKit.framework'
   install_framework 'Pods/Cent.framework'
   install_framework 'Pods/Dollar.framework'
   install_framework 'Pods/FDFullscreenPopGesture.framework'
@@ -69,7 +68,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/AFNetworking.framework'
-  install_framework 'Pods/BlocksKit.framework'
   install_framework 'Pods/Cent.framework'
   install_framework 'Pods/Dollar.framework'
   install_framework 'Pods/FDFullscreenPopGesture.framework'

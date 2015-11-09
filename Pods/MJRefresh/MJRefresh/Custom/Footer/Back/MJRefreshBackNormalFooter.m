@@ -10,7 +10,7 @@
 
 @interface MJRefreshBackNormalFooter()
 {
-    __weak UIImageView *_arrowView;
+    __unsafe_unretained UIImageView *_arrowView;
 }
 @property (weak, nonatomic) UIActivityIndicatorView *loadingView;
 @end
@@ -20,11 +20,13 @@
 - (UIImageView *)arrowView
 {
     if (!_arrowView) {
-        UIImageView *arrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:MJRefreshSrcName(@"arrow.png")]];
+        UIImage *image = [UIImage imageNamed:MJRefreshSrcName(@"arrow.png")] ?: [UIImage imageNamed:MJRefreshFrameworkSrcName(@"arrow.png")];
+        UIImageView *arrowView = [[UIImageView alloc] initWithImage:image];
         [self addSubview:_arrowView = arrowView];
     }
     return _arrowView;
 }
+
 
 - (UIActivityIndicatorView *)loadingView
 {
