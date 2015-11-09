@@ -11,11 +11,14 @@ import SVProgressHUD
 import SDWebImage
 
 enum MVBMainMenuViewControllerOperate: Int {
-    case Main
-    case PasswordManage
+    case Home
+    case NoteTrack
     case ImageTextTrack
+    case Setting
+    
     case HeroesManage
     case AccountManage
+    
     case LogOut
 }
 
@@ -26,8 +29,8 @@ protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
 class MVBMainMenuViewController: UIViewController {
     
     weak var delegate: MVBMainMenuViewControllerDelegate?
-    weak var mainMenuView: MVBMainMenuView? {
-        return self.view as? MVBMainMenuView
+    weak var mainMenuView: MVBMainMenuView! {
+        return self.view as! MVBMainMenuView
     }
     
     override func loadView() {
@@ -36,12 +39,21 @@ class MVBMainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainMenuView!.menuTableView.registerNib(UINib(nibName: MVBMainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MVBMainMenuViewCell.ClassName)
         self.configurUserInfo()
     }
     
     func configurUserInfo() {
         if let userModel = MVBAppDelegate.MVBApp().dataSource.userModel as MVBUserModel? {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: userModel.cover_image_phone as String!))
+            if let coverImagePhoto = userModel.cover_image_phone as? String {
+                mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
+                mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
+            }
+            else {
+                mainMenuView!.nameLabel.textColor = UIColor.blackColor()
+            }
+
             mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
             mainMenuView!.nameLabel.text = userModel.name as? String
             mainMenuView!.describeLbel.text = userModel._description as? String
@@ -82,16 +94,48 @@ class MVBMainMenuViewController: UIViewController {
 
 // MARK: buttonAction
 extension MVBMainMenuViewController {
+
+    @IBAction func backMainAction(sender: AnyObject) {
+        delegate!.mainMenuViewController(self, operate: .Home)
+    }
     
+    @IBAction func settingAction(sender: AnyObject) {
+        
+        if let _ = (mm_drawerController!.centerViewController as? UINavigationController)?.topViewController as? MVBSettingViewController {
+            mm_drawerController!.closeDrawerAnimated(true, completion: nil)
+        }
+        else {
+            let settingNavi = UIStoryboard(name: "MVBSetting", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! UINavigationController
+            let settingViewController = settingNavi.topViewController as! MVBSettingViewController
+            settingViewController.effectSwitchClosuer = { [unowned self] in
+                if $0 {
+                    self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
+                        let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
+                        block(drawerVc, drawerSide, percentVisible)
+                    }
+                    self.mainMenuView!.clipsToBounds = true
+                }
+                else {
+                    self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
+                    self.mainMenuView!.clipsToBounds = false
+                }
+            }
+            mm_drawerController!.setCenterViewController(settingNavi, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
+                self.mm_drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+                self.mm_drawerController!.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { (finish) -> Void in
+                    self.mm_drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+                })
+            })
+        }
+        
+        delegate!.mainMenuViewController(self, operate: .Setting)
+    }
+
     @IBAction func logOutAction(sender: AnyObject) {
-//        UIAlertView.bk_showAlertViewWithTitle("", message: "确定退出", cancelButtonTitle: "取消", otherButtonTitles: ["确定"]) { (alertView, index) -> Void in
-//            if index == 1 {
-                let appDataSource = MVBAppDelegate.MVBApp().dataSource
-                WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
-                SVProgressHUD.showWithStatus("正在退出...")
-                SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-//            }
-//        }
+        let appDataSource = MVBAppDelegate.MVBApp().dataSource
+        WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
+        SVProgressHUD.showWithStatus("正在退出...")
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
     }
     
     @IBAction func clearDiskMemory(sender: AnyObject) {
@@ -101,47 +145,10 @@ extension MVBMainMenuViewController {
         SDImageCache.sharedImageCache().cleanDisk()
     }
     
-    @IBAction func backMainAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.Main)
-    }
-    
-    @IBAction func passwordManageAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.PasswordManage)
-    }
-
-    @IBAction func imageTextTrackAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.ImageTextTrack)
-    }
-    
-    @IBAction func heroesManageAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.HeroesManage)
-    }
-    
-    @IBAction func accountManageAction(sender: AnyObject) {
-        delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.AccountManage)
-    }
-    
-    //  动画开关控制
-    @IBAction func specialEffectsAction(sender: AnyObject) {
-        if let switchBtn = sender as? UISwitch {
-            if switchBtn.on {
-                self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
-                    let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
-                    block(drawerVc, drawerSide, percentVisible)
-                }
-                mainMenuView!.clipsToBounds = true
-            }
-            else {
-                self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
-                mainMenuView!.clipsToBounds = false
-            }
-        }
-    }
-    
 }
 
-// MARK: UIScrollViewDelegate
-extension MVBMainMenuViewController: UIScrollViewDelegate {
+// MARK: UITableViewDelegate, UITableViewDataSource
+extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
@@ -153,6 +160,36 @@ extension MVBMainMenuViewController: UIScrollViewDelegate {
         else {
             mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 0:
+            delegate?.mainMenuViewController(self, operate: .NoteTrack)
+        case 1:
+            delegate?.mainMenuViewController(self, operate: .ImageTextTrack)
+        default:
+            break
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(MVBMainMenuViewCell.ClassName) as! MVBMainMenuViewCell
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Note Track"
+        }
+        if indexPath.row == 1 {
+            cell.textLabel?.text = "Image Text Track"
+        }
+        return cell
     }
     
 }
@@ -168,7 +205,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
             
-            self.mm_drawerController!.dismissViewControllerAnimated(true) {
+            self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
             }
         }

@@ -36,10 +36,10 @@ extension MVBHeroesInfoModel {
             //        MVBHeroesInfoModel.setupObjectClassInArray { () -> [NSObject : AnyObject]! in
             //            return ["heroesDicArray": "MVBHeroModel"]
             //        }
-            MVBHeroesInfoModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
+            MVBHeroesInfoModel.mj_setupIgnoredPropertyNames { () -> [AnyObject]! in
                 return ["heroseModelArray"]
             }
-            MVBHeroesInfoModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+            MVBHeroesInfoModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
                 return ["heroesDicArray": "heroes"]
             }
         }

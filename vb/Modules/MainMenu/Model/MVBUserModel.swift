@@ -39,12 +39,12 @@ class MVBUserModel: NSObject {
     //  利用MJExtension 使其可编码支持NSKeyedArchiver
     required init(coder aDecoder: NSCoder) {
         super.init()
-        self.decode(aDecoder)
+        self.mj_decode(aDecoder)
     }
     
     //  利用MJExtension 使其可编码支持NSKeyedUnarchiver
     func encodeWithCoder(aCoder: NSCoder) {
-        self.encode(aCoder)
+        self.mj_encode(aCoder)
     }
 }
 
@@ -60,7 +60,7 @@ extension MVBUserModel {
         }
         dispatch_once(&Static.token) {
             //  处理属性和Json key不匹配情况
-            MVBUserModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+            MVBUserModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
                 return ["_description": "description"]
             }
         }

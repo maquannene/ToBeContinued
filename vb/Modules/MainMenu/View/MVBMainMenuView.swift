@@ -8,11 +8,29 @@
 
 class MVBMainMenuView: UIView {
     
-    @IBOutlet var headBackgroundImageView: UIImageView!
-    @IBOutlet var headImageView: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var describeLbel: UILabel!
-    @IBOutlet weak var detailScrollView: UIScrollView!
+    @IBOutlet weak var headBackgroundImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var describeLbel: UILabel!
+    
+    @IBOutlet weak var headImageView: UIImageView! {
+        didSet {
+            headImageView.layer.borderWidth = 0
+            headImageView.layer.cornerRadius = 2
+        }
+    }
+    
+    @IBOutlet weak var menuTableView: UITableView! {
+        didSet {
+            menuTableView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+            menuTableView.separatorStyle = .None
+            menuTableView.tableFooterView = {
+                let view = UIView()
+                view.backgroundColor = UIColor.greenColor()
+                return view
+            } ()
+        }
+    }
+    
     //  下面这四条约束都是会自动改变的
     @IBOutlet weak var autoRightGap: NSLayoutConstraint!     //  这条约束是右侧的标杆。detailScrollView 和 containerView的右侧都和它对齐
     @IBOutlet weak var centerX: NSLayoutConstraint!
@@ -35,4 +53,5 @@ class MVBMainMenuView: UIView {
     deinit {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
+    
 }

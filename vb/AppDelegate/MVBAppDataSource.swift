@@ -6,6 +6,8 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
+import MJExtension
+
 class MVBAppDataSource: NSObject {
     
     var userModel: MVBUserModel?
@@ -91,7 +93,7 @@ class MVBAppDataSource: NSObject {
     }
     
     func setUserInfoWithJsonString(jsonString: String!) {
-        self.userModel = MVBUserModel(keyValues: jsonString)
+        self.userModel = MVBUserModel().mj_setKeyValues(jsonString)
         //  归档
         let userData: NSData = NSKeyedArchiver.archivedDataWithRootObject(self.userModel!)
         NSUserDefaults.standardUserDefaults().setObject(userData, forKey: MVBUserInfoKey)

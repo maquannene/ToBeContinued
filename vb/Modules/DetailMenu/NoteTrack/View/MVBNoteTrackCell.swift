@@ -14,6 +14,7 @@ protocol MVBNoteTrackCellSlideGestureDelegate: NSObjectProtocol {
 
 class MVBNoteTrackCell: SWTableViewCell {
 
+    weak var noteTrackModel: MVBNoteTrackModel?
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     lazy var topSeparateLine: CALayer = CALayer()
     lazy var bottomSeparateLine: CALayer = CALayer()
@@ -27,14 +28,12 @@ class MVBNoteTrackCell: SWTableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        baseConfigure()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        topSeparateLine.backgroundColor = UIColor.grayColor().CGColor
-        layer.addSublayer(topSeparateLine)
-        bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
-        layer.addSublayer(bottomSeparateLine)
+        baseConfigure()
     }
     
     override func layoutSubviews() {
@@ -46,12 +45,14 @@ class MVBNoteTrackCell: SWTableViewCell {
     deinit {
         print("\(self.dynamicType) deinit\n")
     }
+    
 }
 
 // MARK: Public
 extension MVBNoteTrackCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel!) -> Void {
+        self.noteTrackModel = noteTrackModel
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
         self.contentLabel!.text = noteTrackModel.title
@@ -63,6 +64,13 @@ extension MVBNoteTrackCell {
 
 // MARK: Private
 extension MVBNoteTrackCell {
+    
+    private func baseConfigure() {
+        topSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        layer.addSublayer(topSeparateLine)
+        bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        layer.addSublayer(bottomSeparateLine)
+    }
     
     private func rightButtons() -> NSArray {
         let rightButtons: NSMutableArray = NSMutableArray()

@@ -1,5 +1,5 @@
 //
-//  MVBMainStructureManage.swift
+//  MVBPageTransformManage.swift
 //  vb
 //
 //  Created by 马权 on 6/21/15.
@@ -8,20 +8,24 @@
 
 import MMDrawerController
 
-class MVBMainStructureManage: NSObject {
+class MVBPageTransformManage: NSObject {
     
     //  抽屉
     var drawerController: MMDrawerController?
+    
     //  左侧主菜单页面
     lazy var mainMenuViewController: MVBMainMenuViewController = MVBMainMenuViewController()
-    //  中间主菜单页面
-    lazy var mainViewController: MVBMainViewController = MVBMainViewController.initWithNavi()
+    //  中间home页面
+    lazy var homeViewController: MVBHomeViewController = MVBHomeViewController.initWithNavi()
     
-    //  第一部分
+    //  第一部分： 图迹
     var noteTrackVc: MVBNoteTrackViewController?
     
     //  第二部分： 图文迹
     var imageTextTrackVc: MVBImageTextTrackViewController?
+    
+    //
+    var settingVc: MVBSettingViewController?
     
     //
     var heroesManageVc: MVBHeroesViewController?
@@ -34,11 +38,10 @@ class MVBMainStructureManage: NSObject {
         mainMenuViewController.delegate = self
     
         //  抽屉控制器
-        drawerController = MMDrawerController(centerViewController: mainViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
+        drawerController = MMDrawerController(centerViewController: homeViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
         drawerController!.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
-        //  注意这里闭包引起的循环引用问题。self 的 drawerController 的一个 closure 持有self 导致循环引用。使用无主引用解决此问题
         drawerController!.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
     }
     
@@ -54,46 +57,50 @@ class MVBMainStructureManage: NSObject {
 }
 
 // MARK: MVBMainMenuViewControllerDelegate
-extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
+extension MVBPageTransformManage: MVBMainMenuViewControllerDelegate {
+    
     func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
-        var centerViewController: UIViewController
+        var centerViewController: UIViewController?
         switch operate {
-        case MVBMainMenuViewControllerOperate.LogOut:
-            return
-        case MVBMainMenuViewControllerOperate.Main:
-            centerViewController = mainViewController.mainNavi!
-        case MVBMainMenuViewControllerOperate.PasswordManage:
-            if noteTrackVc == nil {
-                noteTrackVc = UIStoryboard(name: "MVBNoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBNoteTrackViewController!
-            }
-            if let navi = noteTrackVc!.navigationController as UINavigationController? {
-                centerViewController = navi
-            }
-            else {
-                centerViewController = UINavigationController(rootViewController: noteTrackVc!)
-            }
+            case .LogOut:
+                return
+            case .Home:
+                centerViewController = homeViewController.mainNavi!
+            case .NoteTrack:
+                if noteTrackVc == nil {
+                    noteTrackVc = UIStoryboard(name: "MVBNoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBNoteTrackViewController!
+                }
+                if let navi = noteTrackVc!.navigationController as UINavigationController? {
+                    centerViewController = navi
+                }
+                else {
+                    centerViewController = UINavigationController(rootViewController: noteTrackVc!)
+                }
+                
+            case .ImageTextTrack:
+                if imageTextTrackVc == nil {
+                    imageTextTrackVc = UIStoryboard(name: "MVBImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBImageTextTrackViewController!
+                }
+                centerViewController = imageTextTrackVc!
             
-        case MVBMainMenuViewControllerOperate.ImageTextTrack:
-            if imageTextTrackVc == nil {
-                imageTextTrackVc = UIStoryboard(name: "MVBImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBImageTextTrackViewController!
+            case .Setting:
+                return
+                
+            case .HeroesManage:
+                if heroesManageVc == nil {
+                    heroesManageVc = MVBHeroesViewController()
+                }
+                centerViewController = heroesManageVc!
+                
+            case .AccountManage:
+                if accountManangeVc == nil {
+                    accountManangeVc = MVBAccountManageViewController.initWithNavi()
+                }
+                centerViewController = accountManangeVc!.mainNavi!
             }
-            centerViewController = imageTextTrackVc!
-            
-        case MVBMainMenuViewControllerOperate.HeroesManage:
-            if heroesManageVc == nil {
-                heroesManageVc = MVBHeroesViewController()
-            }
-            centerViewController = heroesManageVc!
-            
-        case MVBMainMenuViewControllerOperate.AccountManage:
-            if accountManangeVc == nil {
-                accountManangeVc = MVBAccountManageViewController.initWithNavi()
-            }
-            centerViewController = accountManangeVc!.mainNavi!
-        }
         
         if centerViewController == drawerController!.centerViewController {
-            self.drawerController!.closeDrawerAnimated(true, completion: nil)
+            drawerController!.closeDrawerAnimated(true, completion: nil)
         }
         else {
             drawerController!.setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
@@ -104,4 +111,5 @@ extension MVBMainStructureManage: MVBMainMenuViewControllerDelegate {
             })
         }
     }
+    
 }

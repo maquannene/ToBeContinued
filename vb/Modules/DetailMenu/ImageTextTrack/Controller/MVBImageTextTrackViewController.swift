@@ -64,7 +64,7 @@ class MVBImageTextTrackViewController: UIViewController {
         super.viewDidLoad()
         dataSource = MVBImageTextTrackViewModel()
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
-        imageTextTrackCollectionView.header.beginRefreshing()
+        imageTextTrackCollectionView.mj_header.beginRefreshing()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -86,7 +86,7 @@ extension MVBImageTextTrackViewController {
     
     //  配置下拉刷新
     func configurePullToRefresh() {
-        imageTextTrackCollectionView!.header = MJRefreshNormalHeader() { [unowned self] in
+        imageTextTrackCollectionView!.mj_header = MJRefreshNormalHeader() { [unowned self] in
             //  首先试图获取存有每条imageTextTrack 的 id 列表
             self.dataSource.queryFindImageTextTrackIdList { [weak self] in
                 guard let strongSelf = self else { return }
@@ -94,16 +94,16 @@ extension MVBImageTextTrackViewController {
                     //  如果获取失败，就创建新的
                     strongSelf.dataSource.queryCreateImageTextTrackIdList { [weak self] succeed in
                         guard let strongSelf = self else { return }
-                        strongSelf.imageTextTrackCollectionView!.header.endRefreshing()
+                        strongSelf.imageTextTrackCollectionView!.mj_header.endRefreshing()
                     }
                     return
                 }
                 //  获取成功，就逐条请求存储的imageTextTrack存在缓存中
                 strongSelf.dataSource.queryImageTextTrackList { [weak self] succeed in
                     guard let strongSelf = self else { return }
-                    guard succeed == true else { strongSelf.imageTextTrackCollectionView!.header.endRefreshing(); return }
+                    guard succeed == true else { strongSelf.imageTextTrackCollectionView!.mj_header.endRefreshing(); return }
                     strongSelf.imageTextTrackCollectionView.reloadData()
-                    strongSelf.imageTextTrackCollectionView!.header.endRefreshing()
+                    strongSelf.imageTextTrackCollectionView!.mj_header.endRefreshing()
                 }
             }
         }

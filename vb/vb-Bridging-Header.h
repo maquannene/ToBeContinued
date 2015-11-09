@@ -19,3 +19,4 @@
 //@import FDFullscreenPopGesture;
 //@import Dollar;
 //@import Cent;
+#import "UINavigationBar+Awesome.h"

@@ -42,11 +42,11 @@ extension MVBHeroModel {
         }
         dispatch_once(&Static.token) {
             //  转json 将id 解析为heroId
-            MVBHeroModel.setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+            MVBHeroModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
                 return ["heroId": "id"]
             }
             //  转json忽略 heroImage
-            MVBHeroModel.setupIgnoredPropertyNames { () -> [AnyObject]! in
+            MVBHeroModel.mj_setupIgnoredPropertyNames { () -> [AnyObject]! in
                 return ["heroImage"]
             }
         }

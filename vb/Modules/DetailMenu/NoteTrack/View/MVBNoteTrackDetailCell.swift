@@ -8,6 +8,8 @@
 
 class MVBNoteTrackDetailCell: UITableViewCell {
 
+    weak var noteTrackModel: MVBNoteTrackModel?
+    
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
@@ -57,7 +59,8 @@ class MVBNoteTrackDetailCell: UITableViewCell {
 // MARK: Public
 extension MVBNoteTrackDetailCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel!) -> Void {
+        self.noteTrackModel = noteTrackModel
         selectionStyle = UITableViewCellSelectionStyle.None
         detailButtonWidth.constant = 0
         detailButtonRightGap.constant = 0

@@ -41,7 +41,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
     }
     
     func baseConfigure() {
-        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceVertical = false
         scrollView.alwaysBounceHorizontal = true
         scrollView.directionalLockEnabled = true
         scrollView.showsVerticalScrollIndicator = false

@@ -28,11 +28,10 @@
 		D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */; };
 		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */; };
-		D45E89881B36CD1500AFF9F8 /* MVBMainStructureManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89771B36CD1500AFF9F8 /* MVBMainStructureManage.swift */; };
-		D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */; };
-		D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */; };
+		D45E89881B36CD1500AFF9F8 /* MVBPageTransformManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89771B36CD1500AFF9F8 /* MVBPageTransformManage.swift */; };
 		D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */; };
 		D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */; };
+		D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */; };
 		D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */; };
@@ -80,6 +79,12 @@
 		D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4EA2EA31BAC505C00E48135 /* MVBAccountRecordView.xib */; };
 		D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */; };
 		D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */; };
+		D4F01F8C1BEEF0970057CCEE /* MVBMainMenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F8B1BEEF0970057CCEE /* MVBMainMenuViewCell.swift */; };
+		D4F01F8E1BEEF7D00057CCEE /* MVBMainMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F8D1BEEF7D00057CCEE /* MVBMainMenuViewCell.xib */; };
+		D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */; };
+		D4F01F931BEF26AC0057CCEE /* MVBHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */; };
+		D4F01F971BEF2FE40057CCEE /* MVBSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */; };
+		D4F01F9A1BEF31E00057CCEE /* MVBSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */; };
 		D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */; };
 		D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */; };
 		D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */; };
@@ -131,13 +136,13 @@
 		D44A6B131B288696003C4834 /* AppMacroObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacroObjc.h; sourceTree = "<group>"; };
 		D44A6B141B2886A7003C4834 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D45E89721B36CD1500AFF9F8 /* MVBLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBLogInViewController.swift; sourceTree = "<group>"; };
-		D45E89771B36CD1500AFF9F8 /* MVBMainStructureManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainStructureManage.swift; sourceTree = "<group>"; };
-		D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainViewController.swift; sourceTree = "<group>"; };
-		D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MVBDetailBaseViewController.swift; path = Main/MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
+		D45E89771B36CD1500AFF9F8 /* MVBPageTransformManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBPageTransformManage.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D46EFAFE1BA5CF3200DB73BE /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackAddMenuView.swift; sourceTree = "<group>"; };
 		D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrack.xib; sourceTree = "<group>"; };
+		D47E024B1BEF411700E34F23 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
 		D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackViewController.swift; sourceTree = "<group>"; };
 		D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBImageTextTrack.storyboard; sourceTree = "<group>"; };
@@ -183,6 +188,12 @@
 		D4EA2EA31BAC505C00E48135 /* MVBAccountRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBAccountRecordView.xib; sourceTree = "<group>"; };
 		D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserView.swift; sourceTree = "<group>"; };
 		D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MQPictureBrowserView.xib; sourceTree = "<group>"; };
+		D4F01F8B1BEEF0970057CCEE /* MVBMainMenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBMainMenuViewCell.swift; sourceTree = "<group>"; };
+		D4F01F8D1BEEF7D00057CCEE /* MVBMainMenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBMainMenuViewCell.xib; sourceTree = "<group>"; };
+		D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
+		D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHomeViewController.swift; sourceTree = "<group>"; };
+		D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSettingViewController.swift; sourceTree = "<group>"; };
+		D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBSetting.storyboard; sourceTree = "<group>"; };
 		D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPictureBrowser.podspec; sourceTree = "<group>"; };
 		D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackDisplayCell.swift; sourceTree = "<group>"; };
 		D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserCell.swift; sourceTree = "<group>"; };
@@ -335,6 +346,7 @@
 		D41C7FFA1B1BEF2600987D42 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D47E024A1BEF411700E34F23 /* AwsomeNavigationBar */,
 				D4F36EAB1BC6C227006DCF94 /* MQPictureBrowser */,
 				D41C7FFE1B1BEF2600987D42 /* VbLibrary */,
 			);
@@ -372,10 +384,11 @@
 		D45E89701B36CD1500AFF9F8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				D45E89771B36CD1500AFF9F8 /* MVBMainStructureManage.swift */,
+				D45E89771B36CD1500AFF9F8 /* MVBPageTransformManage.swift */,
 				D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */,
 				D45E89731B36CD1500AFF9F8 /* MainMenu */,
 				D45E89911B3700B300AFF9F8 /* DetailMenu */,
+				D4F01F941BEF2FB60057CCEE /* SettingMenu */,
 				D45E89711B36CD1500AFF9F8 /* LogIn */,
 			);
 			path = Modules;
@@ -402,12 +415,12 @@
 		D45E89911B3700B300AFF9F8 /* DetailMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D45E89A51B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift */,
-				D45E89961B3700B300AFF9F8 /* Main */,
+				D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */,
+				D4F01F911BEF26AC0057CCEE /* Home */,
 				D4BDF1011BC8A1490053966A /* NoteTrack */,
 				D48982D31BB5324900A3D881 /* ImageTextTrack */,
-				D45E89921B3700B300AFF9F8 /* Heroes */,
 				D4EA2E9E1BAC505C00E48135 /* AccountManage */,
+				D45E89921B3700B300AFF9F8 /* Heroes */,
 			);
 			path = DetailMenu;
 			sourceTree = "<group>";
@@ -422,12 +435,13 @@
 			path = Heroes;
 			sourceTree = "<group>";
 		};
-		D45E89961B3700B300AFF9F8 /* Main */ = {
+		D47E024A1BEF411700E34F23 /* AwsomeNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				D45E89971B3700B300AFF9F8 /* MVBMainViewController.swift */,
+				D47E024B1BEF411700E34F23 /* UINavigationBar+Awesome.h */,
+				D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */,
 			);
-			path = Main;
+			path = AwsomeNavigationBar;
 			sourceTree = "<group>";
 		};
 		D488BF031B28685A0050C2E2 /* AppDelegate */ = {
@@ -563,6 +577,8 @@
 			children = (
 				D4BDF1221BC8E6260053966A /* MVBMainMenuView.swift */,
 				D4BDF1231BC8E6260053966A /* MVBMainMenuView.xib */,
+				D4F01F8B1BEEF0970057CCEE /* MVBMainMenuViewCell.swift */,
+				D4F01F8D1BEEF7D00057CCEE /* MVBMainMenuViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -612,6 +628,23 @@
 				D4EA2EA31BAC505C00E48135 /* MVBAccountRecordView.xib */,
 			);
 			path = AccountManage;
+			sourceTree = "<group>";
+		};
+		D4F01F911BEF26AC0057CCEE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D4F01F941BEF2FB60057CCEE /* SettingMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */,
+				D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */,
+			);
+			path = SettingMenu;
 			sourceTree = "<group>";
 		};
 		D4F36EAB1BC6C227006DCF94 /* MQPictureBrowser */ = {
@@ -702,6 +735,7 @@
 				D4BDF11C1BC8A1490053966A /* MVBNoteTrackDetailCell.xib in Resources */,
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
 				D4BDF1271BC8E6260053966A /* MVBMainMenuView.xib in Resources */,
+				D4F01F9A1BEF31E00057CCEE /* MVBSetting.storyboard in Resources */,
 				D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */,
 				D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */,
 				D4BDF1171BC8A1490053966A /* MVBNewNoteTrackView.xib in Resources */,
@@ -712,6 +746,7 @@
 				D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
 				D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */,
+				D4F01F8E1BEEF7D00057CCEE /* MVBMainMenuViewCell.xib in Resources */,
 				D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */,
 				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
 				D4EA2EA81BAC505C00E48135 /* MVBAccountRecordView.xib in Resources */,
@@ -778,9 +813,10 @@
 				D4BDF1331BC8E6B50053966A /* MVBHeroTableViewCell.swift in Sources */,
 				D4BDF1161BC8A1490053966A /* MVBNewNoteTrackView.swift in Sources */,
 				D4BDF1191BC8A1490053966A /* MVBNoteTrackCell.swift in Sources */,
+				D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */,
+				D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */,
 				D4BDF1261BC8E6260053966A /* MVBMainMenuView.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
-				D45E89A61B3700DE00AFF9F8 /* MVBDetailBaseViewController.swift in Sources */,
 				D40709361BB104F20098867E /* UIView_Extension.swift in Sources */,
 				D4BDF1121BC8A1490053966A /* MVBNoteTrackViewController.swift in Sources */,
 				D4BDF1131BC8A1490053966A /* MVBNoteTrackIdListModel.swift in Sources */,
@@ -793,15 +829,18 @@
 				D418AD441BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
+				D4F01F931BEF26AC0057CCEE /* MVBHomeViewController.swift in Sources */,
 				D4EA2EA61BAC505C00E48135 /* MVBAccountManageViewController.swift in Sources */,
 				D4BDF11B1BC8A1490053966A /* MVBNoteTrackDetailCell.swift in Sources */,
 				D45E89841B36CD1500AFF9F8 /* MVBLogInViewController.swift in Sources */,
-				D45E89881B36CD1500AFF9F8 /* MVBMainStructureManage.swift in Sources */,
+				D45E89881B36CD1500AFF9F8 /* MVBPageTransformManage.swift in Sources */,
 				D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */,
 				D4EA2EA41BAC505C00E48135 /* MVBAcconutTableViewCell.swift in Sources */,
 				D48982E01BB535A600A3D881 /* MVBImageTextTrackCell.swift in Sources */,
 				D48982E21BB5391800A3D881 /* MVBImageTextTrackLayout.swift in Sources */,
+				D4F01F971BEF2FE40057CCEE /* MVBSettingViewController.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
+				D4F01F8C1BEEF0970057CCEE /* MVBMainMenuViewCell.swift in Sources */,
 				D4E48EC51BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift in Sources */,
 				D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */,
 				D418AD471BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift in Sources */,
@@ -812,7 +851,6 @@
 				D4EA2EA51BAC505C00E48135 /* MVBAccountManageDataSource.swift in Sources */,
 				D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */,
 				D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */,
-				D45E89A01B3700B300AFF9F8 /* MVBMainViewController.swift in Sources */,
 				D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */,
 				D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */,
 				D4BDF1301BC8E6B50053966A /* MVBHeroesViewController.swift in Sources */,

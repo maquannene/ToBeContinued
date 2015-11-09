@@ -52,8 +52,8 @@ extension MVBHeroesViewController {
         requestOperate.GET(kDota2HeroesUrl, parameters: param, success: {
             [unowned self] (operation, result: AnyObject!) in
             let resultDic = result as! NSDictionary
-            self.heroesInfo = MVBHeroesInfoModel(keyValues: resultDic["result"])
-            self.heroesInfo.heroseModelArray = NSMutableArray(array:MVBHeroModel.objectArrayWithKeyValuesArray(self.heroesInfo.heroesDicArray))
+//            self.heroesInfo = MVBHeroesInfoModel(keyValues: resultDic["result"])
+//            self.heroesInfo.heroseModelArray = NSMutableArray(array:MVBHeroModel.objectArrayWithKeyValuesArray(self.heroesInfo.heroesDicArray))
             self.heroesTableView.reloadData()
         }) {
             print($1)

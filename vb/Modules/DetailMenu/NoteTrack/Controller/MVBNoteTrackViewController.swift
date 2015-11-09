@@ -59,7 +59,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
         noteTrackListTableView.registerNib(UINib(nibName: Static.noteTrackDetailCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.noteTrackDetailCellId)
         
         //  设置tableView
-        noteTrackListTableView.header.beginRefreshing()
+        noteTrackListTableView.mj_header.beginRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -92,21 +92,21 @@ extension MVBNoteTrackViewController {
     func configurePullToRefresh() {
         //  注意这一句的内存泄露 如果不加 [unowned self] 就会内存泄露
         //  泄漏原因为retain cycle 即 self->noteTrackListTableView->header->refreshingBlock->self
-        noteTrackListTableView.header = MJRefreshNormalHeader() { [unowned self] in
+        noteTrackListTableView.mj_header = MJRefreshNormalHeader() { [unowned self] in
             //  如果获取失败，就创建新的
             self.dataSource.queryFindNoteTrackIdList { [unowned self] succeed in
                 guard succeed == true else {
                     self.dataSource.queryCreateNoteTrackIdList { [unowned self] succeed in
-                        self.noteTrackListTableView.header.endRefreshing()
+                        self.noteTrackListTableView.mj_header.endRefreshing()
                     }
                     return
                 }
                 
                 //  获取成功，就逐条请求存储的noteTrack存在缓存中
                 self.dataSource.queryNoteTrackList { [unowned self] succeed in
-                    guard succeed == true else { self.noteTrackListTableView.header.endRefreshing(); return }
+                    guard succeed == true else { self.noteTrackListTableView.mj_header.endRefreshing(); return }
                     self.noteTrackListTableView.reloadData()
-                    self.noteTrackListTableView.header.endRefreshing()
+                    self.noteTrackListTableView.mj_header.endRefreshing()
                 }
             }
         }

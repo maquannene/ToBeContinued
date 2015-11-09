@@ -82,8 +82,8 @@ class MQPictureBrowserController: UIViewController {
         
         collectionViewFlowLayout.minimumLineSpacing = cellGap
         collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: cellGap / 2, bottom: 0, right: cellGap / 2)
-        collectionViewFlowLayout.itemSize = CGSize(width: self.view.w - cellGap, height: self.view.h)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: cellGap / 2, left: cellGap / 2, bottom: cellGap / 2, right: cellGap / 2)
+        collectionViewFlowLayout.itemSize = CGSize(width: self.view.w - cellGap, height: self.view.h - cellGap)
         
         collectionView.frame = self.view.bounds
         collectionView.backgroundColor = UIColor.clearColor()

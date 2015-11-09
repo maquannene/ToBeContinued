@@ -32,7 +32,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-Pc-CdB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.94919902146464641" green="0.94919902146464641" blue="0.94919902146464641" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="MVBImageTextTrackLayout" customModule="vb" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MVBImageTextTrackCell" id="gb2-oz-fO8" customClass="MVBImageTextTrackCell" customModule="vb" customModuleProvider="target">
@@ -42,12 +42,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-cS-MZj">
-                                                    <rect key="frame" x="5" y="5" width="204" height="229"/>
-                                                    <animations/>
-                                                    <color key="backgroundColor" red="0.93671085858585856" green="0.93671085858585856" blue="0.93671085858585856" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <gestureRecognizers/>
-                                                </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts4-Sw-fpI">
                                                     <rect key="frame" x="0.0" y="218" width="214" height="20.5"/>
                                                     <animations/>
@@ -73,6 +67,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-cS-MZj">
+                                                    <rect key="frame" x="5" y="5" width="204" height="229"/>
+                                                    <animations/>
+                                                    <color key="backgroundColor" red="0.93671085858585856" green="0.93671085858585856" blue="0.93671085858585856" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
+                                                </imageView>
                                             </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DW1-5c-4g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1133" y="-282"/>
+            <point key="canvasLocation" x="-1335" y="-339"/>
         </scene>
     </scenes>
 </document>
