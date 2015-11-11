@@ -23,8 +23,6 @@ class MQPictureBrowserCell: UICollectionViewCell {
     
     private var doubleTapGesture: UITapGestureRecognizer!
     private var tapGesture: UITapGestureRecognizer!
-    private var pinchGesture: UIPinchGestureRecognizer!
-    private var doubleTapGestureLock: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -53,9 +51,6 @@ class MQPictureBrowserCell: UICollectionViewCell {
         addSubview(scrollView)
         scrollView.addSubview(imageView)
         
-        pinchGesture = UIPinchGestureRecognizer(target: self, action: "pinchAction:")
-        addGestureRecognizer(pinchGesture)
-        
         doubleTapGesture = UITapGestureRecognizer(target: self, action: "dobleTapAction:")
         doubleTapGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapGesture)
@@ -76,13 +71,10 @@ class MQPictureBrowserCell: UICollectionViewCell {
     }
     
     @objc private func dobleTapAction(gesture: UITapGestureRecognizer) {
-
+        
         guard scrollView.maximumZoomScale != 1 else { return }
-        guard doubleTapGestureLock == false else { return }
-        doubleTapGestureLock = true
         
         let imageActualSize = calculateImageActualRectInCell(imageView.image!.size).size
-        
         //  如果当前缩放比是1即正常缩放比
         if scrollView.zoomScale == 1 {
             let cellSize = self.frame.size
@@ -95,35 +87,18 @@ class MQPictureBrowserCell: UICollectionViewCell {
             //  这个是将指定的区域放大到scrollView.size 的大小
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 //  放大到最大
-                self.scrollView.bounds = self.bounds
-                self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
                 self.scrollView.zoomToRect(CGRect(x: x, y: y, width: w, height: h), animated: false)
-                }) {
-                    self.doubleTapGestureLock = !$0
+                }) { completed in
+
             }
         }
         else {
             UIView.animateWithDuration(0.3,
                 animations: { () -> Void in
                     //  缩小到最小
-                    self.scrollView.bounds = CGRect(origin: CGPointZero, size: imageActualSize)
-                    self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
                     self.scrollView.setZoomScale(1, animated: false)
-
-                }) {
-                    self.doubleTapGestureLock = !$0
+                }) { completed in
             }
-        }
-    }
-    
-    var scale: CGFloat = 0.0
-    @objc private func pinchAction(gesture: UIPinchGestureRecognizer) {
-        if gesture.state == .Began {
-            scale = scrollView.zoomScale
-        }
-        if gesture.state == .Changed {
-            let newScale = scale * gesture.scale
-            self.scrollView.setZoomScale(newScale, animated: false)
         }
     }
     
@@ -139,13 +114,13 @@ extension MQPictureBrowserCell {
     //  当图片等比放大到宽度等于屏幕宽度时，图片在cell中的rect
     func calculateImageActualRectInCell(imageSize: CGSize) -> CGRect {
         //  获取所占区域大小
-        let boundingRect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: CGFloat(MAXFLOAT))
+        let boundingRect = CGRect(x: 0, y: 0, width: frame.size.width, height: CGFloat(MAXFLOAT))
         let imageActualSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageSize.width, height:imageSize.height), boundingRect).size
         if self.frame.height < imageActualSize.height {
             return CGRect(origin: CGPoint(x: 0, y: 0), size: imageActualSize)
         }
         else {
-            return CGRect(origin: CGPoint(x: 0, y: (self.frame.size.height - imageActualSize.height) / 2), size: imageActualSize)
+            return CGRect(origin: CGPoint(x: 0, y: (frame.size.height - imageActualSize.height) / 2), size: imageActualSize)
         }
     }
     
@@ -168,22 +143,19 @@ extension MQPictureBrowserCell {
     
     func defaultConfigure() {
         let imageActualSize = calculateImageActualRectInCell(self.imageSize).size
+        imageView.frame = CGRect(origin: CGPointZero, size: imageActualSize)
+        scrollView.frame = bounds
+        scrollView.contentSize = imageActualSize
         //  如果高度超过了屏幕的高度
-        if (imageActualSize.height > self.frame.height) {
+        if (imageActualSize.height > frame.height) {
             scrollView.maximumZoomScale = 1
-            scrollView.frame = self.bounds
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         else {
             //  计算出自大缩放比
-            let maxScale = self.frame.height / imageActualSize.height
-            scrollView.maximumZoomScale = maxScale
-            //  设置滚动
-            scrollView.bounds =  CGRect(origin: CGPointZero, size: imageActualSize)
-            self.scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
+            scrollView.maximumZoomScale = frame.height / imageActualSize.height
+            scrollView.contentInset = UIEdgeInsets(top: (scrollView.h - imageActualSize.height) / 2, left: 0, bottom: (scrollView.h - imageActualSize.height) / 2, right: 0)
         }
-        scrollView.contentSize = imageActualSize
-        imageView.frame = CGRect(origin: CGPointZero, size: imageActualSize)
-        scrollView.center = CGPoint(x: self.w / 2, y: self.h / 2)
     }
     
 }
@@ -195,9 +167,8 @@ extension MQPictureBrowserCell: UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
-        guard doubleTapGestureLock == false else { return }
-        scrollView.bounds.size = CGSizeMake(scrollView.bounds.width, scrollView.contentSize.height)
-        scrollView.bounds = CGRect(origin: CGPoint(x: scrollView.bounds.origin.x, y: 0), size: scrollView.bounds.size)
+        //  缩放的时候要调整contentInset 很关键
+        //  超长图片因为maximumZoomScale = 1所以进不了这个方法。
+        scrollView.contentInset = UIEdgeInsets(top: (self.scrollView.h - imageView.frame.height) / 2, left: 0, bottom: (self.scrollView.h - imageView.frame.height) / 2, right: 0)
     }
-    
 }

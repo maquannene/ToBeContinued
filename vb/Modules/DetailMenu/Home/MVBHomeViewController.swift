@@ -26,16 +26,6 @@ class MVBHomeViewController: MVBDetailBaseViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = true
         self.view.backgroundColor = UIColor.yellowColor()
-        
-        let button: UIButton = UIButton(frame: CGRectMake(100, 200, 80, 44))
-        button.backgroundColor = UIColor.redColor()
-        //  注意这里，closure引起的cycle retain问题
-        button.bk_addEventHandler({ [unowned self] (button) -> Void in
-            let vc = UIViewController()
-            vc.view.backgroundColor = UIColor.redColor()
-            self.navigationController!.pushViewController(vc, animated: true)
-        }, forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(button)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
