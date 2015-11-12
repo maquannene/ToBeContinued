@@ -29,22 +29,25 @@ protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
 class MVBMainMenuViewController: UIViewController {
     
     weak var delegate: MVBMainMenuViewControllerDelegate?
-    weak var mainMenuView: MVBMainMenuView! {
-        return self.view as! MVBMainMenuView
-    }
     
-    override func loadView() {
+    override func loadView()
+    {
         NSBundle.mainBundle().loadNibNamed("MVBMainMenuView", owner: self, options: nil)
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         mainMenuView!.menuTableView.registerNib(UINib(nibName: MVBMainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MVBMainMenuViewCell.ClassName)
         self.configurUserInfo()
+        
+        let x = specialEffect
+        specialEffect = x
     }
     
-    func configurUserInfo() {
+    func configurUserInfo()
+    {
         if let userModel = MVBAppDelegate.MVBApp().dataSource.userModel as MVBUserModel? {
             if let coverImagePhoto = userModel.cover_image_phone as? String {
                 mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
@@ -64,7 +67,8 @@ class MVBMainMenuViewController: UIViewController {
         }
     }
     
-    deinit {
+    deinit
+    {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
  
@@ -92,33 +96,55 @@ class MVBMainMenuViewController: UIViewController {
     
 }
 
+//  MARK: Private
+extension MVBMainMenuViewController {
+    
+    weak var mainMenuView: MVBMainMenuView! {
+        return self.view as! MVBMainMenuView
+    }
+    
+    private var specialEffect: Bool {
+        set {
+            if newValue {
+                self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
+                    let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
+                    block(drawerVc, drawerSide, percentVisible)
+                }
+                self.mainMenuView!.clipsToBounds = true
+            }
+            else {
+                self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
+                self.mainMenuView!.clipsToBounds = false
+            }
+            NSUserDefaults.standardUserDefaults().setValue(NSNumber(bool: newValue), forKeyPath: "specialEffect")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        get {
+            guard let specialEffect = NSUserDefaults.standardUserDefaults().valueForKey("specialEffect") as? NSNumber else { return false }
+            return specialEffect.boolValue == true
+        }
+    }
+    
+}
+
 // MARK: buttonAction
 extension MVBMainMenuViewController {
 
-    @IBAction func backMainAction(sender: AnyObject) {
+    @IBAction func backMainAction(sender: AnyObject)
+    {
         delegate!.mainMenuViewController(self, operate: .Home)
     }
     
-    @IBAction func settingAction(sender: AnyObject) {
-        
+    @IBAction func settingAction(sender: AnyObject)
+    {
         if let _ = (mm_drawerController!.centerViewController as? UINavigationController)?.topViewController as? MVBSettingViewController {
             mm_drawerController!.closeDrawerAnimated(true, completion: nil)
         }
         else {
             let settingNavi = UIStoryboard(name: "MVBSetting", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! UINavigationController
             let settingViewController = settingNavi.topViewController as! MVBSettingViewController
-            settingViewController.effectSwitchClosuer = { [unowned self] in
-                if $0 {
-                    self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
-                        let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
-                        block(drawerVc, drawerSide, percentVisible)
-                    }
-                    self.mainMenuView!.clipsToBounds = true
-                }
-                else {
-                    self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
-                    self.mainMenuView!.clipsToBounds = false
-                }
+            settingViewController.specialEffectSwitchClosuer = { [unowned self] in
+                self.specialEffect = $0
             }
             mm_drawerController!.setCenterViewController(settingNavi, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
                 self.mm_drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
@@ -131,14 +157,16 @@ extension MVBMainMenuViewController {
         delegate!.mainMenuViewController(self, operate: .Setting)
     }
 
-    @IBAction func logOutAction(sender: AnyObject) {
+    @IBAction func logOutAction(sender: AnyObject)
+    {
         let appDataSource = MVBAppDelegate.MVBApp().dataSource
         WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
         SVProgressHUD.showWithStatus("正在退出...")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
     }
     
-    @IBAction func clearDiskMemory(sender: AnyObject) {
+    @IBAction func clearDiskMemory(sender: AnyObject)
+    {
         //  清理硬盘缓存
         SDImageCache.sharedImageCache().clearDisk()
         SDImageCache.sharedImageCache().clearMemory()
@@ -150,7 +178,8 @@ extension MVBMainMenuViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
         if scrollView.contentOffset.y < 0 {
             if scrollView.contentOffset.y < -80 {
                 scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: -80)
@@ -162,7 +191,8 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         switch indexPath.row {
         case 0:
             delegate?.mainMenuViewController(self, operate: .NoteTrack)
@@ -173,15 +203,18 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
         return 60
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return 2
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier(MVBMainMenuViewCell.ClassName) as! MVBMainMenuViewCell
         if indexPath.row == 0 {
             cell.textLabel?.text = "Note Track"
@@ -197,7 +230,8 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
 // MARK: WBHttpRequestDelegate
 extension MVBMainMenuViewController: WBHttpRequestDelegate {
     
-    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!)
+    {
         if request.tag == "logOut" {
             MVBAppDelegate.MVBApp().dataSource.clearUserInfo()
             SVProgressHUD.dismiss()
@@ -215,7 +249,8 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
         }
     }
     
-    func request(request: WBHttpRequest!, didFailWithError error: NSError!) {
+    func request(request: WBHttpRequest!, didFailWithError error: NSError!)
+    {
         SVProgressHUD.showErrorWithStatus("网络错误")
     }
     

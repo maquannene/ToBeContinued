@@ -31,7 +31,8 @@ extension MVBImageTextTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryFindImageTextTrackIdList(complete: MVBQureyDataCompleteClosure?) {
+    func queryFindImageTextTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
+    {
         let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBImageTextTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
@@ -51,7 +52,8 @@ extension MVBImageTextTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryCreateImageTextTrackIdList(complete: MVBQureyDataCompleteClosure?) {
+    func queryCreateImageTextTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
+    {
         let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         imageTextTrackIdList = MVBImageTextTrackIdListModel(identifier: identifier)
         imageTextTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
@@ -64,7 +66,8 @@ extension MVBImageTextTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryImageTextTrackList(complete: MVBQureyDataCompleteClosure?) {
+    func queryImageTextTrackListCompletion(complete: MVBQureyDataCompleteClosure?)
+    {
         let fetchGroup: dispatch_group_t = dispatch_group_create()
         let newImageTextTrackList = NSMutableArray()
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
@@ -93,17 +96,22 @@ extension MVBImageTextTrackViewModel {
             complete?(succeed: success)
         }
     }
-    
 
-    
-    func queryAddImageTextTrack(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: MVBQureyDataCompleteClosure?) {
+    /**
+     传入一张原图，进行云端上传
+     
+     - parameter progressClosure: 进度回调
+     - parameter complete: 完成回调
+     */
+    func queryAddImageTextTrackWithOringinImage(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: MVBQureyDataCompleteClosure?)
+    {
         typealias saveImageFileClosure = (imageFile: AVFile!, group: dispatch_group_t!, progressClosure: ((progress: Int) -> Void)?, complete: MVBQureyDataCompleteClosure?) -> Void
         let querySaveImageFile: saveImageFileClosure = { (imageFile, group, progressClosure, complete) in
             dispatch_group_enter(group)
             imageFile.saveInBackgroundWithBlock({ [weak imageFile] (succeed, error) -> Void in
                 guard succeed == true else { complete?(succeed: false); return }    //  确保上传图片成功
                 guard let weakimageFile = imageFile else { return }
-                //            print("image Url: \(weakimageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(weakimageFile.getData().length) size: \(weakimageFile.size() / 1024) KB")
+//                print("image Url: \(weakimageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(weakimageFile.getData().length) size: \(weakimageFile.size() / 1024) KB")
                 //  很重要,将imageData存到SDImageCache的disk cache中
                 NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(weakimageFile.url), contents: weakimageFile.getData(), attributes: nil)
                 //  将本地的AVCacheFile缓存清理掉
@@ -159,8 +167,9 @@ extension MVBImageTextTrackViewModel {
         }
     }
     
-    func queryDeleteImageTextTrack(index: Int!, complete: MVBQureyDataCompleteClosure?) {
-        let track: MVBImageTextTrackModel! = fetchImageTextTrackModel(index)
+    func queryDeleteImageTextTrackAtIndex(index: Int!, complete: MVBQureyDataCompleteClosure?)
+    {
+        let track: MVBImageTextTrackModel! = fetchImageTextTrackModelWithIndex(index)
         
         //  删除原图
         let originImageFile = AVFile()
@@ -203,7 +212,8 @@ extension MVBImageTextTrackViewModel {
     - parameter index: 下标号
     - returns: 图文迹Model
     */
-    func fetchImageTextTrackModel(index: Int!) -> MVBImageTextTrackModel! {
+    func fetchImageTextTrackModelWithIndex(index: Int!) -> MVBImageTextTrackModel!
+    {
         return imageTextTrackList[index] as! MVBImageTextTrackModel
     }
     

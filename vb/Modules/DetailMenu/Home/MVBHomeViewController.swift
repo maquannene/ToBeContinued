@@ -7,8 +7,6 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-import BlocksKit
-
 class MVBHomeViewController: MVBDetailBaseViewController {
     
     //  将自己放在一个navigationController上初始化，可采用类方法
@@ -22,13 +20,15 @@ class MVBHomeViewController: MVBDetailBaseViewController {
 //        return vc
 //    }
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = true
         self.view.backgroundColor = UIColor.yellowColor()
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool
+    {
         let destVc: UIViewController? = self.valueForKey(identifier!) as? UIViewController
         if destVc != nil {
             self.navigationController!.pushViewController(destVc!, animated: true)
@@ -39,7 +39,8 @@ class MVBHomeViewController: MVBDetailBaseViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         if let identifier = segue.identifier as String? {
             self.setValue(segue.destinationViewController, forKey: identifier)
         }
@@ -48,4 +49,5 @@ class MVBHomeViewController: MVBDetailBaseViewController {
     deinit {
         print("\(self.dynamicType) deinit\n")
     }
+    
 }

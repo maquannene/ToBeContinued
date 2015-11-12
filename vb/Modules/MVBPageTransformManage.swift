@@ -32,7 +32,8 @@ class MVBPageTransformManage: NSObject {
     //  
     var accountManangeVc: MVBAccountManageViewController?
     
-    override init() {
+    override init()
+    {
         super.init()
         //  左侧
         mainMenuViewController.delegate = self
@@ -42,24 +43,27 @@ class MVBPageTransformManage: NSObject {
         drawerController!.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
-        drawerController!.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
     }
     
-    func displayMainStructureFrom(presentingVc: UIViewController) {
+    func displayMainStructureFrom(presentingVc: UIViewController)
+    {
         presentingVc.presentViewController(drawerController!, animated: true) {
             self.drawerController!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         }
     }
     
-    deinit {
+    deinit
+    {
         print("\(self.dynamicType) deinit\n")
     }
+    
 }
 
 // MARK: MVBMainMenuViewControllerDelegate
 extension MVBPageTransformManage: MVBMainMenuViewControllerDelegate {
     
-    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) {
+    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate)
+    {
         var centerViewController: UIViewController?
         switch operate {
             case .LogOut:

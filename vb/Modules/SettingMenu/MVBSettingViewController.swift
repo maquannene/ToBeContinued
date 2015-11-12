@@ -21,7 +21,7 @@ class MVBSettingViewController: MVBDetailBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var effectSwitchClosuer: ((Bool) -> Void)?
+    var specialEffectSwitchClosuer: ((Bool) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,8 @@ class MVBSettingViewController: MVBDetailBaseViewController {
 
 extension MVBSettingViewController {
     
-    @objc private func effectSwitchAction(sender: UISwitch!) {
-        effectSwitchClosuer?(sender.on)
+    @objc private func specialEffectSwitchAction(sender: UISwitch!) {
+        specialEffectSwitchClosuer?(sender.on)
     }
     
 }
@@ -52,7 +52,8 @@ extension MVBSettingViewController {
 
 extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
         if indexPath.item == 0 || indexPath.item == 2 || indexPath.item == 4 {
             return 20
         }
@@ -61,11 +62,13 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return 6
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         var cell: UITableViewCell!
         if indexPath.item == 0 || indexPath.item == 2 || indexPath.item == 4 {
             cell = tableView.dequeueReusableCellWithIdentifier(Static.gapCell)
@@ -78,7 +81,10 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell = tableView.dequeueReusableCellWithIdentifier(Static.switchCell)
             cell.textLabel?.text = "神器特效"
             if let sw = cell.accessoryView as? UISwitch {
-                sw.addTarget(self, action: "effectSwitchAction:", forControlEvents: .ValueChanged)
+                if let specialEffect = NSUserDefaults.standardUserDefaults().valueForKey("specialEffect") as? NSNumber {
+                    sw.setOn(specialEffect.boolValue == true, animated: false)
+                }
+                sw.addTarget(self, action: "specialEffectSwitchAction:", forControlEvents: .ValueChanged)
             }
         }
         if indexPath.item == 5 {
@@ -91,7 +97,8 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         if indexPath.item == 5 {
             SDImageCache.sharedImageCache().clearDisk()
             SVProgressHUD.showSuccessWithStatus("清除成功")
