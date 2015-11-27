@@ -1,32 +1,32 @@
 PODS:
-  - AFNetworking (2.6.2):
-    - AFNetworking/NSURLConnection (= 2.6.2)
-    - AFNetworking/NSURLSession (= 2.6.2)
-    - AFNetworking/Reachability (= 2.6.2)
-    - AFNetworking/Security (= 2.6.2)
-    - AFNetworking/Serialization (= 2.6.2)
-    - AFNetworking/UIKit (= 2.6.2)
-  - AFNetworking/NSURLConnection (2.6.2):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.2):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.2)
-  - AFNetworking/Security (2.6.2)
-  - AFNetworking/Serialization (2.6.2)
-  - AFNetworking/UIKit (2.6.2):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Cent (4.0.1):
     - Dollar (~> 4.0.1)
   - Dollar (4.0.1)
   - FDFullscreenPopGesture (1.1)
-  - Kingfisher (1.8.0)
-  - MJExtension (3.0.3)
-  - MJRefresh (3.0.1)
+  - Kingfisher (1.8.2)
+  - MJExtension (3.0.7)
+  - MJRefresh (3.0.6)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -88,13 +88,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Cent: 74e3f5a7e8543317b0724c272d279e8219cbaedb
   Dollar: a058e2659e0d3261307c12630dbc2fd8e32f80bf
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  Kingfisher: 4d40a6d8a0030b575be66593cae3aea587971a67
-  MJExtension: de557e1c48ef3212590d3203764c8003fae68815
-  MJRefresh: ca22bb7197c4a17a0491763773cd5cb106b2a810
+  Kingfisher: b39315e9dbed7e8ffe73a9ca1be2ee006d1d57e4
+  MJExtension: 290cc966f0f849b12b6391a38e296e0004ae8e5e
+  MJRefresh: df419e2393f9020bcd340c552e8f0cf700073f32
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
@@ -103,4 +103,4 @@ SPEC CHECKSUMS:
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   WeiboSDK: 5f2a707c4569a64f4641f4171acd712016f24342
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
