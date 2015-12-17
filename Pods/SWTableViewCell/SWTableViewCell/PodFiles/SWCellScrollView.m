@@ -48,7 +48,7 @@
 //    }
 //    return YES;
     
-    //  change: maquan  收起right button后快速tap tap要相应需共存
+    //  change: maquan  收起right button后快速tap tap要想响应，需共存
     //  ``
     if ([otherGestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
         return YES;
