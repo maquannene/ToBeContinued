@@ -42,6 +42,7 @@ class MVBPageTransformManage: NSObject {
         drawerController = MMDrawerController(centerViewController: homeViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
         drawerController!.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        //  全部特效除过PanningDrawerView
         drawerController!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
     }
     
