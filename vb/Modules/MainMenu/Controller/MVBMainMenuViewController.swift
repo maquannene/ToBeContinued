@@ -15,10 +15,6 @@ enum MVBMainMenuViewControllerOperate: Int {
     case NoteTrack
     case ImageTextTrack
     case Setting
-    
-    case HeroesManage
-    case AccountManage
-    
     case LogOut
 }
 

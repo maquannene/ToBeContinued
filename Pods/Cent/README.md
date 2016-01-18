@@ -10,14 +10,15 @@ Cent is a library that extends certain Swift object types using the extension fe
 
 - [Setup](#setup)
   - [Demo App](#demo-app)
-- Dollar
+- [API Documentation](http://www.dollarswift.org)
+- [Dollar](https://github.com/ankurp/Dollar.swift/tree/master/Dollar#dollar-usage)
   - [Usage](#dollar-usage)
     - [Array](#array)
     - [Dictionary](#dictionary)
     - [Object](#object)
     - [Function](#function)
     - [Chaining](#chaining)
-- Cent
+- [Cent](https://github.com/ankurp/Dollar.swift/tree/master/Cent#cent-usage)
   - [Usage](#cent-usage)
     - [Array](#array-extensions)
     - [Date](#date-extensions)  
@@ -33,7 +34,7 @@ Cent is a library that extends certain Swift object types using the extension fe
 
 ## Using [Carthage](https://github.com/Carthage/Carthage)
 
-Add `github "ankurp/Dollar.swift" ~> 4.0.1` to your `Cartfile` and run `carthage update`. If unfamiliar with Carthage then checkout their [Getting Started section](https://github.com/Carthage/Carthage#getting-started) or this [sample app](https://github.com/ankurp/DollarCarthageApp)
+Add `github "ankurp/Dollar.swift" ~> 4.1.0` to your `Cartfile` and run `carthage update`. If unfamiliar with Carthage then checkout their [Getting Started section](https://github.com/Carthage/Carthage#getting-started) or this [sample app](https://github.com/ankurp/DollarCarthageApp)
 
 ## Using [cocoapods](http://cocoapods.org/) version 0.36.x or greater
 
@@ -63,7 +64,7 @@ Using
 
 ## Communication ##
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/dollar.swift). (Tag 'dollar.swift')
+- If you **need help**, use [gitter.im](https://gitter.im/ankurp/Dollar.swift) or post a question on [Stack Overflow](http://stackoverflow.com/questions/tagged/dollar.swift) with tag 'dollar.swift.
 - If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/dollar.swift).
 - If you **found a bug**, open an issue.
 - If you **have a feature request**, open an issue.
@@ -145,12 +146,12 @@ Passes each element in the array to the callback
 
 ```swift
 $.each(["A", "B"]) { 
-  println("Value \($0)")
+  print("Value \($0)")
 }
 => ["A", "B"]
 
 $.each(["A", "B"]) { (index, elem) in
-  println("\(index) - \(elem)")
+  print("\(index) - \(elem)")
 }
 => ["A", "B"]
 ```
@@ -165,6 +166,18 @@ $.every([1, 2, 3, 4], callback: { $0 < 20 })
 
 $.every([1, 2, 3, 4]) { $0 == 1 } 
 => false
+```
+
+### factorial `$.factorial`
+
+Returns factorial of integer
+
+```swift
+$.factorial(3)
+=> 6
+
+$.factorial(0)
+=> 1
 ```
 
 ### fetch - `$.fetch`
@@ -314,6 +327,18 @@ $.frequencies([1, 2, 3, 4, 5]) { $0 % 2 == 0 }
 => [false: 3, true: 2]
 ```
 
+### gcd `$.gcd`
+
+GCD function return greatest common denominator with number passed
+
+```swift
+$.gcd(3, 10)
+=> 1
+
+$.gcd(3, 9)
+=> 3
+```
+
 ### indexOf - `$.indexOf`
 
 Gets the index at which the first occurrence of value is found.
@@ -356,6 +381,21 @@ $.intersection([1, 2, 3], [5, 2, 1, 4], [2, 1])
 => [1, 2]
 ```
 
+### it-isIn `$.it<T: Comparable>(i: T, isIn range: Range<T>)`
+
+Returns true if i is in interval or range
+
+```swift
+$.it("c", isIn: "a"..."z")
+=> true
+
+$.it("z", isIn: "a"..<"z")
+=> false
+
+$.it(1, isIn: -1.0...10.0)
+=> true
+```
+
 ### last - `$.last`
 
 Gets the last element from the array.
@@ -372,6 +412,18 @@ Gets the index at which the last occurrence of value is found.
 ```swift
 $.lastIndexOf([1, 2, 3, 1, 2, 3], value: 2) 
 => 4
+```
+
+### lcm `$.lcm`
+
+LCM method return least common multiple with number passed
+
+```swift
+$.lcm(3, 10)
+=> 30
+
+$.lcm(3, 9)
+=> 9
 ```
 
 ### rest - `$.rest`
@@ -1111,7 +1163,7 @@ For each item in the array invoke the callback by passing the elem
 ```swift
 let array = ["foo", "spam", "bar", "eggs"]
 array.each {
-  println($0)
+  print($0)
 }
 => ["foo", "spam", "bar", "eggs"]
 ```
@@ -1123,7 +1175,7 @@ For each item in the array invoke the callback by passing the elem along with th
 ```swift
 let array = ["foo", "spam", "bar", "eggs"]
 array.each { (index, elem)
-  println("\(index) - \(elem)")
+  print("\(index) - \(elem)")
 }
 => ["foo", "spam", "bar", "eggs"]
 ```
@@ -1321,6 +1373,16 @@ let str = ch.description
 => "A"
 ```
 
+### `"A".ord -> Int`
+
+Get int representation of character
+
+```swift
+Character("A").ord
+=> 65
+```
+
+
 ## Date Extensions ##
 
 ### `Date.from(#year: Int, month: Int, day: Int) -> NSDate`
@@ -1407,6 +1469,15 @@ Invoke a callback n times
 => 0 1 2 3 4  
 ```
 
+### `char -> Character`
+
+Get ASCII character from integer
+
+```swift
+65.char
+=> "A"
+```
+
 ### `isEven`
 
 Check if int is even
@@ -1438,6 +1509,66 @@ Splits the int into array of digits
 ```swift
 4208.digits()
 => [4, 2, 0, 8]
+```
+
+### `lcm() -> Int`
+
+LCM method return least common multiple with number passed
+
+```swift
+3.lcm(10)
+=> 30
+
+3.lcm(9)
+=> 9
+```
+
+### `gcd() -> Int`
+
+GCD method return greatest common denominator with number passed
+
+```swift
+3.gcd(10)
+=> 1
+
+3.gcd(9)
+=> 3
+```
+
+### `random() -> Int`
+
+Returns random number from 0 upto but not including value of integer
+
+```swift
+3.random()
+=> 2
+
+3.random()
+=> 1
+```
+
+### `factorial() -> Int`
+
+Returns factorial of integer
+
+```swift
+3.factorial()
+=> 6
+
+0.factorial()
+=> 1
+```
+
+### `isIn(interval) -> Bool`
+
+Returns true if i is in interval or range
+
+```swift
+5.isIn(1...10)
+=> true
+
+10.isIn(1..<10)
+=> false
 ```
 
 ### `next() -> Int`
@@ -1489,6 +1620,42 @@ Get the length of the string
 ```swift
 "Hello".length
 => 5
+```
+
+### `.camelCase`
+
+Get the camel case representation of the string
+
+```swift
+"__Dollar and cent-- dollarANDCent".camelCase
+=> "dollarAndCentDollarAndCent"
+```
+
+### `.kebabCase`
+
+Get the kebab case representation of the string
+
+```swift
+"__Dollar and cent-- dollarANDCent".kebabCase
+=> "dollar-and-cent-dollar-and-cent"
+```
+
+### `.snakeCase`
+
+Get the snake case representation of the string
+
+```swift
+"__Dollar and cent-- dollarANDCent".snakeCase
+=> "dollar_and_cent_dollar_and_cent"
+```
+
+### `.startCase`
+
+Get the start case representation of the string
+
+```swift
+"__Dollar and cent-- dollarANDCent".startCase
+=> "Dollar And Cent Dollar And Cent"
 ```
 
 ### `=~ str: String -> Bool`
@@ -1546,7 +1713,7 @@ Get substring using subscript notation and by passing a range
 Get the start index of character
 
 ```swift
-"hello world".indexOf(Character("0"))!
+"hello world".indexOf(Character("o"))!
 => 4
 ```
 

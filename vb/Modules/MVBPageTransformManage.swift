@@ -27,11 +27,6 @@ class MVBPageTransformManage: NSObject {
     //
     var settingVc: MVBSettingViewController?
     
-    //
-    var heroesManageVc: MVBHeroesViewController?
-    //  
-    var accountManangeVc: MVBAccountManageViewController?
-    
     override init()
     {
         super.init()
@@ -90,19 +85,7 @@ extension MVBPageTransformManage: MVBMainMenuViewControllerDelegate {
             
             case .Setting:
                 return
-                
-            case .HeroesManage:
-                if heroesManageVc == nil {
-                    heroesManageVc = MVBHeroesViewController()
-                }
-                centerViewController = heroesManageVc!
-                
-            case .AccountManage:
-                if accountManangeVc == nil {
-                    accountManangeVc = MVBAccountManageViewController.initWithNavi()
-                }
-                centerViewController = accountManangeVc!.mainNavi!
-            }
+        }
         
         if centerViewController == drawerController!.centerViewController {
             drawerController!.closeDrawerAnimated(true, completion: nil)

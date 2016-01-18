@@ -56,6 +56,15 @@ public extension Array {
         return self
     }
     
+    /// For each item in the array that meets the when conditon, invoke the callback by passing the elem
+    ///
+    /// :param callback The callback function to invoke
+    /// :param when The condition to check each element against
+    /// :return the array itself
+    func each(when when: (Element) -> Bool, callback: (Element) -> ()) -> [Element] {
+        return $.each(self, when: when, callback: callback);
+    }
+    
     /// Checks if the given callback returns true value for all items in the array.
     ///
     /// :param array The array to check.
@@ -190,6 +199,24 @@ public extension Array {
 
 }
 
+extension Array {
+  
+    /// Return the result of repeatedly calling `combine` with an accumulated value initialized
+    /// to `initial` on each element of `self`, in turn with a corresponding index.
+    ///
+    /// :param initial the value to be accumulated
+    /// :param combine the combiner with the result, index, and current element
+    /// :return combined result
+    func reduceWithIndex<T>(initial: T, @noescape combine: (T, Int, Array.Generator.Element) throws -> T) rethrows -> T {
+        var result = initial
+        for (index, element) in self.enumerate() {
+            result = try combine(result, index, element)
+        }
+        return result
+    }
+  
+}
+
 /// Overloaded operator to appends another array to an array
 ///
 /// :return array with the element appended in the end
@@ -205,4 +232,12 @@ public func <<<T>(inout array: [T], elem: T) -> [T] {
     array.append(elem)
     return array
 }
+
+/// Overloaded operator to remove elements from first array
+///
+/// :return array with the elements from second array removed
+public func -<T: Hashable>(left: [T], right: [T]) -> [T] {
+    return $.difference(left, right)
+}
+
 

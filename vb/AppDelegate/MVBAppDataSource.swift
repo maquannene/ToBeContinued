@@ -7,6 +7,7 @@
 //
 
 import MJExtension
+import AFNetworking
 
 class MVBAppDataSource: NSObject {
     
@@ -88,6 +89,18 @@ class MVBAppDataSource: NSObject {
         else {
             let param: [String: AnyObject] = ["access_token": self.accessToken!, "uid": self.userID!]
             let _ = WBHttpRequest(URL: "https://api.weibo.com/2/users/show.json", httpMethod: "GET", params: param, delegate: delegate, withTag: tag)
+            
+            AFHTTPSessionManager().GET("https://api.weibo.com/2/users/show.json", parameters: param, progress: nil
+                , success: { (datatask: NSURLSessionDataTask, response) -> Void in
+                    print(datatask)
+                }, failure: { (datatask, error) -> Void in
+                    print(error)
+                    //  拿到错误 response 中的数据。
+                    let errorData: NSData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as! NSData
+                    let json = try? NSJSONSerialization.JSONObjectWithData(errorData, options: [])
+                    print(json)
+            })
+            
             return true
         }
     }

@@ -22,6 +22,7 @@ class MVBAppDelegate: UIResponder {
 }
 
 extension MVBAppDelegate: UIApplicationDelegate {
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         /**/
@@ -54,10 +55,12 @@ extension MVBAppDelegate: UIApplicationDelegate {
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
     }
+    
 }
 
 // MARK: Private
 extension MVBAppDelegate {
+    
     private func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(true)
@@ -69,6 +72,7 @@ extension MVBAppDelegate {
         MVBImageTextTrackModel.registerSubclass()
         AVOSCloud.setApplicationId(MVBAVCloudSDKAppID, clientKey: MVBAVCloudSDKAppKey)
     }
+    
 }
 
 //extension MVBAppDelegate {
@@ -100,6 +104,7 @@ extension MVBAppDelegate {
 //}
 
 extension MVBAppDelegate {
+    
     func test() {
 //        let x = MVBPasswordRecordCell.self
 //        let classString = NSStringFromClass(MVBPasswordRecordCell)
@@ -111,5 +116,6 @@ extension MVBAppDelegate {
 //        let y = self.ClassName
 //        let z = MVBPasswordRecordCell.ClassName
     }
+    
 }
 
