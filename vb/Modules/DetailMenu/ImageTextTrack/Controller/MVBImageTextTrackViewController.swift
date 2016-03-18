@@ -29,6 +29,9 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var imageTextTrackCollectionView: UICollectionView! {
         didSet {
             configurePullToRefresh()
+            let group = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackCell")
+            group.maxConcurrentDownloads = 10
+            MQImageDownloadGroupManage.shareInstance().addGroup(group)
         }
     }
     
@@ -285,6 +288,11 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         vc.pictureBrowerView.saveButton.addTarget(self, action: "saveImage", forControlEvents: .TouchUpInside)
         imageTextTrackBrowserVc = vc
+        
+        let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackDisplayCell")
+        pictureDownloadGroup.maxConcurrentDownloads = 3
+        MQImageDownloadGroupManage.shareInstance().addGroup(pictureDownloadGroup)
+        
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
         willShowClosure = {
             

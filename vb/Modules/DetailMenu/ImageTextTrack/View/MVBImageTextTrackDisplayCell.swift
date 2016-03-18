@@ -69,7 +69,7 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
 //                strongSelf.progressView.hidden = true
 //        }
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTextTrack.originImageFileUrl)!, groupIdentifier: "456", placeholderImage: thumbImage, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        imageView.mq_setImageWithURL(NSURL(string: imageTextTrack.originImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: thumbImage, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
             
             guard let strongSelf = self else { return }
             guard captureUrlStr == strongSelf.imageTextTrack?.originImageFileUrl else { return }

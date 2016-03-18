@@ -32,7 +32,7 @@
 		D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */; };
 		D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */; };
 		D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */; };
-		D48661C51C9AD7CB00858C54 /* MQImageDownloadManage.m in Sources */ = {isa = PBXBuildFile; fileRef = D48661C41C9AD7CB00858C54 /* MQImageDownloadManage.m */; };
+		D48661C51C9AD7CB00858C54 /* MQImageDownloadGroupManage.m in Sources */ = {isa = PBXBuildFile; fileRef = D48661C41C9AD7CB00858C54 /* MQImageDownloadGroupManage.m */; };
 		D48661C81C9AD7E700858C54 /* UIImageView+mq_WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D48661C71C9AD7E700858C54 /* UIImageView+mq_WebCache.m */; };
 		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
 		D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */; };
@@ -135,8 +135,8 @@
 		D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrack.xib; sourceTree = "<group>"; };
 		D47E024B1BEF411700E34F23 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
-		D48661C31C9AD7CB00858C54 /* MQImageDownloadManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDownloadManage.h; sourceTree = "<group>"; };
-		D48661C41C9AD7CB00858C54 /* MQImageDownloadManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageDownloadManage.m; sourceTree = "<group>"; };
+		D48661C31C9AD7CB00858C54 /* MQImageDownloadGroupManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQImageDownloadGroupManage.h; sourceTree = "<group>"; };
+		D48661C41C9AD7CB00858C54 /* MQImageDownloadGroupManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQImageDownloadGroupManage.m; sourceTree = "<group>"; };
 		D48661C61C9AD7E700858C54 /* UIImageView+mq_WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+mq_WebCache.h"; sourceTree = "<group>"; };
 		D48661C71C9AD7E700858C54 /* UIImageView+mq_WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+mq_WebCache.m"; sourceTree = "<group>"; };
 		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
@@ -470,8 +470,8 @@
 			isa = PBXGroup;
 			children = (
 				D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */,
-				D48661C31C9AD7CB00858C54 /* MQImageDownloadManage.h */,
-				D48661C41C9AD7CB00858C54 /* MQImageDownloadManage.m */,
+				D48661C31C9AD7CB00858C54 /* MQImageDownloadGroupManage.h */,
+				D48661C41C9AD7CB00858C54 /* MQImageDownloadGroupManage.m */,
 				D48661C61C9AD7E700858C54 /* UIImageView+mq_WebCache.h */,
 				D48661C71C9AD7E700858C54 /* UIImageView+mq_WebCache.m */,
 				D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */,
@@ -750,7 +750,7 @@
 			files = (
 				D4BDF1161BC8A1490053966A /* MVBNewNoteTrackView.swift in Sources */,
 				D4BDF1191BC8A1490053966A /* MVBNoteTrackCell.swift in Sources */,
-				D48661C51C9AD7CB00858C54 /* MQImageDownloadManage.m in Sources */,
+				D48661C51C9AD7CB00858C54 /* MQImageDownloadGroupManage.m in Sources */,
 				D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */,
 				D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */,
 				D4BDF1261BC8E6260053966A /* MVBMainMenuView.swift in Sources */,

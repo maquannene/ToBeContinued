@@ -8,7 +8,7 @@
 
 #import "UIImageView+mq_WebCache.h"
 #import "SDWebImageManager.h"
-#import "MQImageDownloadManage.h"
+#import "MQImageDownloadGroupManage.h"
 
 @implementation UIImageView (mq_WebCache)
 
@@ -30,7 +30,7 @@
         __block id <SDWebImageOperation> operation = [[SDWebImageManager sharedManager] downloadImageWithURL:url options:options progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (operation) {
-                    [[MQImageDownloadManage shareInstance] removeImageDownLoadOperation:operation fromGroup:identifier forKey:[url absoluteString]];
+                    [[MQImageDownloadGroupManage shareInstance] removeImageDownLoadOperation:operation fromGroup:identifier forKey:[url absoluteString]];
                 }
                 if (!weakSelf) {
                     return;
@@ -46,7 +46,7 @@
         }];
         
         if (operation) {
-            [[MQImageDownloadManage shareInstance] setImageDownLoadOperation:operation toGroup:identifier forKey:[url absoluteString]];
+            [[MQImageDownloadGroupManage shareInstance] setImageDownLoadOperation:operation toGroup:identifier forKey:[url absoluteString]];
         }
     }
     
