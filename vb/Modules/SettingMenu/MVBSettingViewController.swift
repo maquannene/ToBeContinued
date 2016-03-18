@@ -101,6 +101,7 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
     {
         if indexPath.item == 5 {
             SDImageCache.sharedImageCache().clearDisk()
+            SDImageCache.sharedImageCache().clearMemory()
             SVProgressHUD.showSuccessWithStatus("清除成功")
             tableView.reloadData()
         }

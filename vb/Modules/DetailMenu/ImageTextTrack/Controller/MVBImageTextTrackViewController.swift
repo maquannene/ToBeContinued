@@ -290,7 +290,7 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         imageTextTrackBrowserVc = vc
         
         let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackDisplayCell")
-        pictureDownloadGroup.maxConcurrentDownloads = 3
+        pictureDownloadGroup.maxConcurrentDownloads = 10
         MQImageDownloadGroupManage.shareInstance().addGroup(pictureDownloadGroup)
         
         //  这里设置willShowClosure，willShow的delegate时就不用调用了

@@ -14,6 +14,7 @@
 {
 @public
     NSMutableDictionary<NSString *, NSMutableArray<id<SDWebImageOperation>> *> *_downloadOperationsDic;
+    NSMutableArray<NSString *> *_downloadOperationKeys;
     NSString *_identifier;
 }
 
@@ -35,6 +36,7 @@
     self = [super init];
     if (self) {
         _downloadOperationsDic = [@{} mutableCopy];
+        _downloadOperationKeys = [@[] mutableCopy];
         _maxConcurrentDownloads = 10;
         _identifier = [identifier copy];
     }
@@ -47,7 +49,6 @@
 
 {
     NSMutableDictionary<NSString *, MQImageDownloadGroup *> *_downloadGroupsDic;
-    NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *_downloadGroupsKeysDic;
 }
 
 + (instancetype)shareInstance
@@ -65,7 +66,6 @@
     self = [super init];
     if (self) {
         _downloadGroupsDic = [@{} mutableCopy];
-        _downloadGroupsKeysDic = [@{} mutableCopy];
     }
     return self;
 }
@@ -76,55 +76,50 @@
     if (downloadGroup) {
         return;
     }
-    NSMutableArray<NSString *> *downloadGroupKeys = [@[] mutableCopy];
-    _downloadGroupsKeysDic[group->_identifier] = downloadGroupKeys;
     _downloadGroupsDic[group->_identifier] = group;
 }
 
 - (void)removeGroupWithIdentifier:(NSString *)identifier
 {
-    [_downloadGroupsKeysDic removeObjectForKey:identifier];
     [_downloadGroupsDic removeObjectForKey:identifier];
 }
 
 - (void)setImageDownLoadOperation:(id<SDWebImageOperation>)operation toGroup:(NSString *)identifier forKey:(NSString *)key
 {
-    NSMutableArray<NSString *> *downloadGroupKeys = _downloadGroupsKeysDic[identifier];
     MQImageDownloadGroup *downloadGroup = _downloadGroupsDic[identifier];
+    NSMutableArray<NSString *> *downloadOperationKeys = downloadGroup->_downloadOperationKeys;
     
-    if (downloadGroupKeys && downloadGroup) {
-        if ([downloadGroupKeys containsObject:key]) {
-            [downloadGroupKeys removeObject:key];
-            [downloadGroupKeys insertObject:key atIndex:0];
+    if (downloadGroup && downloadOperationKeys) {
+        if ([downloadOperationKeys containsObject:key]) {
+            [downloadOperationKeys removeObject:key];
+            [downloadOperationKeys insertObject:key atIndex:0];
             NSMutableArray<id<SDWebImageOperation>> *operations = downloadGroup->_downloadOperationsDic[key];
             [operations addObject:operation];
         }
         else {
             NSMutableArray<id<SDWebImageOperation>> *operations = [@[operation] mutableCopy];
             downloadGroup->_downloadOperationsDic[key] = operations;
-            [downloadGroupKeys insertObject:key atIndex:0];
+            [downloadOperationKeys insertObject:key atIndex:0];
         }
-        if ([downloadGroupKeys count] > downloadGroup.maxConcurrentDownloads) {
-            NSString *lastKey = [downloadGroupKeys lastObject];
+        if ([downloadOperationKeys count] > downloadGroup.maxConcurrentDownloads) {
+            NSString *lastKey = [downloadOperationKeys lastObject];
             NSMutableArray<id<SDWebImageOperation>> *lastOperations = downloadGroup->_downloadOperationsDic[lastKey];
             [lastOperations enumerateObjectsUsingBlock:^(id<SDWebImageOperation>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [obj cancel];
             }];
             [downloadGroup->_downloadOperationsDic removeObjectForKey:lastKey];
-            [downloadGroupKeys removeLastObject];
+            [downloadOperationKeys removeLastObject];
+            NSLog(@"123");
         }
     }
     else {
         NSMutableArray<id<SDWebImageOperation>> *operations = [@[operation] mutableCopy];
         
-        downloadGroupKeys = [@[] mutableCopy];
         downloadGroup = [[MQImageDownloadGroup alloc] initWithGroupIdentifier:identifier];
-        
-        downloadGroupKeys[0] = key;
-        downloadGroup->_downloadOperationsDic[key] = operations;
-        
-        _downloadGroupsKeysDic[identifier] = downloadGroupKeys;
         _downloadGroupsDic[identifier] = downloadGroup;
+        
+        downloadGroup->_downloadOperationKeys[0] = identifier;
+        downloadGroup->_downloadOperationsDic[identifier] = operations;
     }
 }
 

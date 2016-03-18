@@ -9,6 +9,13 @@
 #import "UIImageView+mq_WebCache.h"
 #import "SDWebImageManager.h"
 #import "MQImageDownloadGroupManage.h"
+#import "objc/runtime.h"
+
+@interface UIImageView ()
+
+@property (nonatomic, copy) NSString *mq_URLString;
+
+@end
 
 @implementation UIImageView (mq_WebCache)
 
@@ -19,9 +26,19 @@
                   progress:(SDWebImageDownloaderProgressBlock)progressBlock
                  completed:(SDWebImageCompletionBlock)completedBlock
 {
+    self.mq_URLString = [url absoluteString];
+    
+    NSString *captureURLString = [url absoluteString];
+    
+    __weak typeof(self) weakSelf = self;
     if (!(options & SDWebImageDelayPlaceholder)) {
         dispatch_main_async_safe(^{
-            self.image = placeholder;
+            if (!weakSelf) {
+                return;
+            }
+            if ([captureURLString isEqualToString:weakSelf.mq_URLString]) {
+                weakSelf.image = placeholder;
+            }
         });
     }
     
@@ -35,7 +52,7 @@
                 if (!weakSelf) {
                     return;
                 }
-                if (image) {
+                if (image && [weakSelf.mq_URLString isEqualToString:captureURLString]) {
                     weakSelf.image = image;
                     [weakSelf setNeedsLayout];
                 }
@@ -56,6 +73,16 @@
             completedBlock(nil, error, SDImageCacheTypeNone, url);
         }
     });
+}
+
+- (void)setMq_URLString:(NSString *)mq_URLString
+{
+    objc_setAssociatedObject(self, @selector(mq_URLString), mq_URLString, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSString *)mq_URLString
+{
+    return objc_getAssociatedObject(self, @selector(mq_URLString));
 }
 
 @end

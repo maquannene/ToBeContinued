@@ -74,6 +74,8 @@ class MQPictureBrowserCell: UICollectionViewCell {
         
         guard scrollView.maximumZoomScale != 1 else { return }
         
+        guard imageView.image != nil else { return }
+        
         let imageActualSize = calculateImageActualRectInCell(imageView.image!.size).size
         //  如果当前缩放比是1即正常缩放比
         if scrollView.zoomScale == 1 {

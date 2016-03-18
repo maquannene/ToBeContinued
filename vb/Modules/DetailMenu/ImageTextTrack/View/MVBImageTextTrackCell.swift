@@ -76,14 +76,14 @@ extension MVBImageTextTrackCell {
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             
-            }) { [weak self] (image, error, cacheType, url) -> Void in
+            }, completed: { [weak self] (image, error, cacheType, url) -> Void in
                 
                 guard let strongSelf = self else { return }
                 guard url.absoluteString == strongSelf.imageTextTrack?.thumbImageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
                 
                 strongSelf.progressView.hidden = true
-        }
+        })
         
         textLabel.text = imageTextTrack.text
     }
