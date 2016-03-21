@@ -74,31 +74,28 @@ class MQPictureBrowserCell: UICollectionViewCell {
         
         guard scrollView.maximumZoomScale != 1 else { return }
         
+        guard imageView.image != nil else { return }
+        
         let imageActualSize = calculateImageActualRectInCell(imageView.image!.size).size
-        //  如果当前缩放比是1即正常缩放比
-        if scrollView.zoomScale == 1 {
-            let cellSize = self.frame.size
-            let scale = cellSize.height / imageActualSize.height   //  沾满全屏的缩放比
+        let cellSize = self.frame.size
+        let maxScale = cellSize.height / imageActualSize.height   //  沾满全屏的缩放比
+        
+        //  如果当前缩放比偏小，就放大至最大
+        if maxScale - scrollView.zoomScale > (maxScale - 1) / 2 {
             let touchPoint = gesture.locationInView(self)
-            let w = cellSize.width / scale
-            let h = cellSize.height / scale
+            let w = cellSize.width / maxScale
+            let h = cellSize.height / maxScale
             let x = touchPoint.x - (w / 2.0)
             let y = touchPoint.y - (h / 2.0)
-            //  这个是将指定的区域放大到scrollView.size 的大小
             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                //  放大到最大
                 self.scrollView.zoomToRect(CGRect(x: x, y: y, width: w, height: h), animated: false)
-                }) { completed in
-
-            }
+            }, completion: nil)
         }
         else {
             UIView.animateWithDuration(0.3,
                 animations: { () -> Void in
-                    //  缩小到最小
                     self.scrollView.setZoomScale(1, animated: false)
-                }) { completed in
-            }
+            }, completion: nil)
         }
     }
     

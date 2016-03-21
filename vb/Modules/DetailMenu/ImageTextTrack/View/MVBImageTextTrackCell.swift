@@ -61,20 +61,31 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 extension MVBImageTextTrackCell {
     
     func configureCell(imageTextTrack: MVBImageTextTrackModel!) -> Void {
+        
         self.imageTextTrack = imageTextTrack
+        
         let captureUrlStr = self.imageTextTrack?.largeImageFileUrl
-        imageView.sd_setImageWithURL(NSURL(string: imageTextTrack.thumbImageFileUrl)!, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        
+        imageView.mq_setImageWithURL(NSURL(string: imageTextTrack.thumbImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+            
             guard let strongSelf = self else { return }
             guard captureUrlStr == strongSelf.imageTextTrack?.thumbImageFileUrl else { return }
+            
             print("当前图片Text:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+            
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
-            }) { [weak self] (image, error, cacheType, url) -> Void in
+            
+            }, completed: { [weak self] (image, error, cacheType, url) -> Void in
+                
                 guard let strongSelf = self else { return }
                 guard url.absoluteString == strongSelf.imageTextTrack?.thumbImageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
+                
                 strongSelf.progressView.hidden = true
-        }
+            
+            })
+        
         textLabel.text = imageTextTrack.text
     }
     
