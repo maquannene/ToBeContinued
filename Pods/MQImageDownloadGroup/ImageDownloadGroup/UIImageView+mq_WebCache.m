@@ -21,37 +21,6 @@
 
 @implementation UIImageView (mq_WebCache)
 
-//  MARK: objc_setAssociatedObject
-- (void)setMq_imageURL:(NSURL *)mq_imageURL
-{
-    objc_setAssociatedObject(self, @selector(mq_imageURL), mq_imageURL, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (NSURL *)mq_imageURL
-{
-    return objc_getAssociatedObject(self, @selector(mq_imageURL));
-}
-
-- (void)setMq_downloadGroupIdentifier:(NSString *)mq_downloadGroupIdentifier
-{
-    objc_setAssociatedObject(self, @selector(mq_downloadGroupIdentifier), mq_downloadGroupIdentifier, OBJC_ASSOCIATION_COPY);
-}
-
-- (NSString *)mq_downloadGroupIdentifier
-{
-    return objc_getAssociatedObject(self, @selector(mq_downloadGroupIdentifier));
-}
-
-- (void)setMq_operation:(id<SDWebImageOperation>)mq_operation
-{
-    objc_setAssociatedObject(self, @selector(mq_operation), mq_operation, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (id<SDWebImageOperation>)mq_operation
-{
-    return objc_getAssociatedObject(self, @selector(mq_operation));
-}
-
 //  MARK: Public
 - (void)mq_setImageWithURL:(NSURL *)url
 {
@@ -122,7 +91,7 @@
         __block id <SDWebImageOperation> operation = [[SDWebImageManager sharedManager] downloadImageWithURL:url options:options progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (operation && identifier) {
-                    [[MQImageDownloadGroupManage shareInstance] removeImageDownLoadOperation:operation fromGroup:self.mq_downloadGroupIdentifier forKey:self.mq_imageURL.absoluteString];
+                    [[MQImageDownloadGroupManage shareInstance] removeImageDownLoadOperation:operation fromGroup:identifier forKey:imageURL.absoluteString];
                 }
                 if (!weakSelf) {
                     return;
@@ -169,6 +138,37 @@
     self.mq_operation = nil;
     self.mq_imageURL = nil;
     self.mq_downloadGroupIdentifier = nil;
+}
+
+//  MARK: objc_setAssociatedObject
+- (void)setMq_imageURL:(NSURL *)mq_imageURL
+{
+    objc_setAssociatedObject(self, @selector(mq_imageURL), mq_imageURL, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (NSURL *)mq_imageURL
+{
+    return objc_getAssociatedObject(self, @selector(mq_imageURL));
+}
+
+- (void)setMq_downloadGroupIdentifier:(NSString *)mq_downloadGroupIdentifier
+{
+    objc_setAssociatedObject(self, @selector(mq_downloadGroupIdentifier), mq_downloadGroupIdentifier, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSString *)mq_downloadGroupIdentifier
+{
+    return objc_getAssociatedObject(self, @selector(mq_downloadGroupIdentifier));
+}
+
+- (void)setMq_operation:(id<SDWebImageOperation>)mq_operation
+{
+    objc_setAssociatedObject(self, @selector(mq_operation), mq_operation, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (id<SDWebImageOperation>)mq_operation
+{
+    return objc_getAssociatedObject(self, @selector(mq_operation));
 }
 
 @end

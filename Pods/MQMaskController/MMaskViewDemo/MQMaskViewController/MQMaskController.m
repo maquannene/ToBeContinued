@@ -13,6 +13,7 @@
 
 @interface MQMaskController () <UIGestureRecognizerDelegate>
 
+@property (nonatomic, assign) MQMaskControllerType type;    //  类型
 @property (nonatomic, assign) BOOL contentViewCenter;       //  内容是否显示在中心。
 @property (nonatomic, assign) BOOL isShowAnimated;
 @property (nonatomic, copy) MQMaskControllerShowAnimationState showAnimationState;
@@ -38,10 +39,42 @@
 
 - (instancetype)init
 {
-    self = [super init];
+    self = [self initWithType:MQMaskControllerDefault withContentView:nil contentCenter:YES];
+    if (self) {
+    
+    }
+    return self;
+}
+
+- (instancetype)initWithType:(MQMaskControllerType)type
+             withContentView:(UIView *)contentView
+               contentCenter:(BOOL)contentCenter
+{
+    self = [self initMaskController:type withContentView:contentView contentCenter:contentCenter delayTime:3];
     if (self) {
         
-        _contentViewCenter = NO;
+    }
+    return self;
+}
+
+- (instancetype)initMaskController:(MQMaskControllerType)type
+                   withContentView:(UIView *)view
+                     contentCenter:(BOOL)contentCenter
+                         delayTime:(CGFloat)delayTime {
+    
+    self = [super init];
+    
+    if (self) {
+        
+        _type = type;
+        
+        _contentView = [view retain];
+        
+        _contentViewCenter = contentCenter;
+        
+        _delayTime = delayTime;
+        
+        _animationDuration = 0.15;
         
         _maskView = [[UIView alloc] init];
         _maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
@@ -59,51 +92,13 @@
         _maskView.frame = CGRectMake(0, 0, getInterfaceScreenSize().width, getInterfaceScreenSize().height);
         //  添加转屏通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-    }
-    return self;
-}
-
-- (instancetype)initWithContentView:(UIView *)view {
-    self = [self init];
-    if (self) {
-        self.contentView = view;
-    }
-    return self;
-}
-
-- (instancetype)initMaskController:(MQMaskControllerType)type
-                   withContentView:(UIView *)view
-                     contentCenter:(BOOL)contentCenter
-                         delayTime:(CGFloat)delayTime {
-    self = [self initWithContentView:view];
-    if (self) {
-        self.contentViewCenter = contentCenter;
-        
-        //  默认类型
-        if (type == MQMaskControllerDefault) {
-            
-        }
         
         //  点击消失
-        if (type == MQMaskControllerTipDismiss) {
+        if (type == MQMaskControllerTipDismiss || type == MQMaskControllerAll) {
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
             tapGesture.delegate = self;
             [_maskView addGestureRecognizer:tapGesture];
             [tapGesture release];
-        }
-        
-        //  延迟消失
-        if (type == MQMaskControllerDelayDismiss) {
-            [self performSelector:@selector(dismiss) withObject:nil afterDelay:delayTime];
-        }
-        
-        //
-        if (type == MQMaskControllerAll) {
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-            tapGesture.delegate = self;
-            [_maskView addGestureRecognizer:tapGesture];
-            [tapGesture release];
-            [self performSelector:@selector(dismiss) withObject:nil afterDelay:delayTime];
         }
     }
     return self;
@@ -116,6 +111,11 @@
 #pragma mark - Public
 
 - (void)showWithAnimated:(BOOL)animated completion:(void (^)(void))completion {
+    
+    //  延迟消失
+    if (_type == MQMaskControllerDelayDismiss || _type == MQMaskControllerAll) {
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:_delayTime];
+    }
     
     _isShowAnimated = animated;
     //  如果设置了内容中心，就显示在中心
@@ -187,7 +187,7 @@
     
     //  如果设置了动画状态
     if (self.showAnimationState) {
-        [UIView animateWithDuration:.3 animations:^{
+        [UIView animateWithDuration:_animationDuration animations:^{
             self.showAnimationState(_maskView, _contentView);
         } completion:^(BOOL finished) {
             if (complete) {
@@ -199,7 +199,7 @@
     else {
         _contentView.transform = CGAffineTransformMakeScale(0.01, 0.01);
         _maskView.alpha = 0.01;
-        [UIView animateWithDuration:.3 animations:^{
+        [UIView animateWithDuration:_animationDuration animations:^{
             _contentView.transform = CGAffineTransformMakeScale(1, 1);
             _contentView.alpha = 1.0;
             _maskView.alpha = 1.0;
@@ -214,7 +214,7 @@
 - (void)dismissWithAnimated:(void (^)())complete {
     
     if (self.closeAnimationState) {
-        [UIView animateWithDuration:.3 animations:^{
+        [UIView animateWithDuration:_animationDuration animations:^{
             self.closeAnimationState(_maskView, _contentView);
         } completion:^(BOOL finished) {
             if (complete) {
@@ -223,7 +223,7 @@
         }];
     }
     else {
-        [UIView animateWithDuration:.3 animations:^(){
+        [UIView animateWithDuration:_animationDuration animations:^(){
             _contentView.transform = CGAffineTransformMakeScale(.01, .01);
             _contentView.alpha = .1;
             _maskView.alpha = .1;
@@ -278,7 +278,7 @@
 }
 
 CGSize getInterfaceScreenSize() {
-    CGSize screenSize;
+    CGSize screenSize = CGSizeZero;
     if (kMQMaskControllerSystemVersion < 8.0 && kMQMaskControllerSystemVersion >= 7.0) {
         BOOL isCurrentOrientationPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
         int width = [[UIScreen mainScreen] bounds].size.width;

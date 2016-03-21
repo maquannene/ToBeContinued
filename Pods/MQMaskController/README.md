@@ -30,9 +30,12 @@ MMaskController *maskController = [[MMaskController alloc] initMaskController:MM
                                                                     animation:YES
                                                                 contentCenter:YES
                                                                     delayTime:3];
-//  2.设置代理。*注意*：消失回调中 [maskController release], 生命周期结束，类似于popoverController
+//  2.设置代理。
 maskController.delegate = self;
 //  3.显示
 [maskController show];
+
+*注意*：ARC 中需 强引 maskController，否则 maskController 立即释放，不能正常处理手势等业务逻辑
+
 ```
 雕虫小技，且看且不喷。

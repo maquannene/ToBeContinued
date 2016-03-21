@@ -14,9 +14,10 @@ pod 'MJRefresh'
 
 pod 'NYXImagesKit' #图片处理库
 pod 'SWTableViewCell', '0.3.7'
-pod "WeiboSDK", :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
+pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
 pod 'FDFullscreenPopGesture', :git => 'git://github.com/forkingdog/FDFullscreenPopGesture', :commit => 'da1efbf53f5fdd17090d5b30e4cd497a23827b58'
-pod 'MQMaskController', :git => 'https://github.com/wuhanness/MQMaskViewController.git', :commit => '6b313578e296ac772e9c5dbe18975094ce741360'
+pod 'MQMaskController', :git => 'https://github.com/wuhanness/MQMaskViewController.git'
+pod 'MQImageDownloadGroup', :git => 'https://github.com/maquannene/MQImageDownloadGroup.git'
 
 pod 'Dollar'
 pod 'Cent'

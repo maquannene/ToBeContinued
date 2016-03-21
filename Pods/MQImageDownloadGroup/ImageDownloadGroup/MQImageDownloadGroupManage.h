@@ -32,4 +32,6 @@ FOUNDATION_EXPORT NSString *const MQImageDownloadDefaultGroupIdentifier;
 
 - (void)removeImageDownLoadOperation:(id<SDWebImageOperation>)operation fromGroup:(NSString *)identifier forKey:(NSString *)key;
 
+- (void)debug:(BOOL)debug;
+
 @end

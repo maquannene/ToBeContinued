@@ -13,6 +13,7 @@ import AVOSCloud
 import MQMaskController
 import Photos
 import SVProgressHUD
+import MQImageDownloadGroup
 
 class MVBImageTextTrackViewController: UIViewController {
     

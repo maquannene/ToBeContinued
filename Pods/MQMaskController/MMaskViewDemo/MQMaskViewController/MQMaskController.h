@@ -40,14 +40,29 @@ typedef void(^MQMaskControllerCloseAnimationState)(UIView *maskView, UIView* con
 @property (nonatomic, assign) id<MQMaskControllerDelegate> delegate;
 @property (nonatomic, retain, readonly) UIView *maskView;               //  可设置遮罩层颜色
 @property (nonatomic, retain) UIView *contentView;                      //  内容
+@property (nonatomic, assign) NSTimeInterval animationDuration;         //  动画时间
+@property (nonatomic, assign) NSTimeInterval delayTime;                 //  持续时间
+
+- (instancetype)init;
 
 /**
- *  条件初始化一个遮罩。
+ *  初始化一个 MQMaskController
  *
- *  @param type 类型
- *  @param view 内容层
+ *  @param type             类型
+ *  @param contentView      内容视图
+ *  @param contentCenter    是否位于中心，若不是，以 contentView origin 为准
+ */
+- (instancetype)initWithType:(MQMaskControllerType)type
+             withContentView:(UIView *)contentView
+               contentCenter:(BOOL)contentCenter;
+
+/**
+ *  初始化一个 MQMaskController
  *
- *  @return 实例
+ *  @param type             类型
+ *  @param contentView      内容视图
+ *  @param contentCenter    是否位于中心，若不是，以 contentView origin 为准
+ *  @param delayTime        持续时间
  */
 - (instancetype)initMaskController:(MQMaskControllerType)type
                    withContentView:(UIView *)view

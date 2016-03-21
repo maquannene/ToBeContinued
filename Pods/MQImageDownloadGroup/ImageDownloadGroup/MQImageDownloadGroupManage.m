@@ -72,6 +72,8 @@ NSString *const MQImageDownloadDefaultGroupIdentifier = @"mq.download.group.defa
     return self;
 }
 
+
+//  MARK: Public
 - (void)addGroup:(MQImageDownloadGroup *)group
 {
     MQImageDownloadGroup *downloadGroup = _downloadGroupsDic[group->_identifier];
@@ -106,9 +108,7 @@ NSString *const MQImageDownloadDefaultGroupIdentifier = @"mq.download.group.defa
         if ([downloadOperationKeys count] > downloadGroup.maxConcurrentDownloads) {
             NSString *lastKey = [downloadOperationKeys lastObject];
             NSMutableArray<id<SDWebImageOperation>> *lastOperations = downloadGroup->_downloadOperationsDic[lastKey];
-            [lastOperations enumerateObjectsUsingBlock:^(id<SDWebImageOperation>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [obj cancel];
-            }];
+            [lastOperations makeObjectsPerformSelector:@selector(cancel)];
             [downloadGroup->_downloadOperationsDic removeObjectForKey:lastKey];
             [downloadOperationKeys removeLastObject];
         }
@@ -126,6 +126,19 @@ NSString *const MQImageDownloadDefaultGroupIdentifier = @"mq.download.group.defa
 
 - (void)removeImageDownLoadOperation:(id<SDWebImageOperation>)operation fromGroup:(NSString *)identifier forKey:(NSString *)key
 {
+    if (_debug) {
+        NSLog(@"groups count = %lu\n", (unsigned long)_downloadGroupsDic.count);
+        [_downloadGroupsDic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, MQImageDownloadGroup * _Nonnull obj, BOOL * _Nonnull stop) {
+            NSLog(@"group id = %@, key count = %lu\n", obj->_identifier, (unsigned long)obj->_downloadOperationsDic.count);
+            [obj->_downloadOperationsDic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSMutableArray<id<SDWebImageOperation>> * _Nonnull obj, BOOL * _Nonnull stop) {
+                NSLog(@"operation key = %@, operation count = %lu\n", key,  obj.count);
+                [obj enumerateObjectsUsingBlock:^(id<SDWebImageOperation>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSLog(@"operation = %@", obj);
+                }];
+            }];
+        }];
+    }
+
     MQImageDownloadGroup *downloadGroup = _downloadGroupsDic[identifier];
     NSMutableArray<id<SDWebImageOperation>> *operations = downloadGroup->_downloadOperationsDic[key];
     [operations removeObject:operation];
@@ -133,6 +146,13 @@ NSString *const MQImageDownloadDefaultGroupIdentifier = @"mq.download.group.defa
         [downloadGroup->_downloadOperationKeys removeObject:key];
         [downloadGroup->_downloadOperationsDic removeObjectForKey:key];
     }
+}
+
+static BOOL _debug = NO;
+
+- (void)debug:(BOOL)debug
+{
+    _debug = debug;
 }
 
 @end

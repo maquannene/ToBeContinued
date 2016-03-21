@@ -1,0 +1,1 @@
+../../../MQImageDownloadGroup/ImageDownloadGroup/MQImageDownloadGroupManage.h

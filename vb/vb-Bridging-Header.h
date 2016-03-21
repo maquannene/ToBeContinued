@@ -20,5 +20,3 @@
 //@import Dollar;
 //@import Cent;
 #import "UINavigationBar+Awesome.h"
-#import "MQImageDownloadGroupManage.h"
-#import "UIImageView+mq_WebCache.h"

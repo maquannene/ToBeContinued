@@ -7,6 +7,7 @@
 //
 
 import SDWebImage
+import MQImageDownloadGroup
 
 class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
 

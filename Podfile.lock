@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - Cent (4.1.0):
-    - Dollar (~> 4.1.0)
-  - Dollar (4.1.0)
+  - Cent (5.0.0):
+    - Dollar (~> 5.0.0)
+  - Dollar (5.0.0)
   - FDFullscreenPopGesture (1.1)
-  - Kingfisher (1.9.2)
-  - MJExtension (3.0.9)
+  - Kingfisher (1.9.3)
+  - MJExtension (3.0.10)
   - MJRefresh (3.1.0)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
@@ -33,12 +33,14 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
-  - MQMaskController (0.0.1)
+  - MQImageDownloadGroup (1.1):
+    - SDWebImage (~> 3.6)
+  - MQMaskController (1.0)
   - NYXImagesKit (2.3)
-  - SDWebImage (3.7.4):
-    - SDWebImage/Core (= 3.7.4)
-  - SDWebImage/Core (3.7.4)
-  - SVProgressHUD (HEAD based on 2.0-beta)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SVProgressHUD (2.0-beta8)
   - SWTableViewCell (0.3.7)
   - WeiboSDK (3.1.3)
 
@@ -52,11 +54,11 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - MMDrawerController (~> 0.5.7)
-  - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`,
-    commit `6b313578e296ac772e9c5dbe18975094ce741360`)
+  - MQImageDownloadGroup (from `https://github.com/maquannene/MQImageDownloadGroup.git`)
+  - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`)
   - NYXImagesKit
   - SDWebImage (~> 3.6)
-  - SVProgressHUD (HEAD)
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SWTableViewCell (= 0.3.7)
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
@@ -64,9 +66,12 @@ EXTERNAL SOURCES:
   FDFullscreenPopGesture:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
+  MQImageDownloadGroup:
+    :git: https://github.com/maquannene/MQImageDownloadGroup.git
   MQMaskController:
-    :commit: 6b313578e296ac772e9c5dbe18975094ce741360
     :git: https://github.com/wuhanness/MQMaskViewController.git
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
   WeiboSDK:
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
@@ -74,26 +79,33 @@ CHECKOUT OPTIONS:
   FDFullscreenPopGesture:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
+  MQImageDownloadGroup:
+    :commit: c5c8e2259fc5990c2d1419781c873af0f0764291
+    :git: https://github.com/maquannene/MQImageDownloadGroup.git
   MQMaskController:
-    :commit: 6b313578e296ac772e9c5dbe18975094ce741360
+    :commit: 823cb8bde32edcd2b2cf85be9f70aee624aa4160
     :git: https://github.com/wuhanness/MQMaskViewController.git
+  SVProgressHUD:
+    :commit: 9b274cc6bfb3b1113f824a7375db300e0ce0a99c
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
   WeiboSDK:
-    :commit: 61e4bf36084b3fda1f73e4099e6c29bf8758e335
+    :commit: 73edfa5b97ab254983f0a349ab1c8d604452d009
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  Cent: 9960f0a1963631c6164cdb43bd3344d04b793fe3
-  Dollar: 1ee47922ccdfda5b572c8a4956b08986f1b4c429
+  Cent: 4bfbe6037d911c0491425ae1ff8057404050fbb2
+  Dollar: 310893dd6b3799b9b155e3deb61a0492987e4d03
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  Kingfisher: 7b6df0fa9d211807152c32c46494f9bc08f0e07b
-  MJExtension: 116781b18cb25cee39619e16617f62bb7433ea4e
+  Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
+  MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  MQMaskController: 7c9864cd0a9b2095d9c7b48acdc60cb813e9679a
+  MQImageDownloadGroup: 6ea26218381ed6052082ec022f4a55ce0e0e5d89
+  MQMaskController: 79ace10666c55a22147a2c55dfdf1250ab105a3f
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
-  SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
-  SVProgressHUD: c83337f10ed32d701c423d519059a249973c8662
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   WeiboSDK: 5f2a707c4569a64f4641f4171acd712016f24342
 

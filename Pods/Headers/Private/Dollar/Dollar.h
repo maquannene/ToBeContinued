@@ -1,1 +1,1 @@
-../../../Dollar/Dollar/Dollar/Dollar.h
+../../../Dollar/Sources/Dollar.h

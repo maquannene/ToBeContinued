@@ -1,8 +1,8 @@
 {
   "name": "MQMaskController",
-  "version": "0.0.1",
+  "version": "1.0",
   "summary": "通用型遮罩层，类似于UIPopoverController，但是更轻量级， 通过自定义contentView内容层，适用于临时气泡弹窗等",
-  "homepage": "https://github.com/wuhanness/MQMaskViewController",
+  "homepage": "https://github.com/maquannene/MQMaskViewController",
   "authors": {
     "maquan": "maquan@kingsoft.com"
   },
@@ -10,8 +10,8 @@
     "ios": "7.0"
   },
   "source": {
-    "git": "https://github.com/wuhanness/MQMaskViewController.git",
-    "commit": "e8bbff5d014c5049210164dcfd6b8b58b3dcb4c3"
+    "git": "https://github.com/maquannene/MQMaskViewController.git",
+    "tag": "1.0"
   },
   "source_files": "MMaskViewDemo/MQMaskViewController/*.{h,m}",
   "frameworks": "UIKit",
