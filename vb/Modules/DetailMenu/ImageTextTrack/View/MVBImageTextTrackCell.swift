@@ -83,7 +83,8 @@ extension MVBImageTextTrackCell {
                 guard error == nil else { return }
                 
                 strongSelf.progressView.hidden = true
-        })
+            
+            })
         
         textLabel.text = imageTextTrack.text
     }

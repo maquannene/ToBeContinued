@@ -7,15 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @import SDWebImage;
 
 @interface UIImageView (mq_WebCache)
 
-- (void)mq_setImageWithURL:(NSURL *)url
-           groupIdentifier:(NSString *)identifier
-          placeholderImage:(UIImage *)placeholder
-                   options:(SDWebImageOptions)options
-                  progress:(SDWebImageDownloaderProgressBlock)progressBlock
-                 completed:(SDWebImageCompletionBlock)completedBlock;
+- (NSURL *)mq_imageURL;
+
+- (void)mq_setImageWithURL:(NSURL *)url;
+
+- (void)mq_setImageWithURL:(NSURL *)url groupIdentifier:(NSString *)identifier;
+
+- (void)mq_setImageWithURL:(NSURL *)url groupIdentifier:(NSString *)identifier placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;
+
+- (void)mq_setImageWithURL:(NSURL *)url completed:(SDWebImageCompletionBlock)completedBlock;
+
+- (void)mq_setImageWithURL:(NSURL *)url groupIdentifier:(NSString *)identifier completed:(SDWebImageCompletionBlock)completedBlock;
+
+- (void)mq_setImageWithURL:(NSURL *)url groupIdentifier:(NSString *)identifier placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options completed:(SDWebImageCompletionBlock)completedBlock;
+
+- (void)mq_setImageWithURL:(NSURL *)url groupIdentifier:(NSString *)identifier placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock;
+
+- (void)mq_cancelCurrentImageDownload;
 
 @end

@@ -9,6 +9,8 @@
 #import "MQImageDownloadGroupManage.h"
 #import "SDWebImageManager.h"
 
+NSString *const MQImageDownloadDefaultGroupIdentifier = @"mq.download.group.default";
+
 @interface MQImageDownloadGroup ()
 
 {
@@ -24,7 +26,7 @@
 
 - (instancetype)init
 {
-    self = [self initWithGroupIdentifier:@"default"];
+    self = [self initWithGroupIdentifier:MQImageDownloadDefaultGroupIdentifier];
     if (self) {
 
     }
@@ -109,7 +111,6 @@
             }];
             [downloadGroup->_downloadOperationsDic removeObjectForKey:lastKey];
             [downloadOperationKeys removeLastObject];
-            NSLog(@"123");
         }
     }
     else {
@@ -128,6 +129,10 @@
     MQImageDownloadGroup *downloadGroup = _downloadGroupsDic[identifier];
     NSMutableArray<id<SDWebImageOperation>> *operations = downloadGroup->_downloadOperationsDic[key];
     [operations removeObject:operation];
+    if (operations.count == 0) {
+        [downloadGroup->_downloadOperationKeys removeObject:key];
+        [downloadGroup->_downloadOperationsDic removeObjectForKey:key];
+    }
 }
 
 @end
