@@ -8,7 +8,7 @@
 
 typealias CellHeightInfo = (cellHeight: CGFloat, longCell: Bool)
 
-protocol MVBImageTextTrackLayoutDelegate {
+protocol MVBImageTextTrackLayoutDelegate: NSObjectProtocol {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
 }
 
@@ -35,7 +35,7 @@ class MVBImageTextTrackLayoutAttributes: UICollectionViewLayoutAttributes {
 
 class MVBImageTextTrackLayout: UICollectionViewLayout {
     
-    var delegate: MVBImageTextTrackLayoutDelegate!
+    weak var delegate: MVBImageTextTrackLayoutDelegate!
     var numberOfColumns: Int = 1
     var cellWidth: CGFloat = 0
     var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -74,7 +74,7 @@ class MVBImageTextTrackLayout: UICollectionViewLayout {
         
         for item in 0..<collectionView!.numberOfItemsInSection(0) {
             let indexPath = NSIndexPath(forItem: item, inSection: 0)
-            let cellHeightInfo = delegate.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
+            let cellHeightInfo = delegate!.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
             let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeightInfo.cellHeight)
             let attributes = MVBImageTextTrackLayoutAttributes(forCellWithIndexPath: indexPath)
             attributes.frame = frame

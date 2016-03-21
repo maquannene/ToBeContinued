@@ -15,8 +15,9 @@ class MVBPageTransformManage: NSObject {
     
     //  左侧主菜单页面
     lazy var mainMenuViewController: MVBMainMenuViewController = MVBMainMenuViewController()
+    
     //  中间home页面
-    lazy var homeViewController: MVBHomeViewController = MVBHomeViewController.initWithNavi()
+    lazy var homeViewController: MVBHomeViewController = MVBHomeViewController()
     
     //  第一部分： 图迹
     var noteTrackVc: MVBNoteTrackViewController?
@@ -34,7 +35,7 @@ class MVBPageTransformManage: NSObject {
         mainMenuViewController.delegate = self
     
         //  抽屉控制器
-        drawerController = MMDrawerController(centerViewController: homeViewController.mainNavi!, leftDrawerViewController: mainMenuViewController)
+        drawerController = MMDrawerController(centerViewController: homeViewController, leftDrawerViewController: mainMenuViewController)
         drawerController!.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         drawerController!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         //  全部特效除过PanningDrawerView
@@ -65,7 +66,7 @@ extension MVBPageTransformManage: MVBMainMenuViewControllerDelegate {
             case .LogOut:
                 return
             case .Home:
-                centerViewController = homeViewController.mainNavi!
+                centerViewController = homeViewController
             case .NoteTrack:
                 if noteTrackVc == nil {
                     noteTrackVc = UIStoryboard(name: "MVBNoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBNoteTrackViewController!
