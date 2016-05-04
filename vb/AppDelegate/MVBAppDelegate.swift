@@ -12,7 +12,10 @@ import AVOSCloud
 class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
-    var mainVc: UIViewController!
+//    var mainVc: UIViewController!
+    
+    var rootVc: RootViewController!
+    
     lazy var dataSource: MVBAppDataSource = MVBAppDataSource()
 
     class func MVBApp() -> MVBAppDelegate! {
@@ -38,22 +41,27 @@ extension MVBAppDelegate: UIApplicationDelegate {
         self.registThirdSDK()
         
         //  主视图控制器
-        self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MVBLogInViewController") as! MVBLogInViewController)
+//        self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LogInViewController") as! LogInViewController)
+        
+        rootVc = RootViewController()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.grayColor()
-        self.window?.rootViewController = self.mainVc
+//        self.window?.rootViewController = self.mainVc
+        window?.rootViewController = rootVc
         self.window?.makeKeyAndVisible()
         return true
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         dataSource.thirdLogInIdentifier = MVBWeiboSDK.LogFromWeibo
-        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
+//        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
+        return WeiboSDK.handleOpenURL(url, delegate: rootVc)
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
+//        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
+        return WeiboSDK.handleOpenURL(url, delegate: rootVc)
     }
     
 }

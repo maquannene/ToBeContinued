@@ -1,12 +1,12 @@
 //
-//  MVBMainMenuView.swift
+//  MainMenuView.swift
 //  vb
 //
 //  Created by 马权 on 6/21/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-class MVBMainMenuView: UIView {
+class MainMenuView: UIView {
     
     @IBOutlet weak var headBackgroundImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!

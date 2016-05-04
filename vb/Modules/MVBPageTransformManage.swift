@@ -14,7 +14,7 @@ class MVBPageTransformManage: NSObject {
     var drawerController: MMDrawerController?
     
     //  左侧主菜单页面
-    lazy var mainMenuViewController: MVBMainMenuViewController = MVBMainMenuViewController()
+    lazy var mainMenuViewController: MainMenuViewController = MainMenuViewController()
     
     //  中间home页面
     lazy var homeViewController: MVBHomeViewController = MVBHomeViewController()
@@ -56,10 +56,10 @@ class MVBPageTransformManage: NSObject {
     
 }
 
-// MARK: MVBMainMenuViewControllerDelegate
-extension MVBPageTransformManage: MVBMainMenuViewControllerDelegate {
+// MARK: MainMenuViewControllerDelegate
+extension MVBPageTransformManage: MainMenuViewControllerDelegate {
     
-    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate)
+    func mainMenuViewController(mainMenuViewController: MainMenuViewController, operate: MainMenuViewControllerOperate)
     {
         var centerViewController: UIViewController?
         switch operate {

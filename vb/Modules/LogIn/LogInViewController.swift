@@ -1,5 +1,5 @@
 //
-//  MVBLogInViewController.swift
+//  LogInViewController.swift
 //  vb
 //
 //  Created by 马权 on 5/16/15.
@@ -9,22 +9,24 @@
 import SVProgressHUD
 import SDWebImage
 
-enum MVBLogInViewModel : Int {
+enum LogInViewModel : Int {
     case NotLogIn                   //  没有登录，没有accessToken等，请登录
     case RetryLogIn                 //  有accessToken，但是没有登陆成功，可能是没网
     case Loading
     case AlreadyLogIn               //  有accessToken，并且登陆成功
 }
 
-class MVBLogInViewController: UIViewController {
+class LogInViewController: UIViewController {
 
-    var pageTransformManage: MVBPageTransformManage?
+//    var pageTransformManage: MVBPageTransformManage?
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userImageViewCenterY: NSLayoutConstraint!
     @IBOutlet weak var logInBtn: UIButton!
     
-    var model: MVBLogInViewModel = MVBLogInViewModel.NotLogIn {
+    var logInCompletionHandler: (() -> Void)?
+    
+    var model: LogInViewModel = LogInViewModel.NotLogIn {
         didSet {
             if model == .AlreadyLogIn {
                 logInBtn.setTitle("Welcome to Back", forState: UIControlState.Normal)
@@ -61,16 +63,16 @@ class MVBLogInViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         let appDataSource = MVBAppDelegate.MVBApp().dataSource
         if appDataSource.accessToken != nil && appDataSource.userID != nil {
-            model = MVBLogInViewModel.Loading
+            model = LogInViewModel.Loading
         }
         else {
-            model = MVBLogInViewModel.NotLogIn
+            model = LogInViewModel.NotLogIn
         }
     }
     
     override func viewDidAppear(animated: Bool) {
         //  如果登陆过，就紧接着获取个人信息
-        if model == MVBLogInViewModel.Loading {
+        if model == LogInViewModel.Loading {
             SVProgressHUD.showWithStatus("读取个人信息...")
             SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             MVBAppDelegate.MVBApp().dataSource.getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
@@ -80,10 +82,10 @@ class MVBLogInViewController: UIViewController {
 }
 
 //  MARK: Aciton
-extension MVBLogInViewController {
+extension LogInViewController {
 
     @IBAction func logInAction(sender: AnyObject) {
-        guard model != MVBLogInViewModel.AlreadyLogIn else { return }
+        guard model != LogInViewModel.AlreadyLogIn else { return }
         if model == .NotLogIn {
             let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
             request.redirectURI = MVBWeiboSDK.RedirectURL
@@ -106,8 +108,9 @@ extension MVBLogInViewController {
             self.userImageView.alpha = 1
             }) { (finish) -> Void in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self] () -> Void in
-                    self.pageTransformManage = MVBPageTransformManage()
-                    self.pageTransformManage!.displayMainStructureFrom(self)
+//                    self.pageTransformManage = MVBPageTransformManage()
+//                    self.pageTransformManage!.displayMainStructureFrom(self)
+                    self.logInCompletionHandler?()
                 }
         }
     }
@@ -115,21 +118,13 @@ extension MVBLogInViewController {
 }
 
 //  MARK: WeiboSDKDelegate
-extension MVBLogInViewController: WeiboSDKDelegate {
+extension LogInViewController: WeiboSDKDelegate {
 
     //   收到一个来自微博客户端程序的响应。 这里是用weibo 登陆成功后的response 设置userInfo和
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
-        guard
-            let _response = response as? WBAuthorizeResponse,
-            let accessToken = _response.accessToken,
-            let userID = _response.userID else { return }
-    
-        MVBAppDelegate.MVBApp().dataSource.accessToken = accessToken
-        MVBAppDelegate.MVBApp().dataSource.userID = userID
-        
         //  这里的回调 是 晚于 viewWillApper
         //  所以这里要单独进行个人信息获取
-        model = MVBLogInViewModel.AlreadyLogIn
+        model = LogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
@@ -147,7 +142,7 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 
 
 //  MARK: WBHttpRequestDelegate
-extension MVBLogInViewController: WBHttpRequestDelegate {
+extension LogInViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
         let result: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
@@ -169,7 +164,7 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
         //  隐藏进度条
         SVProgressHUD.dismiss()
         //  设置登陆成功标志
-        model = MVBLogInViewModel.AlreadyLogIn
+        model = LogInViewModel.AlreadyLogIn
         //  登陆获取信息成功后设置头像
         userImageView!.sd_setImageWithURL(NSURL(string: appDataSource.userModel!.avatar_large as String!))
         //  成功登陆

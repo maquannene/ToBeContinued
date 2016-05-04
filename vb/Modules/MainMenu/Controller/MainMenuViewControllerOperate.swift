@@ -1,5 +1,5 @@
 //
-//  MVBMainMenuViewController.swift
+//  MainMenuViewController.swift
 //  vb
 //
 //  Created by 马权 on 6/21/15.
@@ -10,7 +10,7 @@ import MMDrawerController
 import SVProgressHUD
 import SDWebImage
 
-enum MVBMainMenuViewControllerOperate: Int {
+enum MainMenuViewControllerOperate: Int {
     case Home
     case NoteTrack
     case ImageTextTrack
@@ -18,24 +18,24 @@ enum MVBMainMenuViewControllerOperate: Int {
     case LogOut
 }
 
-protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
-    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) -> Void
+protocol MainMenuViewControllerDelegate: NSObjectProtocol {
+    func mainMenuViewController(mainMenuViewController: MainMenuViewController, operate: MainMenuViewControllerOperate) -> Void
 }
 
-class MVBMainMenuViewController: UIViewController {
+class MainMenuViewController: UIViewController {
     
-    weak var delegate: MVBMainMenuViewControllerDelegate?
+    weak var delegate: MainMenuViewControllerDelegate?
     
     override func loadView()
     {
-        NSBundle.mainBundle().loadNibNamed("MVBMainMenuView", owner: self, options: nil)
+        NSBundle.mainBundle().loadNibNamed("MainMenuView", owner: self, options: nil)
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        mainMenuView!.menuTableView.registerNib(UINib(nibName: MVBMainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MVBMainMenuViewCell.ClassName)
+        mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.ClassName)
         self.configurUserInfo()
         
         let x = specialEffect
@@ -93,10 +93,10 @@ class MVBMainMenuViewController: UIViewController {
 }
 
 //  MARK: Private
-extension MVBMainMenuViewController {
+extension MainMenuViewController {
     
-    weak var mainMenuView: MVBMainMenuView! {
-        return self.view as! MVBMainMenuView
+    weak var mainMenuView: MainMenuView! {
+        return self.view as! MainMenuView
     }
     
     private var specialEffect: Bool {
@@ -124,7 +124,7 @@ extension MVBMainMenuViewController {
 }
 
 // MARK: buttonAction
-extension MVBMainMenuViewController {
+extension MainMenuViewController {
 
     @IBAction func backMainAction(sender: AnyObject)
     {
@@ -172,7 +172,7 @@ extension MVBMainMenuViewController {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
@@ -211,7 +211,7 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(MVBMainMenuViewCell.ClassName) as! MVBMainMenuViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(MainMenuViewCell.ClassName) as! MainMenuViewCell
         if indexPath.row == 0 {
             cell.textLabel?.text = "Note Track"
         }
@@ -224,7 +224,7 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 // MARK: WBHttpRequestDelegate
-extension MVBMainMenuViewController: WBHttpRequestDelegate {
+extension MainMenuViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!)
     {
@@ -236,7 +236,7 @@ extension MVBMainMenuViewController: WBHttpRequestDelegate {
             SDImageCache.sharedImageCache().clearMemory()
             
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
-                self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
+                self.delegate!.mainMenuViewController(self, operate: MainMenuViewControllerOperate.LogOut)
             }
         }
         if request.tag == "getUserInfo" {
