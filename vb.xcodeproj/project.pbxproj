@@ -10,6 +10,7 @@
 		7D34E0700242C08FBFCB39EF /* Pods_vb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DFC41BD83D2C3BBCFA08A6 /* Pods_vb.framework */; };
 		D40709321BB101250098867E /* NSObject_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40709311BB101250098867E /* NSObject_Extension.swift */; };
 		D40709361BB104F20098867E /* UIView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40709351BB104F20098867E /* UIView_Extension.swift */; };
+		D4073AB01CD9FB5700E880D2 /* DrawerVisualStateCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4073AAF1CD9FB5700E880D2 /* DrawerVisualStateCustom.swift */; };
 		D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */; };
 		D4121E791B075D9200612CA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E781B075D9200612CA3 /* QuartzCore.framework */; };
 		D4121E7B1B075D9B00612CA3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E7A1B075D9B00612CA3 /* ImageIO.framework */; };
@@ -63,7 +64,6 @@
 		D4BDF1271BC8E6260053966A /* MainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1231BC8E6260053966A /* MainMenuView.xib */; };
 		D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5B5B41CD9D88E00C8E7CB /* RootViewController.swift */; };
 		D4C5B5B81CD9E14300C8E7CB /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5B5B71CD9E14300C8E7CB /* DrawerController.swift */; };
-		D4DE75A11B57560D007E31F0 /* MMDrawerVisualStateCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */; };
 		D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E17B4B1B286A7F00228B4A /* Images.xcassets */; };
 		D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B4D1B286BC100228B4A /* AppMacro.swift */; };
 		D4E48EBF1BB6388F0042FC74 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */; };
@@ -105,6 +105,7 @@
 		9EB03327E890D0BE38B41628 /* Pods-vb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vb.release.xcconfig"; path = "Pods/Target Support Files/Pods-vb/Pods-vb.release.xcconfig"; sourceTree = "<group>"; };
 		D40709311BB101250098867E /* NSObject_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extension.swift; sourceTree = "<group>"; };
 		D40709351BB104F20098867E /* UIView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView_Extension.swift; sourceTree = "<group>"; };
+		D4073AAF1CD9FB5700E880D2 /* DrawerVisualStateCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerVisualStateCustom.swift; sourceTree = "<group>"; };
 		D40F84231B4EA723004FD250 /* MQPullToRefresh.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPullToRefresh.podspec; sourceTree = "<group>"; };
 		D4121DDE1B07184400612CA3 /* vb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4121DE21B07184400612CA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -167,7 +168,6 @@
 		D4BDF1231BC8E6260053966A /* MainMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuView.xib; sourceTree = "<group>"; };
 		D4C5B5B41CD9D88E00C8E7CB /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		D4C5B5B71CD9E14300C8E7CB /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
-		D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMDrawerVisualStateCustom.swift; sourceTree = "<group>"; };
 		D4E17B4B1B286A7F00228B4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4E17B4D1B286BC100228B4A /* AppMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMacro.swift; sourceTree = "<group>"; };
 		D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
@@ -373,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				D45E89771B36CD1500AFF9F8 /* MVBPageTransformManage.swift */,
-				D4DE75A01B57560D007E31F0 /* MMDrawerVisualStateCustom.swift */,
 				D4C5B5B31CD9D87800C8E7CB /* Root */,
 				D4C5B5B61CD9E0EB00C8E7CB /* Drawer */,
 				D45E89731B36CD1500AFF9F8 /* MainMenu */,
@@ -573,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				D4C5B5B71CD9E14300C8E7CB /* DrawerController.swift */,
+				D4073AAF1CD9FB5700E880D2 /* DrawerVisualStateCustom.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -772,10 +772,10 @@
 				D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */,
 				D4BDF1261BC8E6260053966A /* MainMenuView.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
+				D4073AB01CD9FB5700E880D2 /* DrawerVisualStateCustom.swift in Sources */,
 				D40709361BB104F20098867E /* UIView_Extension.swift in Sources */,
 				D4BDF1121BC8A1490053966A /* MVBNoteTrackViewController.swift in Sources */,
 				D4BDF1131BC8A1490053966A /* MVBNoteTrackIdListModel.swift in Sources */,
-				D4DE75A11B57560D007E31F0 /* MMDrawerVisualStateCustom.swift in Sources */,
 				D4BDF1241BC8E6260053966A /* MainMenuViewControllerOperate.swift in Sources */,
 				D4BDF1151BC8A1490053966A /* MVBNoteTrackModel.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
