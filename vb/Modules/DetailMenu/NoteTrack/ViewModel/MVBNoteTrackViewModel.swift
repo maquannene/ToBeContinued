@@ -76,7 +76,7 @@ extension MVBNoteTrackViewModel {
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
         for objectId in self.noteTrackIdList!.list {
             dispatch_group_enter(fetchGroup)
-            let noteTrackModel: MVBNoteTrackModel = MVBNoteTrackModel(withoutDataWithObjectId: objectId as! String)
+            let noteTrackModel: MVBNoteTrackModel = MVBNoteTrackModel(outDataWithObjectId: objectId as! String)
             noteTrackModel.fetchInBackgroundWithBlock{ (object, error) -> Void in
                 if error != nil {
                     success = false

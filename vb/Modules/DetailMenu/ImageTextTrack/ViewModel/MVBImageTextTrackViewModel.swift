@@ -73,7 +73,7 @@ extension MVBImageTextTrackViewModel {
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
         for objectId in imageTextTrackIdList!.list {
             dispatch_group_enter(fetchGroup)
-            let imageTextTrack: MVBImageTextTrackModel = MVBImageTextTrackModel(withoutDataWithObjectId: objectId as! String)
+            let imageTextTrack: MVBImageTextTrackModel = MVBImageTextTrackModel(outDataWithObjectId: objectId as! String)
             imageTextTrack.fetchInBackgroundWithBlock{ [weak imageTextTrack] (object, error) -> Void in
                 guard let weakImageTextTrack = imageTextTrack else { return }
                 if error != nil {
