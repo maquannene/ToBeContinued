@@ -149,10 +149,11 @@ extension MVBLogInViewController: WeiboSDKDelegate {
 //  MARK: WBHttpRequestDelegate
 extension MVBLogInViewController: WBHttpRequestDelegate {
     
-    func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!) {
+    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
+        let result: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
         let appDataSource = MVBAppDelegate.MVBApp().dataSource
         //  设置userModel
-        appDataSource.setUserInfoWithJsonString(result!)
+        appDataSource.setUserInfoWithJsonString(result as String)
         //  授权过期判定。
         if appDataSource.userModel?.id == nil && appDataSource.accessToken != nil {
             SVProgressHUD.dismiss()
@@ -173,14 +174,6 @@ extension MVBLogInViewController: WBHttpRequestDelegate {
         userImageView!.sd_setImageWithURL(NSURL(string: appDataSource.userModel!.avatar_large as String!))
         //  成功登陆
         self.successLogIn()
-    }
-    
-    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-//        let x: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
-    }
-    
-    func request(request: WBHttpRequest!, didReceiveResponse response: NSURLResponse!) {
-        //        let x: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
     }
     
     func request(request: WBHttpRequest!, didFailWithError error: NSError!) {
