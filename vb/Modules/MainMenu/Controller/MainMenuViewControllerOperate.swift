@@ -36,59 +36,34 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         
         mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.ClassName)
-        self.configurUserInfo()
+        UserInfoManange.shareInstance.getUserInfo(true) { [unowned self] (success, userModel) in
+            if success && userModel != nil {
+                self.configure(userModel!)
+            }
+        }
         
         let x = specialEffect
         specialEffect = x
     }
     
-    func configurUserInfo()
+    func configure(userModel: MVBUserModel)
     {
-        if let userModel = MVBAppDelegate.MVBApp().dataSource.userModel as MVBUserModel? {
-            if let coverImagePhoto = userModel.cover_image_phone as? String {
-                mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
-                mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
-            }
-            else {
-                mainMenuView!.nameLabel.textColor = UIColor.blackColor()
-            }
-
-            mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
-            mainMenuView!.nameLabel.text = userModel.name as? String
-            mainMenuView!.describeLbel.text = userModel._description as? String
+        if let coverImagePhoto = userModel.cover_image_phone as? String {
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
+            mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
         }
         else {
-            let appDataSource = MVBAppDelegate.MVBApp().dataSource
-            appDataSource.getUserInfo(self, tag: "getUserInfo")  //
+            mainMenuView!.nameLabel.textColor = UIColor.blackColor()
         }
+        mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
+        mainMenuView!.nameLabel.text = userModel.name as? String
+        mainMenuView!.describeLbel.text = userModel._description as? String
     }
     
     deinit
     {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
- 
-//    struct ListItem {
-//        var icon: UIImage?
-//        var title: String
-//        var url: NSURL
-//        
-//        static func listItemsFromJSONData(jsonData: NSData?) -> [ListItem] {
-//            guard let jsonData = jsonData,
-//                let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []),
-//                let jsonItems = json as? Array<NSDictionary> else { return [] }
-//            
-//            return jsonItems.flatMap { (itemDesc: NSDictionary) -> ListItem? in
-//                guard let title = itemDesc["title"] as? String,
-//                    let urlString = itemDesc["url"] as? String,
-//                    let url = NSURL(string: urlString)
-//                    else { return nil }
-//                let iconName = itemDesc["icon"] as? String
-//                let icon = iconName.flatMap { UIImage(named: $0) }
-//                return ListItem(icon: icon, title: title, url: url)
-//            }
-//        }
-//    }
     
 }
 
@@ -155,8 +130,8 @@ extension MainMenuViewController {
 
     @IBAction func logOutAction(sender: AnyObject)
     {
-        let appDataSource = MVBAppDelegate.MVBApp().dataSource
-        WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
+        let userInfoManage = UserInfoManange.shareInstance
+        WeiboSDK.logOutWithToken(userInfoManage.accessToken!, delegate: self, withTag: "logOut")
         SVProgressHUD.showWithStatus("正在退出...")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
     }
@@ -229,7 +204,7 @@ extension MainMenuViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!)
     {
         if request.tag == "logOut" {
-            MVBAppDelegate.MVBApp().dataSource.clearUserInfo()
+            UserInfoManange.shareInstance.clearUserInfo()
             SVProgressHUD.dismiss()
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
@@ -238,10 +213,6 @@ extension MainMenuViewController: WBHttpRequestDelegate {
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MainMenuViewControllerOperate.LogOut)
             }
-        }
-        if request.tag == "getUserInfo" {
-            MVBAppDelegate.MVBApp().dataSource.setUserInfoWithJsonString(result!)
-            configurUserInfo()
         }
     }
     

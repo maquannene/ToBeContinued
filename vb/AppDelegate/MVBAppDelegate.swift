@@ -12,11 +12,8 @@ import AVOSCloud
 class MVBAppDelegate: UIResponder {
 
     var window: UIWindow?
-//    var mainVc: UIViewController!
     
     var rootVc: RootViewController!
-    
-    lazy var dataSource: MVBAppDataSource = MVBAppDataSource()
 
     class func MVBApp() -> MVBAppDelegate! {
         return UIApplication.sharedApplication().delegate as! MVBAppDelegate
@@ -39,28 +36,22 @@ extension MVBAppDelegate: UIApplicationDelegate {
         _ = NSBundle.mainBundle().infoDictionary?[key] as! String
         
         self.registThirdSDK()
-        
-        //  主视图控制器
-//        self.mainVc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LogInViewController") as! LogInViewController)
-        
+    
         rootVc = RootViewController()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.grayColor()
-//        self.window?.rootViewController = self.mainVc
         window?.rootViewController = rootVc
         self.window?.makeKeyAndVisible()
         return true
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        dataSource.thirdLogInIdentifier = MVBWeiboSDK.LogFromWeibo
-//        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
+        UserInfoManange.shareInstance.thirdLogInIdentifier = WeiboSDKInfo.LogFromPrefix
         return WeiboSDK.handleOpenURL(url, delegate: rootVc)
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-//        return WeiboSDK.handleOpenURL(url, delegate: self.mainVc as! WeiboSDKDelegate)
         return WeiboSDK.handleOpenURL(url, delegate: rootVc)
     }
     
@@ -72,13 +63,13 @@ extension MVBAppDelegate {
     private func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(true)
-        WeiboSDK.registerApp(MVBWeiboSDK.AppKey)
+        WeiboSDK.registerApp(WeiboSDKInfo.AppKey)
         //  AVOSCloud sdk
         MVBNoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
         MVBNoteTrackModel.registerSubclass()
         MVBImageTextTrackIdListModel.registerSubclass()
         MVBImageTextTrackModel.registerSubclass()
-        AVOSCloud.setApplicationId(MVBAVCloudSDKAppID, clientKey: MVBAVCloudSDKAppKey)
+        AVOSCloud.setApplicationId(kAVCloudSDKAppID, clientKey: kAVCloudSDKAppKey)
     }
     
 }

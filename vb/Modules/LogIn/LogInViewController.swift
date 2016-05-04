@@ -11,7 +11,6 @@ import SDWebImage
 
 enum LogInViewModel : Int {
     case NotLogIn                   //  没有登录，没有accessToken等，请登录
-    case RetryLogIn                 //  有accessToken，但是没有登陆成功，可能是没网
     case Loading
     case AlreadyLogIn               //  有accessToken，并且登陆成功
 }
@@ -38,9 +37,6 @@ class LogInViewController: UIViewController {
                 if model == .NotLogIn {
                     logInBtn.setTitle("LogIn User Weibo", forState: UIControlState.Normal)
                 }
-                if model == .RetryLogIn {
-                    logInBtn.setTitle("Retry LogIn", forState: UIControlState.Normal)
-                }
                 //  头像归位
                 userImageView.image = nil
                 userImageView.alpha = 0
@@ -61,8 +57,8 @@ class LogInViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let appDataSource = MVBAppDelegate.MVBApp().dataSource
-        if appDataSource.accessToken != nil && appDataSource.userID != nil {
+        let userInfoManage = UserInfoManange.shareInstance
+        if userInfoManage.accessToken != nil && userInfoManage.userID != nil {
             model = LogInViewModel.Loading
         }
         else {
@@ -75,7 +71,6 @@ class LogInViewController: UIViewController {
         if model == LogInViewModel.Loading {
             SVProgressHUD.showWithStatus("读取个人信息...")
             SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-            MVBAppDelegate.MVBApp().dataSource.getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
         }
     }
 
@@ -88,15 +83,9 @@ extension LogInViewController {
         guard model != LogInViewModel.AlreadyLogIn else { return }
         if model == .NotLogIn {
             let request: WBAuthorizeRequest = WBAuthorizeRequest.request() as! WBAuthorizeRequest
-            request.redirectURI = MVBWeiboSDK.RedirectURL
+            request.redirectURI = WeiboSDKInfo.RedirectURL
             request.scope = "all"
             WeiboSDK.sendRequest(request)
-        }
-        if model == .RetryLogIn {
-            model = .Loading
-            SVProgressHUD.showWithStatus("读取个人信息...")
-            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-            MVBAppDelegate.MVBApp().dataSource.getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
         }
     }
     
@@ -108,8 +97,6 @@ extension LogInViewController {
             self.userImageView.alpha = 1
             }) { (finish) -> Void in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self] () -> Void in
-//                    self.pageTransformManage = MVBPageTransformManage()
-//                    self.pageTransformManage!.displayMainStructureFrom(self)
                     self.logInCompletionHandler?()
                 }
         }
@@ -130,50 +117,26 @@ extension LogInViewController: WeiboSDKDelegate {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             SVProgressHUD.showWithStatus("读取个人信息...")
             SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
-            MVBAppDelegate.MVBApp().dataSource.getUserInfo(self, tag: nil)     //  登陆成功时获取个人信息
+            UserInfoManange.shareInstance.getUserInfo() { [unowned self] (success, userModel) in
+                //  隐藏进度条
+                SVProgressHUD.dismiss()
+                if success && userModel != nil {
+                    self.model = LogInViewModel.AlreadyLogIn
+                    self.userImageView!.sd_setImageWithURL(NSURL(string: userModel!.avatar_large as String!))
+                    self.successLogIn()
+                }
+                else {
+                    self.model = .NotLogIn
+                    UserInfoManange.shareInstance.clearUserInfo()
+                    SDImageCache.sharedImageCache().clearDisk()
+                    SDImageCache.sharedImageCache().clearMemory()
+                }
+            }
         }
     }
     
     func didReceiveWeiboRequest(request: WBBaseRequest!) {
         
-    }
-    
-}
-
-
-//  MARK: WBHttpRequestDelegate
-extension LogInViewController: WBHttpRequestDelegate {
-    
-    func request(request: WBHttpRequest!, didFinishLoadingWithDataResult data: NSData!) {
-        let result: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!   //  这个data可以用utf8 解成string
-        let appDataSource = MVBAppDelegate.MVBApp().dataSource
-        //  设置userModel
-        appDataSource.setUserInfoWithJsonString(result as String)
-        //  授权过期判定。
-        if appDataSource.userModel?.id == nil && appDataSource.accessToken != nil {
-            SVProgressHUD.dismiss()
-            SVProgressHUD.showErrorWithStatus("授权登陆过期\n请重新登陆授权")
-            model = .NotLogIn
-            
-            appDataSource.clearUserInfo()
-            //  清理硬盘缓存
-            SDImageCache.sharedImageCache().clearDisk()
-            SDImageCache.sharedImageCache().clearMemory()
-            return
-        }
-        //  隐藏进度条
-        SVProgressHUD.dismiss()
-        //  设置登陆成功标志
-        model = LogInViewModel.AlreadyLogIn
-        //  登陆获取信息成功后设置头像
-        userImageView!.sd_setImageWithURL(NSURL(string: appDataSource.userModel!.avatar_large as String!))
-        //  成功登陆
-        self.successLogIn()
-    }
-    
-    func request(request: WBHttpRequest!, didFailWithError error: NSError!) {
-        SVProgressHUD.showErrorWithStatus("网络错误")
-        model = .RetryLogIn
     }
     
 }

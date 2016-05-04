@@ -8,7 +8,7 @@
 
 import MJExtension
 
-class MVBUserModel: NSObject {
+class MVBUserModel: NSObject, NSCoding {
     
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称

@@ -23,8 +23,8 @@ class RootViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let appDataSource = MVBAppDelegate.MVBApp().dataSource
-        if appDataSource.accessToken != nil && appDataSource.userID != nil {
+        let userInfoManage = UserInfoManange.shareInstance
+        if userInfoManage.accessToken != nil && userInfoManage.userID != nil {
             drawerVc = DrawerController()
             presentViewController(drawerVc!, animated: false) {
                 self.drawerVc!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
@@ -56,8 +56,9 @@ extension RootViewController: WeiboSDKDelegate {
             let accessToken = _response.accessToken,
             let userID = _response.userID else { return }
         
-        MVBAppDelegate.MVBApp().dataSource.accessToken = accessToken
-        MVBAppDelegate.MVBApp().dataSource.userID = userID
+        let userInfoManage = UserInfoManange.shareInstance
+        userInfoManage.accessToken = accessToken
+        userInfoManage.userID = userID
         
         logInVc?.didReceiveWeiboResponse(response!)
     }
