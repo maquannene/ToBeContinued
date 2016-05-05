@@ -37,7 +37,7 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        longPressGesture = UILongPressGestureRecognizer(target: self, action: "longpressAction:")
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MVBImageTextTrackCell.longpressAction(_:)))
         addGestureRecognizer(longPressGesture)
     }
     

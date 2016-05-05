@@ -51,11 +51,11 @@ class MQPictureBrowserCell: UICollectionViewCell {
         addSubview(scrollView)
         scrollView.addSubview(imageView)
         
-        doubleTapGesture = UITapGestureRecognizer(target: self, action: "dobleTapAction:")
+        doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(MQPictureBrowserCell.dobleTapAction(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapGesture)
         
-        tapGesture = UITapGestureRecognizer(target: self, action: "tapAction:")
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(MQPictureBrowserCell.tapAction(_:)))
         tapGesture.numberOfTapsRequired = 1
         addGestureRecognizer(tapGesture)
         

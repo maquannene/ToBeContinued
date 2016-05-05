@@ -50,7 +50,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
         //  基础设置
         view.backgroundColor = UIColor.redColor()
         automaticallyAdjustsScrollViewInsets = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewNoteTrackAction:")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(addNewNoteTrackAction(_:)))
         //  初始化数据源
         dataSource = MVBNoteTrackViewModel()
         
@@ -125,8 +125,8 @@ extension MVBNoteTrackViewController {
         let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
         newNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         newNoteTrackView.createButton.setTitle("创建", forState: UIControlState.Normal)
-        newNoteTrackView.createButton.addTarget(self, action: "confirmCreateNewNoteTrackAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        newNoteTrackView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        newNoteTrackView.createButton.addTarget(self, action: #selector(MVBNoteTrackViewController.confirmCreateNewNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        newNoteTrackView.cancelButton.addTarget(self, action: #selector(MVBNoteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         newNoteTrackVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newNoteTrackView, contentCenter: false, delayTime: 0)
         //  设置初始状态
         newNoteTrackVc!.maskView.backgroundColor = UIColor.clearColor()
@@ -159,8 +159,8 @@ extension MVBNoteTrackViewController {
         detailNoteTrackView.configureData(noteTrackModel.title, detailContent: noteTrackModel.detailContent)
         detailNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         detailNoteTrackView.createButton.setTitle("更新", forState: UIControlState.Normal)
-        detailNoteTrackView.createButton.addTarget(self, action: "confirmUpdataNoteTrackAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        detailNoteTrackView.cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        detailNoteTrackView.createButton.addTarget(self, action: #selector(MVBNoteTrackViewController.confirmUpdataNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        detailNoteTrackView.cancelButton.addTarget(self, action: #selector(MVBNoteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         newNoteTrackVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailNoteTrackView, contentCenter: false, delayTime: 0)
         //  设置初始状态
         newNoteTrackVc!.delegate = self
@@ -344,7 +344,7 @@ extension MVBNoteTrackViewController: UITableViewDataSource {
         if (dataSource.expandedIndexPath != nil && dataSource.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: MVBNoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(MVBNoteTrackViewController.Static.noteTrackDetailCellId) as! MVBNoteTrackDetailCell
             detailCell.configureWithNoteTrackModel(noteTrackModel)
-            detailCell.detailButton.addTarget(self, action: "showDetailNoteTrackAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            detailCell.detailButton.addTarget(self, action: #selector(MVBNoteTrackViewController.showDetailNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             return detailCell
         }
         else {

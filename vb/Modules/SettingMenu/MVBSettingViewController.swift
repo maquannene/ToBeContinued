@@ -26,7 +26,7 @@ class MVBSettingViewController: MVBDetailBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .Plain, target: self, action: "backMainAction:")
+        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .Plain, target: self, action: #selector(MVBSettingViewController.backMainAction(_:)))
         leftButton.tintColor = UIColor.blackColor()
         self.navigationItem.setLeftBarButtonItem(leftButton, animated: false)
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
@@ -84,7 +84,7 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
                 if let specialEffect = NSUserDefaults.standardUserDefaults().valueForKey("specialEffect") as? NSNumber {
                     sw.setOn(specialEffect.boolValue == true, animated: false)
                 }
-                sw.addTarget(self, action: "specialEffectSwitchAction:", forControlEvents: .ValueChanged)
+                sw.addTarget(self, action: #selector(MVBSettingViewController.specialEffectSwitchAction(_:)), forControlEvents: .ValueChanged)
             }
         }
         if indexPath.item == 5 {

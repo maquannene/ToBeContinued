@@ -11,9 +11,12 @@ extension UILabel {
     /**
     判断UILabel.text是否显示不全 出现了...
     */
-    func isTruncated(var maxSize: CGSize = CGSizeZero) -> Bool {
+    func isTruncated(maxSize size: CGSize = CGSizeZero) -> Bool {
+        
+        var maxSize = size
         
         if CGSizeEqualToSize(maxSize, CGSizeZero) {
+            
             maxSize = CGSize(width: self.frame.size.width, height: CGFloat(MAXFLOAT))
         }
         

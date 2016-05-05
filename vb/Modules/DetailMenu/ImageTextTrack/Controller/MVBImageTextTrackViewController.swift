@@ -123,8 +123,8 @@ extension MVBImageTextTrackViewController {
     {
         let addMenuView = NSBundle.mainBundle().loadNibNamed("MVBImageTextTrack", owner: nil, options: nil)[0] as! MVBImageTextTrackAddMenuView
         addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
-        addMenuView.fromPictureAlbumButton.addTarget(self, action: "addFromPictureAlbumButtonAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        addMenuView.fromCameraButton.addTarget(self, action: "addFromCameraButtonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.addFromPictureAlbumButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuView.fromCameraButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.addFromCameraButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
         addMenuMaskVC!.showWithAnimated(true, completion: nil)
     }
@@ -153,7 +153,7 @@ extension MVBImageTextTrackViewController {
         let indexPath = imageTextTrackBrowserVc!.collectionView.indexPathsForVisibleItems()[0]
         guard let cell = imageTextTrackBrowserVc!.collectionView.cellForItemAtIndexPath(indexPath) as? MVBImageTextTrackDisplayCell else { return }
         guard let image = cell.imageView.image else { return }
-        UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(MVBImageTextTrackViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject)
@@ -287,7 +287,7 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.cellGap = 10
         vc.collectionView.registerNib(UINib(nibName: "MVBImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
-        vc.pictureBrowerView.saveButton.addTarget(self, action: "saveImage", forControlEvents: .TouchUpInside)
+        vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.saveImage), forControlEvents: .TouchUpInside)
         imageTextTrackBrowserVc = vc
         
         let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackDisplayCell")
