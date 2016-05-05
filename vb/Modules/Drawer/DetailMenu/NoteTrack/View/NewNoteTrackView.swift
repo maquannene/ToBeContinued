@@ -16,9 +16,9 @@ class NewNoteTrackView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 1)
+        backgroundColor = RGBA(255, 255, 255, 1)
         layer.cornerRadius = 10
-        layer.borderColor = RGBA(red: 237, green: 238, blue: 239, alpha: 1).CGColor
+        layer.borderColor = RGBA(237, 238, 239, 1).CGColor
         layer.borderWidth = 1
         layer.shadowColor = UIColor.grayColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 0)

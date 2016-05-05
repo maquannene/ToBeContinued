@@ -1,6 +1,6 @@
 
 //
-//  AppMacro.swift
+//  Constant.swift
 //  vb
 //
 //  Created by 马权 on 6/10/15.
@@ -8,7 +8,6 @@
 //
 
 //  sina sdk
-
 struct WeiboSDKInfo {
     static let AppKey = "1325571405"                                            //  key
     static let RedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
@@ -26,10 +25,6 @@ let kAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
 //  userInfoKey
 let kUserInfoKey = "UserInfoKey"
 
-func getMainBundlePath() -> String? {
-    return  NSBundle.mainBundle().bundlePath
-}
-
-func RGBA(red red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor! {
+func RGBA(red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> UIColor! {
     return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
 }

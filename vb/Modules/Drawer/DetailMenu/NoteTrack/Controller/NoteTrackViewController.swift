@@ -134,12 +134,12 @@ extension N2oteTrackViewController {
         //  设置显示动画
         newNoteTrackVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(newNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0.5)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(255, 255, 255, 0.5)
         }
         //  显示关闭动画
         newNoteTrackVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(newNoteTrackView.frame, self.view.w - 20, 0)
-             self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
+             self.newNoteTrackVc!.maskView.backgroundColor = RGBA(255, 255, 255, 0)
         }
         newNoteTrackVc!.showWithAnimated(true, completion: nil)
         newNoteTrackView.titleTextView.becomeFirstResponder()
@@ -168,12 +168,12 @@ extension N2oteTrackViewController {
         //  设置显示动画
         newNoteTrackVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(detailNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0.8)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(255, 255, 255, 0.8)
         }
         //  显示关闭动画
         newNoteTrackVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(detailNoteTrackView.frame, self.view.w - 20, 0)
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(255, 255, 255, 0)
         }
         newNoteTrackVc!.showWithAnimated(true, completion: nil)
         detailNoteTrackView.titleTextView.becomeFirstResponder()
@@ -212,7 +212,7 @@ extension N2oteTrackViewController {
         //  设置显示动画
         newNoteTrackVc!.setShowAnimationState { [unowned self] (maskView, contentView) -> Void in
             self.newNoteTrackVc!.contentView.frame = CGRectOffset(newNoteTrackView.frame, 0, -(self.newNoteTrackVc!.contentView.h + 10))
-            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+            self.newNoteTrackVc!.maskView.backgroundColor = RGBA(0, 0, 0, 0.3)
         }
         //  显示关闭动画
         newNoteTrackVc!.setCloseAnimationState { [unowned self] (maskView, contentView) -> Void in

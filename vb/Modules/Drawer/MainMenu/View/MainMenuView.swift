@@ -21,7 +21,7 @@ class MainMenuView: UIView {
     
     @IBOutlet weak var menuTableView: UITableView! {
         didSet {
-            menuTableView.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0)
+            menuTableView.backgroundColor = RGBA(0, 0, 0, 0)
             menuTableView.separatorStyle = .None
             menuTableView.tableFooterView = {
                 let view = UIView()

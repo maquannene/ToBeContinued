@@ -25,7 +25,7 @@ class ImageTextTrackCell: UICollectionViewCell {
             imageView.layer.cornerRadius = 2
             imageView.layer.borderWidth = 0
             imageView.clipsToBounds = true
-            imageView.backgroundColor = RGBA(red: 235.0, green: 235.0, blue: 235.0, alpha: 1)
+            imageView.backgroundColor = RGBA(235.0, 235.0, 235.0, 1)
         }
     }
     

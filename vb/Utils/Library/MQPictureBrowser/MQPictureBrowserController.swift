@@ -78,7 +78,7 @@ class MQPictureBrowserController: UIViewController {
         view.addSubview(blurEffectView)
         view.sendSubviewToBack(blurEffectView)
         
-        self.view.backgroundColor = RGBA(red: 255, green: 255, blue: 255, alpha: 0)
+        self.view.backgroundColor = RGBA(255, 255, 255, 0)
         
         collectionViewFlowLayout.minimumLineSpacing = cellGap
         collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -136,7 +136,7 @@ extension MQPictureBrowserController {
                 
                 if self.animationModel == .PictureMove {
                     self.blurEffectView.alpha = 0
-                    self.view.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 1)
+                    self.view.backgroundColor = RGBA(0, 0, 0, 1)
                     self.view.addSubview(self.tmpImageView)                                         //  先将动画图片加在self.view上
                     self.tmpImageView.image = showAnimationInfo.imageView.image                     //  设置动画图片内容
                     let beginRect = self.view.convertRect(showAnimationInfo.imageView.frame, fromView: showAnimationInfo.imageView.superview)
@@ -194,7 +194,7 @@ extension MQPictureBrowserController {
                 }
             }
             else {
-                self.view.backgroundColor = RGBA(red: 0, green: 0, blue: 0, alpha: 0.3)
+                self.view.backgroundColor = RGBA(0, 0, 0, 0.3)
                 self.view.addSubview(self.collectionView)
             }
         }
