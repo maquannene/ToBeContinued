@@ -1,5 +1,5 @@
 //
-//  MVBMainMenuViewController.swift
+//  MainMenuViewController.swift
 //  vb
 //
 //  Created by 马权 on 6/21/15.
@@ -10,7 +10,7 @@ import MMDrawerController
 import SVProgressHUD
 import SDWebImage
 
-enum MVBMainMenuViewControllerOperate: Int {
+enum MainMenuViewControllerOperate: Int {
     case Home
     case NoteTrack
     case ImageTextTrack
@@ -18,85 +18,60 @@ enum MVBMainMenuViewControllerOperate: Int {
     case LogOut
 }
 
-protocol MVBMainMenuViewControllerDelegate: NSObjectProtocol {
-    func mainMenuViewController(mainMenuViewController: MVBMainMenuViewController, operate: MVBMainMenuViewControllerOperate) -> Void
+protocol MainMenuViewControllerDelegate: NSObjectProtocol {
+    func mainMenuViewController(mainMenuViewController: MainMenuViewController, operate: MainMenuViewControllerOperate) -> Void
 }
 
-class MVBMainMenuViewController: UIViewController {
+class MainMenuViewController: UIViewController {
     
-    weak var delegate: MVBMainMenuViewControllerDelegate?
+    weak var delegate: MainMenuViewControllerDelegate?
     
     override func loadView()
     {
-        NSBundle.mainBundle().loadNibNamed("MVBMainMenuView", owner: self, options: nil)
+        NSBundle.mainBundle().loadNibNamed("MainMenuView", owner: self, options: nil)
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        mainMenuView!.menuTableView.registerNib(UINib(nibName: MVBMainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MVBMainMenuViewCell.ClassName)
-        self.configurUserInfo()
+        mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.ClassName)
+        UserInfoManange.shareInstance.getUserInfo(true) { [unowned self] (success, userModel) in
+            if success && userModel != nil {
+                self.configure(userModel!)
+            }
+        }
         
         let x = specialEffect
         specialEffect = x
     }
     
-    func configurUserInfo()
+    func configure(userModel: MVBUserModel)
     {
-        if let userModel = MVBAppDelegate.MVBApp().dataSource.userModel as MVBUserModel? {
-            if let coverImagePhoto = userModel.cover_image_phone as? String {
-                mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
-                mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
-            }
-            else {
-                mainMenuView!.nameLabel.textColor = UIColor.blackColor()
-            }
-
-            mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
-            mainMenuView!.nameLabel.text = userModel.name as? String
-            mainMenuView!.describeLbel.text = userModel._description as? String
+        if let coverImagePhoto = userModel.cover_image_phone as? String {
+            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
+            mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
         }
         else {
-            let appDataSource = MVBAppDelegate.MVBApp().dataSource
-            appDataSource.getUserInfo(self, tag: "getUserInfo")  //
+            mainMenuView!.nameLabel.textColor = UIColor.blackColor()
         }
+        mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
+        mainMenuView!.nameLabel.text = userModel.name as? String
+        mainMenuView!.describeLbel.text = userModel._description as? String
     }
     
     deinit
     {
         print("\(self.dynamicType) deinit\n", terminator: "")
     }
- 
-//    struct ListItem {
-//        var icon: UIImage?
-//        var title: String
-//        var url: NSURL
-//        
-//        static func listItemsFromJSONData(jsonData: NSData?) -> [ListItem] {
-//            guard let jsonData = jsonData,
-//                let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []),
-//                let jsonItems = json as? Array<NSDictionary> else { return [] }
-//            
-//            return jsonItems.flatMap { (itemDesc: NSDictionary) -> ListItem? in
-//                guard let title = itemDesc["title"] as? String,
-//                    let urlString = itemDesc["url"] as? String,
-//                    let url = NSURL(string: urlString)
-//                    else { return nil }
-//                let iconName = itemDesc["icon"] as? String
-//                let icon = iconName.flatMap { UIImage(named: $0) }
-//                return ListItem(icon: icon, title: title, url: url)
-//            }
-//        }
-//    }
     
 }
 
 //  MARK: Private
-extension MVBMainMenuViewController {
+extension MainMenuViewController {
     
-    weak var mainMenuView: MVBMainMenuView! {
-        return self.view as! MVBMainMenuView
+    weak var mainMenuView: MainMenuView! {
+        return self.view as! MainMenuView
     }
     
     private var specialEffect: Bool {
@@ -124,7 +99,7 @@ extension MVBMainMenuViewController {
 }
 
 // MARK: buttonAction
-extension MVBMainMenuViewController {
+extension MainMenuViewController {
 
     @IBAction func backMainAction(sender: AnyObject)
     {
@@ -155,8 +130,8 @@ extension MVBMainMenuViewController {
 
     @IBAction func logOutAction(sender: AnyObject)
     {
-        let appDataSource = MVBAppDelegate.MVBApp().dataSource
-        WeiboSDK.logOutWithToken(appDataSource.accessToken!, delegate: self, withTag: "logOut")
+        let userInfoManage = UserInfoManange.shareInstance
+        WeiboSDK.logOutWithToken(userInfoManage.accessToken!, delegate: self, withTag: "logOut")
         SVProgressHUD.showWithStatus("正在退出...")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
     }
@@ -172,7 +147,7 @@ extension MVBMainMenuViewController {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
@@ -211,7 +186,7 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(MVBMainMenuViewCell.ClassName) as! MVBMainMenuViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(MainMenuViewCell.ClassName) as! MainMenuViewCell
         if indexPath.row == 0 {
             cell.textLabel?.text = "Note Track"
         }
@@ -224,24 +199,20 @@ extension MVBMainMenuViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 // MARK: WBHttpRequestDelegate
-extension MVBMainMenuViewController: WBHttpRequestDelegate {
+extension MainMenuViewController: WBHttpRequestDelegate {
     
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!)
     {
         if request.tag == "logOut" {
-            MVBAppDelegate.MVBApp().dataSource.clearUserInfo()
+            UserInfoManange.shareInstance.clearUserInfo()
             SVProgressHUD.dismiss()
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
             
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
-                self.delegate!.mainMenuViewController(self, operate: MVBMainMenuViewControllerOperate.LogOut)
+                self.delegate!.mainMenuViewController(self, operate: MainMenuViewControllerOperate.LogOut)
             }
-        }
-        if request.tag == "getUserInfo" {
-            MVBAppDelegate.MVBApp().dataSource.setUserInfoWithJsonString(result!)
-            configurUserInfo()
         }
     }
     

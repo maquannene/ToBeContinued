@@ -11,6 +11,7 @@ pod 'Kingfisher', '~> 1.5'
 pod 'MMDrawerController', '~> 0.5.7'
 pod 'MJExtension'
 pod 'MJRefresh'
+pod 'PINCache'
 
 pod 'NYXImagesKit' #图片处理库
 pod 'SWTableViewCell', '0.3.7'

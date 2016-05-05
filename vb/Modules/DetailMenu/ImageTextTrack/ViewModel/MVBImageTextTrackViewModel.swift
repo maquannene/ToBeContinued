@@ -33,7 +33,7 @@ extension MVBImageTextTrackViewModel {
     */
     func queryFindImageTextTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
     {
-        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBImageTextTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
@@ -54,7 +54,7 @@ extension MVBImageTextTrackViewModel {
     */
     func queryCreateImageTextTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
     {
-        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBImageTextTrackIdListModel.self)
         imageTextTrackIdList = MVBImageTextTrackIdListModel(identifier: identifier)
         imageTextTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed)

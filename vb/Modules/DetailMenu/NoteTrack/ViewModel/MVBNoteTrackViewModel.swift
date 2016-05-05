@@ -32,7 +32,7 @@ extension MVBNoteTrackViewModel {
     */
     func queryFindNoteTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
     {
-        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
         let query: AVQuery = AVQuery(className: MVBNoteTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
@@ -57,7 +57,7 @@ extension MVBNoteTrackViewModel {
     */
     func queryCreateNoteTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
     {
-        let identifier: String = MVBAppDelegate.MVBApp().dataSource.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
         self.noteTrackIdList = MVBNoteTrackIdListModel(identifier: identifier)
         self.noteTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed.boolValue)

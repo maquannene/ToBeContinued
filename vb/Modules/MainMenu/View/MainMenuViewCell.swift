@@ -1,12 +1,12 @@
 //
-//  MVBMainMenuViewCell.swift
+//  MainMenuViewCell.swift
 //  vb
 //
 //  Created by 马权 on 11/8/15.
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-class MVBMainMenuViewCell: UITableViewCell {
+class MainMenuViewCell: UITableViewCell {
     
     lazy var bottomSeparateLine: CALayer = CALayer()
 
@@ -31,7 +31,7 @@ class MVBMainMenuViewCell: UITableViewCell {
 }
 
 //  MARK: Private
-extension MVBMainMenuViewCell {
+extension MainMenuViewCell {
     
     func baseConfigure() {
         bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
@@ -41,7 +41,7 @@ extension MVBMainMenuViewCell {
 }
 
 //  MARK: Public
-extension MVBMainMenuViewCell {
+extension MainMenuViewCell {
     
     func configure() {
         self.selectionStyle = .None

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MVBMainMenuViewController" customModule="vb" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainMenuViewController" customModule="vb" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="0vN-CH-dCv" id="GwX-WN-Gcf"/>
             </connections>
@@ -17,13 +16,12 @@
                 <action selector="backMainAction:" destination="-1" id="LPR-iw-Wya"/>
             </connections>
         </tapGestureRecognizer>
-        <view contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MVBMainMenuView" customModule="vb" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="0vN-CH-dCv" customClass="MainMenuView" customModule="vb" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xCb-pq-pGq" userLabel="headBackgroundImageView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                    <animations/>
                     <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="160" id="j4h-jh-Jz4"/>
@@ -34,7 +32,6 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Swb-IR-e8R" userLabel="headImageView">
                     <rect key="frame" x="130" y="40" width="60" height="60"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="1G8-Fm-ncW"/>
                         <constraint firstAttribute="width" secondItem="Swb-IR-e8R" secondAttribute="height" multiplier="1:1" id="A9o-tF-gL6"/>
@@ -42,21 +39,18 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="h7S-7C-ibK">
                     <rect key="frame" x="141" y="134" width="37.5" height="17"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wL-21-3T5">
                     <rect key="frame" x="139" y="110" width="42.5" height="19.5"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bk6-UW-1RN">
                     <rect key="frame" x="190" y="530" width="30" height="30"/>
-                    <animations/>
                     <state key="normal" title="退出"/>
                     <connections>
                         <action selector="logOutAction:" destination="-1" eventType="touchUpInside" id="Wry-dv-Azd"/>
@@ -64,7 +58,6 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cA3-lG-IT3">
                     <rect key="frame" x="8" y="530" width="30" height="30"/>
-                    <animations/>
                     <state key="normal" title="设置"/>
                     <connections>
                         <action selector="settingAction:" destination="-1" eventType="touchUpInside" id="56I-OR-DPA"/>
@@ -72,7 +65,6 @@
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Tq-MJ-dMC">
                     <rect key="frame" x="0.0" y="161" width="320" height="363"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="wJT-Ws-MKP"/>
@@ -80,7 +72,6 @@
                     </connections>
                 </tableView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="cA3-lG-IT3" secondAttribute="bottom" constant="8" id="1bq-ib-lCI"/>

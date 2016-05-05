@@ -9,22 +9,22 @@
 
 //  sina sdk
 
-struct MVBWeiboSDK {
+struct WeiboSDKInfo {
     static let AppKey = "1325571405"                                            //  key
     static let RedirectURL = "http://api.weibo.com/oauth2/default/html"         //  回调页
     
-    static let AutorizeInfo = "MVBWeiboSDKAutorizeInfo"                         //  认证信息key，保存了下面三项
-    static let UserIDKey = "MVBWeiboSDKUserIDKey"                               //  userID
-    static let AccessTokenKey = "MVBWeiboSDKAccessTokenKey"                     //  token
-    static let LogFromWeibo = "MVBWeiboSDKLogFromWeibo"                         //  微博登陆前缀
+    static let AutorizeInfo = "WeiboSDKInfoAutorizeInfo"                         //  认证信息key，保存了下面三项
+    static let UserIDKey = "WeiboSDKInfoUserIDKey"                               //  userID
+    static let AccessTokenKey = "WeiboSDKInfoAccessTokenKey"                     //  token
+    static let LogFromPrefix = "WeiboSDKInfoLogFromWeibo"                         //  微博登陆前缀
 }
 
 //  avoscloud sdk
-let MVBAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"
-let MVBAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
+let kAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"
+let kAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
 
 //  userInfoKey
-let MVBUserInfoKey = "MVBUserInfoKey"
+let kUserInfoKey = "MVBUserInfoKey"
 
 func getMainBundlePath() -> String? {
     return  NSBundle.mainBundle().bundlePath
