@@ -35,7 +35,7 @@ class MainMenuViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.ClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.ClassName)
+        mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.RealClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.RealClassName)
         UserInfoManange.shareInstance.getUserInfo(true) { [unowned self] (success, userModel) in
             if success && userModel != nil {
                 self.configure(userModel!)
@@ -186,7 +186,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(MainMenuViewCell.ClassName) as! MainMenuViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(MainMenuViewCell.RealClassName) as! MainMenuViewCell
         if indexPath.row == 0 {
             cell.textLabel?.text = "Note Track"
         }

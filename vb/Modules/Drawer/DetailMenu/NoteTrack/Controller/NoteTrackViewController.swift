@@ -16,8 +16,8 @@ import MQMaskController
 class N2oteTrackViewController: DetailBaseViewController {
     
     struct Static {
-        static let noteTrackCellId = NoteTrackCell.ClassName
-        static let noteTrackDetailCellId = NoteTrackDetailCell.ClassName
+        static let noteTrackCellId = NoteTrackCell.RealClassName
+        static let noteTrackDetailCellId = NoteTrackDetailCell.RealClassName
     }
     
     var dataSource: NoteTrackViewModel!

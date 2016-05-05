@@ -228,7 +228,7 @@ extension ImageTextTrackViewController: MQPictureBrowserControllerDataSource, MQ
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
     {
-        let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! ImageTextTrackDisplayCell
+        let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackDisplayCell.RealClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! ImageTextTrackDisplayCell
         imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! ImageTextTrackModel)
         return imageTextTrackDisplayCell
     }
@@ -285,7 +285,7 @@ extension ImageTextTrackViewController: UICollectionViewDelegate, ImageTextTrack
         vc.dataSource = self
         vc.delegate = self
         vc.cellGap = 10
-        vc.collectionView.registerNib(UINib(nibName: "ImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: ImageTextTrackDisplayCell.ClassName)
+        vc.collectionView.registerNib(UINib(nibName: "ImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: ImageTextTrackDisplayCell.RealClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
         vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(ImageTextTrackViewController.saveImage), forControlEvents: .TouchUpInside)
         imageTextTrackBrowserVc = vc
@@ -312,7 +312,7 @@ extension ImageTextTrackViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackCell.ClassName, forIndexPath: indexPath) as! ImageTextTrackCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackCell.RealClassName, forIndexPath: indexPath) as! ImageTextTrackCell
         cell.configureCell(dataSource.imageTextTrackList[indexPath.item] as! ImageTextTrackModel)
         cell.delegate = self
         return cell

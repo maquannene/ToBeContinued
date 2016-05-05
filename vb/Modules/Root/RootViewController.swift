@@ -25,7 +25,7 @@ class RootViewController: UIViewController {
         super.viewDidAppear(animated)
         let userInfoManage = UserInfoManange.shareInstance
         if userInfoManage.accessToken != nil && userInfoManage.userID != nil {
-            drawerVc = DrawerController()
+            drawerVc = DrawerController.drawerController()
             presentViewController(drawerVc!, animated: false) {
                 self.drawerVc!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
             }

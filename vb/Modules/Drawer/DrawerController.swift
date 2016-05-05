@@ -25,24 +25,18 @@ class DrawerController: MMDrawerController {
     //
     var settingVc: SettingViewController?
     
-    init() {
+    class func drawerController() -> DrawerController {
         let mainVc = MainMenuViewController()
         let homeVc = HomeViewController()
-        super.init(centerViewController: homeVc, leftDrawerViewController: mainVc, rightDrawerViewController: nil)
-        maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
-        openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        let drawerController = DrawerController(centerViewController: homeVc, leftDrawerViewController: mainVc, rightDrawerViewController: nil)
+        drawerController.mainVc = mainVc
+        drawerController.homeVc = homeVc
+        drawerController.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
+        drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
         //  全部特效除过PanningDrawerView
-        closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
-        
-        mainVc.delegate = self
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        drawerController.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
+        drawerController.mainVc?.delegate = drawerController
+        return drawerController
     }
     
 }

@@ -8,13 +8,21 @@
 
 public extension NSObject{
     
-//    //  类方法，类也是对象，这里的self 指的就是 这个类
-    public class var ClassName: String{
+    //  类方法，类也是对象，这里的self 指的就是 这个类
+    public class var RealClassName: String {
+        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+    }
+    
+    public class var ClassName: String {
         return NSStringFromClass(self)
     }
     
     //  实例方法
-    public var ClassName: String{
+    public var RealClassName: String {
+        return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+    }
+    
+    public var ClassName: String {
         return NSStringFromClass(self.dynamicType)
     }
     
