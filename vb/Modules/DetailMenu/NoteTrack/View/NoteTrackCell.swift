@@ -1,5 +1,5 @@
 //
-//  MVBNoteTrackCell.swift
+//  NoteTrackCell.swift
 //  vb
 //
 //  Created by 马权 on 6/19/15.
@@ -8,19 +8,19 @@
 
 import SWTableViewCell
 
-protocol MVBNoteTrackCellSlideGestureDelegate: NSObjectProtocol {
+protocol NoteTrackCellSlideGestureDelegate: NSObjectProtocol {
     func slideGestureRecognizerShouldReceiveTouch() -> NSNumber
 }
 
-class MVBNoteTrackCell: SWTableViewCell {
+class NoteTrackCell: SWTableViewCell {
 
-    weak var noteTrackModel: MVBNoteTrackModel?
+    weak var noteTrackModel: NoteTrackModel?
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     lazy var topSeparateLine: CALayer = CALayer()
     lazy var bottomSeparateLine: CALayer = CALayer()
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
-    weak var slideGestureDelegate: MVBNoteTrackCellSlideGestureDelegate?
+    weak var slideGestureDelegate: NoteTrackCellSlideGestureDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -49,9 +49,9 @@ class MVBNoteTrackCell: SWTableViewCell {
 }
 
 // MARK: Public
-extension MVBNoteTrackCell {
+extension NoteTrackCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel!) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: NoteTrackModel!) -> Void {
         self.noteTrackModel = noteTrackModel
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
@@ -63,7 +63,7 @@ extension MVBNoteTrackCell {
 }
 
 // MARK: Private
-extension MVBNoteTrackCell {
+extension NoteTrackCell {
     
     private func baseConfigure() {
         topSeparateLine.backgroundColor = UIColor.grayColor().CGColor

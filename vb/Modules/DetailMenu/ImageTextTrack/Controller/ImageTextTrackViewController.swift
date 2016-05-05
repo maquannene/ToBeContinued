@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackViewController.swift
+//  ImageTextTrackViewController.swift
 //  vb
 //
 //  Created by 马权 on 9/25/15.
@@ -15,9 +15,9 @@ import Photos
 import SVProgressHUD
 import MQImageDownloadGroup
 
-class MVBImageTextTrackViewController: UIViewController {
+class ImageTextTrackViewController: UIViewController {
     
-    var dataSource: MVBImageTextTrackViewModel!
+    var dataSource: ImageTextTrackViewModel!
     weak var imageTextTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
     var willShowClosure: (Void -> Void)?
@@ -30,13 +30,13 @@ class MVBImageTextTrackViewController: UIViewController {
     @IBOutlet weak var imageTextTrackCollectionView: UICollectionView! {
         didSet {
             configurePullToRefresh()
-            let group = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackCell")
+            let group = MQImageDownloadGroup(groupIdentifier: "ImageTextTrackCell")
             group.maxConcurrentDownloads = 10
             MQImageDownloadGroupManage.shareInstance().addGroup(group)
         }
     }
     
-    @IBOutlet weak var layout: MVBImageTextTrackLayout! {
+    @IBOutlet weak var layout: ImageTextTrackLayout! {
         didSet {
             layout.delegate = self
             layout.numberOfColumns = 2
@@ -66,7 +66,7 @@ class MVBImageTextTrackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = MVBImageTextTrackViewModel()
+        dataSource = ImageTextTrackViewModel()
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
         imageTextTrackCollectionView.mj_header.beginRefreshing()
     }
@@ -86,7 +86,7 @@ class MVBImageTextTrackViewController: UIViewController {
 }
 
 //  MARK: Private
-extension MVBImageTextTrackViewController {
+extension ImageTextTrackViewController {
     
     //  配置下拉刷新
     func configurePullToRefresh()
@@ -117,14 +117,14 @@ extension MVBImageTextTrackViewController {
 }
 
 //  MARK: Action
-extension MVBImageTextTrackViewController {
+extension ImageTextTrackViewController {
     
     @IBAction func addImageTextTrackAction(sender: AnyObject!)
     {
-        let addMenuView = NSBundle.mainBundle().loadNibNamed("MVBImageTextTrack", owner: nil, options: nil)[0] as! MVBImageTextTrackAddMenuView
+        let addMenuView = NSBundle.mainBundle().loadNibNamed("ImageTextTrack", owner: nil, options: nil)[0] as! ImageTextTrackAddMenuView
         addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
-        addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.addFromPictureAlbumButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        addMenuView.fromCameraButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.addFromCameraButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(ImageTextTrackViewController.addFromPictureAlbumButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        addMenuView.fromCameraButton.addTarget(self, action: #selector(ImageTextTrackViewController.addFromCameraButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
         addMenuMaskVC!.showWithAnimated(true, completion: nil)
     }
@@ -151,9 +151,9 @@ extension MVBImageTextTrackViewController {
     {
         print(imageTextTrackBrowserVc!.collectionView.indexPathsForVisibleItems())
         let indexPath = imageTextTrackBrowserVc!.collectionView.indexPathsForVisibleItems()[0]
-        guard let cell = imageTextTrackBrowserVc!.collectionView.cellForItemAtIndexPath(indexPath) as? MVBImageTextTrackDisplayCell else { return }
+        guard let cell = imageTextTrackBrowserVc!.collectionView.cellForItemAtIndexPath(indexPath) as? ImageTextTrackDisplayCell else { return }
         guard let image = cell.imageView.image else { return }
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(MVBImageTextTrackViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(ImageTextTrackViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject)
@@ -168,7 +168,7 @@ extension MVBImageTextTrackViewController {
 }
 
 //  MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
-extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ImageTextTrackViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
@@ -203,11 +203,11 @@ extension MVBImageTextTrackViewController: UIImagePickerControllerDelegate, UINa
 }
 
 //  MARK: MQPictureBrowserControllerDataSource MQPictureBrowserControllerDelegate
-extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource, MQPictureBrowserControllerDelegate {
+extension ImageTextTrackViewController: MQPictureBrowserControllerDataSource, MQPictureBrowserControllerDelegate {
     
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo?
     {
-        if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
+        if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! ImageTextTrackCell? {
             return (cell.imageView, cell)
         }
         return nil
@@ -215,7 +215,7 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     
     func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo?
     {
-        if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackCell? {
+        if let cell = imageTextTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! ImageTextTrackCell? {
             return (cell.imageView, cell)
         }
         return nil
@@ -228,8 +228,8 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
     {
-        let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! MVBImageTextTrackDisplayCell
-        imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! MVBImageTextTrackModel)
+        let imageTextTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackDisplayCell.ClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! ImageTextTrackDisplayCell
+        imageTextTrackDisplayCell.configurePictureCell(dataSource.imageTextTrackList[index] as! ImageTextTrackModel)
         return imageTextTrackDisplayCell
     }
     
@@ -244,13 +244,13 @@ extension MVBImageTextTrackViewController: MQPictureBrowserControllerDataSource,
 //    }
 }
 
-//  MARK: MVBImageTextTrackLayoutDelegate
-extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
+//  MARK: ImageTextTrackLayoutDelegate
+extension ImageTextTrackViewController: ImageTextTrackLayoutDelegate {
     
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
     {
         print(indexPath.item)
-        let imageTextTrack = dataSource.imageTextTrackList[indexPath.item] as! MVBImageTextTrackModel
+        let imageTextTrack = dataSource.imageTextTrackList[indexPath.item] as! ImageTextTrackModel
         let imageWidht = cellWidth - 10 //  转成imageWidth进行计算
         let boundingRect = CGRect(x: 0, y: 0, width: imageWidht, height: CGFloat(MAXFLOAT))
         let imageRect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTextTrack.imageWidht.doubleValue, height:imageTextTrack.imageHeight.doubleValue), boundingRect)
@@ -261,9 +261,9 @@ extension MVBImageTextTrackViewController: MVBImageTextTrackLayoutDelegate {
 }
 
 //  MARK: UICollectionViewDelegate
-extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTextTrackCellDelegate {
+extension ImageTextTrackViewController: UICollectionViewDelegate, ImageTextTrackCellDelegate {
 
-    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell, gesture: UIGestureRecognizer)
+    func imageTextTrackCellDidLongPress(imageTextTrackCell: ImageTextTrackCell, gesture: UIGestureRecognizer)
     {
         let index = imageTextTrackCollectionView.indexPathForItemAtPoint(gesture.locationInView(imageTextTrackCollectionView))!.item
         let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.Default) { [unowned self] (action) -> Void in
@@ -285,12 +285,12 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
         vc.dataSource = self
         vc.delegate = self
         vc.cellGap = 10
-        vc.collectionView.registerNib(UINib(nibName: "MVBImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: MVBImageTextTrackDisplayCell.ClassName)
+        vc.collectionView.registerNib(UINib(nibName: "ImageTextTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: ImageTextTrackDisplayCell.ClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
-        vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(MVBImageTextTrackViewController.saveImage), forControlEvents: .TouchUpInside)
+        vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(ImageTextTrackViewController.saveImage), forControlEvents: .TouchUpInside)
         imageTextTrackBrowserVc = vc
         
-        let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "MVBImageTextTrackDisplayCell")
+        let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "ImageTextTrackDisplayCell")
         pictureDownloadGroup.maxConcurrentDownloads = 10
         MQImageDownloadGroupManage.shareInstance().addGroup(pictureDownloadGroup)
         
@@ -303,7 +303,7 @@ extension MVBImageTextTrackViewController: UICollectionViewDelegate, MVBImageTex
 }
 
 //  MARK: UICollectionViewDataSource
-extension MVBImageTextTrackViewController: UICollectionViewDataSource {
+extension ImageTextTrackViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -312,8 +312,8 @@ extension MVBImageTextTrackViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MVBImageTextTrackCell.ClassName, forIndexPath: indexPath) as! MVBImageTextTrackCell
-        cell.configureCell(dataSource.imageTextTrackList[indexPath.item] as! MVBImageTextTrackModel)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageTextTrackCell.ClassName, forIndexPath: indexPath) as! ImageTextTrackCell
+        cell.configureCell(dataSource.imageTextTrackList[indexPath.item] as! ImageTextTrackModel)
         cell.delegate = self
         return cell
     }

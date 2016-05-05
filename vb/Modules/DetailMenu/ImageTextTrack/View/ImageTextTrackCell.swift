@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackCell.swift
+//  ImageTextTrackCell.swift
 //  vb
 //
 //  Created by 马权 on 9/25/15.
@@ -8,14 +8,14 @@
 
 import SDWebImage
 
-protocol MVBImageTextTrackCellDelegate: NSObjectProtocol {
-    func imageTextTrackCellDidLongPress(imageTextTrackCell: MVBImageTextTrackCell, gesture: UIGestureRecognizer) -> Void
+protocol ImageTextTrackCellDelegate: NSObjectProtocol {
+    func imageTextTrackCellDidLongPress(imageTextTrackCell: ImageTextTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
-class MVBImageTextTrackCell: UICollectionViewCell {
+class ImageTextTrackCell: UICollectionViewCell {
     
-    weak var delegate: MVBImageTextTrackCellDelegate?
-    weak var imageTextTrack: MVBImageTextTrackModel?
+    weak var delegate: ImageTextTrackCellDelegate?
+    weak var imageTextTrack: ImageTextTrackModel?
     var longPressGesture: UILongPressGestureRecognizer!
     @IBOutlet weak var longImageIcon: UILabel!
     @IBOutlet weak var textLabel: UILabel!
@@ -37,13 +37,13 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MVBImageTextTrackCell.longpressAction(_:)))
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ImageTextTrackCell.longpressAction(_:)))
         addGestureRecognizer(longPressGesture)
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         super.applyLayoutAttributes(layoutAttributes)
-        let attributes = layoutAttributes as! MVBImageTextTrackLayoutAttributes
+        let attributes = layoutAttributes as! ImageTextTrackLayoutAttributes
         longImageIcon.hidden = !attributes.longImage
     }
     
@@ -58,9 +58,9 @@ class MVBImageTextTrackCell: UICollectionViewCell {
 }
 
 //  MARK: Public
-extension MVBImageTextTrackCell {
+extension ImageTextTrackCell {
     
-    func configureCell(imageTextTrack: MVBImageTextTrackModel!) -> Void {
+    func configureCell(imageTextTrack: ImageTextTrackModel!) -> Void {
         
         self.imageTextTrack = imageTextTrack
         

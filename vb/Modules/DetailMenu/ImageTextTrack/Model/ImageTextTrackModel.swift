@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackModel.swift
+//  ImageTextTrackModel.swift
 //  vb
 //
 //  Created by 马权 on 9/25/15.
@@ -8,7 +8,7 @@
 
 import AVOSCloud
 
-class MVBImageTextTrackModel: AVObject {
+class ImageTextTrackModel: AVObject {
     
     @NSManaged var thumbImageFileUrl: String!               //  瀑布流使用的略缩图
     @NSManaged var largeImageFileUrl: String!               //  点开看的大图
@@ -68,8 +68,8 @@ class MVBImageTextTrackModel: AVObject {
     
 }
 
-extension MVBImageTextTrackModel: AVSubclassing {
+extension ImageTextTrackModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBImageTextTrackModel"
+        return "ImageTextTrackModel"
     }
 }

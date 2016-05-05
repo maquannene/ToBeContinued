@@ -1,5 +1,5 @@
 //
-//  MVBAppDelegate.swift
+//  AppDelegate.swift
 //  vb
 //
 //  Created by 马权 on 5/16/15.
@@ -9,19 +9,15 @@
 import AVOSCloud
 
 @UIApplicationMain
-class MVBAppDelegate: UIResponder {
+class AppDelegate: UIResponder {
 
     var window: UIWindow?
     
     var rootVc: RootViewController!
-
-    class func MVBApp() -> MVBAppDelegate! {
-        return UIApplication.sharedApplication().delegate as! MVBAppDelegate
-    }
     
 }
 
-extension MVBAppDelegate: UIApplicationDelegate {
+extension AppDelegate: UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -58,23 +54,23 @@ extension MVBAppDelegate: UIApplicationDelegate {
 }
 
 // MARK: Private
-extension MVBAppDelegate {
+extension AppDelegate {
     
     private func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(WeiboSDKInfo.AppKey)
         //  AVOSCloud sdk
-        MVBNoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
-        MVBNoteTrackModel.registerSubclass()
-        MVBImageTextTrackIdListModel.registerSubclass()
-        MVBImageTextTrackModel.registerSubclass()
+        NoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
+        NoteTrackModel.registerSubclass()
+        ImageTextTrackIdListModel.registerSubclass()
+        ImageTextTrackModel.registerSubclass()
         AVOSCloud.setApplicationId(kAVCloudSDKAppID, clientKey: kAVCloudSDKAppKey)
     }
     
 }
 
-//extension MVBAppDelegate {
+//extension AppDelegate {
 //    func test() {
 ////        var requestOperate: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 ////        var param: [String: String] = ["key": "5E09D57E6D09BE20A1DF727134A89871", "language": "zh"]
@@ -102,18 +98,10 @@ extension MVBAppDelegate {
 //    }
 //}
 
-extension MVBAppDelegate {
+extension AppDelegate {
     
     func test() {
-//        let x = MVBPasswordRecordCell.self
-//        let classString = NSStringFromClass(MVBPasswordRecordCell)
-//        let anyobjectype : AnyObject.Type = NSClassFromString(classString)!
-//        let nsobjectype : NSObject.Type = anyobjectype as! NSObject.Type
-//        let rec: AnyObject = nsobjectype.init()
-//        print(rec)
-//        
-//        let y = self.ClassName
-//        let z = MVBPasswordRecordCell.ClassName
+
     }
     
 }

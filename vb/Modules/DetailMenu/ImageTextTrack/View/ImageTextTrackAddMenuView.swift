@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackAddMenuView.swift
+//  ImageTextTrackAddMenuView.swift
 //  vb
 //
 //  Created by 马权 on 10/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MVBImageTextTrackAddMenuView: UIView {
+class ImageTextTrackAddMenuView: UIView {
 
     @IBOutlet weak var fromPictureAlbumButton: UIButton! {
         didSet {

@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackDisplayCell.swift
+//  ImageTextTrackDisplayCell.swift
 //  vb
 //
 //  Created by 马权 on 10/8/15.
@@ -9,9 +9,9 @@
 import SDWebImage
 import MQImageDownloadGroup
 
-class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
+class ImageTextTrackDisplayCell: MQPictureBrowserCell {
 
-    weak var imageTextTrack: MVBImageTextTrackModel?
+    weak var imageTextTrack: ImageTextTrackModel?
     
     @IBOutlet weak var progressView: UIProgressView! {
         didSet {
@@ -44,7 +44,7 @@ class MVBImageTextTrackDisplayCell: MQPictureBrowserCell {
         progressView.frame = CGRect(x: 20, y: layoutAttributes.frame.height / 2, width: layoutAttributes.frame.width - 40, height: 20)
     }
     
-    func configurePictureCell(imageTextTrack: MVBImageTextTrackModel!) {
+    func configurePictureCell(imageTextTrack: ImageTextTrackModel!) {
         self.imageTextTrack = imageTextTrack
         
         let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTextTrack.thumbImageFileUrl)

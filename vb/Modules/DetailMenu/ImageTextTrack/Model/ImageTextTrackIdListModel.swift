@@ -1,5 +1,5 @@
 //
-//  MVBImageTextTrackIdListModel.swift
+//  ImageTextTrackIdListModel.swift
 //  vb
 //
 //  Created by 马权 on 9/26/15.
@@ -10,7 +10,7 @@ import AVOSCloud
 
 //  记录着所有 图文迹 的list 类。通过每个用户的唯一kIdentifier来查找
 
-class MVBImageTextTrackIdListModel: AVObject {
+class ImageTextTrackIdListModel: AVObject {
     
     @NSManaged var identifier: String!
     @NSManaged var list: NSMutableArray!
@@ -23,8 +23,8 @@ class MVBImageTextTrackIdListModel: AVObject {
     }
 }
 
-extension MVBImageTextTrackIdListModel: AVSubclassing {
+extension ImageTextTrackIdListModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBImageTextTrackIdListModel"
+        return "ImageTextTrackIdListModel"
     }
 }

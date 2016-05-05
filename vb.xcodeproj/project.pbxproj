@@ -21,44 +21,44 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
-		D418AD441BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D418AD431BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift */; };
-		D418AD471BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D418AD461BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift */; };
+		D418AD441BE0D70C00338CC2 /* NoteTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D418AD431BE0D70C00338CC2 /* NoteTrackViewModel.swift */; };
+		D418AD471BE0D72D00338CC2 /* ImageTextTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D418AD461BE0D72D00338CC2 /* ImageTextTrackViewModel.swift */; };
 		D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C7FFF1B1BEF2600987D42 /* MQButton.swift */; };
 		D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */; };
 		D42E74311CDA1A290050A9EC /* UserInfoManange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42E74301CDA1A290050A9EC /* UserInfoManange.swift */; };
 		D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D441578A1B3E4B35004ECC7E /* MQMaskController.podspec */; };
 		D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44A6B141B2886A7003C4834 /* AppMacroObjc.m */; };
 		D45E89841B36CD1500AFF9F8 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* LogInViewController.swift */; };
-		D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */; };
-		D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */; };
+		D4786FBE1BC95FAA0043DCBF /* ImageTextTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4786FBD1BC95FAA0043DCBF /* ImageTextTrackAddMenuView.swift */; };
+		D4786FC01BC95FD00043DCBF /* ImageTextTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4786FBF1BC95FCF0043DCBF /* ImageTextTrack.xib */; };
 		D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */; };
-		D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */; };
-		D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */; };
-		D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */; };
-		D48982E01BB535A600A3D881 /* MVBImageTextTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */; };
-		D48982E21BB5391800A3D881 /* MVBImageTextTrackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */; };
-		D48982E41BB53B4A00A3D881 /* MVBImageTextTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982E31BB53B4A00A3D881 /* MVBImageTextTrackModel.swift */; };
+		D488BF051B28685A0050C2E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* AppDelegate.swift */; };
+		D48982DA1BB532BE00A3D881 /* ImageTextTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982D71BB532BE00A3D881 /* ImageTextTrackViewController.swift */; };
+		D48982DE1BB5348C00A3D881 /* ImageTextTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D48982DD1BB5348C00A3D881 /* ImageTextTrack.storyboard */; };
+		D48982E01BB535A600A3D881 /* ImageTextTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982DF1BB535A600A3D881 /* ImageTextTrackCell.swift */; };
+		D48982E21BB5391800A3D881 /* ImageTextTrackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982E11BB5391800A3D881 /* ImageTextTrackLayout.swift */; };
+		D48982E41BB53B4A00A3D881 /* ImageTextTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48982E31BB53B4A00A3D881 /* ImageTextTrackModel.swift */; };
 		D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4121DEC1B07184400612CA3 /* LaunchScreen.xib */; };
 		D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4121DE71B07184400612CA3 /* Main.storyboard */; };
-		D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */; };
+		D4B209D31BE0FAC600E15434 /* ImageTextTrackDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B209D21BE0FAC600E15434 /* ImageTextTrackDisplayCell.xib */; };
 		D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B679B81BB4ED3D002E7B32 /* UIWindow_Extension.swift */; };
 		D4B679BB1BB4EDC1002E7B32 /* UIScreen_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B679BA1BB4EDC1002E7B32 /* UIScreen_Extension.swift */; };
 		D4B712F31BAFC6D200166806 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F21BAFC6D200166806 /* AVOSCloud.framework */; };
 		D4B712F51BAFC72900166806 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F41BAFC72900166806 /* libsqlite3.tbd */; };
 		D4B712F71BAFC77200166806 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F61BAFC77200166806 /* libicucore.tbd */; };
-		D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1031BC8A1490053966A /* MVBNoteTrack.storyboard */; };
-		D4BDF1121BC8A1490053966A /* MVBNoteTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1041BC8A1490053966A /* MVBNoteTrackViewController.swift */; };
-		D4BDF1131BC8A1490053966A /* MVBNoteTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1061BC8A1490053966A /* MVBNoteTrackIdListModel.swift */; };
-		D4BDF1151BC8A1490053966A /* MVBNoteTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1081BC8A1490053966A /* MVBNoteTrackModel.swift */; };
-		D4BDF1161BC8A1490053966A /* MVBNewNoteTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10A1BC8A1490053966A /* MVBNewNoteTrackView.swift */; };
-		D4BDF1171BC8A1490053966A /* MVBNewNoteTrackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF10B1BC8A1490053966A /* MVBNewNoteTrackView.xib */; };
-		D4BDF1181BC8A1490053966A /* MVBNoteTrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10C1BC8A1490053966A /* MVBNoteTrackDetailView.swift */; };
-		D4BDF1191BC8A1490053966A /* MVBNoteTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10D1BC8A1490053966A /* MVBNoteTrackCell.swift */; };
-		D4BDF11A1BC8A1490053966A /* MVBNoteTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */; };
-		D4BDF11B1BC8A1490053966A /* MVBNoteTrackDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */; };
-		D4BDF11C1BC8A1490053966A /* MVBNoteTrackDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */; };
+		D4BDF1111BC8A1490053966A /* NoteTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1031BC8A1490053966A /* NoteTrack.storyboard */; };
+		D4BDF1121BC8A1490053966A /* NoteTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1041BC8A1490053966A /* NoteTrackViewController.swift */; };
+		D4BDF1131BC8A1490053966A /* NoteTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1061BC8A1490053966A /* NoteTrackIdListModel.swift */; };
+		D4BDF1151BC8A1490053966A /* NoteTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1081BC8A1490053966A /* NoteTrackModel.swift */; };
+		D4BDF1161BC8A1490053966A /* NewNoteTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10A1BC8A1490053966A /* NewNoteTrackView.swift */; };
+		D4BDF1171BC8A1490053966A /* NewNoteTrackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF10B1BC8A1490053966A /* NewNoteTrackView.xib */; };
+		D4BDF1181BC8A1490053966A /* NoteTrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10C1BC8A1490053966A /* NoteTrackDetailView.swift */; };
+		D4BDF1191BC8A1490053966A /* NoteTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10D1BC8A1490053966A /* NoteTrackCell.swift */; };
+		D4BDF11A1BC8A1490053966A /* NoteTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF10E1BC8A1490053966A /* NoteTrackCell.xib */; };
+		D4BDF11B1BC8A1490053966A /* NoteTrackDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF10F1BC8A1490053966A /* NoteTrackDetailCell.swift */; };
+		D4BDF11C1BC8A1490053966A /* NoteTrackDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1101BC8A1490053966A /* NoteTrackDetailCell.xib */; };
 		D4BDF1241BC8E6260053966A /* MainMenuViewControllerOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF11E1BC8E6260053966A /* MainMenuViewControllerOperate.swift */; };
-		D4BDF1251BC8E6260053966A /* MVBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1201BC8E6260053966A /* MVBUserModel.swift */; };
+		D4BDF1251BC8E6260053966A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1201BC8E6260053966A /* UserModel.swift */; };
 		D4BDF1261BC8E6260053966A /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BDF1221BC8E6260053966A /* MainMenuView.swift */; };
 		D4BDF1271BC8E6260053966A /* MainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4BDF1231BC8E6260053966A /* MainMenuView.xib */; };
 		D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5B5B41CD9D88E00C8E7CB /* RootViewController.swift */; };
@@ -66,18 +66,18 @@
 		D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E17B4B1B286A7F00228B4A /* Images.xcassets */; };
 		D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E17B4D1B286BC100228B4A /* AppMacro.swift */; };
 		D4E48EBF1BB6388F0042FC74 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */; };
-		D4E48EC51BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E48EC41BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift */; };
+		D4E48EC51BB63F070042FC74 /* ImageTextTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E48EC41BB63F070042FC74 /* ImageTextTrackIdListModel.swift */; };
 		D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E903321BB1514000D5907D /* UILabel_Extension.swift */; };
 		D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */; };
 		D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */; };
 		D4F01F8C1BEEF0970057CCEE /* MainMenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F8B1BEEF0970057CCEE /* MainMenuViewCell.swift */; };
 		D4F01F8E1BEEF7D00057CCEE /* MainMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F8D1BEEF7D00057CCEE /* MainMenuViewCell.xib */; };
-		D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */; };
-		D4F01F931BEF26AC0057CCEE /* MVBHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */; };
-		D4F01F971BEF2FE40057CCEE /* MVBSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */; };
-		D4F01F9A1BEF31E00057CCEE /* MVBSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */; };
+		D4F01F901BEF26A20057CCEE /* DetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F8F1BEF26A20057CCEE /* DetailBaseViewController.swift */; };
+		D4F01F931BEF26AC0057CCEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F921BEF26AC0057CCEE /* HomeViewController.swift */; };
+		D4F01F971BEF2FE40057CCEE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01F951BEF2FE40057CCEE /* SettingViewController.swift */; };
+		D4F01F9A1BEF31E00057CCEE /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F01F991BEF31E00057CCEE /* Setting.storyboard */; };
 		D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */; };
-		D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */; };
+		D4F36EAA1BC6BFC6006DCF94 /* ImageTextTrackDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EA91BC6BFC6006DCF94 /* ImageTextTrackDisplayCell.swift */; };
 		D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */; };
 		D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */; };
 /* End PBXBuildFile section */
@@ -121,8 +121,8 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D418AD431BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackViewModel.swift; sourceTree = "<group>"; };
-		D418AD461BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackViewModel.swift; sourceTree = "<group>"; };
+		D418AD431BE0D70C00338CC2 /* NoteTrackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackViewModel.swift; sourceTree = "<group>"; };
+		D418AD461BE0D72D00338CC2 /* ImageTextTrackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackViewModel.swift; sourceTree = "<group>"; };
 		D41C7FFF1B1BEF2600987D42 /* MQButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQButton.swift; sourceTree = "<group>"; };
 		D41C80001B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D41C80011B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
@@ -133,35 +133,35 @@
 		D45E89721B36CD1500AFF9F8 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D46EFAFE1BA5CF3200DB73BE /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
-		D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackAddMenuView.swift; sourceTree = "<group>"; };
-		D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrack.xib; sourceTree = "<group>"; };
+		D4786FBD1BC95FAA0043DCBF /* ImageTextTrackAddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackAddMenuView.swift; sourceTree = "<group>"; };
+		D4786FBF1BC95FCF0043DCBF /* ImageTextTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTextTrack.xib; sourceTree = "<group>"; };
 		D47E024B1BEF411700E34F23 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
-		D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBAppDelegate.swift; sourceTree = "<group>"; };
-		D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackViewController.swift; sourceTree = "<group>"; };
-		D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBImageTextTrack.storyboard; sourceTree = "<group>"; };
-		D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackCell.swift; sourceTree = "<group>"; };
-		D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackLayout.swift; sourceTree = "<group>"; };
-		D48982E31BB53B4A00A3D881 /* MVBImageTextTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackModel.swift; sourceTree = "<group>"; };
-		D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBImageTextTrackDisplayCell.xib; sourceTree = "<group>"; };
+		D488BF041B28685A0050C2E2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D48982D71BB532BE00A3D881 /* ImageTextTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackViewController.swift; sourceTree = "<group>"; };
+		D48982DD1BB5348C00A3D881 /* ImageTextTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageTextTrack.storyboard; sourceTree = "<group>"; };
+		D48982DF1BB535A600A3D881 /* ImageTextTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackCell.swift; sourceTree = "<group>"; };
+		D48982E11BB5391800A3D881 /* ImageTextTrackLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackLayout.swift; sourceTree = "<group>"; };
+		D48982E31BB53B4A00A3D881 /* ImageTextTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackModel.swift; sourceTree = "<group>"; };
+		D4B209D21BE0FAC600E15434 /* ImageTextTrackDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTextTrackDisplayCell.xib; sourceTree = "<group>"; };
 		D4B679B81BB4ED3D002E7B32 /* UIWindow_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindow_Extension.swift; sourceTree = "<group>"; };
 		D4B679BA1BB4EDC1002E7B32 /* UIScreen_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScreen_Extension.swift; sourceTree = "<group>"; };
 		D4B712F21BAFC6D200166806 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		D4B712F41BAFC72900166806 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D4B712F61BAFC77200166806 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		D4BDF1031BC8A1490053966A /* MVBNoteTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBNoteTrack.storyboard; sourceTree = "<group>"; };
-		D4BDF1041BC8A1490053966A /* MVBNoteTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackViewController.swift; sourceTree = "<group>"; };
-		D4BDF1061BC8A1490053966A /* MVBNoteTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackIdListModel.swift; sourceTree = "<group>"; };
-		D4BDF1081BC8A1490053966A /* MVBNoteTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackModel.swift; sourceTree = "<group>"; };
-		D4BDF10A1BC8A1490053966A /* MVBNewNoteTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNewNoteTrackView.swift; sourceTree = "<group>"; };
-		D4BDF10B1BC8A1490053966A /* MVBNewNoteTrackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBNewNoteTrackView.xib; sourceTree = "<group>"; };
-		D4BDF10C1BC8A1490053966A /* MVBNoteTrackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackDetailView.swift; sourceTree = "<group>"; };
-		D4BDF10D1BC8A1490053966A /* MVBNoteTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackCell.swift; sourceTree = "<group>"; };
-		D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBNoteTrackCell.xib; sourceTree = "<group>"; };
-		D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBNoteTrackDetailCell.swift; sourceTree = "<group>"; };
-		D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVBNoteTrackDetailCell.xib; sourceTree = "<group>"; };
+		D4BDF1031BC8A1490053966A /* NoteTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NoteTrack.storyboard; sourceTree = "<group>"; };
+		D4BDF1041BC8A1490053966A /* NoteTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackViewController.swift; sourceTree = "<group>"; };
+		D4BDF1061BC8A1490053966A /* NoteTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListModel.swift; sourceTree = "<group>"; };
+		D4BDF1081BC8A1490053966A /* NoteTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackModel.swift; sourceTree = "<group>"; };
+		D4BDF10A1BC8A1490053966A /* NewNoteTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewNoteTrackView.swift; sourceTree = "<group>"; };
+		D4BDF10B1BC8A1490053966A /* NewNoteTrackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteTrackView.xib; sourceTree = "<group>"; };
+		D4BDF10C1BC8A1490053966A /* NoteTrackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackDetailView.swift; sourceTree = "<group>"; };
+		D4BDF10D1BC8A1490053966A /* NoteTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackCell.swift; sourceTree = "<group>"; };
+		D4BDF10E1BC8A1490053966A /* NoteTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteTrackCell.xib; sourceTree = "<group>"; };
+		D4BDF10F1BC8A1490053966A /* NoteTrackDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackDetailCell.swift; sourceTree = "<group>"; };
+		D4BDF1101BC8A1490053966A /* NoteTrackDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteTrackDetailCell.xib; sourceTree = "<group>"; };
 		D4BDF11E1BC8E6260053966A /* MainMenuViewControllerOperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewControllerOperate.swift; sourceTree = "<group>"; };
-		D4BDF1201BC8E6260053966A /* MVBUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBUserModel.swift; sourceTree = "<group>"; };
+		D4BDF1201BC8E6260053966A /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D4BDF1221BC8E6260053966A /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		D4BDF1231BC8E6260053966A /* MainMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuView.xib; sourceTree = "<group>"; };
 		D4C5B5B41CD9D88E00C8E7CB /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -169,18 +169,18 @@
 		D4E17B4B1B286A7F00228B4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4E17B4D1B286BC100228B4A /* AppMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMacro.swift; sourceTree = "<group>"; };
 		D4E48EBE1BB6388F0042FC74 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
-		D4E48EC41BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackIdListModel.swift; sourceTree = "<group>"; };
+		D4E48EC41BB63F070042FC74 /* ImageTextTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackIdListModel.swift; sourceTree = "<group>"; };
 		D4E903321BB1514000D5907D /* UILabel_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel_Extension.swift; sourceTree = "<group>"; };
 		D4F01F4D1BE751730057CCEE /* MQPictureBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserView.swift; sourceTree = "<group>"; };
 		D4F01F4F1BE7530D0057CCEE /* MQPictureBrowserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MQPictureBrowserView.xib; sourceTree = "<group>"; };
 		D4F01F8B1BEEF0970057CCEE /* MainMenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewCell.swift; sourceTree = "<group>"; };
 		D4F01F8D1BEEF7D00057CCEE /* MainMenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewCell.xib; sourceTree = "<group>"; };
-		D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBDetailBaseViewController.swift; sourceTree = "<group>"; };
-		D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBHomeViewController.swift; sourceTree = "<group>"; };
-		D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBSettingViewController.swift; sourceTree = "<group>"; };
-		D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MVBSetting.storyboard; sourceTree = "<group>"; };
+		D4F01F8F1BEF26A20057CCEE /* DetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBaseViewController.swift; sourceTree = "<group>"; };
+		D4F01F921BEF26AC0057CCEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D4F01F951BEF2FE40057CCEE /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D4F01F991BEF31E00057CCEE /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		D4F36E651BC66CCF006DCF94 /* MQPictureBrowser.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MQPictureBrowser.podspec; sourceTree = "<group>"; };
-		D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVBImageTextTrackDisplayCell.swift; sourceTree = "<group>"; };
+		D4F36EA91BC6BFC6006DCF94 /* ImageTextTrackDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackDisplayCell.swift; sourceTree = "<group>"; };
 		D4F36EAC1BC6C227006DCF94 /* MQPictureBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserCell.swift; sourceTree = "<group>"; };
 		D4F36EAD1BC6C227006DCF94 /* MQPictureBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureBrowserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -305,7 +305,7 @@
 		D418AD421BE0D70C00338CC2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D418AD431BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift */,
+				D418AD431BE0D70C00338CC2 /* NoteTrackViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -313,7 +313,7 @@
 		D418AD451BE0D72D00338CC2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D418AD461BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift */,
+				D418AD461BE0D72D00338CC2 /* ImageTextTrackViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 		D45E89911B3700B300AFF9F8 /* DetailMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D4F01F8F1BEF26A20057CCEE /* MVBDetailBaseViewController.swift */,
+				D4F01F8F1BEF26A20057CCEE /* DetailBaseViewController.swift */,
 				D4F01F911BEF26AC0057CCEE /* Home */,
 				D4BDF1011BC8A1490053966A /* NoteTrack */,
 				D48982D31BB5324900A3D881 /* ImageTextTrack */,
@@ -421,7 +421,7 @@
 		D488BF031B28685A0050C2E2 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				D488BF041B28685A0050C2E2 /* MVBAppDelegate.swift */,
+				D488BF041B28685A0050C2E2 /* AppDelegate.swift */,
 				D42E74301CDA1A290050A9EC /* UserInfoManange.swift */,
 			);
 			path = AppDelegate;
@@ -451,8 +451,8 @@
 		D48982D61BB532BE00A3D881 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D48982D71BB532BE00A3D881 /* MVBImageTextTrackViewController.swift */,
-				D48982DD1BB5348C00A3D881 /* MVBImageTextTrack.storyboard */,
+				D48982D71BB532BE00A3D881 /* ImageTextTrackViewController.swift */,
+				D48982DD1BB5348C00A3D881 /* ImageTextTrack.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,8 +460,8 @@
 		D48982D81BB532BE00A3D881 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D48982E31BB53B4A00A3D881 /* MVBImageTextTrackModel.swift */,
-				D4E48EC41BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift */,
+				D48982E31BB53B4A00A3D881 /* ImageTextTrackModel.swift */,
+				D4E48EC41BB63F070042FC74 /* ImageTextTrackIdListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -469,12 +469,12 @@
 		D48982D91BB532BE00A3D881 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D48982DF1BB535A600A3D881 /* MVBImageTextTrackCell.swift */,
-				D48982E11BB5391800A3D881 /* MVBImageTextTrackLayout.swift */,
-				D4F36EA91BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift */,
-				D4B209D21BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib */,
-				D4786FBD1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift */,
-				D4786FBF1BC95FCF0043DCBF /* MVBImageTextTrack.xib */,
+				D48982DF1BB535A600A3D881 /* ImageTextTrackCell.swift */,
+				D48982E11BB5391800A3D881 /* ImageTextTrackLayout.swift */,
+				D4F36EA91BC6BFC6006DCF94 /* ImageTextTrackDisplayCell.swift */,
+				D4B209D21BE0FAC600E15434 /* ImageTextTrackDisplayCell.xib */,
+				D4786FBD1BC95FAA0043DCBF /* ImageTextTrackAddMenuView.swift */,
+				D4786FBF1BC95FCF0043DCBF /* ImageTextTrack.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -501,8 +501,8 @@
 		D4BDF1021BC8A1490053966A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D4BDF1041BC8A1490053966A /* MVBNoteTrackViewController.swift */,
-				D4BDF1031BC8A1490053966A /* MVBNoteTrack.storyboard */,
+				D4BDF1041BC8A1490053966A /* NoteTrackViewController.swift */,
+				D4BDF1031BC8A1490053966A /* NoteTrack.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -510,8 +510,8 @@
 		D4BDF1051BC8A1490053966A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D4BDF1061BC8A1490053966A /* MVBNoteTrackIdListModel.swift */,
-				D4BDF1081BC8A1490053966A /* MVBNoteTrackModel.swift */,
+				D4BDF1061BC8A1490053966A /* NoteTrackIdListModel.swift */,
+				D4BDF1081BC8A1490053966A /* NoteTrackModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -519,13 +519,13 @@
 		D4BDF1091BC8A1490053966A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D4BDF10A1BC8A1490053966A /* MVBNewNoteTrackView.swift */,
-				D4BDF10B1BC8A1490053966A /* MVBNewNoteTrackView.xib */,
-				D4BDF10D1BC8A1490053966A /* MVBNoteTrackCell.swift */,
-				D4BDF10E1BC8A1490053966A /* MVBNoteTrackCell.xib */,
-				D4BDF10F1BC8A1490053966A /* MVBNoteTrackDetailCell.swift */,
-				D4BDF1101BC8A1490053966A /* MVBNoteTrackDetailCell.xib */,
-				D4BDF10C1BC8A1490053966A /* MVBNoteTrackDetailView.swift */,
+				D4BDF10A1BC8A1490053966A /* NewNoteTrackView.swift */,
+				D4BDF10B1BC8A1490053966A /* NewNoteTrackView.xib */,
+				D4BDF10D1BC8A1490053966A /* NoteTrackCell.swift */,
+				D4BDF10E1BC8A1490053966A /* NoteTrackCell.xib */,
+				D4BDF10F1BC8A1490053966A /* NoteTrackDetailCell.swift */,
+				D4BDF1101BC8A1490053966A /* NoteTrackDetailCell.xib */,
+				D4BDF10C1BC8A1490053966A /* NoteTrackDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -541,7 +541,7 @@
 		D4BDF11F1BC8E6260053966A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D4BDF1201BC8E6260053966A /* MVBUserModel.swift */,
+				D4BDF1201BC8E6260053966A /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -586,7 +586,7 @@
 		D4F01F911BEF26AC0057CCEE /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D4F01F921BEF26AC0057CCEE /* MVBHomeViewController.swift */,
+				D4F01F921BEF26AC0057CCEE /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -594,8 +594,8 @@
 		D4F01F941BEF2FB60057CCEE /* SettingMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D4F01F951BEF2FE40057CCEE /* MVBSettingViewController.swift */,
-				D4F01F991BEF31E00057CCEE /* MVBSetting.storyboard */,
+				D4F01F951BEF2FE40057CCEE /* SettingViewController.swift */,
+				D4F01F991BEF31E00057CCEE /* Setting.storyboard */,
 			);
 			path = SettingMenu;
 			sourceTree = "<group>";
@@ -687,23 +687,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4BDF11C1BC8A1490053966A /* MVBNoteTrackDetailCell.xib in Resources */,
+				D4BDF11C1BC8A1490053966A /* NoteTrackDetailCell.xib in Resources */,
 				D4AAF2C51B31B47C00350A91 /* LaunchScreen.xib in Resources */,
 				D4BDF1271BC8E6260053966A /* MainMenuView.xib in Resources */,
-				D4F01F9A1BEF31E00057CCEE /* MVBSetting.storyboard in Resources */,
-				D48982DE1BB5348C00A3D881 /* MVBImageTextTrack.storyboard in Resources */,
+				D4F01F9A1BEF31E00057CCEE /* Setting.storyboard in Resources */,
+				D48982DE1BB5348C00A3D881 /* ImageTextTrack.storyboard in Resources */,
 				D40F84241B4EA723004FD250 /* MQPullToRefresh.podspec in Resources */,
-				D4BDF1171BC8A1490053966A /* MVBNewNoteTrackView.xib in Resources */,
+				D4BDF1171BC8A1490053966A /* NewNoteTrackView.xib in Resources */,
 				D4E48EBF1BB6388F0042FC74 /* Photos.xcassets in Resources */,
-				D4BDF11A1BC8A1490053966A /* MVBNoteTrackCell.xib in Resources */,
+				D4BDF11A1BC8A1490053966A /* NoteTrackCell.xib in Resources */,
 				D441578B1B3E4B35004ECC7E /* MQMaskController.podspec in Resources */,
-				D4BDF1111BC8A1490053966A /* MVBNoteTrack.storyboard in Resources */,
+				D4BDF1111BC8A1490053966A /* NoteTrack.storyboard in Resources */,
 				D4AAF2C61B31B47C00350A91 /* Main.storyboard in Resources */,
 				D4F01F501BE7530D0057CCEE /* MQPictureBrowserView.xib in Resources */,
 				D4F01F8E1BEEF7D00057CCEE /* MainMenuViewCell.xib in Resources */,
-				D4B209D31BE0FAC600E15434 /* MVBImageTextTrackDisplayCell.xib in Resources */,
+				D4B209D31BE0FAC600E15434 /* ImageTextTrackDisplayCell.xib in Resources */,
 				D4F36E661BC66CCF006DCF94 /* MQPictureBrowser.podspec in Resources */,
-				D4786FC01BC95FD00043DCBF /* MVBImageTextTrack.xib in Resources */,
+				D4786FC01BC95FD00043DCBF /* ImageTextTrack.xib in Resources */,
 				D4E17B4C1B286A7F00228B4A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -763,47 +763,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4BDF1161BC8A1490053966A /* MVBNewNoteTrackView.swift in Sources */,
-				D4BDF1191BC8A1490053966A /* MVBNoteTrackCell.swift in Sources */,
+				D4BDF1161BC8A1490053966A /* NewNoteTrackView.swift in Sources */,
+				D4BDF1191BC8A1490053966A /* NoteTrackCell.swift in Sources */,
 				D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */,
-				D4F01F901BEF26A20057CCEE /* MVBDetailBaseViewController.swift in Sources */,
+				D4F01F901BEF26A20057CCEE /* DetailBaseViewController.swift in Sources */,
 				D4BDF1261BC8E6260053966A /* MainMenuView.swift in Sources */,
 				D41C80111B1BEF2600987D42 /* UIView+MQRecursiveLevelLog.m in Sources */,
 				D4073AB01CD9FB5700E880D2 /* DrawerVisualStateCustom.swift in Sources */,
 				D40709361BB104F20098867E /* UIView_Extension.swift in Sources */,
-				D4BDF1121BC8A1490053966A /* MVBNoteTrackViewController.swift in Sources */,
-				D4BDF1131BC8A1490053966A /* MVBNoteTrackIdListModel.swift in Sources */,
+				D4BDF1121BC8A1490053966A /* NoteTrackViewController.swift in Sources */,
+				D4BDF1131BC8A1490053966A /* NoteTrackIdListModel.swift in Sources */,
 				D4BDF1241BC8E6260053966A /* MainMenuViewControllerOperate.swift in Sources */,
-				D4BDF1151BC8A1490053966A /* MVBNoteTrackModel.swift in Sources */,
-				D488BF051B28685A0050C2E2 /* MVBAppDelegate.swift in Sources */,
-				D418AD441BE0D70C00338CC2 /* MVBNoteTrackViewModel.swift in Sources */,
+				D4BDF1151BC8A1490053966A /* NoteTrackModel.swift in Sources */,
+				D488BF051B28685A0050C2E2 /* AppDelegate.swift in Sources */,
+				D418AD441BE0D70C00338CC2 /* NoteTrackViewModel.swift in Sources */,
 				D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
-				D4F01F931BEF26AC0057CCEE /* MVBHomeViewController.swift in Sources */,
+				D4F01F931BEF26AC0057CCEE /* HomeViewController.swift in Sources */,
 				D42E74311CDA1A290050A9EC /* UserInfoManange.swift in Sources */,
-				D4BDF11B1BC8A1490053966A /* MVBNoteTrackDetailCell.swift in Sources */,
+				D4BDF11B1BC8A1490053966A /* NoteTrackDetailCell.swift in Sources */,
 				D45E89841B36CD1500AFF9F8 /* LogInViewController.swift in Sources */,
-				D4F36EAA1BC6BFC6006DCF94 /* MVBImageTextTrackDisplayCell.swift in Sources */,
-				D48982E01BB535A600A3D881 /* MVBImageTextTrackCell.swift in Sources */,
-				D48982E21BB5391800A3D881 /* MVBImageTextTrackLayout.swift in Sources */,
-				D4F01F971BEF2FE40057CCEE /* MVBSettingViewController.swift in Sources */,
+				D4F36EAA1BC6BFC6006DCF94 /* ImageTextTrackDisplayCell.swift in Sources */,
+				D48982E01BB535A600A3D881 /* ImageTextTrackCell.swift in Sources */,
+				D48982E21BB5391800A3D881 /* ImageTextTrackLayout.swift in Sources */,
+				D4F01F971BEF2FE40057CCEE /* SettingViewController.swift in Sources */,
 				D41C80101B1BEF2600987D42 /* MQButton.swift in Sources */,
 				D4F01F8C1BEEF0970057CCEE /* MainMenuViewCell.swift in Sources */,
-				D4E48EC51BB63F070042FC74 /* MVBImageTextTrackIdListModel.swift in Sources */,
+				D4E48EC51BB63F070042FC74 /* ImageTextTrackIdListModel.swift in Sources */,
 				D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */,
-				D418AD471BE0D72D00338CC2 /* MVBImageTextTrackViewModel.swift in Sources */,
+				D418AD471BE0D72D00338CC2 /* ImageTextTrackViewModel.swift in Sources */,
 				D44A6B151B2886A7003C4834 /* AppMacroObjc.m in Sources */,
-				D4BDF1181BC8A1490053966A /* MVBNoteTrackDetailView.swift in Sources */,
-				D48982E41BB53B4A00A3D881 /* MVBImageTextTrackModel.swift in Sources */,
+				D4BDF1181BC8A1490053966A /* NoteTrackDetailView.swift in Sources */,
+				D48982E41BB53B4A00A3D881 /* ImageTextTrackModel.swift in Sources */,
 				D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */,
 				D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */,
-				D4786FBE1BC95FAA0043DCBF /* MVBImageTextTrackAddMenuView.swift in Sources */,
+				D4786FBE1BC95FAA0043DCBF /* ImageTextTrackAddMenuView.swift in Sources */,
 				D4F36EAF1BC6C227006DCF94 /* MQPictureBrowserController.swift in Sources */,
-				D48982DA1BB532BE00A3D881 /* MVBImageTextTrackViewController.swift in Sources */,
+				D48982DA1BB532BE00A3D881 /* ImageTextTrackViewController.swift in Sources */,
 				D4B679BB1BB4EDC1002E7B32 /* UIScreen_Extension.swift in Sources */,
 				D4E17B4E1B286BC100228B4A /* AppMacro.swift in Sources */,
-				D4BDF1251BC8E6260053966A /* MVBUserModel.swift in Sources */,
+				D4BDF1251BC8E6260053966A /* UserModel.swift in Sources */,
 				D4C5B5B81CD9E14300C8E7CB /* DrawerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

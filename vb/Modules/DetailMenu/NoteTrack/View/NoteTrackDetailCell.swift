@@ -1,14 +1,14 @@
 //
-//  MVBNoteTrackDetailCell.swift
+//  NoteTrackDetailCell.swift
 //  vb
 //
 //  Created by 马权 on 7/16/15.
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
-class MVBNoteTrackDetailCell: UITableViewCell {
+class NoteTrackDetailCell: UITableViewCell {
 
-    weak var noteTrackModel: MVBNoteTrackModel?
+    weak var noteTrackModel: NoteTrackModel?
     
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
@@ -57,9 +57,9 @@ class MVBNoteTrackDetailCell: UITableViewCell {
 }
 
 // MARK: Public
-extension MVBNoteTrackDetailCell {
+extension NoteTrackDetailCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: MVBNoteTrackModel!) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: NoteTrackModel!) -> Void {
         self.noteTrackModel = noteTrackModel
         selectionStyle = UITableViewCellSelectionStyle.None
         detailButtonWidth.constant = 0

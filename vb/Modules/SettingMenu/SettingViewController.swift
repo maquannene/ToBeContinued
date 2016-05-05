@@ -1,5 +1,5 @@
 //
-//  MVBSettingViewController.swift
+//  SettingViewController.swift
 //  vb
 //
 //  Created by 马权 on 11/8/15.
@@ -10,7 +10,7 @@ import MMDrawerController
 import SDWebImage
 import SVProgressHUD
 
-class MVBSettingViewController: MVBDetailBaseViewController {
+class SettingViewController: DetailBaseViewController {
     
     private struct Static {
         static let disclosureCell = "disclosureCell"
@@ -26,7 +26,7 @@ class MVBSettingViewController: MVBDetailBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .Plain, target: self, action: #selector(MVBSettingViewController.backMainAction(_:)))
+        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .Plain, target: self, action: #selector(SettingViewController.backMainAction(_:)))
         leftButton.tintColor = UIColor.blackColor()
         self.navigationItem.setLeftBarButtonItem(leftButton, animated: false)
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
@@ -38,7 +38,7 @@ class MVBSettingViewController: MVBDetailBaseViewController {
 
 }
 
-extension MVBSettingViewController {
+extension SettingViewController {
     
     @objc private func specialEffectSwitchAction(sender: UISwitch!) {
         specialEffectSwitchClosuer?(sender.on)
@@ -50,7 +50,7 @@ extension MVBSettingViewController {
 //  2. 开关特效 switchCell
 //  3. 清理缓存 commonCell
 
-extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -84,7 +84,7 @@ extension MVBSettingViewController: UITableViewDelegate, UITableViewDataSource {
                 if let specialEffect = NSUserDefaults.standardUserDefaults().valueForKey("specialEffect") as? NSNumber {
                     sw.setOn(specialEffect.boolValue == true, animated: false)
                 }
-                sw.addTarget(self, action: #selector(MVBSettingViewController.specialEffectSwitchAction(_:)), forControlEvents: .ValueChanged)
+                sw.addTarget(self, action: #selector(SettingViewController.specialEffectSwitchAction(_:)), forControlEvents: .ValueChanged)
             }
         }
         if indexPath.item == 5 {

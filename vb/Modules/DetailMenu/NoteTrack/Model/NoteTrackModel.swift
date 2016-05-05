@@ -1,5 +1,5 @@
 //
-//  MVBNoteTrackModel.swift
+//  NoteTrackModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
@@ -8,7 +8,7 @@
 
 import AVOSCloud
 
-class MVBNoteTrackModel: AVObject {
+class NoteTrackModel: AVObject {
     
     @NSManaged var title: String!
     @NSManaged var detailContent: String!
@@ -24,8 +24,8 @@ class MVBNoteTrackModel: AVObject {
     }
 }
 
-extension MVBNoteTrackModel: AVSubclassing {
+extension NoteTrackModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBNoteTrackModel"
+        return "NoteTrackModel"
     }
 }

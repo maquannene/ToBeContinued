@@ -25,7 +25,7 @@
         <!--Setting View Controller-->
         <scene sceneID="wQg-8v-UQM">
             <objects>
-                <viewController storyboardIdentifier="MVBSettingViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jca-wp-h8E" customClass="MVBSettingViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jca-wp-h8E" customClass="SettingViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wIJ-IX-lhl"/>
                         <viewControllerLayoutGuide type="bottom" id="Iwx-zg-i5R"/>

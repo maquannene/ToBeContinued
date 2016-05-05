@@ -1,12 +1,12 @@
 //
-//  MVBNoteTrackDetailView.swift
+//  NoteTrackDetailView.swift
 //  vb
 //
 //  Created by 马权 on 9/22/15.
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-class MVBNoteTrackDetailView: UIView {
+class NoteTrackDetailView: UIView {
 
     @IBOutlet weak var contentLabel: UILabel!
     

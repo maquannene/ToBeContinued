@@ -46,7 +46,7 @@ class MainMenuViewController: UIViewController {
         specialEffect = x
     }
     
-    func configure(userModel: MVBUserModel)
+    func configure(userModel: UserModel)
     {
         if let coverImagePhoto = userModel.cover_image_phone as? String {
             mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
@@ -78,7 +78,7 @@ extension MainMenuViewController {
         set {
             if newValue {
                 self.mm_drawerController.setDrawerVisualStateBlock { (drawerVc, drawerSide, percentVisible) -> Void in
-                    let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.MVBCustomDrawerVisualState()
+                    let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.CustomDrawerVisualState()
                     block(drawerVc, drawerSide, percentVisible)
                 }
                 self.mainMenuView!.clipsToBounds = true
@@ -108,12 +108,12 @@ extension MainMenuViewController {
     
     @IBAction func settingAction(sender: AnyObject)
     {
-        if let _ = (mm_drawerController!.centerViewController as? UINavigationController)?.topViewController as? MVBSettingViewController {
+        if let _ = (mm_drawerController!.centerViewController as? UINavigationController)?.topViewController as? SettingViewController {
             mm_drawerController!.closeDrawerAnimated(true, completion: nil)
         }
         else {
-            let settingNavi = UIStoryboard(name: "MVBSetting", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! UINavigationController
-            let settingViewController = settingNavi.topViewController as! MVBSettingViewController
+            let settingNavi = UIStoryboard(name: "Setting", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! UINavigationController
+            let settingViewController = settingNavi.topViewController as! SettingViewController
             settingViewController.specialEffectSwitchClosuer = { [unowned self] in
                 self.specialEffect = $0
             }

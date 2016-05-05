@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="dwD-iW-iFd" customClass="MVBNoteTrackDetailCell" customModule="vb" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="dwD-iW-iFd" customClass="NoteTrackDetailCell" customModule="vb" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="497" height="58"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dwD-iW-iFd" id="s6l-8o-3M8">
@@ -16,7 +15,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TOL-01-vpm">
                         <rect key="frame" x="10" y="10" width="30" height="37.5"/>
-                        <animations/>
                         <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="X1A-wl-yt3"/>
@@ -24,7 +22,6 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-Lu-wvr">
                         <rect key="frame" x="50" y="10" width="39.5" height="37.5"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.82597458960000003" green="0.82597458960000003" blue="0.82597458960000003" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,13 +29,11 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhd-q8-8FR">
                         <rect key="frame" x="457" y="5" width="30" height="47.5"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="M7c-1f-VDx"/>
                         </constraints>
                     </button>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstItem="TOL-01-vpm" firstAttribute="top" secondItem="s6l-8o-3M8" secondAttribute="top" constant="10" id="7iN-vT-Xxc"/>
                     <constraint firstAttribute="trailing" secondItem="Yhd-q8-8FR" secondAttribute="trailing" constant="10" id="CbA-z6-n2x"/>
@@ -52,7 +47,6 @@
                     <constraint firstItem="Yhd-q8-8FR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A0v-Lu-wvr" secondAttribute="trailing" constant="10" id="xWD-Mo-rUk"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="contentLabel" destination="A0v-Lu-wvr" id="lfO-xw-Ofv"/>
                 <outlet property="detailButton" destination="Yhd-q8-8FR" id="DuZ-sn-iTT"/>
