@@ -1,5 +1,5 @@
 //
-//  MVBUserModel.swift
+//  UserModel.swift
 //  vb
 //
 //  Created by 马权 on 5/16/15.
@@ -8,7 +8,7 @@
 
 import MJExtension
 
-class MVBUserModel: NSObject, NSCoding {
+class UserModel: NSObject, NSCoding {
     
     var id: NSString?                   //  用户ID
     var name: NSString?                 //  用户昵称
@@ -48,19 +48,19 @@ class MVBUserModel: NSObject, NSCoding {
     }
 }
 
-extension MVBUserModel {
+extension UserModel {
     
     internal override class func initialize() {
         struct Static {
             static var token: dispatch_once_t = 0
         }
         // make sure this isn't a subclass
-        if self !== MVBUserModel.self {
+        if self !== UserModel.self {
             return
         }
         dispatch_once(&Static.token) {
             //  处理属性和Json key不匹配情况
-            MVBUserModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
+            UserModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
                 return ["_description": "description"]
             }
         }

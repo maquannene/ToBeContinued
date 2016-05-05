@@ -1,5 +1,5 @@
 //
-//  MVBDetailBaseViewController.swift
+//  DetailBaseViewController.swift
 //  vb
 //
 //  Created by 马权 on 6/21/15.
@@ -8,7 +8,7 @@
 
 import MMDrawerController
 
-class MVBDetailBaseViewController: UIViewController {
+class DetailBaseViewController: UIViewController {
     
     var mainNavi: UINavigationController?
 

@@ -14,20 +14,20 @@ class DrawerController: MMDrawerController {
     var mainVc: MainMenuViewController?
     
     //  中间home页面
-    var homeVc: MVBHomeViewController?
+    var homeVc: HomeViewController?
     
     //  第一部分： 图迹
-    var noteTrackVc: MVBNoteTrackViewController?
+    var noteTrackVc: N2oteTrackViewController?
     
     //  第二部分： 图文迹
-    var imageTextTrackVc: MVBImageTextTrackViewController?
+    var imageTextTrackVc: ImageTextTrackViewController?
     
     //
-    var settingVc: MVBSettingViewController?
+    var settingVc: SettingViewController?
     
     init() {
         let mainVc = MainMenuViewController()
-        let homeVc = MVBHomeViewController()
+        let homeVc = HomeViewController()
         super.init(centerViewController: homeVc, leftDrawerViewController: mainVc, rightDrawerViewController: nil)
         maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
         openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
@@ -59,7 +59,7 @@ extension DrawerController: MainMenuViewControllerDelegate {
             centerViewController = homeVc
         case .NoteTrack:
             if noteTrackVc == nil {
-                noteTrackVc = UIStoryboard(name: "MVBNoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBNoteTrackViewController!
+                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! N2oteTrackViewController!
             }
             if let navi = noteTrackVc!.navigationController as UINavigationController? {
                 centerViewController = navi
@@ -70,7 +70,7 @@ extension DrawerController: MainMenuViewControllerDelegate {
             
         case .ImageTextTrack:
             if imageTextTrackVc == nil {
-                imageTextTrackVc = UIStoryboard(name: "MVBImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! MVBImageTextTrackViewController!
+                imageTextTrackVc = UIStoryboard(name: "ImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! ImageTextTrackViewController!
             }
             centerViewController = imageTextTrackVc!
             

@@ -16,8 +16,7 @@ enum LogInViewModel : Int {
 }
 
 class LogInViewController: UIViewController {
-
-//    var pageTransformManage: MVBPageTransformManage?
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userImageViewCenterY: NSLayoutConstraint!

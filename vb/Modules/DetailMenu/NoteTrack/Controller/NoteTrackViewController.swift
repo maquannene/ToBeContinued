@@ -1,5 +1,5 @@
 //
-//  MVBNoteTrackViewController.swift
+//  N2oteTrackViewController.swift
 //  vb
 //
 //  Created by 马权 on 6/16/15.
@@ -13,14 +13,14 @@ import SWTableViewCell
 import MQMaskController
 
 //  MARK: LeftCycle
-class MVBNoteTrackViewController: MVBDetailBaseViewController {
+class N2oteTrackViewController: DetailBaseViewController {
     
     struct Static {
-        static let noteTrackCellId = MVBNoteTrackCell.ClassName
-        static let noteTrackDetailCellId = MVBNoteTrackDetailCell.ClassName
+        static let noteTrackCellId = NoteTrackCell.ClassName
+        static let noteTrackDetailCellId = NoteTrackDetailCell.ClassName
     }
     
-    var dataSource: MVBNoteTrackViewModel!
+    var dataSource: NoteTrackViewModel!
     var newNoteTrackVc: MQMaskController?
     @IBOutlet weak var noNoteTrackTips: UILabel!
     var operateCellIndex: Int = -1
@@ -52,7 +52,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(addNewNoteTrackAction(_:)))
         //  初始化数据源
-        dataSource = MVBNoteTrackViewModel()
+        dataSource = NoteTrackViewModel()
         
         noteTrackListTableView.tableFooterView = UIView()
         noteTrackListTableView.registerNib(UINib(nibName: Static.noteTrackCellId, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: Static.noteTrackCellId)
@@ -87,7 +87,7 @@ class MVBNoteTrackViewController: MVBDetailBaseViewController {
 }
 
 //  MARK: Private
-extension MVBNoteTrackViewController {
+extension N2oteTrackViewController {
     
     func configurePullToRefresh()
     {
@@ -116,17 +116,17 @@ extension MVBNoteTrackViewController {
 }
 
 //  MARK: Action
-extension MVBNoteTrackViewController {
+extension N2oteTrackViewController {
     /**
     新增密码条目
     */
     @objc private func addNewNoteTrackAction(sender: AnyObject!)
     {
-        let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
+        let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("NewNoteTrackView", owner: nil, options: nil)[0] as! NewNoteTrackView
         newNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         newNoteTrackView.createButton.setTitle("创建", forState: UIControlState.Normal)
-        newNoteTrackView.createButton.addTarget(self, action: #selector(MVBNoteTrackViewController.confirmCreateNewNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        newNoteTrackView.cancelButton.addTarget(self, action: #selector(MVBNoteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        newNoteTrackView.createButton.addTarget(self, action: #selector(N2oteTrackViewController.confirmCreateNewNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        newNoteTrackView.cancelButton.addTarget(self, action: #selector(N2oteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         newNoteTrackVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newNoteTrackView, contentCenter: false, delayTime: 0)
         //  设置初始状态
         newNoteTrackVc!.maskView.backgroundColor = UIColor.clearColor()
@@ -154,13 +154,13 @@ extension MVBNoteTrackViewController {
             noteTrackListTableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         operateCellIndex = indexPath.row //  记录操作的哪个cell
-        let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
-        let detailNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[0] as! MVBNewNoteTrackView
+        let noteTrackModel: NoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
+        let detailNoteTrackView = NSBundle.mainBundle().loadNibNamed("NewNoteTrackView", owner: nil, options: nil)[0] as! NewNoteTrackView
         detailNoteTrackView.configureData(noteTrackModel.title, detailContent: noteTrackModel.detailContent)
         detailNoteTrackView.frame = CGRectMake(-(self.view.frame.width - 40), 40, self.view.frame.width - 40, 240)
         detailNoteTrackView.createButton.setTitle("更新", forState: UIControlState.Normal)
-        detailNoteTrackView.createButton.addTarget(self, action: #selector(MVBNoteTrackViewController.confirmUpdataNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        detailNoteTrackView.cancelButton.addTarget(self, action: #selector(MVBNoteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        detailNoteTrackView.createButton.addTarget(self, action: #selector(N2oteTrackViewController.confirmUpdataNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        detailNoteTrackView.cancelButton.addTarget(self, action: #selector(N2oteTrackViewController.cancelAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         newNoteTrackVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: detailNoteTrackView, contentCenter: false, delayTime: 0)
         //  设置初始状态
         newNoteTrackVc!.delegate = self
@@ -201,8 +201,8 @@ extension MVBNoteTrackViewController {
     */
     @objc private func showDetailNoteTrackAction(sender: AnyObject!)
     {
-        let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(dataSource.expandingIndexPath!.row)
-        let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("MVBNewNoteTrackView", owner: nil, options: nil)[1] as! MVBNoteTrackDetailView
+        let noteTrackModel: NoteTrackModel = dataSource.fetchNoteTrackModel(dataSource.expandingIndexPath!.row)
+        let newNoteTrackView = NSBundle.mainBundle().loadNibNamed("NewNoteTrackView", owner: nil, options: nil)[1] as! NoteTrackDetailView
         newNoteTrackView.frame = CGRectMake(10, self.view.h, self.view.frame.width - 20, 0)
         newNoteTrackView.contentText = noteTrackModel.detailContent
         newNoteTrackVc = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: newNoteTrackView, contentCenter: false, delayTime: 0)
@@ -227,8 +227,8 @@ extension MVBNoteTrackViewController {
     */
     @objc private func confirmCreateNewNoteTrackAction(sender: AnyObject!)
     {
-        let contentView = newNoteTrackVc!.contentView as! MVBNewNoteTrackView
-        dataSource.queryAddNoteTrack(MVBNoteTrackModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
+        let contentView = newNoteTrackVc!.contentView as! NewNoteTrackView
+        dataSource.queryAddNoteTrack(NoteTrackModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text), complete: { [unowned self]  (succeed) -> Void in
             self.dataSource.expandingIndexPath = nil
             self.dataSource.expandedIndexPath = nil
 //            self.noteTrackListTableView.reloadData()
@@ -243,8 +243,8 @@ extension MVBNoteTrackViewController {
     */
     @objc private func confirmUpdataNoteTrackAction(sender: AnyObject!)
     {
-        let contentView = newNoteTrackVc!.contentView as! MVBNewNoteTrackView
-        let noteTrackModel: MVBNoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
+        let contentView = newNoteTrackVc!.contentView as! NewNoteTrackView
+        let noteTrackModel: NoteTrackModel = dataSource.fetchNoteTrackModel(operateCellIndex)
         noteTrackModel.update(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
         dataSource.queryUpdateNoteTrack(noteTrackModel) { [unowned self] (succeed) -> Void in
             self.dataSource.expandingIndexPath = nil
@@ -261,7 +261,7 @@ extension MVBNoteTrackViewController {
 }
 
 //  MARK: UITableViewDelegate
-extension MVBNoteTrackViewController: UITableViewDelegate {
+extension N2oteTrackViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -278,7 +278,7 @@ extension MVBNoteTrackViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
         //  如果点击的是detailCell 就不响应点击
-        if let _ = cell as? MVBNoteTrackDetailCell {
+        if let _ = cell as? NoteTrackDetailCell {
             return
         }
         
@@ -286,7 +286,7 @@ extension MVBNoteTrackViewController: UITableViewDelegate {
         //  如果有侧滑出的，就先收起侧滑；没有侧滑出的就响应展开。
         let visiableCells: NSArray = tableView.visibleCells
         for cell in visiableCells {
-            if (cell is MVBNoteTrackCell && !cell.isUtilityButtonsHidden()) {
+            if (cell is NoteTrackCell && !cell.isUtilityButtonsHidden()) {
                 cell.hideUtilityButtonsAnimated(true)
                 return
             }
@@ -323,7 +323,7 @@ extension MVBNoteTrackViewController: UITableViewDelegate {
 }
 
 // MARK: UITableViewDataSource
-extension MVBNoteTrackViewController: UITableViewDataSource {
+extension N2oteTrackViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -339,16 +339,16 @@ extension MVBNoteTrackViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let actualIndexPath = dataSource.convertToActualIndexPath(indexPath)
-        let noteTrackModel: MVBNoteTrackModel = dataSource.noteTrackModelList[actualIndexPath.row] as! MVBNoteTrackModel
+        let noteTrackModel: NoteTrackModel = dataSource.noteTrackModelList[actualIndexPath.row] as! NoteTrackModel
         //  如果是展开的detailCell
         if (dataSource.expandedIndexPath != nil && dataSource.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
-            let detailCell: MVBNoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(MVBNoteTrackViewController.Static.noteTrackDetailCellId) as! MVBNoteTrackDetailCell
+            let detailCell: NoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(N2oteTrackViewController.Static.noteTrackDetailCellId) as! NoteTrackDetailCell
             detailCell.configureWithNoteTrackModel(noteTrackModel)
-            detailCell.detailButton.addTarget(self, action: #selector(MVBNoteTrackViewController.showDetailNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            detailCell.detailButton.addTarget(self, action: #selector(N2oteTrackViewController.showDetailNoteTrackAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             return detailCell
         }
         else {
-            let titleCell: MVBNoteTrackCell = tableView.dequeueReusableCellWithIdentifier(MVBNoteTrackViewController.Static.noteTrackCellId) as! MVBNoteTrackCell
+            let titleCell: NoteTrackCell = tableView.dequeueReusableCellWithIdentifier(N2oteTrackViewController.Static.noteTrackCellId) as! NoteTrackCell
             titleCell.configureWithNoteTrackModel(noteTrackModel)
             titleCell.delegate = self
             titleCell.slideGestureDelegate = self
@@ -359,7 +359,7 @@ extension MVBNoteTrackViewController: UITableViewDataSource {
 }
 
 //  MARK: SWTableViewCellDelegate
-extension MVBNoteTrackViewController: SWTableViewCellDelegate, MVBNoteTrackCellSlideGestureDelegate {
+extension N2oteTrackViewController: SWTableViewCellDelegate, NoteTrackCellSlideGestureDelegate {
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
@@ -387,9 +387,9 @@ extension MVBNoteTrackViewController: SWTableViewCellDelegate, MVBNoteTrackCellS
     func slideGestureRecognizerShouldReceiveTouch() -> NSNumber
     {
         for cell in noteTrackListTableView.visibleCells {
-            guard cell is MVBNoteTrackCell else { return true }
-            if !(cell as! MVBNoteTrackCell).isUtilityButtonsHidden() {
-                (cell as! MVBNoteTrackCell).hideUtilityButtonsAnimated(true)
+            guard cell is NoteTrackCell else { return true }
+            if !(cell as! NoteTrackCell).isUtilityButtonsHidden() {
+                (cell as! NoteTrackCell).hideUtilityButtonsAnimated(true)
                 return false
             }
         }
@@ -399,11 +399,11 @@ extension MVBNoteTrackViewController: SWTableViewCellDelegate, MVBNoteTrackCellS
 }
 
 // MARK: MQMaskControllerDelegate
-extension MVBNoteTrackViewController: MQMaskControllerDelegate {
+extension N2oteTrackViewController: MQMaskControllerDelegate {
     
     func maskControllerWillDismiss(maskController: MQMaskController!)
     {
-        if let contentView = maskController.contentView as? MVBNewNoteTrackView {
+        if let contentView = maskController.contentView as? NewNoteTrackView {
             if contentView.titleTextView.isFirstResponder() {
                 contentView.titleTextView.resignFirstResponder()
             }

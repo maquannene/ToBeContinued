@@ -10,7 +10,7 @@ import MMDrawerController
 
 // MARK: MMDrawer的自定义动画类，扩展自MMDrawerVisualState
 extension MMDrawerVisualState {
-    class func MVBCustomDrawerVisualState() -> MMDrawerControllerDrawerVisualStateBlock {
+    class func CustomDrawerVisualState() -> MMDrawerControllerDrawerVisualStateBlock {
         return { (drawerController: MMDrawerController!, drawerSide: MMDrawerSide, percentVisible: CGFloat) -> Void in
             var sideViewController: UIViewController?
             var scale: CGFloat!

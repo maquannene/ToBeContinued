@@ -1,5 +1,5 @@
 //
-//  MVBNoteTrackIdListModel.swift
+//  NoteTrackIdListModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
@@ -10,7 +10,7 @@ import AVOSCloud
 
 //  记录着所有 密码Id 的list 类。通过每个用户的唯一kIdentifier来查找
 
-class MVBNoteTrackIdListModel: AVObject {
+class NoteTrackIdListModel: AVObject {
     
     @NSManaged var identifier: String!
     @NSManaged var list: NSMutableArray!
@@ -23,8 +23,8 @@ class MVBNoteTrackIdListModel: AVObject {
     }
 }
 
-extension MVBNoteTrackIdListModel: AVSubclassing {
+extension NoteTrackIdListModel: AVSubclassing {
     static func parseClassName() -> String! {
-        return "MVBNoteTrackIdListModel"
+        return "NoteTrackIdListModel"
     }
 }

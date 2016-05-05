@@ -1,5 +1,5 @@
 //
-//  MVBNoteTrackViewModel.swift
+//  NoteTrackViewModel.swift
 //  vb
 //
 //  Created by 马权 on 6/28/15.
@@ -8,11 +8,11 @@
  
 import AVOSCloud
   
-typealias MVBQureyDataCompleteClosure = (succeed: Bool!) -> Void
+typealias QureyDataCompleteClosure = (succeed: Bool!) -> Void
   
-class MVBNoteTrackViewModel: NSObject {
+class NoteTrackViewModel: NSObject {
     
-    var noteTrackIdList: MVBNoteTrackIdListModel?
+    var noteTrackIdList: NoteTrackIdListModel?
     lazy var noteTrackModelList: NSMutableArray = NSMutableArray()              //  存储密码信息列表的缓存数组
     var expandingIndexPath: NSIndexPath?                                        //  展开的cell的IndexPath
     var expandedIndexPath: NSIndexPath?                                         //  被展开（扩展区域）的indexPath
@@ -24,16 +24,16 @@ class MVBNoteTrackViewModel: NSObject {
 }
 
 //  MARK: Public
-extension MVBNoteTrackViewModel {
+extension NoteTrackViewModel {
     /**
     请求查找包含每个密码对象objectId的列表（先找到列表，再fetch）
     
     - parameter complete: 完成回调
     */
-    func queryFindNoteTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
+    func queryFindNoteTrackIdListCompletion(complete: QureyDataCompleteClosure?)
     {
-        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
-        let query: AVQuery = AVQuery(className: MVBNoteTrackIdListModel.ClassName)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(NoteTrackIdListModel.self)
+        let query: AVQuery = AVQuery(className: NoteTrackIdListModel.ClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
         query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
@@ -42,7 +42,7 @@ extension MVBNoteTrackViewModel {
             
             guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
             
-            guard let objc = objects[0] as? MVBNoteTrackIdListModel else { complete?(succeed: false); return }
+            guard let objc = objects[0] as? NoteTrackIdListModel else { complete?(succeed: false); return }
             
             self.noteTrackIdList = objc
             
@@ -55,10 +55,10 @@ extension MVBNoteTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryCreateNoteTrackIdListCompletion(complete: MVBQureyDataCompleteClosure?)
+    func queryCreateNoteTrackIdListCompletion(complete: QureyDataCompleteClosure?)
     {
-        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(MVBNoteTrackIdListModel.self)
-        self.noteTrackIdList = MVBNoteTrackIdListModel(identifier: identifier)
+        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(NoteTrackIdListModel.self)
+        self.noteTrackIdList = NoteTrackIdListModel(identifier: identifier)
         self.noteTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed.boolValue)
         }
@@ -69,14 +69,14 @@ extension MVBNoteTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryNoteTrackListCompletion(complete: MVBQureyDataCompleteClosure?)
+    func queryNoteTrackListCompletion(complete: QureyDataCompleteClosure?)
     {
         let fetchGroup: dispatch_group_t = dispatch_group_create()
         let newNoteTrackModelList = NSMutableArray()
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
         for objectId in self.noteTrackIdList!.list {
             dispatch_group_enter(fetchGroup)
-            let noteTrackModel: MVBNoteTrackModel = MVBNoteTrackModel(outDataWithObjectId: objectId as! String)
+            let noteTrackModel: NoteTrackModel = NoteTrackModel(outDataWithObjectId: objectId as! String)
             noteTrackModel.fetchInBackgroundWithBlock{ (object, error) -> Void in
                 if error != nil {
                     success = false
@@ -91,7 +91,7 @@ extension MVBNoteTrackViewModel {
             if success == true {
                 //  对数据根据时间进行排序
                 newNoteTrackModelList.sortUsingComparator {
-                    return ($1 as! MVBNoteTrackModel).createdAt.compare(($0 as! MVBNoteTrackModel).createdAt)
+                    return ($1 as! NoteTrackModel).createdAt.compare(($0 as! NoteTrackModel).createdAt)
                 }
             }
             self.noteTrackModelList = newNoteTrackModelList
@@ -105,7 +105,7 @@ extension MVBNoteTrackViewModel {
     - parameter recrod:   密码项的类对象
     - parameter complete: 完成回调
     */
-    func queryAddNoteTrack(noteTrackModel: MVBNoteTrackModel, complete: MVBQureyDataCompleteClosure?)
+    func queryAddNoteTrack(noteTrackModel: NoteTrackModel, complete: QureyDataCompleteClosure?)
     {
         //  将新的密码记录写入AVOSCloud
         noteTrackModel.saveInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
@@ -126,9 +126,9 @@ extension MVBNoteTrackViewModel {
     - parameter index:    要删除的index
     - parameter complete: 删除完成回调
     */
-    func queryDeleteNoteTrackAtIndex(index: Int!, complete: MVBQureyDataCompleteClosure?)
+    func queryDeleteNoteTrackAtIndex(index: Int!, complete: QureyDataCompleteClosure?)
     {
-        let track: MVBNoteTrackModel! = fetchNoteTrackModel(index)
+        let track: NoteTrackModel! = fetchNoteTrackModel(index)
         track.deleteInBackgroundWithBlock { [unowned self] (succeed: Bool, error: NSError!) -> Void in
             if succeed.boolValue == false { complete?(succeed: false); return }
             //  删除成功后要将密码记录的objectId从noteTrackIdLis中删除并保存
@@ -147,7 +147,7 @@ extension MVBNoteTrackViewModel {
     - parameter track:   需要更新的密码对象
     - parameter complete: 完成回调
     */
-    func queryUpdateNoteTrack(noteTrackModel: MVBNoteTrackModel, complete: MVBQureyDataCompleteClosure?)
+    func queryUpdateNoteTrack(noteTrackModel: NoteTrackModel, complete: QureyDataCompleteClosure?)
     {
         noteTrackModel.saveInBackgroundWithBlock { (succeed: Bool, error: NSError!) -> Void in
             (complete?(succeed: succeed))!
@@ -160,9 +160,9 @@ extension MVBNoteTrackViewModel {
     - parameter index: 下标号
     - returns: 密码对象
     */
-    func fetchNoteTrackModel(index: Int!) -> MVBNoteTrackModel!
+    func fetchNoteTrackModel(index: Int!) -> NoteTrackModel!
     {
-        return noteTrackModelList[index] as? MVBNoteTrackModel
+        return noteTrackModelList[index] as? NoteTrackModel
     }
 
     func convertToActualIndexPath(indexPath: NSIndexPath) -> NSIndexPath!

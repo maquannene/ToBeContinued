@@ -19,7 +19,7 @@ class UserInfoManange {
     
     static var cacheName = "com.maquan.vb.Account"
     
-    var userModel: MVBUserModel?
+    var userModel: UserModel?
     
     var cache: PINCache = PINCache(name: cacheName)
     
@@ -72,10 +72,10 @@ class UserInfoManange {
         return thirdLogInIdentifier! + "." + userID + "."
     }
     
-    func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, MVBUserModel?) -> Void)?) {
+    func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
         guard self.userID != nil && self.accessToken != nil else { return }
         if fromCachePriority {
-            if let userModel = cache.objectForKey(kUserInfoKey) as? MVBUserModel {
+            if let userModel = cache.objectForKey(kUserInfoKey) as? UserModel {
                 self.userModel = userModel
             }
             completion?(true, self.userModel)
@@ -95,7 +95,7 @@ class UserInfoManange {
     }
     
     func setUserInfoWithValue(value: AnyObject!) {
-        self.userModel = MVBUserModel().mj_setKeyValues(value)
+        self.userModel = UserModel().mj_setKeyValues(value)
         cache.setObject(self.userModel!, forKey: kUserInfoKey)
     }
     

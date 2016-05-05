@@ -24,7 +24,7 @@ let kAVCloudSDKAppID = "76k3lwtg9xseirgzio0xm20io2pt3zpgq5wn83gp7i08rait"
 let kAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
 
 //  userInfoKey
-let kUserInfoKey = "MVBUserInfoKey"
+let kUserInfoKey = "UserInfoKey"
 
 func getMainBundlePath() -> String? {
     return  NSBundle.mainBundle().bundlePath
