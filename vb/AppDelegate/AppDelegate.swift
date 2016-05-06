@@ -36,7 +36,7 @@ extension AppDelegate: UIApplicationDelegate {
         rootVc = RootViewController()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.backgroundColor = UIColor.grayColor()
+        self.window?.backgroundColor = UIColor.blackColor()
         window?.rootViewController = rootVc
         self.window?.makeKeyAndVisible()
         return true

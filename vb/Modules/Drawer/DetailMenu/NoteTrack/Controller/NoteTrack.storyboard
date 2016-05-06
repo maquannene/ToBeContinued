@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--2ote Track View Controller-->
+        <!--Note Track View Controller-->
         <scene sceneID="ePp-e4-aDD">
             <objects>
-                <viewController storyboardIdentifier="N2oteTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bEv-9s-iZT" customClass="N2oteTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoteTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bEv-9s-iZT" customClass="NoteTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ScL-MO-R6h"/>
                         <viewControllerLayoutGuide type="bottom" id="4DL-AM-9BT"/>

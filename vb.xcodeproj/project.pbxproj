@@ -327,8 +327,8 @@
 			children = (
 				D451DD3F1CDB478F0035AEE1 /* DetailBaseViewController.swift */,
 				D451DD401CDB478F0035AEE1 /* Home */,
-				D451DD421CDB478F0035AEE1 /* ImageTextTrack */,
 				D451DD521CDB478F0035AEE1 /* NoteTrack */,
+				D451DD421CDB478F0035AEE1 /* ImageTextTrack */,
 			);
 			path = DetailMenu;
 			sourceTree = "<group>";
@@ -345,9 +345,9 @@
 			isa = PBXGroup;
 			children = (
 				D451DD431CDB478F0035AEE1 /* Controller */,
-				D451DD461CDB478F0035AEE1 /* Model */,
-				D451DD491CDB478F0035AEE1 /* View */,
 				D451DD501CDB478F0035AEE1 /* ViewModel */,
+				D451DD491CDB478F0035AEE1 /* View */,
+				D451DD461CDB478F0035AEE1 /* Model */,
 			);
 			path = ImageTextTrack;
 			sourceTree = "<group>";
@@ -355,8 +355,8 @@
 		D451DD431CDB478F0035AEE1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D451DD441CDB478F0035AEE1 /* ImageTextTrack.storyboard */,
 				D451DD451CDB478F0035AEE1 /* ImageTextTrackViewController.swift */,
+				D451DD441CDB478F0035AEE1 /* ImageTextTrack.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -395,9 +395,9 @@
 			isa = PBXGroup;
 			children = (
 				D451DD531CDB478F0035AEE1 /* Controller */,
-				D451DD561CDB478F0035AEE1 /* Model */,
-				D451DD591CDB478F0035AEE1 /* View */,
 				D451DD611CDB478F0035AEE1 /* ViewModel */,
+				D451DD591CDB478F0035AEE1 /* View */,
+				D451DD561CDB478F0035AEE1 /* Model */,
 			);
 			path = NoteTrack;
 			sourceTree = "<group>";
@@ -405,8 +405,8 @@
 		D451DD531CDB478F0035AEE1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D451DD541CDB478F0035AEE1 /* NoteTrack.storyboard */,
 				D451DD551CDB478F0035AEE1 /* NoteTrackViewController.swift */,
+				D451DD541CDB478F0035AEE1 /* NoteTrack.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
