@@ -26,7 +26,7 @@ class ImageTextTrackViewModel: NSObject {
 }
 
 //  MARK: Public
-extension ImageTextTrackViewModel: CloudCache {
+extension ImageTextTrackViewModel: CloudModelBase {
     
     /**
     请求获取包含每个imageTextTrack对象objectId的列表（先找到列表，再fetch）
@@ -35,7 +35,7 @@ extension ImageTextTrackViewModel: CloudCache {
     */
     func queryFindImageTextTrackIdListCompletion(complete: QureyImageTextTrackDataCompletion?)
     {
-        let identifier: String = generateIdentifier(ImageTextTrackIdListModel.RealClassName)
+        let identifier: String = ImageTextTrackViewModel.uniqueIdentifier()
         let query: AVQuery = AVQuery(className: ImageTextTrackIdListModel.RealClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
@@ -56,7 +56,7 @@ extension ImageTextTrackViewModel: CloudCache {
     */
     func queryCreateImageTextTrackIdListCompletion(complete: QureyImageTextTrackDataCompletion?)
     {
-        let identifier: String = generateIdentifier(ImageTextTrackIdListModel.RealClassName)
+        let identifier: String = ImageTextTrackViewModel.uniqueIdentifier()
         imageTextTrackIdList = ImageTextTrackIdListModel(identifier: identifier)
         imageTextTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed)

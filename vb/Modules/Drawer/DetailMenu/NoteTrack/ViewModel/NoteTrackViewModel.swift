@@ -7,13 +7,16 @@
 //
  
 import AVOSCloud
+import RealmSwift
   
 typealias QureyNoteTrackDataCompletion = (succeed: Bool!) -> Void
   
 class NoteTrackViewModel: NSObject {
     
     var noteTrackIdList: NoteTrackIdListModel?
-    lazy var noteTrackModelList: [NoteTrackModel?] = [NoteTrackModel?]()          //  存储noteModel列表的缓存数组
+    lazy var noteTrackModelList: [NoteTrackModel?] = [NoteTrackModel?]()        //  存储noteModel列表的缓存数组
+    lazy var realm: Realm? = try! Realm()
+    
     var expandingIndexPath: NSIndexPath?                                        //  展开的cell的IndexPath
     var expandedIndexPath: NSIndexPath?                                         //  被展开（扩展区域）的indexPath
     
@@ -24,59 +27,56 @@ class NoteTrackViewModel: NSObject {
 }
 
 //  MARK: Public
-extension NoteTrackViewModel: CloudCache {
+extension NoteTrackViewModel: CloudModelBase {
     /**
     请求查找包含每个 NoteTrack 对象objectId的列表（先找到列表，再fetch）
     
     - parameter complete: 完成回调
     */
-    func queryFindNoteTrackIdListCompletion(complete: QureyNoteTrackDataCompletion?)
+    func queryFindNoteTrackIdListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
     {
-        let identifier: String = generateIdentifier(NoteTrackIdListModel.RealClassName)
-        let query: AVQuery = AVQuery(className: NoteTrackIdListModel.RealClassName)
-        //  根据identifier 识别符查询list
-        query.whereKey("identifier", equalTo: identifier)
-        query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
-            
-            guard error == nil else { complete?(succeed: false); return }
-            
-            guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
-            
-            guard let objc = objects[0] as? NoteTrackIdListModel else { complete?(succeed: false); return }
-            
-            self.noteTrackIdList = objc
-            
-            complete?(succeed: true)
+        var cacheModel: NoteTrackIdListCacheModel?
+        if fromCachePriority {
+            if let cacheModels: Results = realm?.objects(NoteTrackIdListCacheModel) {
+                if cacheModels.count > 0 {
+                    cacheModel = cacheModels[0]
+                    noteTrackIdList = cacheModel?.exportToCloudObject()
+                    complete?(succeed: true)
+                }
+            }
+        }
+    
+        if updateCache || cacheModel != nil {
+            let identifier: String = NoteTrackViewModel.uniqueIdentifier()
+            let query: AVQuery = AVQuery(className: NoteTrackIdListModel.RealClassName)
+            //  根据identifier 识别符查询list
+            query.whereKey("identifier", equalTo: identifier)
+            query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
+                guard error == nil else { complete?(succeed: false); return }
+                guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
+                guard let objc = objects[0] as? NoteTrackIdListModel else { complete?(succeed: false); return }
+                self.noteTrackIdList = objc
+                try! self.realm?.write {
+                    self.realm?.add(objc.exportToCacheObject(), update: true)
+                }
+                complete?(succeed: true)
+            }
         }
     }
     
     /**
-    第一次使用 请求创建 NoteTrack 列表对象的id列表
-    
-    - parameter complete: 完成回调
-    */
-    func queryCreateNoteTrackIdListCompletion(complete: QureyNoteTrackDataCompletion?)
-    {
-        let identifier: String = generateIdentifier(NoteTrackIdListModel.RealClassName)
-        self.noteTrackIdList = NoteTrackIdListModel(identifier: identifier)
-        self.noteTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
-            complete?(succeed: succeed)
-        }
-    }
-    
-    /**
-    根据 noteTrackIdList 的 id 列表重新生成 noteTrackModelList
-    
-    - parameter complete: 完成回调
-    */
-    func queryNoteTrackListCompletion(complete: QureyNoteTrackDataCompletion?)
+     根据 noteTrackIdList 的 id 列表重新生成 noteTrackModelList
+     
+     - parameter complete: 完成回调
+     */
+    func queryNoteTrackListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
     {
         let fetchGroup: dispatch_group_t = dispatch_group_create()
         var newNoteTrackModelList = [NoteTrackModel?]()
         var success = true      //  加载标志位，一旦有一个失败，就标记失败
         for objectId in self.noteTrackIdList!.list {
             dispatch_group_enter(fetchGroup)
-            let noteTrackModel: NoteTrackModel = NoteTrackModel(outDataWithObjectId: objectId as! String)
+            let noteTrackModel: NoteTrackModel = NoteTrackModel(outDataWithObjectId: objectId )
             noteTrackModel.fetchInBackgroundWithBlock{ (object, error) -> Void in
                 if error != nil {
                     success = false
@@ -99,6 +99,27 @@ extension NoteTrackViewModel: CloudCache {
         }
     }
     
+    /**
+    第一次使用 请求创建 NoteTrack 列表对象的id列表
+    
+    - parameter complete: 完成回调
+    */
+    func queryCreateNoteTrackIdListCompletion(complete: QureyNoteTrackDataCompletion?)
+    {
+        let identifier: String = NoteTrackViewModel.uniqueIdentifier()
+        let noteTrackIdList = NoteTrackIdListModel(identifier: identifier)
+        noteTrackIdList.saveInBackgroundWithBlock{ [weak self] (succeed, error) -> Void in
+            guard let sSelf = self else { complete?(succeed: succeed); return }
+            if succeed {
+                sSelf.noteTrackIdList = noteTrackIdList
+                try! sSelf.realm?.write {
+                    sSelf.realm?.add(sSelf.noteTrackIdList!.exportToCacheObject(), update: true)
+                }
+            }
+            complete?(succeed: succeed)
+        }
+    }
+
     /**
     请求新增 NoteTrack 对象
     
@@ -193,13 +214,23 @@ extension NoteTrackViewModel: CloudCache {
     
 }
 
-protocol CloudCache {
-    func generateIdentifier(className: String!) -> String!
+protocol CloudModelBase {
+    static func uniqueIdentifier() -> String!
 }
 
-extension CloudCache {
-    func generateIdentifier(className: String!) -> String! {
-        return UserInfoManange.shareInstance.uniqueCloudKey! + className
+extension CloudModelBase {
+    static func uniqueIdentifier() -> String! {
+        return UserInfoManange.shareInstance.uniqueCloudKey! + String(self)
+    }
+}
+
+protocol CacheModelBase {
+    static func uniqueIdentifier() -> String!
+}
+
+extension CacheModelBase {
+    static func uniqueIdentifier() -> String! {
+        return UserInfoManange.shareInstance.uniqueCacheKey! + String(self)
     }
 }
   
