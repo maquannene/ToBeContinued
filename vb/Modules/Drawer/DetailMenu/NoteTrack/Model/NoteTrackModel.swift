@@ -29,3 +29,21 @@ extension NoteTrackModel: AVSubclassing {
         return "NoteTrackModel"
     }
 }
+
+extension NoteTrackModel: NSMutableCopying, NSCopying {
+    func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = NoteTrackModel()
+        noteTrackModel.title = self.title
+        noteTrackModel.detailContent = self.detailContent
+        noteTrackModel.objectId = self.objectId
+        return noteTrackModel
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = NoteTrackModel()
+        noteTrackModel.title = self.title
+        noteTrackModel.detailContent = self.detailContent
+        noteTrackModel.objectId = self.objectId
+        return noteTrackModel
+    }
+}
