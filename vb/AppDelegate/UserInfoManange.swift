@@ -72,6 +72,11 @@ class UserInfoManange {
         return thirdLogInIdentifier! + "." + userID + "."
     }
     
+    var uniqueCacheKey: String? {
+        guard let userID = self.userID else { return nil }
+        return thirdLogInIdentifier! + "." + userID + "."
+    }
+    
     func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
         guard self.userID != nil && self.accessToken != nil else { return }
         if fromCachePriority {

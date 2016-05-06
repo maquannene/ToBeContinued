@@ -47,3 +47,21 @@ extension NoteTrackModel: NSMutableCopying, NSCopying {
         return noteTrackModel
     }
 }
+
+extension NoteTrackModel: ModelExportProtocol {
+    
+    typealias CloudType = NoteTrackModel
+    typealias CacheType = NoteTrackCacheModel
+    
+    func exportToCacheObject() -> CacheType! {
+        let object = NoteTrackCacheModel()
+        object.objectId = objectId
+        object.title = title
+        object.detailContent = detailContent
+        return object
+    }
+    
+    func exportToCloudObject() -> CloudType! {
+        return self
+    }
+}

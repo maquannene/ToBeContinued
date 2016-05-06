@@ -20,6 +20,11 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
+		D425B9041CDC99B300609BF0 /* ModelAssociate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9031CDC99B300609BF0 /* ModelAssociate.swift */; };
+		D425B9091CDC9A0700609BF0 /* NoteTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */; };
+		D425B90A1CDC9A0700609BF0 /* NoteTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */; };
+		D425B90C1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */; };
+		D42A333F1CDCC2F20024270B /* NoteTrackCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */; };
 		D42E74311CDA1A290050A9EC /* UserInfoManange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42E74301CDA1A290050A9EC /* UserInfoManange.swift */; };
 		D451DD721CDB478F0035AEE1 /* DetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD3F1CDB478F0035AEE1 /* DetailBaseViewController.swift */; };
 		D451DD731CDB478F0035AEE1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD411CDB478F0035AEE1 /* HomeViewController.swift */; };
@@ -36,8 +41,6 @@
 		D451DD7E1CDB478F0035AEE1 /* ImageTextTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD511CDB478F0035AEE1 /* ImageTextTrackViewModel.swift */; };
 		D451DD7F1CDB478F0035AEE1 /* NoteTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D451DD541CDB478F0035AEE1 /* NoteTrack.storyboard */; };
 		D451DD801CDB478F0035AEE1 /* NoteTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD551CDB478F0035AEE1 /* NoteTrackViewController.swift */; };
-		D451DD811CDB478F0035AEE1 /* NoteTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD571CDB478F0035AEE1 /* NoteTrackIdListModel.swift */; };
-		D451DD821CDB478F0035AEE1 /* NoteTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD581CDB478F0035AEE1 /* NoteTrackModel.swift */; };
 		D451DD831CDB478F0035AEE1 /* NewNoteTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD5A1CDB478F0035AEE1 /* NewNoteTrackView.swift */; };
 		D451DD841CDB478F0035AEE1 /* NewNoteTrackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D451DD5B1CDB478F0035AEE1 /* NewNoteTrackView.xib */; };
 		D451DD851CDB478F0035AEE1 /* NoteTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD5C1CDB478F0035AEE1 /* NoteTrackCell.swift */; };
@@ -116,6 +119,11 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D425B9031CDC99B300609BF0 /* ModelAssociate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAssociate.swift; sourceTree = "<group>"; };
+		D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListModel.swift; sourceTree = "<group>"; };
+		D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackModel.swift; sourceTree = "<group>"; };
+		D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListCacheModel.swift; sourceTree = "<group>"; };
+		D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackCacheModel.swift; sourceTree = "<group>"; };
 		D42E74301CDA1A290050A9EC /* UserInfoManange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoManange.swift; sourceTree = "<group>"; };
 		D451DD3F1CDB478F0035AEE1 /* DetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBaseViewController.swift; sourceTree = "<group>"; };
 		D451DD411CDB478F0035AEE1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -132,8 +140,6 @@
 		D451DD511CDB478F0035AEE1 /* ImageTextTrackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTrackViewModel.swift; sourceTree = "<group>"; };
 		D451DD541CDB478F0035AEE1 /* NoteTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NoteTrack.storyboard; sourceTree = "<group>"; };
 		D451DD551CDB478F0035AEE1 /* NoteTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackViewController.swift; sourceTree = "<group>"; };
-		D451DD571CDB478F0035AEE1 /* NoteTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListModel.swift; sourceTree = "<group>"; };
-		D451DD581CDB478F0035AEE1 /* NoteTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackModel.swift; sourceTree = "<group>"; };
 		D451DD5A1CDB478F0035AEE1 /* NewNoteTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewNoteTrackView.swift; sourceTree = "<group>"; };
 		D451DD5B1CDB478F0035AEE1 /* NewNoteTrackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteTrackView.xib; sourceTree = "<group>"; };
 		D451DD5C1CDB478F0035AEE1 /* NoteTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackCell.swift; sourceTree = "<group>"; };
@@ -259,6 +265,7 @@
 			children = (
 				D488BF031B28685A0050C2E2 /* AppDelegate */,
 				D45E89701B36CD1500AFF9F8 /* Modules */,
+				D425B9011CDC996200609BF0 /* Tools */,
 				D451DD951CDB49420035AEE1 /* Universal */,
 				D41C7FF91B1BEF2600987D42 /* Utils */,
 				D4E17B4A1B286A6300228B4A /* Resources */,
@@ -320,6 +327,40 @@
 				D4B712F11BAFC6D200166806 /* AVOSCloud */,
 			);
 			path = SDK;
+			sourceTree = "<group>";
+		};
+		D425B9011CDC996200609BF0 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D425B9021CDC999A00609BF0 /* ModelAssociate */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		D425B9021CDC999A00609BF0 /* ModelAssociate */ = {
+			isa = PBXGroup;
+			children = (
+				D425B9031CDC99B300609BF0 /* ModelAssociate.swift */,
+			);
+			path = ModelAssociate;
+			sourceTree = "<group>";
+		};
+		D425B9051CDC9A0700609BF0 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */,
+				D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		D425B9061CDC9A0700609BF0 /* Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */,
+				D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */,
+			);
+			path = Cloud;
 			sourceTree = "<group>";
 		};
 		D451DD3E1CDB478F0035AEE1 /* DetailMenu */ = {
@@ -414,8 +455,8 @@
 		D451DD561CDB478F0035AEE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D451DD571CDB478F0035AEE1 /* NoteTrackIdListModel.swift */,
-				D451DD581CDB478F0035AEE1 /* NoteTrackModel.swift */,
+				D425B9061CDC9A0700609BF0 /* Cloud */,
+				D425B9051CDC9A0700609BF0 /* Cache */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -750,23 +791,26 @@
 				D40709361BB104F20098867E /* UIView_Extension.swift in Sources */,
 				D451DD7B1CDB478F0035AEE1 /* ImageTextTrackDisplayCell.swift in Sources */,
 				D451DD721CDB478F0035AEE1 /* DetailBaseViewController.swift in Sources */,
-				D451DD811CDB478F0035AEE1 /* NoteTrackIdListModel.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* AppDelegate.swift in Sources */,
 				D451DD871CDB478F0035AEE1 /* NoteTrackDetailCell.swift in Sources */,
 				D451DD941CDB478F0035AEE1 /* SettingViewController.swift in Sources */,
+				D425B9091CDC9A0700609BF0 /* NoteTrackIdListModel.swift in Sources */,
 				D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
-				D451DD821CDB478F0035AEE1 /* NoteTrackModel.swift in Sources */,
 				D451DD9A1CDB49420035AEE1 /* AppMacroObjc.m in Sources */,
 				D451DD851CDB478F0035AEE1 /* NoteTrackCell.swift in Sources */,
 				D451DD991CDB49420035AEE1 /* Constant.swift in Sources */,
 				D451DD731CDB478F0035AEE1 /* HomeViewController.swift in Sources */,
+				D425B9041CDC99B300609BF0 /* ModelAssociate.swift in Sources */,
 				D42E74311CDA1A290050A9EC /* UserInfoManange.swift in Sources */,
+				D425B90A1CDC9A0700609BF0 /* NoteTrackModel.swift in Sources */,
 				D451DD771CDB478F0035AEE1 /* ImageTextTrackModel.swift in Sources */,
 				D451DD8F1CDB478F0035AEE1 /* MainMenuView.swift in Sources */,
 				D45E89841B36CD1500AFF9F8 /* LogInViewController.swift in Sources */,
 				D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */,
+				D42A333F1CDCC2F20024270B /* NoteTrackCacheModel.swift in Sources */,
+				D425B90C1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift in Sources */,
 				D451DD8A1CDB478F0035AEE1 /* NoteTrackViewModel.swift in Sources */,
 				D451DD8E1CDB478F0035AEE1 /* UserModel.swift in Sources */,
 				D451DD7A1CDB478F0035AEE1 /* ImageTextTrackCell.swift in Sources */,
