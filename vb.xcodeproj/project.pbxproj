@@ -60,7 +60,6 @@
 		D451DD991CDB49420035AEE1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD961CDB49420035AEE1 /* Constant.swift */; };
 		D451DD9A1CDB49420035AEE1 /* AppMacroObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = D451DD981CDB49420035AEE1 /* AppMacroObjc.m */; };
 		D451DD9F1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D451DD9E1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.m */; };
-		D45D91461CDDC2460080EF06 /* RealmString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D91451CDDC2460080EF06 /* RealmString.swift */; };
 		D45E89841B36CD1500AFF9F8 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E89721B36CD1500AFF9F8 /* LogInViewController.swift */; };
 		D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E024C1BEF411700E34F23 /* UINavigationBar+Awesome.m */; };
 		D488BF051B28685A0050C2E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D488BF041B28685A0050C2E2 /* AppDelegate.swift */; };
@@ -162,7 +161,6 @@
 		D451DD981CDB49420035AEE1 /* AppMacroObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMacroObjc.m; sourceTree = "<group>"; };
 		D451DD9D1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQRecursiveLevelLog.h"; sourceTree = "<group>"; };
 		D451DD9E1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQRecursiveLevelLog.m"; sourceTree = "<group>"; };
-		D45D91451CDDC2460080EF06 /* RealmString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmString.swift; sourceTree = "<group>"; };
 		D45E89721B36CD1500AFF9F8 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D46C6CB31B10273400EA9FF6 /* vb-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vb-Prefix.pch"; path = "vb/vb-Prefix.pch"; sourceTree = "<group>"; };
 		D46EFAFE1BA5CF3200DB73BE /* vb-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vb-Bridging-Header.h"; path = "vb/vb-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 		D425B9011CDC996200609BF0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				D45D91441CDDC2360080EF06 /* RealmType */,
 				D425B9021CDC999A00609BF0 /* ModelAssociate */,
 			);
 			path = Tools;
@@ -549,14 +546,6 @@
 				D451DD9E1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.m */,
 			);
 			path = Category;
-			sourceTree = "<group>";
-		};
-		D45D91441CDDC2360080EF06 /* RealmType */ = {
-			isa = PBXGroup;
-			children = (
-				D45D91451CDDC2460080EF06 /* RealmString.swift */,
-			);
-			path = RealmType;
 			sourceTree = "<group>";
 		};
 		D45E89701B36CD1500AFF9F8 /* Modules */ = {
@@ -807,7 +796,6 @@
 				D451DD941CDB478F0035AEE1 /* SettingViewController.swift in Sources */,
 				D425B9091CDC9A0700609BF0 /* NoteTrackIdListModel.swift in Sources */,
 				D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */,
-				D45D91461CDDC2460080EF06 /* RealmString.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
 				D451DD9A1CDB49420035AEE1 /* AppMacroObjc.m in Sources */,

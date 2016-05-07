@@ -8,21 +8,28 @@
 
 import RealmSwift
 
+class NoteTrackId: Object {
+    dynamic var id = ""
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+}
+
 class NoteTrackIdListCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String!
     dynamic var identifier: String!
     var list: [String] {
         get {
-            return _list.map { $0.stringValue }
+            return _list.map { $0.id }
         }
         set {
             _list.removeAll()
-            _list.appendContentsOf(newValue.map { RealmString(value: [$0]) })
+            _list.appendContentsOf(newValue.map { NoteTrackId(value: [$0]) })
         }
     }
     
-    var _list = List<RealmString>()
+    var _list = List<NoteTrackId>()
     
     convenience init(identifier: String) {
         self.init()

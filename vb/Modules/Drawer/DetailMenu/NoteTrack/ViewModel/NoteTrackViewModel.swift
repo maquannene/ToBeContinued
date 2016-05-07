@@ -86,7 +86,7 @@ extension NoteTrackViewModel: CloudModelBase {
                 //  冗余数据清理
                 try! realm?.write {
                     //  删除数据库中的 NoteTrackId RealmString 类型
-                    if let deleteIdeObj: [RealmString] = realm?.objects(RealmString).filter( { $0.stringValue == cacheModel.objectId } ) {
+                    if let deleteIdeObj: [NoteTrackId] = realm?.objects(NoteTrackId).filter( { $0.id == cacheModel.objectId } ) {
                         realm?.delete(deleteIdeObj[0])
                     }
                     //  删除数据库中 NoteTrackCacheModel 对象
@@ -218,7 +218,7 @@ extension NoteTrackViewModel: CloudModelBase {
                 //  更新 NoteTrackIdList 的数据库
                 sSelf.realm?.add(sSelf.noteTrackIdList!.exportToCacheObject(), update: true)
                 //  删除数据库中的 NoteTrackId RealmString 类型
-                if let deleteIdeObj: [RealmString] = sSelf.realm?.objects(RealmString).filter( { $0.stringValue == track.objectId } ) {
+                if let deleteIdeObj: [NoteTrackId] = sSelf.realm?.objects(NoteTrackId).filter( { $0.id == track.objectId } ) {
                     sSelf.realm?.delete(deleteIdeObj[0])
                 }
                 //  删除数据库中 NoteTrackCacheModel 对象
