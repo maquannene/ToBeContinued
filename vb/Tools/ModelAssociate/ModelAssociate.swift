@@ -6,12 +6,6 @@
 //  Copyright © 2016 maquan. All rights reserved.
 //
 
-import RealmSwift
-
-class RealmString: Object {
-    dynamic var stringValue = ""
-}
-
 protocol ModelExportProtocol {
     associatedtype CloudType
     associatedtype CacheType
@@ -19,3 +13,22 @@ protocol ModelExportProtocol {
     func exportToCacheObject() -> CacheType!
 }
 
+protocol CloudModelBase {
+    static func uniqueIdentifier() -> String!
+}
+
+extension CloudModelBase {
+    static func uniqueIdentifier() -> String! {
+        return UserInfoManange.shareInstance.uniqueCloudKey! + String(self)
+    }
+}
+
+protocol CacheModelBase {
+    static func uniqueIdentifier() -> String!
+}
+
+extension CacheModelBase {
+    static func uniqueIdentifier() -> String! {
+        return UserInfoManange.shareInstance.uniqueCacheKey! + String(self)
+    }
+}

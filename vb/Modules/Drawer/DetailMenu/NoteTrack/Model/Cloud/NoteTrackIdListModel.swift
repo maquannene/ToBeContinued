@@ -29,6 +29,24 @@ extension NoteTrackIdListModel: AVSubclassing {
     }
 }
 
+extension NoteTrackIdListModel: NSCopying, NSMutableCopying {
+    func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = NoteTrackIdListModel()
+        noteTrackModel.objectId = self.objectId
+        noteTrackModel.identifier = self.identifier
+        noteTrackModel.list = self.list
+        return noteTrackModel
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = NoteTrackIdListModel()
+        noteTrackModel.objectId = self.objectId
+        noteTrackModel.identifier = self.identifier
+        noteTrackModel.list = self.list
+        return noteTrackModel
+    }
+}
+
 extension NoteTrackIdListModel: ModelExportProtocol {
     
     typealias CloudType = NoteTrackIdListModel

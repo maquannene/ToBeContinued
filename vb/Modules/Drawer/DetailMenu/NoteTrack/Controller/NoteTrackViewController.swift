@@ -232,7 +232,7 @@ extension NoteTrackViewController {
     }
     
     /**
-    确认更新密码条目事件
+    确认更新 NoteTrack 条目事件
     */
     @objc private func confirmUpdataNoteTrackAction(sender: AnyObject!)
     {
@@ -335,7 +335,7 @@ extension NoteTrackViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let actualIndexPath = viewModel.convertToActualIndexPath(indexPath)
-        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]!
+        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]
         //  如果是展开的detailCell
         if (viewModel.expandedIndexPath != nil && viewModel.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: NoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(NoteTrackViewController.Static.noteTrackDetailCellId) as! NoteTrackDetailCell

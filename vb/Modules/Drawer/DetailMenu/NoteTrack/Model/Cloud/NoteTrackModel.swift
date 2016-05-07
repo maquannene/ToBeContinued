@@ -22,6 +22,11 @@ class NoteTrackModel: AVObject {
         self.title = title
         self.detailContent = detailContent
     }
+    
+    func update(newTrackModel noteTrackModel: NoteTrackModel) {
+        self.title = noteTrackModel.title
+        self.detailContent = noteTrackModel.detailContent
+    }
 }
 
 extension NoteTrackModel: AVSubclassing {
@@ -33,17 +38,17 @@ extension NoteTrackModel: AVSubclassing {
 extension NoteTrackModel: NSMutableCopying, NSCopying {
     func mutableCopyWithZone(zone: NSZone) -> AnyObject {
         let noteTrackModel = NoteTrackModel()
+        noteTrackModel.objectId = self.objectId
         noteTrackModel.title = self.title
         noteTrackModel.detailContent = self.detailContent
-        noteTrackModel.objectId = self.objectId
         return noteTrackModel
     }
     
     func copyWithZone(zone: NSZone) -> AnyObject {
         let noteTrackModel = NoteTrackModel()
+        noteTrackModel.objectId = self.objectId
         noteTrackModel.title = self.title
         noteTrackModel.detailContent = self.detailContent
-        noteTrackModel.objectId = self.objectId
         return noteTrackModel
     }
 }
@@ -58,6 +63,7 @@ extension NoteTrackModel: ModelExportProtocol {
         object.objectId = objectId
         object.title = title
         object.detailContent = detailContent
+        object.createdAt = createdAt
         return object
     }
     
