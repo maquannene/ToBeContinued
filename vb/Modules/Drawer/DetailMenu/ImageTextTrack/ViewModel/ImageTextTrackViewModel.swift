@@ -12,6 +12,8 @@ import SDWebImage
 import AVFoundation
 import NYXImagesKit
 
+typealias QureyImageTextTrackDataCompletion = (succeed: Bool!) -> Void
+
 class ImageTextTrackViewModel: NSObject {
 
     var imageTextTrackIdList: ImageTextTrackIdListModel?
@@ -24,17 +26,17 @@ class ImageTextTrackViewModel: NSObject {
 }
 
 //  MARK: Public
-extension ImageTextTrackViewModel {
+extension ImageTextTrackViewModel: CloudModelBase {
     
     /**
     请求获取包含每个imageTextTrack对象objectId的列表（先找到列表，再fetch）
     
     - parameter complete: 完成回调
     */
-    func queryFindImageTextTrackIdListCompletion(complete: QureyDataCompleteClosure?)
+    func queryFindImageTextTrackIdListCompletion(complete: QureyImageTextTrackDataCompletion?)
     {
-        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(ImageTextTrackIdListModel.self)
-        let query: AVQuery = AVQuery(className: ImageTextTrackIdListModel.ClassName)
+        let identifier: String = ImageTextTrackViewModel.uniqueIdentifier()
+        let query: AVQuery = AVQuery(className: ImageTextTrackIdListModel.RealClassName)
         //  根据identifier 识别符查询list
         query.whereKey("identifier", equalTo: identifier)
         query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) -> Void in
@@ -52,9 +54,9 @@ extension ImageTextTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryCreateImageTextTrackIdListCompletion(complete: QureyDataCompleteClosure?)
+    func queryCreateImageTextTrackIdListCompletion(complete: QureyImageTextTrackDataCompletion?)
     {
-        let identifier: String = UserInfoManange.shareInstance.uniqueCloudKey! + NSStringFromClass(ImageTextTrackIdListModel.self)
+        let identifier: String = ImageTextTrackViewModel.uniqueIdentifier()
         imageTextTrackIdList = ImageTextTrackIdListModel(identifier: identifier)
         imageTextTrackIdList!.saveInBackgroundWithBlock{ (succeed, error) -> Void in
             complete?(succeed: succeed)
@@ -66,7 +68,7 @@ extension ImageTextTrackViewModel {
     
     - parameter complete: 完成回调
     */
-    func queryImageTextTrackListCompletion(complete: QureyDataCompleteClosure?)
+    func queryImageTextTrackListCompletion(complete: QureyImageTextTrackDataCompletion?)
     {
         let fetchGroup: dispatch_group_t = dispatch_group_create()
         let newImageTextTrackList = NSMutableArray()
@@ -103,9 +105,9 @@ extension ImageTextTrackViewModel {
      - parameter progressClosure: 进度回调
      - parameter complete: 完成回调
      */
-    func queryAddImageTextTrackWithOringinImage(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: QureyDataCompleteClosure?)
+    func queryAddImageTextTrackWithOringinImage(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: QureyImageTextTrackDataCompletion?)
     {
-        typealias saveImageFileClosure = (imageFile: AVFile!, group: dispatch_group_t!, progressClosure: ((progress: Int) -> Void)?, complete: QureyDataCompleteClosure?) -> Void
+        typealias saveImageFileClosure = (imageFile: AVFile!, group: dispatch_group_t!, progressClosure: ((progress: Int) -> Void)?, complete: QureyImageTextTrackDataCompletion?) -> Void
         let querySaveImageFile: saveImageFileClosure = { (imageFile, group, progressClosure, complete) in
             dispatch_group_enter(group)
             imageFile.saveInBackgroundWithBlock({ [weak imageFile] (succeed, error) -> Void in
@@ -117,7 +119,7 @@ extension ImageTextTrackViewModel {
                 //  将本地的AVCacheFile缓存清理掉
                 weakimageFile.clearCachedFile()
                 dispatch_group_leave(group)
-                }, progressBlock: { (progress: Int) -> Void in
+            }, progressBlock: { (progress: Int) -> Void in
                     progressClosure?(progress: progress)
             })
         }
@@ -167,7 +169,7 @@ extension ImageTextTrackViewModel {
         }
     }
     
-    func queryDeleteImageTextTrackAtIndex(index: Int!, complete: QureyDataCompleteClosure?)
+    func queryDeleteImageTextTrackAtIndex(index: Int!, complete: QureyImageTextTrackDataCompletion?)
     {
         let track: ImageTextTrackModel! = fetchImageTextTrackModelWithIndex(index)
         

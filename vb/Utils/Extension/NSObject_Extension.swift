@@ -6,7 +6,7 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-public extension NSObject{
+public extension NSObject {
     
     //  类方法，类也是对象，这里的self 指的就是 这个类
     public class var RealClassName: String {

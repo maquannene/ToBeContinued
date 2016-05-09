@@ -38,6 +38,11 @@ PODS:
   - MQMaskController (1.0)
   - NYXImagesKit (2.3)
   - PINCache (2.2.2)
+  - Realm (0.101.0):
+    - Realm/Headers (= 0.101.0)
+  - Realm/Headers (0.101.0)
+  - RealmSwift (0.101.0):
+    - Realm (= 0.101.0)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -59,6 +64,7 @@ DEPENDENCIES:
   - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`)
   - NYXImagesKit
   - PINCache
+  - RealmSwift
   - SDWebImage (~> 3.6)
   - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SWTableViewCell (= 0.3.7)
@@ -107,6 +113,8 @@ SPEC CHECKSUMS:
   MQMaskController: 79ace10666c55a22147a2c55dfdf1250ab105a3f
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
+  Realm: b21596d6d7e1c054f6fae967d27263d2593ca309
+  RealmSwift: 5247501bcd68b9db3a718cba808e1ce45ba67034
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579

@@ -17,7 +17,7 @@ class DrawerController: MMDrawerController {
     var homeVc: HomeViewController?
     
     //  第一部分： 图迹
-    var noteTrackVc: N2oteTrackViewController?
+    var noteTrackVc: NoteTrackViewController?
     
     //  第二部分： 图文迹
     var imageTextTrackVc: ImageTextTrackViewController?
@@ -53,7 +53,7 @@ extension DrawerController: MainMenuViewControllerDelegate {
             centerViewController = homeVc
         case .NoteTrack:
             if noteTrackVc == nil {
-                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! N2oteTrackViewController!
+                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! NoteTrackViewController!
             }
             if let navi = noteTrackVc!.navigationController as UINavigationController? {
                 centerViewController = navi
