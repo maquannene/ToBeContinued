@@ -21,7 +21,6 @@ class NoteTrackViewController: DetailBaseViewController {
     }
     
     var viewModel: NoteTrackViewModel!
-    
     var newNoteTrackVc: MQMaskController?
     @IBOutlet weak var noNoteTrackTips: UILabel!
     var operateCellIndex: Int = -1
@@ -55,20 +54,6 @@ class NoteTrackViewController: DetailBaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        AFNetworkReachabilityManager.sharedManager().startMonitoring()
-        AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock { (netWorkState: AFNetworkReachabilityStatus) -> Void in
-            switch netWorkState {
-            case AFNetworkReachabilityStatus.NotReachable:
-                print("网络不可用")
-                SVProgressHUD.showInfoWithStatus("网络不可用")
-            case AFNetworkReachabilityStatus.ReachableViaWWAN:
-                print("3G")
-            case AFNetworkReachabilityStatus.ReachableViaWiFi:
-                print("wifi")
-            default:
-                print("未知状态")
-            }
-        }
     }
 
     deinit {
@@ -219,7 +204,7 @@ extension NoteTrackViewController {
     {
         let contentView = newNoteTrackVc!.contentView as! NewNoteTrackView
         let noteTrackModel = NoteTrackModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
-        viewModel.queryAddNoteTrack(noteTrackModel, complete: { [weak self]  (succeed) -> Void in
+        viewModel.queryAddNoteTrack(noteTrackModel) { [weak self] (succeed) -> Void in
             guard let strongSelf = self else { return }
             strongSelf.viewModel.expandingIndexPath = nil
             strongSelf.viewModel.expandedIndexPath = nil
@@ -227,7 +212,7 @@ extension NoteTrackViewController {
             strongSelf.newNoteTrackVc!.dismissWithAnimated(true) {
                 strongSelf.noteTrackListTableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
             }
-        })
+        }
     }
     
     /**
