@@ -133,7 +133,6 @@ extension MainMenuViewController {
         let userInfoManage = UserInfoManange.shareInstance
         WeiboSDK.logOutWithToken(userInfoManage.accessToken!, delegate: self, withTag: "logOut")
         SVProgressHUD.showWithStatus("正在退出...")
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
     }
     
     @IBAction func clearDiskMemory(sender: AnyObject)
@@ -204,7 +203,7 @@ extension MainMenuViewController: WBHttpRequestDelegate {
     func request(request: WBHttpRequest!, didFinishLoadingWithResult result: String!)
     {
         if request.tag == "logOut" {
-            UserInfoManange.shareInstance.clearUserInfo()
+            UserInfoManange.shareInstance.clear()
             SVProgressHUD.dismiss()
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()

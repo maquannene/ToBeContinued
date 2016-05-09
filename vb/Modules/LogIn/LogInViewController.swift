@@ -69,7 +69,6 @@ class LogInViewController: UIViewController {
         //  如果登陆过，就紧接着获取个人信息
         if model == LogInViewModel.Loading {
             SVProgressHUD.showWithStatus("读取个人信息...")
-            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         }
     }
 
@@ -100,7 +99,6 @@ extension LogInViewController {
                 }
         }
     }
-    
 }
 
 //  MARK: WeiboSDKDelegate
@@ -110,12 +108,9 @@ extension LogInViewController: WeiboSDKDelegate {
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
         //  这里的回调 是 晚于 viewWillApper
         //  所以这里要单独进行个人信息获取
-        model = LogInViewModel.AlreadyLogIn
         SVProgressHUD.showSuccessWithStatus("登陆成功")
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             SVProgressHUD.showWithStatus("读取个人信息...")
-            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             UserInfoManange.shareInstance.getUserInfo() { [unowned self] (success, userModel) in
                 //  隐藏进度条
                 SVProgressHUD.dismiss()
@@ -123,12 +118,6 @@ extension LogInViewController: WeiboSDKDelegate {
                     self.model = LogInViewModel.AlreadyLogIn
                     self.userImageView!.sd_setImageWithURL(NSURL(string: userModel!.avatar_large as String!))
                     self.successLogIn()
-                }
-                else {
-                    self.model = .NotLogIn
-                    UserInfoManange.shareInstance.clearUserInfo()
-                    SDImageCache.sharedImageCache().clearDisk()
-                    SDImageCache.sharedImageCache().clearMemory()
                 }
             }
         }

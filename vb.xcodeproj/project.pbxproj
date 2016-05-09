@@ -551,9 +551,9 @@
 		D45E89701B36CD1500AFF9F8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D45E89711B36CD1500AFF9F8 /* LogIn */,
 				D4C5B5B31CD9D87800C8E7CB /* Root */,
 				D4C5B5B61CD9E0EB00C8E7CB /* Drawer */,
-				D45E89711B36CD1500AFF9F8 /* LogIn */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

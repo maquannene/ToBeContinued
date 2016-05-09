@@ -61,7 +61,6 @@ class NoteTrackViewController: DetailBaseViewController {
             case AFNetworkReachabilityStatus.NotReachable:
                 print("网络不可用")
                 SVProgressHUD.showInfoWithStatus("网络不可用")
-                SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
             case AFNetworkReachabilityStatus.ReachableViaWWAN:
                 print("3G")
             case AFNetworkReachabilityStatus.ReachableViaWiFi:

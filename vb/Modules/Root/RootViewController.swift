@@ -42,6 +42,10 @@ class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultMaskType(.None)
+        SVProgressHUD.setDefaultStyle(.Dark)
+        SVProgressHUD.setDefaultAnimationType(.Native)
+        SVProgressHUD.setMinimumDismissTimeInterval(2)
     }
     
 }

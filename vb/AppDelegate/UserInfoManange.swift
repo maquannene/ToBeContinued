@@ -10,6 +10,7 @@ import Foundation
 import PINCache
 import MJExtension
 import AFNetworking
+import RealmSwift
 
 class UserInfoManange {
     
@@ -50,6 +51,16 @@ class UserInfoManange {
         }
     }
     
+    var uniqueCloudKey: String? {
+        guard let userID = self.userID else { return nil }
+        return thirdLogInIdentifier! + "." + userID + "."
+    }
+    
+    var uniqueCacheKey: String? {
+        guard let userID = self.userID else { return nil }
+        return thirdLogInIdentifier! + "." + userID + "."
+    }
+    
     func updateUserModel(key: String!, value: String!) {
         if var authorizeInfo = cache.objectForKey(WeiboSDKInfo.AutorizeInfo) as? [String: String] {
             authorizeInfo[key] = value
@@ -65,16 +76,6 @@ class UserInfoManange {
     func readUserModel(key: String!) -> String? {
         guard let authorizeInfo = cache.objectForKey(WeiboSDKInfo.AutorizeInfo) as? [String: String] else { return nil }
         return authorizeInfo[key]
-    }
-    
-    var uniqueCloudKey: String? {
-        guard let userID = self.userID else { return nil }
-        return thirdLogInIdentifier! + "." + userID + "."
-    }
-    
-    var uniqueCacheKey: String? {
-        guard let userID = self.userID else { return nil }
-        return thirdLogInIdentifier! + "." + userID + "."
     }
     
     func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
@@ -104,11 +105,27 @@ class UserInfoManange {
         cache.setObject(self.userModel!, forKey: kUserInfoKey)
     }
     
-    func clearUserInfo() {
+    func clear() {
         accessToken = nil
         userID = nil
         thirdLogInIdentifier = nil
         userModel = nil
+        // 清理 realm 数据
+        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+        let realmURLs = [
+            realmURL,
+            realmURL.URLByAppendingPathExtension("lock"),
+            realmURL.URLByAppendingPathExtension("management"),
+        ]
+        let manager = NSFileManager.defaultManager()
+        for URL in realmURLs {
+            do {
+                try manager.removeItemAtURL(URL)
+            } catch {
+                // 处理错误
+            }
+        }
+        
         //  移除存储三个唯一值信息的字典
         cache.removeObjectForKey(WeiboSDKInfo.AutorizeInfo)
         //  移除个人信息的字典
