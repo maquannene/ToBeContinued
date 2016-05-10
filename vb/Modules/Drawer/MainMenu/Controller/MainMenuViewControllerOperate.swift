@@ -13,7 +13,7 @@ import SDWebImage
 enum MainMenuViewControllerOperate: Int {
     case Home
     case NoteTrack
-    case ImageTextTrack
+    case ImageTrack
     case Setting
     case LogOut
 }
@@ -168,7 +168,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             delegate?.mainMenuViewController(self, operate: .NoteTrack)
         case 1:
-            delegate?.mainMenuViewController(self, operate: .ImageTextTrack)
+            delegate?.mainMenuViewController(self, operate: .ImageTrack)
         default:
             break
         }

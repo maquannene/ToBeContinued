@@ -1,5 +1,5 @@
 //
-//  ImageTextTrackLayout.swift
+//  ImageTrackLayout.swift
 //  vb
 //
 //  Created by 马权 on 9/25/15.
@@ -8,22 +8,22 @@
 
 typealias CellHeightInfo = (cellHeight: CGFloat, longCell: Bool)
 
-protocol ImageTextTrackLayoutDelegate: NSObjectProtocol {
+protocol ImageTrackLayoutDelegate: NSObjectProtocol {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
 }
 
-class ImageTextTrackLayoutAttributes: UICollectionViewLayoutAttributes {
+class ImageTrackLayoutAttributes: UICollectionViewLayoutAttributes {
     
     var longImage: Bool = false
     
     override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = super.copyWithZone(zone) as! ImageTextTrackLayoutAttributes
+        let copy = super.copyWithZone(zone) as! ImageTrackLayoutAttributes
         copy.longImage = longImage
         return copy
     }
     
     override func isEqual(object: AnyObject?) -> Bool {
-        if let attributes = object as? ImageTextTrackLayoutAttributes {
+        if let attributes = object as? ImageTrackLayoutAttributes {
             if attributes.longImage == longImage {
                 return super.isEqual(object)
             }
@@ -33,19 +33,19 @@ class ImageTextTrackLayoutAttributes: UICollectionViewLayoutAttributes {
     
 }
 
-class ImageTextTrackLayout: UICollectionViewLayout {
+class ImageTrackLayout: UICollectionViewLayout {
     
-    weak var delegate: ImageTextTrackLayoutDelegate!
+    weak var delegate: ImageTrackLayoutDelegate!
     var numberOfColumns: Int = 1
     var cellWidth: CGFloat = 0
     var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
-    private var layoutAttributesCache = [ImageTextTrackLayoutAttributes]()
+    private var layoutAttributesCache = [ImageTrackLayoutAttributes]()
     private var contentHeight: CGFloat = 0
     private var contentWidth: CGFloat = 0
     
     override class func layoutAttributesClass() -> AnyClass {
-        return ImageTextTrackLayoutAttributes.self
+        return ImageTrackLayoutAttributes.self
     }
     
     
@@ -76,7 +76,7 @@ class ImageTextTrackLayout: UICollectionViewLayout {
             let indexPath = NSIndexPath(forItem: item, inSection: 0)
             let cellHeightInfo = delegate!.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
             let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeightInfo.cellHeight)
-            let attributes = ImageTextTrackLayoutAttributes(forCellWithIndexPath: indexPath)
+            let attributes = ImageTrackLayoutAttributes(forCellWithIndexPath: indexPath)
             attributes.frame = frame
             attributes.longImage = cellHeightInfo.longCell
             layoutAttributesCache.append(attributes)

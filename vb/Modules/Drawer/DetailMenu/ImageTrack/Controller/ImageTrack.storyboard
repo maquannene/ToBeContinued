@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Image Text Track View Controller-->
+        <!--Image Track View Controller-->
         <scene sceneID="3Lw-yo-vqa">
             <objects>
-                <viewController storyboardIdentifier="ImageTextTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jrq-Ir-Fhw" customClass="ImageTextTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jrq-Ir-Fhw" customClass="ImageTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PjH-lN-nzl"/>
                         <viewControllerLayoutGuide type="bottom" id="TUK-7G-Bck"/>
@@ -130,7 +130,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="imageTextTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
+                        <outlet property="imageTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
                         <outlet property="layout" destination="vgQ-X3-bCS" id="nn7-Gx-Vpa"/>
                         <outlet property="updateProgressLabel" destination="twi-9J-g4C" id="K6N-y5-mYM"/>
                         <outlet property="updateProgressTop" destination="jOb-x0-3Tm" id="K8x-3R-d8o"/>
