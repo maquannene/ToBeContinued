@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Image Text Track View Controller-->
+        <!--Image Track View Controller-->
         <scene sceneID="3Lw-yo-vqa">
             <objects>
-                <viewController storyboardIdentifier="ImageTextTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jrq-Ir-Fhw" customClass="ImageTextTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageTrackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jrq-Ir-Fhw" customClass="ImageTrackViewController" customModule="vb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PjH-lN-nzl"/>
                         <viewControllerLayoutGuide type="bottom" id="TUK-7G-Bck"/>
@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="width" constant="44" id="d2D-Wa-EV8"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="addImageTextTrackAction:" destination="Jrq-Ir-Fhw" eventType="touchUpInside" id="5Ek-bL-zPM"/>
+                                    <action selector="addImageTrackAction:" destination="Jrq-Ir-Fhw" eventType="touchUpInside" id="72C-8i-7Wr"/>
                                 </connections>
                             </button>
                             <progressView opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQL-qx-E4b" userLabel="prgressView">
@@ -44,9 +44,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-Pc-CdB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="ImageTextTrackLayout" customModule="vb" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="ImageTrackLayout" customModule="vb" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageTextTrackCell" id="gb2-oz-fO8" customClass="ImageTextTrackCell" customModule="vb" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageTrackCell" id="gb2-oz-fO8" customClass="ImageTrackCell" customModule="vb" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -130,7 +130,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="imageTextTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
+                        <outlet property="imageTrackCollectionView" destination="PtS-Pc-CdB" id="3RP-A4-PvK"/>
                         <outlet property="layout" destination="vgQ-X3-bCS" id="nn7-Gx-Vpa"/>
                         <outlet property="updateProgressLabel" destination="twi-9J-g4C" id="K6N-y5-mYM"/>
                         <outlet property="updateProgressTop" destination="jOb-x0-3Tm" id="K8x-3R-d8o"/>

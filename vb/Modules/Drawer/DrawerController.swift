@@ -20,7 +20,7 @@ class DrawerController: MMDrawerController {
     var noteTrackVc: NoteTrackViewController?
     
     //  第二部分： 图文迹
-    var imageTextTrackVc: ImageTextTrackViewController?
+    var imageTrackVc: ImageTrackViewController?
     
     //
     var settingVc: SettingViewController?
@@ -62,11 +62,11 @@ extension DrawerController: MainMenuViewControllerDelegate {
                 centerViewController = UINavigationController(rootViewController: noteTrackVc!)
             }
             
-        case .ImageTextTrack:
-            if imageTextTrackVc == nil {
-                imageTextTrackVc = UIStoryboard(name: "ImageTextTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! ImageTextTrackViewController!
+        case .ImageTrack:
+            if imageTrackVc == nil {
+                imageTrackVc = UIStoryboard(name: "ImageTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! ImageTrackViewController!
             }
-            centerViewController = imageTextTrackVc!
+            centerViewController = imageTrackVc!
             
         case .Setting:
             return

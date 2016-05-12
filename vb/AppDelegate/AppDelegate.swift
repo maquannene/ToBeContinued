@@ -64,8 +64,8 @@ extension AppDelegate {
         //  AVOSCloud sdk
         NoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
         NoteTrackModel.registerSubclass()
-        ImageTextTrackIdListModel.registerSubclass()
-        ImageTextTrackModel.registerSubclass()
+        ImageTrackIdListModel.registerSubclass()
+        ImageTrackModel.registerSubclass()
         AVOSCloud.setApplicationId(kAVCloudSDKAppID, clientKey: kAVCloudSDKAppKey)
     }
     

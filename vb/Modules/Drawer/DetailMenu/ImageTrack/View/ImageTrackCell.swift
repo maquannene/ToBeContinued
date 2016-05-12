@@ -1,5 +1,5 @@
 //
-//  ImageTextTrackCell.swift
+//  ImageTrackCell.swift
 //  vb
 //
 //  Created by 马权 on 9/25/15.
@@ -8,14 +8,14 @@
 
 import SDWebImage
 
-protocol ImageTextTrackCellDelegate: NSObjectProtocol {
-    func imageTextTrackCellDidLongPress(imageTextTrackCell: ImageTextTrackCell, gesture: UIGestureRecognizer) -> Void
+protocol ImageTrackCellDelegate: NSObjectProtocol {
+    func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
-class ImageTextTrackCell: UICollectionViewCell {
+class ImageTrackCell: UICollectionViewCell {
     
-    weak var delegate: ImageTextTrackCellDelegate?
-    weak var imageTextTrack: ImageTextTrackModel?
+    weak var delegate: ImageTrackCellDelegate?
+    weak var imageTrack: ImageTrackModel?
     var longPressGesture: UILongPressGestureRecognizer!
     @IBOutlet weak var longImageIcon: UILabel!
     @IBOutlet weak var textLabel: UILabel!
@@ -37,18 +37,18 @@ class ImageTextTrackCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ImageTextTrackCell.longpressAction(_:)))
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ImageTrackCell.longpressAction(_:)))
         addGestureRecognizer(longPressGesture)
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         super.applyLayoutAttributes(layoutAttributes)
-        let attributes = layoutAttributes as! ImageTextTrackLayoutAttributes
+        let attributes = layoutAttributes as! ImageTrackLayoutAttributes
         longImageIcon.hidden = !attributes.longImage
     }
     
     @objc private func longpressAction(sender: AnyObject) {
-        delegate?.imageTextTrackCellDidLongPress(self, gesture: sender as! UIGestureRecognizer)
+        delegate?.imageTrackCellDidLongPress(self, gesture: sender as! UIGestureRecognizer)
     }
     
     deinit {
@@ -58,20 +58,20 @@ class ImageTextTrackCell: UICollectionViewCell {
 }
 
 //  MARK: Public
-extension ImageTextTrackCell {
+extension ImageTrackCell {
     
-    func configureCell(imageTextTrack: ImageTextTrackModel!) -> Void {
+    func configureCell(imageTrack: ImageTrackModel!) -> Void {
         
-        self.imageTextTrack = imageTextTrack
+        self.imageTrack = imageTrack
         
-        let captureUrlStr = self.imageTextTrack?.largeImageFileUrl
+        let captureUrlStr = self.imageTrack?.largeImageFileUrl
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTextTrack.thumbImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        imageView.mq_setImageWithURL(NSURL(string: imageTrack.thumbImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
             
             guard let strongSelf = self else { return }
-            guard captureUrlStr == strongSelf.imageTextTrack?.thumbImageFileUrl else { return }
+            guard captureUrlStr == strongSelf.imageTrack?.thumbImageFileUrl else { return }
             
-            print("当前图片Text:\(imageTextTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+            print("当前图片Text:\(imageTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
             
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
@@ -79,14 +79,14 @@ extension ImageTextTrackCell {
             }, completed: { [weak self] (image, error, cacheType, url) -> Void in
                 
                 guard let strongSelf = self else { return }
-                guard url.absoluteString == strongSelf.imageTextTrack?.thumbImageFileUrl else { return }  //  回调验证
+                guard url.absoluteString == strongSelf.imageTrack?.thumbImageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
                 
                 strongSelf.progressView.hidden = true
             
             })
         
-        textLabel.text = imageTextTrack.text
+        textLabel.text = imageTrack.text
     }
     
 }

@@ -25,10 +25,14 @@ extension CloudModelBase {
 
 protocol CacheModelBase {
     static func uniqueIdentifier() -> String!
+    func synced() -> Bool
 }
 
 extension CacheModelBase {
     static func uniqueIdentifier() -> String! {
         return UserInfoManange.shareInstance.uniqueCacheKey! + String(self)
+    }
+    func synced() -> Bool {
+        return false
     }
 }
