@@ -17,8 +17,8 @@ class ImageTrackCacheModel: Object {
     dynamic var thumbImageFileObjectId: String!
     dynamic var largeImageFileObjectId: String!
     dynamic var originImageFileObjectId: String!
-    dynamic var imageWidht: NSNumber!
-    dynamic var imageHeight: NSNumber!
+    dynamic var imageWidht: Double = 0.0
+    dynamic var imageHeight: Double = 0.0
     dynamic var text: String?
     dynamic var createdAt: NSDate!
  
@@ -33,7 +33,7 @@ class ImageTrackCacheModel: Object {
         text: String?,
         imageSize: CGSize!) {
         self.init()
-        self.objectId = NSUUID().UUIDString
+        self.objectId = objectId
         self.thumbImageFileUrl = thumbImageFileUrl ?? originImageFileUrl
         self.largeImageFileUrl = largeImageFileUrl ?? originImageFileUrl
         self.originImageFileUrl = originImageFileUrl
@@ -41,8 +41,8 @@ class ImageTrackCacheModel: Object {
         self.largeImageFileObjectId = largeImageFileObjectId ?? originImageFileObjectId
         self.originImageFileObjectId = originImageFileObjectId
         self.text = text
-        self.imageWidht = imageSize.width
-        self.imageHeight = imageSize.height
+        self.imageWidht = Double(imageSize.width)
+        self.imageHeight = Double(imageSize.height)
     }
     
     convenience init(model: ImageTrackCacheModel) {
@@ -54,7 +54,7 @@ class ImageTrackCacheModel: Object {
                   largeImageFileObjectId: model.largeImageFileObjectId,
                   originImageFileObjectId: model.originImageFileObjectId,
                   text: model.text,
-                  imageSize: CGSize(width: model.imageWidht.integerValue, height:model.imageHeight.integerValue))
+                  imageSize: CGSize(width: model.imageWidht, height:model.imageHeight))
     }
     
     convenience init(cloudModel: ImageTrackModel) {

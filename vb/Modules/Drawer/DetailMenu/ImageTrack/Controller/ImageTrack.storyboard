@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="width" constant="44" id="d2D-Wa-EV8"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="addImageTextTrackAction:" destination="Jrq-Ir-Fhw" eventType="touchUpInside" id="5Ek-bL-zPM"/>
+                                    <action selector="addImageTrackAction:" destination="Jrq-Ir-Fhw" eventType="touchUpInside" id="72C-8i-7Wr"/>
                                 </connections>
                             </button>
                             <progressView opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQL-qx-E4b" userLabel="prgressView">
@@ -44,9 +44,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-Pc-CdB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="1" green="0.97295380570000001" blue="0.58454178320000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="ImageTextTrackLayout" customModule="vb" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="vgQ-X3-bCS" customClass="ImageTrackLayout" customModule="vb" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageTextTrackCell" id="gb2-oz-fO8" customClass="ImageTextTrackCell" customModule="vb" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageTrackCell" id="gb2-oz-fO8" customClass="ImageTrackCell" customModule="vb" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="214" height="239"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

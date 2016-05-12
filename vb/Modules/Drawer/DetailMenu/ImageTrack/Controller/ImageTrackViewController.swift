@@ -176,7 +176,7 @@ extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigatio
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
-        dataSource.queryAddImageTrackWithOringinImage(image, progressClosure: { [weak self] (progress) -> Void in
+        dataSource.queryAddImageTrackWithOringinImage(image, progress: { [weak self] (progress) -> Void in
             print("大图上传进度: \(progress)")
             guard let strongSelf = self else { return }
             strongSelf.updateProgressShow = true

@@ -14,7 +14,7 @@ class ImageTrackModel: AVObject {
     @NSManaged var largeImageFileUrl: String!               //  点开看的大图
     @NSManaged var originImageFileUrl: String!              //  原图
     @NSManaged var thumbImageFileObjectId: String!
-    @NSManaged var largeImageFileObjectId: String!
+    @NSManaged var largeImageFileObjectId: String?
     @NSManaged var originImageFileObjectId: String!
     @NSManaged var imageWidht: NSNumber!
     @NSManaged var imageHeight: NSNumber!
@@ -32,7 +32,7 @@ class ImageTrackModel: AVObject {
 //    }
     
     convenience init(
-        objectId: String = NSUUID().UUIDString,
+        objectId: String? = NSUUID().UUIDString,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,
         originImageFileUrl: String!,
@@ -75,7 +75,7 @@ class ImageTrackModel: AVObject {
                   largeImageFileObjectId: cacheModel.largeImageFileObjectId,
                   originImageFileObjectId: cacheModel.originImageFileObjectId,
                   text: cacheModel.text,
-                  imageSize: CGSize(width: cacheModel.imageWidht.integerValue, height:cacheModel.imageHeight.integerValue))
+                  imageSize: CGSize(width: cacheModel.imageWidht, height:cacheModel.imageHeight))
     }
     
 //    func update(imageFileUrl: String!, imageFileObjectId: String!, text: String?, imageSize: CGSize!) {

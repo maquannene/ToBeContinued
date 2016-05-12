@@ -22,7 +22,7 @@ class ImageTrackViewModel: NSObject {
 
     var imageTrackIdList: ImageTrackIdListModel?
     var imageTrackList: [ImageTrackModel?]! = [ImageTrackModel?]()           //  存储当前imageTrack的缓存列表
-    let realm: Realm = try! Realm()
+    var realm: Realm = try! Realm()
     
     deinit {
         print("\(self.dynamicType) deinit\n")
@@ -57,15 +57,18 @@ extension ImageTrackViewModel {
             let query: AVQuery = AVQuery(className: ImageTrackIdListModel.RealClassName)
             query.whereKey("identifier", equalTo: identifier)
             query.findObjectsInBackgroundWithBlock { [weak self] (object: [AnyObject]!, error: NSError!) -> Void in
-                guard let strongSelf = self else { complete?(succeed: false); return }
-                if let objc = object[0] as? ImageTrackIdListModel {
-                    strongSelf.imageTrackIdList = objc
-                    try! strongSelf.realm.write {
-                        strongSelf.realm.add(objc.exportToCacheObject(), update: true)
+                guard let strongSelf = self else { return }
+                if object != nil {
+                    guard object.count > 0 else { complete?(succeed: false); return }
+                    if let objc = object[0] as? ImageTrackIdListModel {
+                        strongSelf.imageTrackIdList = objc
+                        try! strongSelf.realm.write {
+                            strongSelf.realm.add(objc.exportToCacheObject(), update: true)
+                        }
+                        complete?(succeed: true)
                     }
-                    complete?(succeed: true)
                 }
-                complete?(succeed: false)
+                complete?(succeed: (error == nil))
             }
         }
     }
@@ -90,7 +93,7 @@ extension ImageTrackViewModel {
                 //  冗余数据清理
                 try! realm.write {
                     if let deleteObject: [ImageTrackId] = realm.objects(ImageTrackId).filter( { $0.id == model.objectId }) {
-                        realm.delete(deleteObject[0])   //  清除冗余的 id
+                        realm.delete(deleteObject)   //  清除冗余的 id
                     }
                     realm.delete(model) //  清除冗余的 cacheModel
                 }
@@ -99,7 +102,7 @@ extension ImageTrackViewModel {
             //  排序 + 格式转换
             if filterCacheModelList.count > 0 {
                 cloudModelList = filterCacheModelList.sort{
-                    return $0.createdAt.timeIntervalSince1970 < $1.createdAt.timeIntervalSince1970
+                    return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                 }.map {
                     return $0.exportToCloudObject()
                 }
@@ -131,13 +134,13 @@ extension ImageTrackViewModel {
                     if newImageTrackList.count > 2 {
                         //  对数据根据时间进行排序
                         newImageTrackList.sortInPlace {
-                            return $0!.createdAt.timeIntervalSince1970 < $1!.createdAt.timeIntervalSince1970
+                            return $0!.createdAt.timeIntervalSince1970 > $1!.createdAt.timeIntervalSince1970
                         }
                     }
                     strongSelf.imageTrackList = newImageTrackList
                     try! strongSelf.realm.write {
                         strongSelf.imageTrackList.forEach {
-                            strongSelf.realm.add($0!.exportToCacheObject())
+                            strongSelf.realm.add($0!.exportToCacheObject(), update: true)
                         }
                     }
                 }
@@ -175,31 +178,43 @@ extension ImageTrackViewModel {
      - parameter progressClosure: 进度回调
      - parameter complete: 完成回调
      */
-    func queryAddImageTrackWithOringinImage(originImage: UIImage!, progressClosure: ((progress: Int) -> Void)?, complete: QureyImageTrackDataCompletion?)
+    func queryAddImageTrackWithOringinImage(originImage: UIImage!, progress: ((progress: Int) -> Void)?, completion: QureyImageTrackDataCompletion?)
     {
-        typealias saveImageFileClosure = (imageFile: AVFile!, group: dispatch_group_t!, progressClosure: ((progress: Int) -> Void)?, complete: QureyImageTrackDataCompletion?) -> Void
-        let querySaveImageFile: saveImageFileClosure = { (imageFile, group, progressClosure, complete) in
-            dispatch_group_enter(group)
-            imageFile.saveInBackgroundWithBlock({ [weak imageFile] (succeed, error) -> Void in
-                guard succeed == true else { complete?(succeed: false); return }    //  确保上传图片成功
-                guard let weakimageFile = imageFile else { return }
-//                print("image Url: \(weakimageFile.url) \n size: \(image.size) \n text: xxx \n image length: \(weakimageFile.getData().length) size: \(weakimageFile.size() / 1024) KB")
-                //  很重要,将imageData存到SDImageCache的disk cache中
-                NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(weakimageFile.url), contents: weakimageFile.getData(), attributes: nil)
-                //  将本地的AVCacheFile缓存清理掉
-                weakimageFile.clearCachedFile()
-                dispatch_group_leave(group)
-            }, progressBlock: { (progress: Int) -> Void in
-                    progressClosure?(progress: progress)
+        var isSucceed: Bool = true
+        
+        typealias SaveImageFileCompletion = (succeed: Bool) -> Void
+        typealias SaveImageFileClosure = (imageFile: AVFile!, progress: ((progress: Int) -> Void)?, completion: SaveImageFileCompletion?) -> Void
+        let querySaveImageFile: SaveImageFileClosure = { (imageFile, progress, completion) in
+            imageFile.saveInBackgroundWithBlock({ (succeed, error) in
+                if succeed {
+//                    print("image Url: \(imageFile.url) \n size: \(imageFile.size) \n text: xxx \n image length: \(imageFile.getData().length) size: \(imageFile.size() / 1024) KB")
+                    //  很重要,将imageData存到SDImageCache的disk cache中
+                    NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(imageFile.url), contents: imageFile.getData(), attributes: nil)
+                    //  将本地的AVCacheFile缓存清理掉
+                    imageFile.clearCachedFile()
+                }
+                completion?(succeed: succeed)
+            }, progressBlock: {
+                progress?(progress: $0)
             })
         }
         
         let saveImageGroup: dispatch_group_t = dispatch_group_create()
-
+        
+        dispatch_group_enter(saveImageGroup)
         //  调度组一：上传原图
         let originImageFile: AVFile! = AVFile(name: "maquan", data: UIImageJPEGRepresentation(originImage!, 0))
-        querySaveImageFile(imageFile: originImageFile, group: saveImageGroup, progressClosure: progressClosure, complete: complete)
-
+        querySaveImageFile(imageFile: originImageFile, progress: progress) { (succeed) in
+            if succeed {
+                
+            }
+            else {
+                isSucceed = false
+            }
+            dispatch_group_leave(saveImageGroup)
+        }
+        
+        dispatch_group_enter(saveImageGroup)
         //  调度组二：上传缩略图
         var thumbImageFile: AVFile?
         if originImage.size.width > 720 {
@@ -207,34 +222,43 @@ extension ImageTrackViewModel {
             let thumbImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
             let thumbImage = originImage.scaleToSize(thumbImageSize)
             thumbImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(thumbImage!, 0))
-            querySaveImageFile(imageFile: thumbImageFile, group: saveImageGroup, progressClosure: nil, complete: complete)
+            querySaveImageFile(imageFile: thumbImageFile, progress: nil) { (succeed) in
+                if succeed {
+                
+                }
+                else {
+                    isSucceed = false
+                }
+                dispatch_group_leave(saveImageGroup)
+            }
         }
         
-        //  调度组三：上传大图（目前大图就是原图）
-        var largeImageFile: AVFile?
-        if false {
-            let boundingRect = CGRect(x: 0, y: 0, width: 720, height: CGFloat(MAXFLOAT))
-            let largeImageSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: originImage.size.width, height: originImage.size.height), boundingRect).size
-            let largeImage = originImage.scaleToSize(largeImageSize)
-            largeImageFile = AVFile(name: "maquan", data: UIImageJPEGRepresentation(largeImage!, 0))
-            querySaveImageFile(imageFile: largeImageFile, group: saveImageGroup, progressClosure: nil, complete: complete)
-        }
-        
-        dispatch_group_notify(saveImageGroup, dispatch_get_main_queue()) { () -> Void in
-            let textTrackModel: ImageTrackModel = ImageTrackModel(thumbImageFileUrl: thumbImageFile?.url, largeImageFileUrl: largeImageFile?.url, originImageFileUrl: originImageFile.url, thumbImageFileObjectId: thumbImageFile?.objectId, largeImageFileObjectId: largeImageFile?.objectId, originImageFileObjectId: originImageFile.objectId, text: nil, imageSize: originImage.size)
+        dispatch_group_notify(saveImageGroup, dispatch_get_main_queue()) { [weak self] () -> Void in
             
-            textTrackModel.saveInBackgroundWithBlock { [weak self, weak textTrackModel] succeed, error in
-                guard succeed == true else { complete?(succeed: false); return }    //  确保成功
-                guard let strongSelf = self else { return }
-                guard let strongTextTrackModel = textTrackModel else { return }
-                guard succeed == true else { complete?(succeed: false); return }
-                //  存储完track后 先将对应的id存入imageTrackIdList并且保存
-                strongSelf.imageTrackIdList!.addObject(strongTextTrackModel.objectId, forKey: "list")
-                strongSelf.imageTrackIdList!.fetchWhenSave = true //  保存的同时获取最新值
-                strongSelf.imageTrackIdList!.save()
-                //  再将新建track加入缓存中
-                strongSelf.imageTrackList.insert(strongTextTrackModel, atIndex: 0)
-                complete?(succeed: true)
+            guard let strongSelf = self else { return }
+            guard isSucceed == true else { completion?(succeed: false); return }
+        
+            //  新 imageTrack
+            let newImageTrackModel: ImageTrackModel! = ImageTrackModel(objectId: nil, thumbImageFileUrl: thumbImageFile?.url, largeImageFileUrl: nil, originImageFileUrl: originImageFile.url, thumbImageFileObjectId: thumbImageFile?.objectId, largeImageFileObjectId: nil, originImageFileObjectId: originImageFile.objectId, text: nil, imageSize: originImage.size)
+    
+            //  新 imageTrackIdList
+            let newImageTrackIdList: ImageTrackIdListModel = strongSelf.imageTrackIdList?.copy() as! ImageTrackIdListModel
+            newImageTrackIdList.fetchWhenSave = true
+            
+            newImageTrackModel.saveInBackgroundWithBlock { [weak self] succeed, error in
+                guard let strongSelf = self else { completion?(succeed: succeed); return }
+                guard succeed == true else { completion?(succeed: false); return }
+                newImageTrackIdList.addObject(newImageTrackModel?.objectId, forKey: "list")
+                isSucceed = newImageTrackIdList.save()
+                if isSucceed {
+                    strongSelf.imageTrackList.insert(newImageTrackModel, atIndex: 0)
+                    strongSelf.imageTrackIdList = newImageTrackIdList
+                    try! strongSelf.realm.write {
+                        strongSelf.realm.add(newImageTrackModel!.exportToCacheObject())
+                        strongSelf.realm.add(newImageTrackIdList.exportToCacheObject(), update: true)
+                    }
+                }
+                completion?(succeed: isSucceed)
             }
         }
     }
@@ -259,6 +283,12 @@ extension ImageTrackViewModel {
                         strongSelf.realm.delete(deleteObj)
                     }
                 }
+                
+                //  删除model
+                track.deleteInBackgroundWithBlock { (succeed, error) -> Void in
+                    print(succeed)
+                }
+                
                 //  删除原图
                 let originImageFile = AVFile()
                 originImageFile.objectId = track.originImageFileObjectId

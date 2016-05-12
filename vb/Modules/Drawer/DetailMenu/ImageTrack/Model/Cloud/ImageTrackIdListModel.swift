@@ -29,6 +29,24 @@ extension ImageTrackIdListModel: AVSubclassing {
     }
 }
 
+extension ImageTrackIdListModel: NSCopying, NSMutableCopying {
+    func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = ImageTrackIdListModel()
+        noteTrackModel.objectId = self.objectId
+        noteTrackModel.identifier = self.identifier
+        noteTrackModel.list = self.list
+        return noteTrackModel
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let noteTrackModel = ImageTrackIdListModel()
+        noteTrackModel.objectId = self.objectId
+        noteTrackModel.identifier = self.identifier
+        noteTrackModel.list = self.list
+        return noteTrackModel
+    }
+}
+
 extension ImageTrackIdListModel: ModelExportProtocol {
     
     typealias CacheType = ImageTrackIdListCacheModel

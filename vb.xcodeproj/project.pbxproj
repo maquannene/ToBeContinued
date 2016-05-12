@@ -560,8 +560,8 @@
 		D4B91B291CE1F60500CA919E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D4B91B2A1CE1F60500CA919E /* ImageTrack.storyboard */,
 				D4B91B2B1CE1F60500CA919E /* ImageTrackViewController.swift */,
+				D4B91B2A1CE1F60500CA919E /* ImageTrack.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
