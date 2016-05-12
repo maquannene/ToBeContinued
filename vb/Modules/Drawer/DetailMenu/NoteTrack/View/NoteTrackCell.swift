@@ -12,9 +12,13 @@ protocol NoteTrackCellSlideGestureDelegate: NSObjectProtocol {
     func slideGestureRecognizerShouldReceiveTouch() -> NSNumber
 }
 
+protocol NoteTrackCellDataSource: class {
+    var titleStr: String! { get }
+}
+
 class NoteTrackCell: SWTableViewCell {
 
-    weak var noteTrackModel: NoteTrackModel?
+    weak var noteTrackModel: NoteTrackCellDataSource?
     lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     lazy var topSeparateLine: CALayer = CALayer()
     lazy var bottomSeparateLine: CALayer = CALayer()
@@ -51,15 +55,14 @@ class NoteTrackCell: SWTableViewCell {
 // MARK: Public
 extension NoteTrackCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: NoteTrackModel!) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: NoteTrackCellDataSource!) -> Void {
         self.noteTrackModel = noteTrackModel
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.whiteColor()
-        self.contentLabel!.text = noteTrackModel.title
+        self.contentLabel!.text = noteTrackModel.titleStr
         self.rightUtilityButtons = rightButtons() as [AnyObject]
         self.setRightUtilityButtons(self.rightUtilityButtons, withButtonWidth: 70)
     }
-    
 }
 
 // MARK: Private

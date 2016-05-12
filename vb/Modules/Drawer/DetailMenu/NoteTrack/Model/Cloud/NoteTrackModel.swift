@@ -71,3 +71,13 @@ extension NoteTrackModel: ModelExportProtocol {
         return self
     }
 }
+
+extension NoteTrackModel: NoteTrackCellDataSource, NoteTrackDetailCellDataSource {
+    var titleStr: String! {
+        return self.title
+    }
+    
+    var detailContentStr: String? {
+        return self.detailContent
+    }
+}

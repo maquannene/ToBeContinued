@@ -6,9 +6,13 @@
 //  Copyright (c) 2015 maquan. All rights reserved.
 //
 
+protocol NoteTrackDetailCellDataSource: class {
+    var detailContentStr: String? { get }
+}
+
 class NoteTrackDetailCell: UITableViewCell {
 
-    weak var noteTrackModel: NoteTrackModel?
+    weak var noteTrackModel: NoteTrackDetailCellDataSource?
     
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
@@ -59,7 +63,7 @@ class NoteTrackDetailCell: UITableViewCell {
 // MARK: Public
 extension NoteTrackDetailCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: NoteTrackModel!) -> Void {
+    func configureWithNoteTrackModel(noteTrackModel: NoteTrackDetailCellDataSource!) -> Void {
         self.noteTrackModel = noteTrackModel
         selectionStyle = UITableViewCellSelectionStyle.None
         detailButtonWidth.constant = 0
@@ -67,7 +71,7 @@ extension NoteTrackDetailCell {
         //  重新设置了约束，要更新约束布局。
         setNeedsUpdateConstraints()
         updateConstraintsIfNeeded()
-        contentLabel!.text = noteTrackModel.detailContent
+        contentLabel!.text = noteTrackModel.detailContentStr
         //  这两句非常重要。让contentLabel内加入文本后重新排列文字，并且刷新字号。
         //  这样在layoutSubview中调用isTruncated才正确。
         contentLabel!.setNeedsLayout()
