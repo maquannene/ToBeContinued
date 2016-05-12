@@ -10,19 +10,26 @@ import RealmSwift
 
 class NoteTrackCacheModel: Object, CacheModelBase {
     
-    dynamic var objectId: String!
+    dynamic var objectId: String?
     dynamic var title: String!
-    dynamic var detailContent: String!
+    dynamic var detailContent: String?
     dynamic var createdAt: NSDate!
     
-    convenience init(title: String?, detailContent: String?) {
-        self.init()
-        self.objectId = NSUUID().UUIDString
-        self.title = title
+    convenience init(objectId: String? = NSUUID().UUIDString, title: String!, detailContent: String?) {
+        self.init(title: title, detailContent: detailContent)
+        self.objectId = objectId
         self.detailContent = detailContent
     }
     
-    func update(title title: String?, detailContent: String?) {
+    convenience init(model: NoteTrackCacheModel) {
+        self.init(objectId: model.objectId, title: model.title, detailContent: model.title)
+    }
+    
+    convenience init(cloudModel: NoteTrackModel) {
+        self.init(objectId: cloudModel.objectId, title: cloudModel.title, detailContent: cloudModel.title)
+    }
+    
+    func update(title title: String!, detailContent: String?) {
         self.title = title
         self.detailContent = detailContent
     }
@@ -38,10 +45,7 @@ extension NoteTrackCacheModel: ModelExportProtocol {
     typealias CacheType = NoteTrackCacheModel
     
     func exportToCloudObject() -> CloudType! {
-        let object = NoteTrackModel()
-        object.objectId = objectId
-        object.title = title
-        object.detailContent = title
+        let object = NoteTrackModel(cacheModel: self)
         return object
     }
     

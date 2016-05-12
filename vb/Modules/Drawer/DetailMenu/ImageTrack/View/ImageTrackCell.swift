@@ -34,7 +34,7 @@ class ImageTrackCell: UICollectionViewCell {
             progressView.layer.cornerRadius = 3
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ImageTrackCell.longpressAction(_:)))
@@ -66,24 +66,24 @@ extension ImageTrackCell {
         
         let captureUrlStr = self.imageTrack?.largeImageFileUrl
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTrack.thumbImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: nil, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
-            
-            guard let strongSelf = self else { return }
-            guard captureUrlStr == strongSelf.imageTrack?.thumbImageFileUrl else { return }
-            
-            print("当前图片Text:\(imageTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
-            
-            strongSelf.progressView.hidden = false
-            strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
-            
+        imageView.mq_setImageWithURL(NSURL(string: imageTrack.thumbImageFileUrl ?? imageTrack.originImageFileUrl)!,
+                                     groupIdentifier: reuseIdentifier,
+                                     placeholderImage: nil,
+                                     options: .RetryFailed,
+                                     progress:
+            { [weak self] (receivedSize, expectedSize) -> Void in
+                
+                guard let strongSelf = self else { return }
+                guard captureUrlStr == strongSelf.imageTrack?.thumbImageFileUrl else { return }
+                print("当前图片Text:\(imageTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+                strongSelf.progressView.hidden = false
+                strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }, completed: { [weak self] (image, error, cacheType, url) -> Void in
                 
                 guard let strongSelf = self else { return }
                 guard url.absoluteString == strongSelf.imageTrack?.thumbImageFileUrl else { return }  //  回调验证
                 guard error == nil else { return }
-                
                 strongSelf.progressView.hidden = true
-            
             })
         
         textLabel.text = imageTrack.text

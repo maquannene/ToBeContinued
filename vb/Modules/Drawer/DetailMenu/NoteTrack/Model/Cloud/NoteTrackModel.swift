@@ -11,14 +11,23 @@ import AVOSCloud
 class NoteTrackModel: AVObject {
     
     @NSManaged var title: String!
-    @NSManaged var detailContent: String!
+    @NSManaged var detailContent: String?
     
-    convenience init(title: String?, detailContent: String?) {
+    convenience init(objectId: String! = NSUUID().UUIDString, title: String?, detailContent: String?) {
         self.init()
+        self.objectId = objectId
         update(title: title, detailContent: detailContent)
     }
     
-    func update(title title: String?, detailContent: String?) {
+    convenience init(model: NoteTrackModel) {
+        self.init(objectId: model.objectId, title: model.title, detailContent: model.detailContent)
+    }
+    
+    convenience init(cacheModel: NoteTrackCacheModel) {
+        self.init(objectId: cacheModel.objectId, title: cacheModel.title, detailContent: cacheModel.detailContent)
+    }
+    
+    func update(title title: String!, detailContent: String?) {
         self.title = title
         self.detailContent = detailContent
     }
@@ -37,18 +46,12 @@ extension NoteTrackModel: AVSubclassing {
 
 extension NoteTrackModel: NSMutableCopying, NSCopying {
     func mutableCopyWithZone(zone: NSZone) -> AnyObject {
-        let noteTrackModel = NoteTrackModel()
-        noteTrackModel.objectId = self.objectId
-        noteTrackModel.title = self.title
-        noteTrackModel.detailContent = self.detailContent
+        let noteTrackModel = NoteTrackModel(model: self)
         return noteTrackModel
     }
     
     func copyWithZone(zone: NSZone) -> AnyObject {
-        let noteTrackModel = NoteTrackModel()
-        noteTrackModel.objectId = self.objectId
-        noteTrackModel.title = self.title
-        noteTrackModel.detailContent = self.detailContent
+        let noteTrackModel = NoteTrackModel(model: self)
         return noteTrackModel
     }
 }
@@ -59,10 +62,7 @@ extension NoteTrackModel: ModelExportProtocol {
     typealias CacheType = NoteTrackCacheModel
     
     func exportToCacheObject() -> CacheType! {
-        let object = NoteTrackCacheModel()
-        object.objectId = objectId
-        object.title = title
-        object.detailContent = detailContent
+        let object = NoteTrackCacheModel(cloudModel: self)
         object.createdAt = createdAt
         return object
     }

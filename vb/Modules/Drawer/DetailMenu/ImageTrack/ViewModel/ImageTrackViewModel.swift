@@ -239,7 +239,15 @@ extension ImageTrackViewModel {
             guard isSucceed == true else { completion?(succeed: false); return }
         
             //  新 imageTrack
-            let newImageTrackModel: ImageTrackModel! = ImageTrackModel(objectId: nil, thumbImageFileUrl: thumbImageFile?.url, largeImageFileUrl: nil, originImageFileUrl: originImageFile.url, thumbImageFileObjectId: thumbImageFile?.objectId, largeImageFileObjectId: nil, originImageFileObjectId: originImageFile.objectId, text: nil, imageSize: originImage.size)
+            let newImageTrackModel: ImageTrackModel! = ImageTrackModel(objectId: nil,
+                                                                       thumbImageFileUrl: thumbImageFile?.url,
+                                                                       largeImageFileUrl: nil,
+                                                                       originImageFileUrl: originImageFile.url,
+                                                                       thumbImageFileObjectId: thumbImageFile?.objectId,
+                                                                       largeImageFileObjectId: nil,
+                                                                       originImageFileObjectId: originImageFile.objectId,
+                                                                       text: nil,
+                                                                       imageSize: originImage.size)
     
             //  新 imageTrackIdList
             let newImageTrackIdList: ImageTrackIdListModel = strongSelf.imageTrackIdList?.copy() as! ImageTrackIdListModel

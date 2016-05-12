@@ -10,10 +10,10 @@ import AVOSCloud
 
 class ImageTrackModel: AVObject {
     
-    @NSManaged var thumbImageFileUrl: String!               //  瀑布流使用的略缩图
-    @NSManaged var largeImageFileUrl: String!               //  点开看的大图
+    @NSManaged var thumbImageFileUrl: String?               //  瀑布流使用的略缩图
+    @NSManaged var largeImageFileUrl: String?               //  点开看的大图
     @NSManaged var originImageFileUrl: String!              //  原图
-    @NSManaged var thumbImageFileObjectId: String!
+    @NSManaged var thumbImageFileObjectId: String?
     @NSManaged var largeImageFileObjectId: String?
     @NSManaged var originImageFileObjectId: String!
     @NSManaged var imageWidht: NSNumber!

@@ -26,7 +26,7 @@ class NewNoteTrackView: UIView {
         layer.shadowOpacity = 0.8
     }
     
-    func configureData(title: String, detailContent: String) {
+    func configureData(title: String?, detailContent: String?) {
         titleTextView.text = title
         detailContentTextView.text = detailContent
     }

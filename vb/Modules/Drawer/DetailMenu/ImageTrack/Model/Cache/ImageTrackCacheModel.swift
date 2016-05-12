@@ -10,12 +10,12 @@ import RealmSwift
 
 class ImageTrackCacheModel: Object {
 
-    dynamic var objectId: String!
-    dynamic var thumbImageFileUrl: String!               //  瀑布流使用的略缩图
-    dynamic var largeImageFileUrl: String!               //  点开看的大图
+    dynamic var objectId: String?
+    dynamic var thumbImageFileUrl: String?               //  瀑布流使用的略缩图
+    dynamic var largeImageFileUrl: String?               //  点开看的大图
     dynamic var originImageFileUrl: String!              //  原图
-    dynamic var thumbImageFileObjectId: String!
-    dynamic var largeImageFileObjectId: String!
+    dynamic var thumbImageFileObjectId: String?
+    dynamic var largeImageFileObjectId: String?
     dynamic var originImageFileObjectId: String!
     dynamic var imageWidht: Double = 0.0
     dynamic var imageHeight: Double = 0.0
@@ -23,7 +23,7 @@ class ImageTrackCacheModel: Object {
     dynamic var createdAt: NSDate!
  
     convenience init(
-        objectId: String = NSUUID().UUIDString,
+        objectId: String? = NSUUID().UUIDString,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,
         originImageFileUrl: String!,

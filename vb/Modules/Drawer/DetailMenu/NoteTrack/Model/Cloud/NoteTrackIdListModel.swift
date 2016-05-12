@@ -24,12 +24,14 @@ class NoteTrackIdListModel: AVObject {
 }
 
 extension NoteTrackIdListModel: AVSubclassing {
+    
     static func parseClassName() -> String! {
         return "NoteTrackIdListModel"
     }
 }
 
 extension NoteTrackIdListModel: NSCopying, NSMutableCopying {
+    
     func mutableCopyWithZone(zone: NSZone) -> AnyObject {
         let noteTrackModel = NoteTrackIdListModel()
         noteTrackModel.objectId = self.objectId

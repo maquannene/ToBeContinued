@@ -19,6 +19,7 @@ class NoteTrackIdListCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String!
     dynamic var identifier: String!
+    
     var list: [String] {
         get {
             return _list.map { $0.id }
@@ -45,7 +46,6 @@ class NoteTrackIdListCacheModel: Object, CacheModelBase {
     override static func ignoredProperties() -> [String] {
         return ["list"]
     }
-    
 }
 
 extension NoteTrackIdListCacheModel: ModelExportProtocol {

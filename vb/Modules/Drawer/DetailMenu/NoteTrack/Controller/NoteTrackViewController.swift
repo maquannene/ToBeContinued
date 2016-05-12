@@ -203,7 +203,7 @@ extension NoteTrackViewController {
     @objc private func confirmCreateNewNoteTrackAction(sender: AnyObject!)
     {
         let contentView = newNoteTrackVc!.contentView as! NewNoteTrackView
-        let noteTrackModel = NoteTrackModel(title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
+        let noteTrackModel = NoteTrackModel(objectId: nil, title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
         viewModel.queryAddNoteTrack(noteTrackModel) { [weak self] (succeed) -> Void in
             guard let strongSelf = self else { return }
             strongSelf.viewModel.expandingIndexPath = nil
@@ -319,7 +319,7 @@ extension NoteTrackViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let actualIndexPath = viewModel.convertToActualIndexPath(indexPath)
-        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]
+        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]!
         //  如果是展开的detailCell
         if (viewModel.expandedIndexPath != nil && viewModel.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: NoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(NoteTrackViewController.Static.noteTrackDetailCellId) as! NoteTrackDetailCell
