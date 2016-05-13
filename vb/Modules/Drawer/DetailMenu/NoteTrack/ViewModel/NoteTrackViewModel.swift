@@ -53,14 +53,16 @@ extension NoteTrackViewModel: CloudModelBase {
             let query: AVQuery = AVQuery(className: NoteTrackIdListModel.RealClassName)
             //  根据identifier 识别符查询list
             query.whereKey("identifier", equalTo: identifier)
-            query.findObjectsInBackgroundWithBlock { [unowned self] (objects: [AnyObject]!, error) -> Void in
-                guard error == nil && objects.count > 0 else { complete?(succeed: false); return }
+            query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) -> Void in
+                guard let strongSelf = self else { return }
+                guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
                 if let objc = objects[0] as? NoteTrackIdListModel {
-                    self.noteTrackIdList = objc
-                    try! self.realm.write {
-                        self.realm.add(objc.exportToCacheObject(), update: true)
+                    strongSelf.noteTrackIdList = objc
+                    try! strongSelf.realm.write {
+                        strongSelf.realm.add(objc.exportToCacheObject(), update: true)
                     }
                     complete?(succeed: true)
+                    return
                 }
                 complete?(succeed: false)
             }
@@ -185,6 +187,7 @@ extension NoteTrackViewModel: CloudModelBase {
             guard isSucceed.boolValue == true else { complete?(succeed: false); return }
             //  写完成功后要再将 NoteTrack 的 objectId 写入noteTrackIdList 并且保存
             newNoteTrackIdList.addObject(newNoteTrackModel.objectId, forKey: "list")
+            newNoteTrackIdList.count += 1
             //  2.保存 NoteTrackIdListModel 到 Cloud
             isSucceed = newNoteTrackIdList.save()
             if  (isSucceed) {
@@ -211,6 +214,7 @@ extension NoteTrackViewModel: CloudModelBase {
         guard let track = fetchNoteTrackModel(index) else { complete?(succeed: false); return }
         let newNoteTrackIdList: NoteTrackIdListModel = noteTrackIdList!.mutableCopy() as! NoteTrackIdListModel
         newNoteTrackIdList.removeObject(track.objectId, forKey: "list")
+        newNoteTrackIdList.count -= 1
         newNoteTrackIdList.fetchWhenSave = true
         newNoteTrackIdList.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) in
             guard let sSelf = self else { return }

@@ -58,17 +58,16 @@ extension ImageTrackViewModel {
             query.whereKey("identifier", equalTo: identifier)
             query.findObjectsInBackgroundWithBlock { [weak self] (object: [AnyObject]!, error: NSError!) -> Void in
                 guard let strongSelf = self else { return }
-                if object != nil {
-                    guard object.count > 0 else { complete?(succeed: false); return }
-                    if let objc = object[0] as? ImageTrackIdListModel {
-                        strongSelf.imageTrackIdList = objc
-                        try! strongSelf.realm.write {
-                            strongSelf.realm.add(objc.exportToCacheObject(), update: true)
-                        }
-                        complete?(succeed: true)
+                guard object != nil && object.count > 0 else { complete?(succeed: false); return }
+                if let objc = object[0] as? ImageTrackIdListModel {
+                    strongSelf.imageTrackIdList = objc
+                    try! strongSelf.realm.write {
+                        strongSelf.realm.add(objc.exportToCacheObject(), update: true)
                     }
+                    complete?(succeed: true)
+                    return
                 }
-                complete?(succeed: (error == nil))
+                complete?(succeed: false)
             }
         }
     }

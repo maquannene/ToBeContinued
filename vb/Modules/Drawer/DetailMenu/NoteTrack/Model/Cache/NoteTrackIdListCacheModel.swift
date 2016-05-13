@@ -19,6 +19,7 @@ class NoteTrackIdListCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String!
     dynamic var identifier: String!
+    dynamic var count = 0
     
     var list: [String] {
         get {
@@ -27,6 +28,7 @@ class NoteTrackIdListCacheModel: Object, CacheModelBase {
         set {
             _list.removeAll()
             _list.appendContentsOf(newValue.map { NoteTrackId(value: [$0]) })
+            count = _list.count
         }
     }
     
@@ -62,6 +64,7 @@ extension NoteTrackIdListCacheModel: ModelExportProtocol {
         object.objectId = objectId
         object.identifier = identifier
         object.list = list
+        object.count = count
         return object
     }
 }

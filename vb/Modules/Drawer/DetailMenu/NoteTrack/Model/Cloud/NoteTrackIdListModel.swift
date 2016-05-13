@@ -15,11 +15,13 @@ class NoteTrackIdListModel: AVObject {
     
     @NSManaged var identifier: String!
     @NSManaged var list: [String]!
+    @NSManaged var count: Int
     
     convenience init(identifier: String) {
         self.init()
         self.identifier = identifier
         self.list = [String]()
+        self.count = 0
     }
 }
 
@@ -37,6 +39,7 @@ extension NoteTrackIdListModel: NSCopying, NSMutableCopying {
         noteTrackModel.objectId = self.objectId
         noteTrackModel.identifier = self.identifier
         noteTrackModel.list = self.list
+        noteTrackModel.count = self.count
         return noteTrackModel
     }
     
@@ -45,6 +48,7 @@ extension NoteTrackIdListModel: NSCopying, NSMutableCopying {
         noteTrackModel.objectId = self.objectId
         noteTrackModel.identifier = self.identifier
         noteTrackModel.list = self.list
+        noteTrackModel.count = self.count
         return noteTrackModel
     }
 }
@@ -59,6 +63,7 @@ extension NoteTrackIdListModel: ModelExportProtocol {
         object.objectId = objectId
         object.identifier = identifier
         object.list = list
+        object.count = count
         return object
     }
     

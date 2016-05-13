@@ -25,6 +25,13 @@ extension AppDelegate: UIApplicationDelegate {
         /**/
         test()
         /**/
+
+        let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
+            if (oldSchemaVersion < 1) {
+            }
+        })
+        Realm.Configuration.defaultConfiguration = config
+        let realm = try! Realm()
         
         let key = String(kCFBundleVersionKey)
         //先去沙盒中取出上次使用的版本号

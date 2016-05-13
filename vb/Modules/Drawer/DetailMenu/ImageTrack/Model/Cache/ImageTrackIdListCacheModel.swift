@@ -19,7 +19,6 @@ class ImageTrackIdListCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String!
     dynamic var identifier: String!
-    
     dynamic var count = 0
     
     var list: [String] {
