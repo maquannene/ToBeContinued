@@ -223,7 +223,7 @@ extension ImageTrackViewController: MQPictureBrowserControllerDataSource, MQPict
     
     func numberOfItemsInPictureBrowserController(controller: MQPictureBrowserController) -> Int
     {
-        return dataSource.imageTrackList.count
+        return dataSource.imageTrackIdList.count
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
@@ -309,7 +309,7 @@ extension ImageTrackViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return dataSource.imageTrackList.count
+        return dataSource.imageTrackIdList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell

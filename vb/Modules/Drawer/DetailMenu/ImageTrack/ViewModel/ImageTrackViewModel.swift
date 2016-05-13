@@ -257,6 +257,7 @@ extension ImageTrackViewModel {
                 guard let strongSelf = self else { completion?(succeed: succeed); return }
                 guard succeed == true else { completion?(succeed: false); return }
                 newImageTrackIdList.addObject(newImageTrackModel?.objectId, forKey: "list")
+                newImageTrackIdList.count += 1
                 isSucceed = newImageTrackIdList.save()
                 if isSucceed {
                     strongSelf.imageTrackList.insert(newImageTrackModel, atIndex: 0)
@@ -276,6 +277,7 @@ extension ImageTrackViewModel {
         guard let track = fetchImageTrackModelWithIndex(index) else { complete?(succeed: false); return }
         let newImageTrackIdList: ImageTrackIdListModel = imageTrackIdList.mutableCopy() as! ImageTrackIdListModel
         newImageTrackIdList.removeObject(track.objectId, forKey: "list")
+        newImageTrackIdList.count -= 1
         newImageTrackIdList.fetchWhenSave = true
         newImageTrackIdList.saveInBackgroundWithBlock { [weak self] (succeed, error) in
             guard let strongSelf = self else { complete?(succeed: false); return }

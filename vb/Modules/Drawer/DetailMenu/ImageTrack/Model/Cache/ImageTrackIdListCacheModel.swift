@@ -20,6 +20,8 @@ class ImageTrackIdListCacheModel: Object, CacheModelBase {
     dynamic var objectId: String!
     dynamic var identifier: String!
     
+    dynamic var count = 0
+    
     var list: [String] {
         get {
             return _list.map { $0.id }
@@ -27,6 +29,7 @@ class ImageTrackIdListCacheModel: Object, CacheModelBase {
         set {
             _list.removeAll()
             _list.appendContentsOf(newValue.map { ImageTrackId(value: [$0]) })
+            count = _list.count
         }
     }
     
@@ -35,8 +38,8 @@ class ImageTrackIdListCacheModel: Object, CacheModelBase {
     convenience init(identifier: String) {
         self.init()
         self.objectId = NSUUID().UUIDString
-        self.list = [String]()
         self.identifier = identifier
+        self.list = [String]()
     }
     
     override class func primaryKey() -> String? {
@@ -61,6 +64,7 @@ extension ImageTrackIdListCacheModel: ModelExportProtocol {
         object.objectId = objectId
         object.list = list
         object.identifier = identifier
+        object.count = count
         return object
     }
 }

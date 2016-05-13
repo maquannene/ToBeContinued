@@ -14,11 +14,13 @@ class ImageTrackIdListModel: AVObject, CloudModelBase {
     
     @NSManaged var identifier: String!
     @NSManaged var list: [String]!
+    @NSManaged var count: Int
     
     convenience init(identifier: String) {
         self.init()
-        self.list = [String]()
         self.identifier = identifier
+        self.list = [String]()
+        self.count = 0
     }
 }
 
@@ -31,19 +33,21 @@ extension ImageTrackIdListModel: AVSubclassing {
 
 extension ImageTrackIdListModel: NSCopying, NSMutableCopying {
     func mutableCopyWithZone(zone: NSZone) -> AnyObject {
-        let noteTrackModel = ImageTrackIdListModel()
-        noteTrackModel.objectId = self.objectId
-        noteTrackModel.identifier = self.identifier
-        noteTrackModel.list = self.list
-        return noteTrackModel
+        let model = ImageTrackIdListModel()
+        model.objectId = self.objectId
+        model.identifier = self.identifier
+        model.list = self.list
+        model.count = self.count
+        return model
     }
     
     func copyWithZone(zone: NSZone) -> AnyObject {
-        let noteTrackModel = ImageTrackIdListModel()
-        noteTrackModel.objectId = self.objectId
-        noteTrackModel.identifier = self.identifier
-        noteTrackModel.list = self.list
-        return noteTrackModel
+        let model = ImageTrackIdListModel()
+        model.objectId = self.objectId
+        model.identifier = self.identifier
+        model.list = self.list
+        model.count = self.count
+        return model
     }
 }
 
@@ -61,6 +65,7 @@ extension ImageTrackIdListModel: ModelExportProtocol {
         object.objectId = objectId
         object.identifier = identifier
         object.list = list
+        object.count = count
         return object
     }
 }
