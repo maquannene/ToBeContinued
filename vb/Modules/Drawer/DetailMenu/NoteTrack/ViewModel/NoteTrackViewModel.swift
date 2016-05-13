@@ -127,7 +127,7 @@ extension NoteTrackViewModel: CloudModelBase {
                 guard let sSelf = self else { complete?(succeed: succeed); return }
                 //  数量大于 2 时，对数据进行排序
                 if succeed == true {
-                    if newNoteTrackModelList.count > 2 {
+                    if newNoteTrackModelList.count > 1 {
                         newNoteTrackModelList.sortInPlace {
                             return $0!.createdAt.timeIntervalSince1970 < $1!.createdAt.timeIntervalSince1970
                         }

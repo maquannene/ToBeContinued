@@ -131,7 +131,7 @@ extension ImageTrackViewModel {
             dispatch_group_notify(fetchGroup, dispatch_get_main_queue()) { [weak self] () -> Void in
                 guard let strongSelf = self else { complete?(succeed: succeed); return }
                 if succeed == true {
-                    if newImageTrackList.count > 2 {
+                    if newImageTrackList.count > 1 {
                         //  对数据根据时间进行排序
                         newImageTrackList.sortInPlace {
                             return $0!.createdAt.timeIntervalSince1970 > $1!.createdAt.timeIntervalSince1970
