@@ -11,23 +11,22 @@ import RealmSwift
 class NoteTrackCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String?
-    dynamic var title: String!
-    dynamic var detailContent: String?
+    dynamic var identifier: String!
     dynamic var createdAt: NSDate!
     
-    convenience init(objectId: String? = NSUUID().UUIDString, title: String!, detailContent: String?) {
+    dynamic var title: String!
+    dynamic var detailContent: String?
+    
+    convenience init(objectId: String? = NSUUID().UUIDString, identifier: String!, title: String!, detailContent: String?) {
         self.init()
         self.objectId = objectId
+        self.identifier = identifier
         self.title = title
         self.detailContent = detailContent
     }
     
     convenience init(model: NoteTrackCacheModel) {
-        self.init(objectId: model.objectId, title: model.title, detailContent: model.title)
-    }
-    
-    convenience init(cloudModel: NoteTrackModel) {
-        self.init(objectId: cloudModel.objectId, title: cloudModel.title, detailContent: cloudModel.title)
+        self.init(objectId: model.objectId, identifier: model.identifier, title: model.title, detailContent: model.detailContent)
     }
     
     func update(title title: String!, detailContent: String?) {
@@ -46,11 +45,19 @@ extension NoteTrackCacheModel: ModelExportProtocol {
     typealias CacheType = NoteTrackCacheModel
     
     func exportToCloudObject() -> CloudType! {
-        let object = NoteTrackModel(cacheModel: self)
+        let object = NoteTrackCacheModel.convertCacheToCloudObject(self)
         return object
+    }
+    
+    static func convertCacheToCloudObject(cacheObject: CacheType) -> CloudType {
+        return NoteTrackModel(objectId: cacheObject.objectId, identifier: cacheObject.identifier, title: cacheObject.title, detailContent: cacheObject.detailContent)
     }
     
     func exportToCacheObject() -> CacheType! {
         return self
+    }
+    
+    static func convertCloudToCacheObject(cloudObject: CloudType) -> CacheType {
+        return NoteTrackCacheModel(objectId: cloudObject.objectId, identifier: cloudObject.identifier, title: cloudObject.title, detailContent: cloudObject.detailContent)
     }
 }

@@ -69,7 +69,7 @@ extension AppDelegate {
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(WeiboSDKInfo.AppKey)
         //  AVOSCloud sdk
-        NoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
+        //  这几个注册协议必须调用，否则生成不了继承的对象
         NoteTrackModel.registerSubclass()
         ImageTrackIdListModel.registerSubclass()
         ImageTrackModel.registerSubclass()

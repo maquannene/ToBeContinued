@@ -10,7 +10,9 @@ protocol ModelExportProtocol {
     associatedtype CloudType
     associatedtype CacheType
     func exportToCloudObject() -> CloudType!
+//    static func convertCacheToCloudObject(cacheObject: CacheType) -> CloudType
     func exportToCacheObject() -> CacheType!
+//    static func convertCloudToCacheObject(cloudObject: CloudType) -> CacheType
 }
 
 protocol CloudModelBase {

@@ -20,11 +20,8 @@
 		D4121E851B075DCC00612CA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E841B075DCC00612CA3 /* UIKit.framework */; };
 		D4121E871B075DD600612CA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E861B075DD600612CA3 /* Foundation.framework */; };
 		D4121E891B075DDC00612CA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4121E881B075DDC00612CA3 /* CoreGraphics.framework */; };
-		D4233FAB1CE20300007360B0 /* ImageTrackCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4233FAA1CE20300007360B0 /* ImageTrackCacheModel.swift */; };
 		D425B9041CDC99B300609BF0 /* ModelAssociate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9031CDC99B300609BF0 /* ModelAssociate.swift */; };
-		D425B9091CDC9A0700609BF0 /* NoteTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */; };
 		D425B90A1CDC9A0700609BF0 /* NoteTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */; };
-		D425B90C1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */; };
 		D42A333F1CDCC2F20024270B /* NoteTrackCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */; };
 		D42E74311CDA1A290050A9EC /* UserInfoManange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42E74301CDA1A290050A9EC /* UserInfoManange.swift */; };
 		D451DD721CDB478F0035AEE1 /* DetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451DD3F1CDB478F0035AEE1 /* DetailBaseViewController.swift */; };
@@ -60,10 +57,11 @@
 		D4B712F31BAFC6D200166806 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F21BAFC6D200166806 /* AVOSCloud.framework */; };
 		D4B712F51BAFC72900166806 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F41BAFC72900166806 /* libsqlite3.tbd */; };
 		D4B712F71BAFC77200166806 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B712F61BAFC77200166806 /* libicucore.tbd */; };
+		D4B7B3191CE607E100FCC7A1 /* ImageTrackCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7B3171CE607E100FCC7A1 /* ImageTrackCacheModel.swift */; };
+		D4B7B31A1CE607E100FCC7A1 /* ImageTrackIdListCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7B3181CE607E100FCC7A1 /* ImageTrackIdListCacheModel.swift */; };
+		D4B7B31C1CE607F100FCC7A1 /* ImageTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7B31B1CE607F100FCC7A1 /* ImageTrackIdListModel.swift */; };
 		D4B91B3B1CE1F60500CA919E /* ImageTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4B91B2A1CE1F60500CA919E /* ImageTrack.storyboard */; };
 		D4B91B3C1CE1F60500CA919E /* ImageTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B91B2B1CE1F60500CA919E /* ImageTrackViewController.swift */; };
-		D4B91B3D1CE1F60500CA919E /* ImageTrackIdListCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B91B2E1CE1F60500CA919E /* ImageTrackIdListCacheModel.swift */; };
-		D4B91B3E1CE1F60500CA919E /* ImageTrackIdListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B91B301CE1F60500CA919E /* ImageTrackIdListModel.swift */; };
 		D4B91B3F1CE1F60500CA919E /* ImageTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B91B311CE1F60500CA919E /* ImageTrackModel.swift */; };
 		D4B91B401CE1F60500CA919E /* ImageTrack.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B91B331CE1F60500CA919E /* ImageTrack.xib */; };
 		D4B91B411CE1F60500CA919E /* ImageTrackAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B91B341CE1F60500CA919E /* ImageTrackAddMenuView.swift */; };
@@ -121,11 +119,8 @@
 		D4121E841B075DCC00612CA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4121E861B075DD600612CA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4121E881B075DDC00612CA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D4233FAA1CE20300007360B0 /* ImageTrackCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackCacheModel.swift; sourceTree = "<group>"; };
 		D425B9031CDC99B300609BF0 /* ModelAssociate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAssociate.swift; sourceTree = "<group>"; };
-		D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListModel.swift; sourceTree = "<group>"; };
 		D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackModel.swift; sourceTree = "<group>"; };
-		D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackIdListCacheModel.swift; sourceTree = "<group>"; };
 		D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTrackCacheModel.swift; sourceTree = "<group>"; };
 		D42E74301CDA1A290050A9EC /* UserInfoManange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoManange.swift; sourceTree = "<group>"; };
 		D451DD3F1CDB478F0035AEE1 /* DetailBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBaseViewController.swift; sourceTree = "<group>"; };
@@ -164,10 +159,11 @@
 		D4B712F21BAFC6D200166806 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		D4B712F41BAFC72900166806 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D4B712F61BAFC77200166806 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		D4B7B3171CE607E100FCC7A1 /* ImageTrackCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackCacheModel.swift; sourceTree = "<group>"; };
+		D4B7B3181CE607E100FCC7A1 /* ImageTrackIdListCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackIdListCacheModel.swift; sourceTree = "<group>"; };
+		D4B7B31B1CE607F100FCC7A1 /* ImageTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackIdListModel.swift; sourceTree = "<group>"; };
 		D4B91B2A1CE1F60500CA919E /* ImageTrack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageTrack.storyboard; sourceTree = "<group>"; };
 		D4B91B2B1CE1F60500CA919E /* ImageTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackViewController.swift; sourceTree = "<group>"; };
-		D4B91B2E1CE1F60500CA919E /* ImageTrackIdListCacheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackIdListCacheModel.swift; sourceTree = "<group>"; };
-		D4B91B301CE1F60500CA919E /* ImageTrackIdListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackIdListModel.swift; sourceTree = "<group>"; };
 		D4B91B311CE1F60500CA919E /* ImageTrackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackModel.swift; sourceTree = "<group>"; };
 		D4B91B331CE1F60500CA919E /* ImageTrack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTrack.xib; sourceTree = "<group>"; };
 		D4B91B341CE1F60500CA919E /* ImageTrackAddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTrackAddMenuView.swift; sourceTree = "<group>"; };
@@ -352,7 +348,6 @@
 		D425B9051CDC9A0700609BF0 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				D425B90B1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift */,
 				D42A333E1CDCC2F20024270B /* NoteTrackCacheModel.swift */,
 			);
 			path = Cache;
@@ -361,7 +356,6 @@
 		D425B9061CDC9A0700609BF0 /* Cloud */ = {
 			isa = PBXGroup;
 			children = (
-				D425B9071CDC9A0700609BF0 /* NoteTrackIdListModel.swift */,
 				D425B9081CDC9A0700609BF0 /* NoteTrackModel.swift */,
 			);
 			path = Cloud;
@@ -578,8 +572,8 @@
 		D4B91B2D1CE1F60500CA919E /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				D4B91B2E1CE1F60500CA919E /* ImageTrackIdListCacheModel.swift */,
-				D4233FAA1CE20300007360B0 /* ImageTrackCacheModel.swift */,
+				D4B7B3171CE607E100FCC7A1 /* ImageTrackCacheModel.swift */,
+				D4B7B3181CE607E100FCC7A1 /* ImageTrackIdListCacheModel.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -587,7 +581,7 @@
 		D4B91B2F1CE1F60500CA919E /* Cloud */ = {
 			isa = PBXGroup;
 			children = (
-				D4B91B301CE1F60500CA919E /* ImageTrackIdListModel.swift */,
+				D4B7B31B1CE607F100FCC7A1 /* ImageTrackIdListModel.swift */,
 				D4B91B311CE1F60500CA919E /* ImageTrackModel.swift */,
 			);
 			path = Cloud;
@@ -804,6 +798,7 @@
 			files = (
 				D451DD891CDB478F0035AEE1 /* NoteTrackDetailView.swift in Sources */,
 				D47E024D1BEF411700E34F23 /* UINavigationBar+Awesome.m in Sources */,
+				D4B7B31A1CE607E100FCC7A1 /* ImageTrackIdListCacheModel.swift in Sources */,
 				D4B91B421CE1F60500CA919E /* ImageTrackCell.swift in Sources */,
 				D451DD831CDB478F0035AEE1 /* NewNoteTrackView.swift in Sources */,
 				D4073AB01CD9FB5700E880D2 /* DrawerVisualStateCustom.swift in Sources */,
@@ -811,12 +806,9 @@
 				D451DD721CDB478F0035AEE1 /* DetailBaseViewController.swift in Sources */,
 				D488BF051B28685A0050C2E2 /* AppDelegate.swift in Sources */,
 				D4B91B411CE1F60500CA919E /* ImageTrackAddMenuView.swift in Sources */,
-				D4B91B3E1CE1F60500CA919E /* ImageTrackIdListModel.swift in Sources */,
 				D451DD871CDB478F0035AEE1 /* NoteTrackDetailCell.swift in Sources */,
 				D4B91B461CE1F60500CA919E /* ImageTrackViewModel.swift in Sources */,
-				D4B91B3D1CE1F60500CA919E /* ImageTrackIdListCacheModel.swift in Sources */,
 				D451DD941CDB478F0035AEE1 /* SettingViewController.swift in Sources */,
-				D425B9091CDC9A0700609BF0 /* NoteTrackIdListModel.swift in Sources */,
 				D4C5B5B51CD9D88E00C8E7CB /* RootViewController.swift in Sources */,
 				D4B679B91BB4ED3D002E7B32 /* UIWindow_Extension.swift in Sources */,
 				D40709321BB101250098867E /* NSObject_Extension.swift in Sources */,
@@ -832,15 +824,15 @@
 				D45E89841B36CD1500AFF9F8 /* LogInViewController.swift in Sources */,
 				D4B91B3C1CE1F60500CA919E /* ImageTrackViewController.swift in Sources */,
 				D4B91B451CE1F60500CA919E /* ImageTrackLayout.swift in Sources */,
+				D4B7B31C1CE607F100FCC7A1 /* ImageTrackIdListModel.swift in Sources */,
 				D4F01F4E1BE751730057CCEE /* MQPictureBrowserView.swift in Sources */,
 				D42A333F1CDCC2F20024270B /* NoteTrackCacheModel.swift in Sources */,
-				D425B90C1CDC9A2300609BF0 /* NoteTrackIdListCacheModel.swift in Sources */,
 				D4B91B431CE1F60500CA919E /* ImageTrackDisplayCell.swift in Sources */,
 				D451DD8A1CDB478F0035AEE1 /* NoteTrackViewModel.swift in Sources */,
 				D451DD8E1CDB478F0035AEE1 /* UserModel.swift in Sources */,
-				D4233FAB1CE20300007360B0 /* ImageTrackCacheModel.swift in Sources */,
 				D451DD8D1CDB478F0035AEE1 /* MainMenuViewControllerOperate.swift in Sources */,
 				D451DD801CDB478F0035AEE1 /* NoteTrackViewController.swift in Sources */,
+				D4B7B3191CE607E100FCC7A1 /* ImageTrackCacheModel.swift in Sources */,
 				D451DD9F1CDB4ADD0035AEE1 /* UIView+MQRecursiveLevelLog.m in Sources */,
 				D4F36EAE1BC6C227006DCF94 /* MQPictureBrowserCell.swift in Sources */,
 				D4E903331BB1514000D5907D /* UILabel_Extension.swift in Sources */,

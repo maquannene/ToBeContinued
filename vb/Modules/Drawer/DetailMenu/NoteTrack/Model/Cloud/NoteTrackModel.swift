@@ -8,23 +8,22 @@
 
 import AVOSCloud
 
-class NoteTrackModel: AVObject {
+class NoteTrackModel: AVObject, CloudModelBase {
+    
+    @NSManaged var identifier: String!
     
     @NSManaged var title: String!
     @NSManaged var detailContent: String?
     
-    convenience init(objectId: String! = NSUUID().UUIDString, title: String?, detailContent: String?) {
+    convenience init(objectId: String! = NSUUID().UUIDString, identifier: String!, title: String?, detailContent: String?) {
         self.init()
         self.objectId = objectId
+        self.identifier = identifier
         update(title: title, detailContent: detailContent)
     }
     
     convenience init(model: NoteTrackModel) {
-        self.init(objectId: model.objectId, title: model.title, detailContent: model.detailContent)
-    }
-    
-    convenience init(cacheModel: NoteTrackCacheModel) {
-        self.init(objectId: cacheModel.objectId, title: cacheModel.title, detailContent: cacheModel.detailContent)
+        self.init(objectId: model.objectId, identifier: model.identifier, title: model.title, detailContent: model.detailContent)
     }
     
     func update(title title: String!, detailContent: String?) {
@@ -62,13 +61,21 @@ extension NoteTrackModel: ModelExportProtocol {
     typealias CacheType = NoteTrackCacheModel
     
     func exportToCacheObject() -> CacheType! {
-        let object = NoteTrackCacheModel(cloudModel: self)
+        let object = NoteTrackModel.convertCloudToCacheObject(self)
         object.createdAt = createdAt
         return object
     }
     
+    static func convertCloudToCacheObject(cloudObject: CloudType) -> CacheType {
+        return NoteTrackCacheModel(objectId: cloudObject.objectId, identifier: cloudObject.identifier, title: cloudObject.title, detailContent: cloudObject.detailContent)
+    }
+    
     func exportToCloudObject() -> CloudType! {
         return self
+    }
+    
+    static func convertCacheToCloudObject(cacheObject: CacheType) -> CloudType {
+        return NoteTrackModel(objectId: cacheObject.objectId, identifier: cacheObject.identifier, title: cacheObject.title, detailContent: cacheObject.detailContent)
     }
 }
 
