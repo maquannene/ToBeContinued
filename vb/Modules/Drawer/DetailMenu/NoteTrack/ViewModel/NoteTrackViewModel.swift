@@ -74,7 +74,7 @@ extension NoteTrackViewModel: CloudModelBase {
      */
     func queryNoteTrackListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
     {
-        var cloudModelList: [NoteTrackModel]?
+        var cloudModelList: [NoteTrackModel?]?
         //  先从数据库取
         if fromCachePriority {
             //  筛选列表中的数据

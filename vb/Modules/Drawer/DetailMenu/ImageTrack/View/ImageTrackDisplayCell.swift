@@ -9,9 +9,14 @@
 import SDWebImage
 import MQImageDownloadGroup
 
+protocol ImageTrackDisplayCellDataSource: class {
+    var originImageURL: String! { get }
+    var imageSize: CGSize { get }
+}
+
 class ImageTrackDisplayCell: MQPictureBrowserCell {
 
-    weak var imageTrack: ImageTrackModel?
+    weak var imageTrack: ImageTrackDisplayCellDataSource?
     
     @IBOutlet weak var progressView: UIProgressView! {
         didSet {
@@ -44,19 +49,19 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
         progressView.frame = CGRect(x: 20, y: layoutAttributes.frame.height / 2, width: layoutAttributes.frame.width - 40, height: 20)
     }
     
-    func configurePictureCell(imageTrack: ImageTrackModel!) {
+    func configurePictureCell(imageTrack: ImageTrackDisplayCellDataSource!) {
         self.imageTrack = imageTrack
         
-        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.thumbImageFileUrl)
+        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.originImageURL)
 
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有校验正确才能设置进度
-        let captureUrlStr = self.imageTrack?.largeImageFileUrl
+        let captureUrlStr = self.imageTrack?.originImageURL
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTrack.originImageFileUrl)!, groupIdentifier: reuseIdentifier, placeholderImage: thumbImage, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        imageView.mq_setImageWithURL(NSURL(string: imageTrack.originImageURL)!, groupIdentifier: reuseIdentifier, placeholderImage: thumbImage, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
             
             guard let strongSelf = self else { return }
-            guard captureUrlStr == strongSelf.imageTrack?.originImageFileUrl else { return }
+            guard captureUrlStr == strongSelf.imageTrack?.originImageURL else { return }
             
             strongSelf.progressView.hidden = false
             strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
@@ -64,13 +69,13 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
             }, completed: { [weak self] (image, error, cacheType, url) -> Void in
             
             guard let strongSelf = self else { return }
-            guard url.absoluteString == strongSelf.imageTrack?.originImageFileUrl else { return }  //  回调验证
+            guard url.absoluteString == strongSelf.imageTrack?.originImageURL else { return }  //  回调验证
             guard error == nil else { return }
             
             strongSelf.progressView.hidden = true
         })
         
-        self.imageSize = CGSize(width: imageTrack.imageWidht.doubleValue, height: imageTrack.imageHeight.doubleValue)
+        self.imageSize = imageTrack.imageSize
         defaultConfigure()
     }
     

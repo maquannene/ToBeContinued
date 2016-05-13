@@ -20,7 +20,7 @@ typealias QureyImageTrackDataPolicy = (fromCachePriority: Bool, updateCache: Boo
 
 class ImageTrackViewModel: NSObject {
 
-    var imageTrackIdList: ImageTrackIdListModel?
+    var imageTrackIdList: ImageTrackIdListModel = ImageTrackIdListModel(identifier: ImageTrackIdListModel.uniqueIdentifier())
     var imageTrackList: [ImageTrackModel?]! = [ImageTrackModel?]()           //  存储当前imageTrack的缓存列表
     var realm: Realm = try! Realm()
     
@@ -45,7 +45,7 @@ extension ImageTrackViewModel {
             if let cacheResults: Results = realm.objects(ImageTrackIdListCacheModel) {
                 if cacheResults.count > 0 {
                     cacheModel = cacheResults[0].exportToCloudObject()
-                    imageTrackIdList = cacheModel
+                    imageTrackIdList = cacheModel!
                     complete?(succeed: true)
                 }
             }
@@ -85,7 +85,7 @@ extension ImageTrackViewModel {
         if policy.fromCachePriority {
             //  筛选列表中的数据
             let filterCacheModelList = realm.objects(ImageTrackCacheModel).filter{ (model) -> Bool in
-                for i in (imageTrackIdList?.list)! {
+                for i in imageTrackIdList.list {
                     if model.objectId == i {
                         return true
                     }
@@ -115,7 +115,7 @@ extension ImageTrackViewModel {
             let fetchGroup: dispatch_group_t = dispatch_group_create()
             var newImageTrackList = [ImageTrackModel?]()
             var succeed = true      //  加载标志位，一旦有一个失败，就标记失败
-            for objectId in imageTrackIdList!.list {
+            for objectId in imageTrackIdList.list {
                 dispatch_group_enter(fetchGroup)
                 let imageTrack: ImageTrackModel = ImageTrackModel(outDataWithObjectId: objectId)
                 imageTrack.fetchInBackgroundWithBlock{ [unowned imageTrack] (object, error) -> Void in
@@ -165,7 +165,7 @@ extension ImageTrackViewModel {
                 sSelf.imageTrackIdList = cloudModel
                 //  写数据库数据
                 try! sSelf.realm.write {
-                    sSelf.realm.add(sSelf.imageTrackIdList!.exportToCacheObject(), update: true)
+                    sSelf.realm.add(sSelf.imageTrackIdList.exportToCacheObject(), update: true)
                 }
             }
             complete?(succeed: succeed)
@@ -250,7 +250,7 @@ extension ImageTrackViewModel {
                                                                        imageSize: originImage.size)
     
             //  新 imageTrackIdList
-            let newImageTrackIdList: ImageTrackIdListModel = strongSelf.imageTrackIdList?.copy() as! ImageTrackIdListModel
+            let newImageTrackIdList: ImageTrackIdListModel = strongSelf.imageTrackIdList.copy() as! ImageTrackIdListModel
             newImageTrackIdList.fetchWhenSave = true
             
             newImageTrackModel.saveInBackgroundWithBlock { [weak self] succeed, error in
@@ -274,7 +274,7 @@ extension ImageTrackViewModel {
     func queryDeleteImageTrackAtIndex(index: Int!, complete: QureyImageTrackDataCompletion?)
     {
         guard let track = fetchImageTrackModelWithIndex(index) else { complete?(succeed: false); return }
-        let newImageTrackIdList: ImageTrackIdListModel = imageTrackIdList?.mutableCopy() as! ImageTrackIdListModel
+        let newImageTrackIdList: ImageTrackIdListModel = imageTrackIdList.mutableCopy() as! ImageTrackIdListModel
         newImageTrackIdList.removeObject(track.objectId, forKey: "list")
         newImageTrackIdList.fetchWhenSave = true
         newImageTrackIdList.saveInBackgroundWithBlock { [weak self] (succeed, error) in
@@ -283,7 +283,7 @@ extension ImageTrackViewModel {
                 strongSelf.imageTrackIdList = newImageTrackIdList
                 strongSelf.imageTrackList.removeAtIndex(index)
                 try! strongSelf.realm.write {
-                    strongSelf.realm.add(strongSelf.imageTrackIdList!.exportToCacheObject(), update: true)
+                    strongSelf.realm.add(strongSelf.imageTrackIdList.exportToCacheObject(), update: true)
                     if let deleteIdObj: [ImageTrackId] = strongSelf.realm.objects(ImageTrackId).filter( { $0.id == track.objectId } ) {
                         strongSelf.realm.delete(deleteIdObj)
                     }

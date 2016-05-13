@@ -12,10 +12,15 @@ protocol ImageTrackCellDelegate: NSObjectProtocol {
     func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
+protocol ImageTrackCellDataSource: class {
+    var imageURL: String! { get }
+    var textStr: String? { get }
+}
+
 class ImageTrackCell: UICollectionViewCell {
     
     weak var delegate: ImageTrackCellDelegate?
-    weak var imageTrack: ImageTrackModel?
+    weak var imageTrack: ImageTrackCellDataSource?
     var longPressGesture: UILongPressGestureRecognizer!
     @IBOutlet weak var longImageIcon: UILabel!
     @IBOutlet weak var textLabel: UILabel!
@@ -60,13 +65,13 @@ class ImageTrackCell: UICollectionViewCell {
 //  MARK: Public
 extension ImageTrackCell {
     
-    func configureCell(imageTrack: ImageTrackModel!) -> Void {
+    func configureCell(imageTrack: ImageTrackCellDataSource!) -> Void {
         
         self.imageTrack = imageTrack
         
-        let captureUrlStr = self.imageTrack?.largeImageFileUrl
+        let captureUrlStr = self.imageTrack?.imageURL
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTrack.thumbImageFileUrl ?? imageTrack.originImageFileUrl)!,
+        imageView.mq_setImageWithURL(NSURL(string: imageTrack.imageURL)!,
                                      groupIdentifier: reuseIdentifier,
                                      placeholderImage: nil,
                                      options: .RetryFailed,
@@ -74,19 +79,19 @@ extension ImageTrackCell {
             { [weak self] (receivedSize, expectedSize) -> Void in
                 
                 guard let strongSelf = self else { return }
-                guard captureUrlStr == strongSelf.imageTrack?.thumbImageFileUrl else { return }
-                print("当前图片Text:\(imageTrack.text),进度:\(Float(receivedSize) / Float(expectedSize))")
+                guard captureUrlStr == strongSelf.imageTrack?.imageURL else { return }
+                print("当前图片Text:\(imageTrack.textStr),进度:\(Float(receivedSize) / Float(expectedSize))")
                 strongSelf.progressView.hidden = false
                 strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
             }, completed: { [weak self] (image, error, cacheType, url) -> Void in
                 
                 guard let strongSelf = self else { return }
-                guard url.absoluteString == strongSelf.imageTrack?.thumbImageFileUrl else { return }  //  回调验证
+                guard url.absoluteString == strongSelf.imageTrack?.imageURL else { return }  //  回调验证
                 guard error == nil else { return }
                 strongSelf.progressView.hidden = true
             })
         
-        textLabel.text = imageTrack.text
+        textLabel.text = self.imageTrack?.textStr
     }
     
 }

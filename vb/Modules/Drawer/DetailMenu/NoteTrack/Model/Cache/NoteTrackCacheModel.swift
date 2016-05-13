@@ -16,8 +16,9 @@ class NoteTrackCacheModel: Object, CacheModelBase {
     dynamic var createdAt: NSDate!
     
     convenience init(objectId: String? = NSUUID().UUIDString, title: String!, detailContent: String?) {
-        self.init(title: title, detailContent: detailContent)
+        self.init()
         self.objectId = objectId
+        self.title = title
         self.detailContent = detailContent
     }
     

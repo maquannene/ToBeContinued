@@ -127,3 +127,21 @@ extension ImageTrackModel: ModelExportProtocol {
         return self
     }
 }
+
+extension ImageTrackModel: ImageTrackCellDataSource, ImageTrackDisplayCellDataSource {
+    
+    var imageURL: String! {
+        return thumbImageFileUrl ?? originImageFileUrl
+    }
+    var textStr: String? {
+        return text
+    }
+    
+    var originImageURL: String! {
+        return originImageFileUrl
+    }
+    
+    var imageSize: CGSize {
+        return CGSize(width: imageWidht.integerValue, height: imageHeight.integerValue)
+    }
+}
