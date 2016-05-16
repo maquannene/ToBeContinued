@@ -11,6 +11,7 @@ import MQImageDownloadGroup
 
 protocol ImageTrackDisplayCellDataSource: class {
     var originImageURL: String! { get }
+    var thumbImageURL: String! { get }
     var imageSize: CGSize { get }
 }
 
@@ -52,7 +53,7 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
     func configurePictureCell(imageTrack: ImageTrackDisplayCellDataSource!) {
         self.imageTrack = imageTrack
         
-        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.originImageURL)
+        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.thumbImageURL)
 
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有校验正确才能设置进度

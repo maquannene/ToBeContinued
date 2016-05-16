@@ -138,8 +138,13 @@ extension ImageTrackModel: ImageTrackCellDataSource, ImageTrackDisplayCellDataSo
     var imageURL: String! {
         return thumbImageFileUrl ?? originImageFileUrl
     }
+    
     var textStr: String? {
         return text
+    }
+    
+    var thumbImageURL: String! {
+        return thumbImageFileUrl ?? originImageFileUrl
     }
     
     var originImageURL: String! {
