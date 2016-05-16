@@ -13,8 +13,8 @@ typealias QureyNoteTrackDataCompletion = (succeed: Bool!) -> Void
   
 class NoteTrackViewModel: NSObject {
     
-    var noteTrackIdList: NoteTrackIdListModel?
-    var noteTrackModelList: [NoteTrackModel?]! = [NoteTrackModel?]()            //  存储noteModel列表的缓存数组
+//    var noteTrackIdList: NoteTrackIdListModel?
+    var noteTrackModelList: [NoteTrackModel]! = [NoteTrackModel]()            //  存储noteModel列表的缓存数组
     let realm: Realm = try! Realm()
     
     var expandingIndexPath: NSIndexPath?                                        //  展开的cell的IndexPath
@@ -26,48 +26,7 @@ class NoteTrackViewModel: NSObject {
 }
 
 //  MARK: Public
-extension NoteTrackViewModel: CloudModelBase {
-    
-    /**
-    请求查找包含每个 NoteTrack 对象objectId的列表
-    
-    - parameter complete: 完成回调
-    */
-    func queryFindNoteTrackIdListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
-    {
-        //  先从数据库取
-        var cacheModel: NoteTrackIdListModel?
-        if fromCachePriority {
-            if let cacheResults: Results = realm.objects(NoteTrackIdListCacheModel) {
-                if cacheResults.count > 0 {
-                    cacheModel = cacheResults[0].exportToCloudObject()
-                    noteTrackIdList = cacheModel
-                    complete?(succeed: true)
-                }
-            }
-        }
-    
-        //  再从服务器取
-        if updateCache || cacheModel == nil {
-            let identifier: String = NoteTrackViewModel.uniqueIdentifier()
-            let query: AVQuery = AVQuery(className: NoteTrackIdListModel.RealClassName)
-            //  根据identifier 识别符查询list
-            query.whereKey("identifier", equalTo: identifier)
-            query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) -> Void in
-                guard let strongSelf = self else { return }
-                guard objects != nil && objects.count > 0 else { complete?(succeed: false); return }
-                if let objc = objects[0] as? NoteTrackIdListModel {
-                    strongSelf.noteTrackIdList = objc
-                    try! strongSelf.realm.write {
-                        strongSelf.realm.add(objc.exportToCacheObject(), update: true)
-                    }
-                    complete?(succeed: true)
-                    return
-                }
-                complete?(succeed: false)
-            }
-        }
-    }
+extension NoteTrackViewModel {
     
     /**
      根据 noteTrackIdList 的 id 列表重新生成 noteTrackModelList
@@ -76,29 +35,16 @@ extension NoteTrackViewModel: CloudModelBase {
      */
     func queryNoteTrackListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
     {
-        var cloudModelList: [NoteTrackModel?]?
+        var cloudModelList: [NoteTrackModel]?
+        var cacheModelList: Results<NoteTrackCacheModel>?
         //  先从数据库取
         if fromCachePriority {
             //  筛选列表中的数据
-            let cacheModelList = realm.objects(NoteTrackCacheModel).filter { (cacheModel) -> Bool in
-                for i in (noteTrackIdList?.list)! {
-                    if cacheModel.objectId == i {
-                        return true
-                    }
-                }
-                //  冗余数据清理
-                try! realm.write {
-                    if let deleteIdeObj: [NoteTrackId] = realm.objects(NoteTrackId).filter( { $0.id == cacheModel.objectId } ) {
-                        realm.delete(deleteIdeObj)
-                    }
-                    realm.delete(cacheModel)
-                }
-                return false
-            }
+            cacheModelList = realm.objects(NoteTrackCacheModel)
             //  排序 + 格式转换
-            if cacheModelList.count > 0 {
-                cloudModelList = cacheModelList.sort {
-                    return $0.createdAt.timeIntervalSince1970 < $1.createdAt.timeIntervalSince1970
+            if cacheModelList?.count > 0 {
+                cloudModelList = cacheModelList?.sort {
+                    return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                 }.map {
                     $0.exportToCloudObject()
                 }
@@ -107,65 +53,30 @@ extension NoteTrackViewModel: CloudModelBase {
             }
         }
         
-        //  再从服务器取
         if updateCache || cloudModelList == nil {
-            let fetchGroup: dispatch_group_t = dispatch_group_create()
-            var newNoteTrackModelList = [NoteTrackModel?]()
-            var succeed = true      //  加载标志位，一旦有一个失败，就标记失败
-            for objectId in self.noteTrackIdList!.list {
-                dispatch_group_enter(fetchGroup)
-                let noteTrackModel: NoteTrackModel = NoteTrackModel(outDataWithObjectId: objectId )
-                noteTrackModel.fetchInBackgroundWithBlock{ (object, error) -> Void in
-                    if error != nil {
-                        succeed = false
-                    }
-                    else {
-                        newNoteTrackModelList.insert(noteTrackModel, atIndex: 0)
-                    }
-                    dispatch_group_leave(fetchGroup)
-                }
-            }
-            dispatch_group_notify(fetchGroup, dispatch_get_main_queue()) { [weak self] in
-                guard let sSelf = self else { complete?(succeed: succeed); return }
-                //  数量大于 2 时，对数据进行排序
-                if succeed == true {
+            let identifier: String = NoteTrackModel.uniqueIdentifier()
+            let query: AVQuery = AVQuery(className: NoteTrackModel.RealClassName)
+            //  根据identifier 识别符查询list
+            query.whereKey("identifier", equalTo: identifier)
+            query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) in
+                guard let strongSelf = self else { complete?(succeed: error == nil); return }
+                guard error == nil else { print(error); complete?(succeed: false); return }
+                if var newNoteTrackModelList = objects as? [NoteTrackModel] {
                     if newNoteTrackModelList.count > 1 {
                         newNoteTrackModelList.sortInPlace {
-                            return $0!.createdAt.timeIntervalSince1970 < $1!.createdAt.timeIntervalSince1970
+                            return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                         }
                     }
-                    sSelf.noteTrackModelList = newNoteTrackModelList
-                    try! sSelf.realm.write {
-                        sSelf.noteTrackModelList.forEach {
-                            sSelf.realm.add($0!.exportToCacheObject(), update: true)
+                    strongSelf.noteTrackModelList = newNoteTrackModelList
+                    try! strongSelf.realm.write {
+                        strongSelf.realm.delete(cacheModelList ?? strongSelf.realm.objects(NoteTrackCacheModel))
+                        strongSelf.noteTrackModelList.forEach {
+                            strongSelf.realm.add($0.exportToCacheObject(), update: true)
                         }
                     }
                 }
-                complete?(succeed: succeed)
+                complete?(succeed: true)
             }
-        }
-    }
-    
-    /**
-    第一次使用 请求创建 NoteTrack 列表对象的id列表
-    
-    - parameter complete: 完成回调
-    */
-    func queryCreateNoteTrackIdListCompletion(complete: QureyNoteTrackDataCompletion?)
-    {
-        let identifier: String = NoteTrackViewModel.uniqueIdentifier()
-        let noteTrackIdList = NoteTrackIdListModel(identifier: identifier)
-        //  写服务器数据
-        noteTrackIdList.saveInBackgroundWithBlock{ [weak self] (succeed, error) -> Void in
-            guard let sSelf = self else { complete?(succeed: succeed); return }
-            if succeed {
-                sSelf.noteTrackIdList = noteTrackIdList
-                //  写数据库数据
-                try! sSelf.realm.write {
-                    sSelf.realm.add(sSelf.noteTrackIdList!.exportToCacheObject(), update: true)
-                }
-            }
-            complete?(succeed: succeed)
         }
     }
 
@@ -177,29 +88,17 @@ extension NoteTrackViewModel: CloudModelBase {
     */
     func queryAddNoteTrack(newNoteTrackModel: NoteTrackModel, complete: QureyNoteTrackDataCompletion?)
     {
-        let newNoteTrackIdList: NoteTrackIdListModel = noteTrackIdList!.mutableCopy() as! NoteTrackIdListModel
-        newNoteTrackIdList.fetchWhenSave = true
-        //  写服务器数据
-        //  1.保存 NotTrackModel 到 Cloud
+        newNoteTrackModel.identifier = NoteTrackModel.uniqueIdentifier()
         newNoteTrackModel.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
             guard let sSelf = self else { complete?(succeed: succeed); return }
-            var isSucceed = succeed
-            guard isSucceed.boolValue == true else { complete?(succeed: false); return }
-            //  写完成功后要再将 NoteTrack 的 objectId 写入noteTrackIdList 并且保存
-            newNoteTrackIdList.addObject(newNoteTrackModel.objectId, forKey: "list")
-            newNoteTrackIdList.count += 1
-            //  2.保存 NoteTrackIdListModel 到 Cloud
-            isSucceed = newNoteTrackIdList.save()
-            if  (isSucceed) {
+            if  (succeed) {
                 //  写数据库数据
                 sSelf.noteTrackModelList.insert(newNoteTrackModel, atIndex: 0)
-                sSelf.noteTrackIdList = newNoteTrackIdList
                 try! sSelf.realm.write {
                     sSelf.realm.add(newNoteTrackModel.exportToCacheObject(), update: true)
-                    sSelf.realm.add(sSelf.noteTrackIdList!.exportToCacheObject(), update: true)
                 }
             }
-            complete?(succeed: isSucceed)
+            complete?(succeed: succeed)
         }
     }
     
@@ -211,31 +110,20 @@ extension NoteTrackViewModel: CloudModelBase {
     */
     func queryDeleteNoteTrackAtIndex(index: Int!, complete: QureyNoteTrackDataCompletion?)
     {
-        guard let track = fetchNoteTrackModel(index) else { complete?(succeed: false); return }
-        let newNoteTrackIdList: NoteTrackIdListModel = noteTrackIdList!.mutableCopy() as! NoteTrackIdListModel
-        newNoteTrackIdList.removeObject(track.objectId, forKey: "list")
-        newNoteTrackIdList.count -= 1
-        newNoteTrackIdList.fetchWhenSave = true
-        newNoteTrackIdList.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) in
-            guard let sSelf = self else { return }
+        guard let trackModel = fetchNoteTrackModel(index) else { complete?(succeed: false); return }
+    
+        trackModel.deleteInBackgroundWithBlock { [weak self] (succeed, error) in
+            guard let strongSelf = self else { complete?(succeed: succeed); return }
             if succeed {
-                sSelf.noteTrackIdList = newNoteTrackIdList
-                sSelf.noteTrackModelList.removeAtIndex(index)
-                try! sSelf.realm.write {
-                    //  更新 NoteTrackIdList 的数据库
-                    sSelf.realm.add(sSelf.noteTrackIdList!.exportToCacheObject(), update: true)
-                    //  删除数据库中的 NoteTrackId RealmString 类型
-                    if let deleteIdeObj: [NoteTrackId] = sSelf.realm.objects(NoteTrackId).filter( { $0.id == track.objectId } ) {
-                        sSelf.realm.delete(deleteIdeObj)
-                    }
-                    //  删除数据库中 NoteTrackCacheModel 对象
-                    if let deleteObj: [NoteTrackCacheModel] = sSelf.realm.objects(NoteTrackCacheModel).filter( {$0.objectId == track.objectId } ) {
-                        sSelf.realm.delete(deleteObj)
+                strongSelf.noteTrackModelList.removeAtIndex(index)
+                //  删除数据库中 NoteTrackCacheModel 对象
+                if let deleteObj: [NoteTrackCacheModel] = strongSelf.realm.objects(NoteTrackCacheModel).filter( {$0.objectId == trackModel.objectId } ) {
+                    try! strongSelf.realm.write {
+                        strongSelf.realm.delete(deleteObj)
                     }
                 }
-                track.deleteInBackground()
             }
-            complete?(succeed: true)
+            complete?(succeed: succeed)
         }
     }
     
@@ -245,17 +133,17 @@ extension NoteTrackViewModel: CloudModelBase {
     - parameter track:   需要更新的密码对象
     - parameter complete: 完成回调
     */
-    func queryUpdateNoteTrack(noteTrackModel: NoteTrackModel, index: Int, complete: QureyNoteTrackDataCompletion?)
+    func queryUpdateNoteTrack(newNoteTrackModel: NoteTrackModel, index: Int, complete: QureyNoteTrackDataCompletion?)
     {
-        noteTrackModel.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
+        newNoteTrackModel.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
             guard let sSelf = self else { return }
             if (succeed) {
-                if let noteTrackModel = sSelf.noteTrackModelList[index] {
+                if let noteTrackModel = sSelf.noteTrackModelList[index] as NoteTrackModel? {
+                    noteTrackModel.update(newTrackModel: newNoteTrackModel)
                     try! sSelf.realm.write {
                         sSelf.realm.add(noteTrackModel.exportToCacheObject(), update: true)
                     }
                 }
-                noteTrackModel.update(newTrackModel: noteTrackModel)
             }
             complete?(succeed: succeed)
         }
@@ -279,7 +167,7 @@ extension NoteTrackViewModel: CloudModelBase {
         }
         return indexPath
     }
-    
+
 }
 
   

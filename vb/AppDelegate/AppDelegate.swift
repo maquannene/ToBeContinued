@@ -26,8 +26,8 @@ extension AppDelegate: UIApplicationDelegate {
         test()
         /**/
 
-        let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
-            if (oldSchemaVersion < 1) {
+        let config = Realm.Configuration(schemaVersion: 2, migrationBlock: { migration, oldSchemaVersion in
+            if (oldSchemaVersion < 2) {
             }
         })
         Realm.Configuration.defaultConfiguration = config
@@ -69,9 +69,8 @@ extension AppDelegate {
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(WeiboSDKInfo.AppKey)
         //  AVOSCloud sdk
-        NoteTrackIdListModel.registerSubclass()  //  这几个注册协议必须调用，否则生成不了继承的对象
+        //  这几个注册协议必须调用，否则生成不了继承的对象
         NoteTrackModel.registerSubclass()
-        ImageTrackIdListModel.registerSubclass()
         ImageTrackModel.registerSubclass()
         AVOSCloud.setApplicationId(kAVCloudSDKAppID, clientKey: kAVCloudSDKAppKey)
     }

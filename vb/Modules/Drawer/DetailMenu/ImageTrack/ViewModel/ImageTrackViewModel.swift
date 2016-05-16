@@ -20,8 +20,7 @@ typealias QureyImageTrackDataPolicy = (fromCachePriority: Bool, updateCache: Boo
 
 class ImageTrackViewModel: NSObject {
 
-    var imageTrackIdList: ImageTrackIdListModel = ImageTrackIdListModel(identifier: ImageTrackIdListModel.uniqueIdentifier())
-    var imageTrackList: [ImageTrackModel?]! = [ImageTrackModel?]()           //  存储当前imageTrack的缓存列表
+    var imageTrackModelList: [ImageTrackModel]! = [ImageTrackModel]()           //  存储当前imageTrack的缓存列表
     var realm: Realm = try! Realm()
     
     deinit {
@@ -33,141 +32,52 @@ class ImageTrackViewModel: NSObject {
 extension ImageTrackViewModel {
     
     /**
-    请求获取包含每个imageTrack对象objectId的列表（先找到列表，再fetch）
-    
-    - parameter complete: 完成回调
-    */
-    func queryFindImageTrackIdListCompletion(policy: QureyImageTrackDataPolicy = (true, true), complete: QureyImageTrackDataCompletion?)
-    {
-        //  先从数据库取
-        var cacheModel: ImageTrackIdListModel?
-        if policy.fromCachePriority {
-            if let cacheResults: Results = realm.objects(ImageTrackIdListCacheModel) {
-                if cacheResults.count > 0 {
-                    cacheModel = cacheResults[0].exportToCloudObject()
-                    imageTrackIdList = cacheModel!
-                    complete?(succeed: true)
-                }
-            }
-        }
-        
-        //  再从服务器拉取
-        if policy.updateCache || cacheModel == nil {
-            let identifier:  String = ImageTrackIdListModel.uniqueIdentifier()
-            let query: AVQuery = AVQuery(className: ImageTrackIdListModel.RealClassName)
-            query.whereKey("identifier", equalTo: identifier)
-            query.findObjectsInBackgroundWithBlock { [weak self] (object: [AnyObject]!, error: NSError!) -> Void in
-                guard let strongSelf = self else { return }
-                guard object != nil && object.count > 0 else { complete?(succeed: false); return }
-                if let objc = object[0] as? ImageTrackIdListModel {
-                    strongSelf.imageTrackIdList = objc
-                    try! strongSelf.realm.write {
-                        strongSelf.realm.add(objc.exportToCacheObject(), update: true)
-                    }
-                    complete?(succeed: true)
-                    return
-                }
-                complete?(succeed: false)
-            }
-        }
-    }
-    
-    /**
      根据imageTrackIdList的id列表创建生成imageTrackDataList
      
      - parameter complete: 完成回调
      */
     func queryImageTrackListCompletion(policy: QureyImageTrackDataPolicy = (true, true), complete: QureyImageTrackDataCompletion?)
     {
-        var cloudModelList: [ImageTrackModel?]?
+        var cloudModelList: [ImageTrackModel]?
+        var cacheModelList: Results<ImageTrackCacheModel>?
         //  先从数据库取
         if policy.fromCachePriority {
             //  筛选列表中的数据
-            let filterCacheModelList = realm.objects(ImageTrackCacheModel).filter{ (model) -> Bool in
-                for i in imageTrackIdList.list {
-                    if model.objectId == i {
-                        return true
-                    }
-                }
-                //  冗余数据清理
-                try! realm.write {
-                    if let deleteObject: [ImageTrackId] = realm.objects(ImageTrackId).filter( { $0.id == model.objectId }) {
-                        realm.delete(deleteObject)   //  清除冗余的 id
-                    }
-                    realm.delete(model) //  清除冗余的 cacheModel
-                }
-                return false
-            }
+            cacheModelList = realm.objects(ImageTrackCacheModel)
             //  排序 + 格式转换
-            if filterCacheModelList.count > 0 {
-                cloudModelList = filterCacheModelList.sort{
+            if cacheModelList?.count > 0 {
+                cloudModelList = cacheModelList!.sort{
                     return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                 }.map {
                     return $0.exportToCloudObject()
                 }
-                imageTrackList = cloudModelList
+                imageTrackModelList = cloudModelList
                 complete?(succeed: true)
             }
         }
     
         if policy.updateCache || cloudModelList?.count > 0 {
-            let fetchGroup: dispatch_group_t = dispatch_group_create()
-            var newImageTrackList = [ImageTrackModel?]()
-            var succeed = true      //  加载标志位，一旦有一个失败，就标记失败
-            for objectId in imageTrackIdList.list {
-                dispatch_group_enter(fetchGroup)
-                let imageTrack: ImageTrackModel = ImageTrackModel(outDataWithObjectId: objectId)
-                imageTrack.fetchInBackgroundWithBlock{ [unowned imageTrack] (object, error) -> Void in
-                    if error != nil {
-                        succeed = false
+            
+            let identifier: String = ImageTrackModel.uniqueIdentifier()
+            let query: AVQuery = AVQuery(className: ImageTrackModel.RealClassName)
+            query.whereKey("identifier", equalTo: identifier)
+            query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error: NSError!) in
+                guard let strongSelf = self else { complete?(succeed: error == nil); return }
+                guard error == nil else { print(error); complete?(succeed: false); return }
+                if var newImageTrackModelList = objects as? [ImageTrackModel] {
+                    newImageTrackModelList.sortInPlace {
+                        return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                     }
-                    else {
-                        newImageTrackList.insert(imageTrack, atIndex: 0)
-                    }
-                    dispatch_group_leave(fetchGroup)
-                }
-            }
-            dispatch_group_notify(fetchGroup, dispatch_get_main_queue()) { [weak self] () -> Void in
-                guard let strongSelf = self else { complete?(succeed: succeed); return }
-                if succeed == true {
-                    if newImageTrackList.count > 1 {
-                        //  对数据根据时间进行排序
-                        newImageTrackList.sortInPlace {
-                            return $0!.createdAt.timeIntervalSince1970 > $1!.createdAt.timeIntervalSince1970
-                        }
-                    }
-                    strongSelf.imageTrackList = newImageTrackList
+                    strongSelf.imageTrackModelList = newImageTrackModelList
                     try! strongSelf.realm.write {
-                        strongSelf.imageTrackList.forEach {
-                            strongSelf.realm.add($0!.exportToCacheObject(), update: true)
+                        strongSelf.realm.delete(cacheModelList ?? strongSelf.realm.objects(ImageTrackCacheModel))
+                        strongSelf.imageTrackModelList.forEach {
+                            strongSelf.realm.add($0.exportToCacheObject(), update: true)
                         }
                     }
                 }
-                complete?(succeed: succeed)
+                complete?(succeed: true)
             }
-        }
-    }
-
-    /**
-    第一次使用 请求图文迹列表对象的id列表
-    
-    - parameter complete: 完成回调
-    */
-    func queryCreateImageTrackIdListCompletion(complete: QureyImageTrackDataCompletion?)
-    {
-        let identifier: String = ImageTrackIdListModel.uniqueIdentifier()
-        let cloudModel = ImageTrackIdListModel(identifier: identifier)
-        //  写服务器数据
-        cloudModel.saveInBackgroundWithBlock{ [weak self] (succeed, error) -> Void in
-            guard let sSelf = self else { complete?(succeed: succeed); return }
-            if succeed {
-                sSelf.imageTrackIdList = cloudModel
-                //  写数据库数据
-                try! sSelf.realm.write {
-                    sSelf.realm.add(sSelf.imageTrackIdList.exportToCacheObject(), update: true)
-                }
-            }
-            complete?(succeed: succeed)
         }
     }
     
@@ -233,12 +143,11 @@ extension ImageTrackViewModel {
         }
         
         dispatch_group_notify(saveImageGroup, dispatch_get_main_queue()) { [weak self] () -> Void in
-            
-            guard let strongSelf = self else { return }
+            guard let _ = self else { completion?(succeed: isSucceed); return }
             guard isSucceed == true else { completion?(succeed: false); return }
-        
             //  新 imageTrack
             let newImageTrackModel: ImageTrackModel! = ImageTrackModel(objectId: nil,
+                                                                       identifier: ImageTrackModel.uniqueIdentifier(),
                                                                        thumbImageFileUrl: thumbImageFile?.url,
                                                                        largeImageFileUrl: nil,
                                                                        originImageFileUrl: originImageFile.url,
@@ -247,23 +156,12 @@ extension ImageTrackViewModel {
                                                                        originImageFileObjectId: originImageFile.objectId,
                                                                        text: nil,
                                                                        imageSize: originImage.size)
-    
-            //  新 imageTrackIdList
-            let newImageTrackIdList: ImageTrackIdListModel = strongSelf.imageTrackIdList.copy() as! ImageTrackIdListModel
-            newImageTrackIdList.fetchWhenSave = true
-            
             newImageTrackModel.saveInBackgroundWithBlock { [weak self] succeed, error in
                 guard let strongSelf = self else { completion?(succeed: succeed); return }
-                guard succeed == true else { completion?(succeed: false); return }
-                newImageTrackIdList.addObject(newImageTrackModel?.objectId, forKey: "list")
-                newImageTrackIdList.count += 1
-                isSucceed = newImageTrackIdList.save()
-                if isSucceed {
-                    strongSelf.imageTrackList.insert(newImageTrackModel, atIndex: 0)
-                    strongSelf.imageTrackIdList = newImageTrackIdList
+                if succeed {
+                    strongSelf.imageTrackModelList.insert(newImageTrackModel, atIndex: 0)
                     try! strongSelf.realm.write {
                         strongSelf.realm.add(newImageTrackModel!.exportToCacheObject())
-                        strongSelf.realm.add(newImageTrackIdList.exportToCacheObject(), update: true)
                     }
                 }
                 completion?(succeed: isSucceed)
@@ -273,50 +171,36 @@ extension ImageTrackViewModel {
     
     func queryDeleteImageTrackAtIndex(index: Int!, complete: QureyImageTrackDataCompletion?)
     {
-        guard let track = fetchImageTrackModelWithIndex(index) else { complete?(succeed: false); return }
-        let newImageTrackIdList: ImageTrackIdListModel = imageTrackIdList.mutableCopy() as! ImageTrackIdListModel
-        newImageTrackIdList.removeObject(track.objectId, forKey: "list")
-        newImageTrackIdList.count -= 1
-        newImageTrackIdList.fetchWhenSave = true
-        newImageTrackIdList.saveInBackgroundWithBlock { [weak self] (succeed, error) in
+        guard let trackModel = fetchImageTrackModelWithIndex(index) else { complete?(succeed: false); return }
+        trackModel.deleteInBackgroundWithBlock { [weak self] (succeed, error) in
             guard let strongSelf = self else { complete?(succeed: false); return }
             if succeed {
-                strongSelf.imageTrackIdList = newImageTrackIdList
-                strongSelf.imageTrackList.removeAtIndex(index)
-                try! strongSelf.realm.write {
-                    strongSelf.realm.add(strongSelf.imageTrackIdList.exportToCacheObject(), update: true)
-                    if let deleteIdObj: [ImageTrackId] = strongSelf.realm.objects(ImageTrackId).filter( { $0.id == track.objectId } ) {
-                        strongSelf.realm.delete(deleteIdObj)
-                    }
-                    if let deleteObj: [ImageTrackCacheModel] = strongSelf.realm.objects(ImageTrackCacheModel).filter( { $0.objectId == track.objectId } ) {
+                strongSelf.imageTrackModelList.removeAtIndex(index)
+                if let deleteObj: [ImageTrackCacheModel] = strongSelf.realm.objects(ImageTrackCacheModel).filter( { $0.objectId == trackModel.objectId } ) {
+                    try! strongSelf.realm.write {
                         strongSelf.realm.delete(deleteObj)
                     }
                 }
                 
-                //  删除model
-                track.deleteInBackgroundWithBlock { (succeed, error) -> Void in
-                    print(succeed)
-                }
-                
                 //  删除原图
                 let originImageFile = AVFile()
-                originImageFile.objectId = track.originImageFileObjectId
+                originImageFile.objectId = trackModel.originImageFileObjectId
                 originImageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
                     print(success)
                 }
                 
                 //  删除缩略图
-                if track.thumbImageFileUrl != track.originImageFileUrl {
+                if trackModel.thumbImageFileUrl != trackModel.originImageFileUrl {
                     let thumbImageFile = AVFile()
-                    thumbImageFile.objectId = track.thumbImageFileObjectId
+                    thumbImageFile.objectId = trackModel.thumbImageFileObjectId
                     thumbImageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
                         print(success)
                     }
                 }
                 //  删除大图
-                if track.largeImageFileUrl != track.originImageFileUrl {
+                if trackModel.largeImageFileUrl != trackModel.originImageFileUrl {
                     let largeImageFile = AVFile()
-                    largeImageFile.objectId = track.largeImageFileObjectId
+                    largeImageFile.objectId = trackModel.largeImageFileObjectId
                     largeImageFile.deleteInBackgroundWithBlock { (success, error) -> Void in
                         print(success)
                     }
@@ -334,7 +218,7 @@ extension ImageTrackViewModel {
     */
     func fetchImageTrackModelWithIndex(index: Int!) -> ImageTrackModel?
     {
-        return imageTrackList[index]
+        return imageTrackModelList[index]
     }
     
 }

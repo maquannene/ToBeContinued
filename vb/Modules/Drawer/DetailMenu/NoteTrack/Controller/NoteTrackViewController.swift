@@ -69,25 +69,14 @@ extension NoteTrackViewController {
         //  注意这一句的内存泄露 如果不加 [unowned self] 就会内存泄露
         //  泄漏原因为retain cycle 即 self->noteTrackListTableView->header->refreshingBlock->self
         noteTrackListTableView.mj_header = MJRefreshNormalHeader() { [unowned self] in
-            //  如果获取失败，就创建新的
-            self.viewModel.queryFindNoteTrackIdListCompletion { [unowned self] succeed in
-                guard succeed == true else {
-                    self.viewModel.queryCreateNoteTrackIdListCompletion { [unowned self] succeed in
-                        self.noteTrackListTableView.mj_header.endRefreshing()
-                    }
-                    return
-                }
-                
-                //  获取成功，就逐条请求存储的noteTrack存在缓存中
-                self.viewModel.queryNoteTrackListCompletion { [unowned self] succeed in
-                    guard succeed == true else { self.noteTrackListTableView.mj_header.endRefreshing(); return }
-                    self.noteTrackListTableView.reloadData()
-                    self.noteTrackListTableView.mj_header.endRefreshing()
-                }
+            //  获取成功，就逐条请求存储的noteTrack存在缓存中
+            self.viewModel.queryNoteTrackListCompletion { [unowned self] succeed in
+                guard succeed == true else { self.noteTrackListTableView.mj_header.endRefreshing(); return }
+                self.noteTrackListTableView.reloadData()
+                self.noteTrackListTableView.mj_header.endRefreshing()
             }
         }
     }
-    
 }
 
 //  MARK: Action
@@ -203,7 +192,11 @@ extension NoteTrackViewController {
     @objc private func confirmCreateNewNoteTrackAction(sender: AnyObject!)
     {
         let contentView = newNoteTrackVc!.contentView as! NewNoteTrackView
-        let noteTrackModel = NoteTrackModel(objectId: nil, title: contentView.titleTextView.text, detailContent: contentView.detailContentTextView.text)
+        let noteTrackModel = NoteTrackModel(objectId: nil,
+                                            identifier: NoteTrackModel.uniqueIdentifier(),
+                                            title: contentView.titleTextView.text,
+                                            detailContent:
+            contentView.detailContentTextView.text)
         viewModel.queryAddNoteTrack(noteTrackModel) { [weak self] (succeed) -> Void in
             guard let strongSelf = self else { return }
             strongSelf.viewModel.expandingIndexPath = nil
@@ -307,7 +300,7 @@ extension NoteTrackViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        noNoteTrackTips.hidden = viewModel.noteTrackModelList.count > 0;
+        noNoteTrackTips.hidden = (viewModel.noteTrackModelList.count > 0)
         if viewModel.expandedIndexPath != nil {
             return viewModel.noteTrackModelList.count + 1
         }
@@ -319,7 +312,7 @@ extension NoteTrackViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let actualIndexPath = viewModel.convertToActualIndexPath(indexPath)
-        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]!
+        let noteTrackModel: NoteTrackModel = viewModel.noteTrackModelList[actualIndexPath.row]
         //  如果是展开的detailCell
         if (viewModel.expandedIndexPath != nil && viewModel.expandedIndexPath!.compare(indexPath) == NSComparisonResult.OrderedSame) {
             let detailCell: NoteTrackDetailCell = tableView.dequeueReusableCellWithIdentifier(NoteTrackViewController.Static.noteTrackDetailCellId) as! NoteTrackDetailCell

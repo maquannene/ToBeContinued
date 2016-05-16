@@ -11,6 +11,9 @@ import RealmSwift
 class ImageTrackCacheModel: Object {
 
     dynamic var objectId: String?
+    dynamic var identifier: String!
+    dynamic var createdAt: NSDate!
+    
     dynamic var thumbImageFileUrl: String?               //  瀑布流使用的略缩图
     dynamic var largeImageFileUrl: String?               //  点开看的大图
     dynamic var originImageFileUrl: String!              //  原图
@@ -20,10 +23,10 @@ class ImageTrackCacheModel: Object {
     dynamic var imageWidht: Double = 0.0
     dynamic var imageHeight: Double = 0.0
     dynamic var text: String?
-    dynamic var createdAt: NSDate!
  
     convenience init(
         objectId: String? = NSUUID().UUIDString,
+        identifier: String!,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,
         originImageFileUrl: String!,
@@ -34,6 +37,7 @@ class ImageTrackCacheModel: Object {
         imageSize: CGSize!) {
         self.init()
         self.objectId = objectId
+        self.identifier = identifier
         self.thumbImageFileUrl = thumbImageFileUrl ?? originImageFileUrl
         self.largeImageFileUrl = largeImageFileUrl ?? originImageFileUrl
         self.originImageFileUrl = originImageFileUrl
@@ -47,6 +51,7 @@ class ImageTrackCacheModel: Object {
     
     convenience init(model: ImageTrackCacheModel) {
         self.init(objectId: model.objectId,
+                  identifier: model.identifier,
                   thumbImageFileUrl: model.thumbImageFileUrl,
                   largeImageFileUrl: model.largeImageFileUrl,
                   originImageFileUrl: model.originImageFileUrl,
@@ -55,18 +60,6 @@ class ImageTrackCacheModel: Object {
                   originImageFileObjectId: model.originImageFileObjectId,
                   text: model.text,
                   imageSize: CGSize(width: model.imageWidht, height:model.imageHeight))
-    }
-    
-    convenience init(cloudModel: ImageTrackModel) {
-        self.init(objectId: cloudModel.objectId,
-                  thumbImageFileUrl: cloudModel.thumbImageFileUrl,
-                  largeImageFileUrl: cloudModel.largeImageFileUrl,
-                  originImageFileUrl: cloudModel.originImageFileUrl,
-                  thumbImageFileObjectId: cloudModel.thumbImageFileObjectId,
-                  largeImageFileObjectId: cloudModel.largeImageFileObjectId,
-                  originImageFileObjectId: cloudModel.originImageFileObjectId,
-                  text: cloudModel.text,
-                  imageSize: CGSize(width: cloudModel.imageWidht.integerValue, height:cloudModel.imageHeight.integerValue))
     }
     
     override class func primaryKey() -> String? {
@@ -80,7 +73,16 @@ extension ImageTrackCacheModel: ModelExportProtocol {
     typealias CloudType = ImageTrackModel
     
     func exportToCloudObject() -> CloudType! {
-        let object = ImageTrackModel(cacheModel: self)
+        let object = ImageTrackModel(objectId: objectId,
+                                     identifier: identifier,
+                                     thumbImageFileUrl: thumbImageFileUrl,
+                                     largeImageFileUrl: largeImageFileUrl,
+                                     originImageFileUrl: originImageFileUrl,
+                                     thumbImageFileObjectId: thumbImageFileObjectId,
+                                     largeImageFileObjectId: largeImageFileObjectId,
+                                     originImageFileObjectId: originImageFileObjectId,
+                                     text: text,
+                                     imageSize: CGSize(width: imageWidht, height: imageHeight))
         return object
     }
     
