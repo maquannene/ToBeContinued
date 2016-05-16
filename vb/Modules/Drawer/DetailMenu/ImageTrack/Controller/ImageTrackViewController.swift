@@ -17,7 +17,7 @@ import MQImageDownloadGroup
 
 class ImageTrackViewController: UIViewController {
     
-    var dataSource: ImageTrackViewModel!
+    var viewModel: ImageTrackViewModel!
     weak var imageTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
     var willShowClosure: (Void -> Void)?
@@ -66,7 +66,7 @@ class ImageTrackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = ImageTrackViewModel()
+        viewModel = ImageTrackViewModel()
         layout.cellWidth = (self.view.w - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(layout.numberOfColumns)
         imageTrackCollectionView.mj_header.beginRefreshing()
     }
@@ -92,24 +92,12 @@ extension ImageTrackViewController {
     func configurePullToRefresh()
     {
         imageTrackCollectionView!.mj_header = MJRefreshNormalHeader() { [unowned self] in
-            //  首先试图获取存有每条imageTrack 的 id 列表
-            self.dataSource.queryFindImageTrackIdListCompletion { [weak self] in
+            //  获取成功，就逐条请求存储的imageTrack存在缓存中
+            self.viewModel.queryImageTrackListCompletion { [weak self] succeed in
                 guard let strongSelf = self else { return }
-                guard $0 == true else {
-                    //  如果获取失败，就创建新的
-                    strongSelf.dataSource.queryCreateImageTrackIdListCompletion { [weak self] succeed in
-                        guard let strongSelf = self else { return }
-                        strongSelf.imageTrackCollectionView!.mj_header.endRefreshing()
-                    }
-                    return
-                }
-                //  获取成功，就逐条请求存储的imageTrack存在缓存中
-                strongSelf.dataSource.queryImageTrackListCompletion { [weak self] succeed in
-                    guard let strongSelf = self else { return }
-                    guard succeed == true else { strongSelf.imageTrackCollectionView!.mj_header.endRefreshing(); return }
-                    strongSelf.imageTrackCollectionView.reloadData()
-                    strongSelf.imageTrackCollectionView!.mj_header.endRefreshing()
-                }
+                guard succeed == true else { strongSelf.imageTrackCollectionView!.mj_header.endRefreshing(); return }
+                strongSelf.imageTrackCollectionView.reloadData()
+                strongSelf.imageTrackCollectionView!.mj_header.endRefreshing()
             }
         }
     }
@@ -176,7 +164,7 @@ extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigatio
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
-        dataSource.queryAddImageTrackWithOringinImage(image, progress: { [weak self] (progress) -> Void in
+        viewModel.queryAddImageTrackWithOringinImage(image, progress: { [weak self] (progress) -> Void in
             print("大图上传进度: \(progress)")
             guard let strongSelf = self else { return }
             strongSelf.updateProgressShow = true
@@ -190,7 +178,7 @@ extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigatio
                 strongSelf.imageTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                     strongSelf.updateProgressShow = false
-                })
+            })
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -223,13 +211,13 @@ extension ImageTrackViewController: MQPictureBrowserControllerDataSource, MQPict
     
     func numberOfItemsInPictureBrowserController(controller: MQPictureBrowserController) -> Int
     {
-        return dataSource.imageTrackIdList.count
+        return viewModel.imageTrackModelList.count
     }
     
     func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
     {
         let imageTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(ImageTrackDisplayCell.RealClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! ImageTrackDisplayCell
-        imageTrackDisplayCell.configurePictureCell(dataSource.imageTrackList[index])
+        imageTrackDisplayCell.configurePictureCell(viewModel.imageTrackModelList[index])
         return imageTrackDisplayCell
     }
     
@@ -250,7 +238,7 @@ extension ImageTrackViewController: ImageTrackLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
     {
         print(indexPath.item)
-        if let imageTrack = dataSource.imageTrackList[indexPath.item] {
+        if let imageTrack = viewModel.imageTrackModelList[indexPath.item] as ImageTrackModel? {
             let imageWidht = cellWidth - 10 //  转成imageWidth进行计算
             let boundingRect = CGRect(x: 0, y: 0, width: imageWidht, height: CGFloat(MAXFLOAT))
             let imageRect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTrack.imageWidht.doubleValue, height:imageTrack.imageHeight.doubleValue), boundingRect)
@@ -269,10 +257,10 @@ extension ImageTrackViewController: UICollectionViewDelegate, ImageTrackCellDele
     {
         let index = imageTrackCollectionView.indexPathForItemAtPoint(gesture.locationInView(imageTrackCollectionView))!.item
         let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.Default) { [unowned self] (action) -> Void in
-            self.dataSource.queryDeleteImageTrackAtIndex(index, complete: { [weak self] (succeed) -> Void in
+            self.viewModel.queryDeleteImageTrackAtIndex(index) { [weak self] (succeed) -> Void in
                 guard let strongSelf = self else { return }
                 strongSelf.imageTrackCollectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
-            })
+            }
         }
         let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
         let alertController = UIAlertController(title: nil, message: "删除图文迹", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -309,13 +297,13 @@ extension ImageTrackViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return dataSource.imageTrackIdList.count
+        return viewModel.imageTrackModelList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageTrackCell.RealClassName, forIndexPath: indexPath) as! ImageTrackCell
-        cell.configureCell(dataSource.imageTrackList[indexPath.item])
+        cell.configureCell(viewModel.imageTrackModelList[indexPath.item])
         cell.delegate = self
         return cell
     }

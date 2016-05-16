@@ -8,7 +8,9 @@
 
 import AVOSCloud
 
-class ImageTrackModel: AVObject {
+class ImageTrackModel: AVObject, CloudModelBase {
+    
+    @NSManaged var identifier: String!
     
     @NSManaged var thumbImageFileUrl: String?               //  瀑布流使用的略缩图
     @NSManaged var largeImageFileUrl: String?               //  点开看的大图
@@ -33,6 +35,7 @@ class ImageTrackModel: AVObject {
     
     convenience init(
         objectId: String? = NSUUID().UUIDString,
+        identifier: String!,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,
         originImageFileUrl: String!,
@@ -43,6 +46,7 @@ class ImageTrackModel: AVObject {
         imageSize: CGSize!) {
         self.init()
         self.objectId = objectId
+        self.identifier = identifier
         self.thumbImageFileUrl = thumbImageFileUrl ?? originImageFileUrl
         self.largeImageFileUrl = largeImageFileUrl ?? originImageFileUrl
         self.originImageFileUrl = originImageFileUrl
@@ -56,6 +60,7 @@ class ImageTrackModel: AVObject {
     
     convenience init(model: ImageTrackModel) {
         self.init(objectId: model.objectId,
+                  identifier: model.identifier,
                   thumbImageFileUrl: model.thumbImageFileUrl,
                   largeImageFileUrl: model.largeImageFileUrl,
                   originImageFileUrl: model.originImageFileUrl,
@@ -68,6 +73,7 @@ class ImageTrackModel: AVObject {
     
     convenience init(cacheModel: ImageTrackCacheModel) {
         self.init(objectId: cacheModel.objectId,
+                  identifier: cacheModel.identifier,
                   thumbImageFileUrl: cacheModel.thumbImageFileUrl,
                   largeImageFileUrl: cacheModel.largeImageFileUrl,
                   originImageFileUrl: cacheModel.originImageFileUrl,
@@ -77,16 +83,6 @@ class ImageTrackModel: AVObject {
                   text: cacheModel.text,
                   imageSize: CGSize(width: cacheModel.imageWidht, height:cacheModel.imageHeight))
     }
-    
-//    func update(imageFileUrl: String!, imageFileObjectId: String!, text: String?, imageSize: CGSize!) {
-//        //  这个AVObject 中的值必须用这个种setObject:forKey的方法，否者没法存储在云上
-//        self.largeImageFileUrl = imageFileUrl
-//        self.imageFileObjectId = imageFileObjectId
-//        self.text = text
-//        self.imageWidht = imageSize.width
-//        self.imageHeight = imageSize.height
-//        print("123")
-//    }
     
     deinit {
         print("\(self.dynamicType) deinit\n", terminator: "")
@@ -118,7 +114,16 @@ extension ImageTrackModel: ModelExportProtocol {
     typealias CacheType = ImageTrackCacheModel
     
     func exportToCacheObject() -> CacheType! {
-        let object = ImageTrackCacheModel(cloudModel: self)
+        let object = ImageTrackCacheModel(objectId: objectId,
+                                          identifier: identifier,
+                                          thumbImageFileUrl: thumbImageFileUrl,
+                                          largeImageFileUrl: largeImageFileUrl,
+                                          originImageFileUrl: originImageFileUrl,
+                                          thumbImageFileObjectId: thumbImageFileObjectId,
+                                          largeImageFileObjectId: largeImageFileObjectId,
+                                          originImageFileObjectId: originImageFileObjectId,
+                                          text: text,
+                                          imageSize: CGSize(width: imageWidht.integerValue, height:imageHeight.integerValue))
         object.createdAt = createdAt
         return object
     }

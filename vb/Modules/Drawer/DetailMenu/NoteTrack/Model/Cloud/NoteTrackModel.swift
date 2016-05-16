@@ -61,21 +61,13 @@ extension NoteTrackModel: ModelExportProtocol {
     typealias CacheType = NoteTrackCacheModel
     
     func exportToCacheObject() -> CacheType! {
-        let object = NoteTrackModel.convertCloudToCacheObject(self)
+        let object = NoteTrackCacheModel(objectId: objectId, identifier: identifier, title: title, detailContent: detailContent)
         object.createdAt = createdAt
         return object
     }
     
-    static func convertCloudToCacheObject(cloudObject: CloudType) -> CacheType {
-        return NoteTrackCacheModel(objectId: cloudObject.objectId, identifier: cloudObject.identifier, title: cloudObject.title, detailContent: cloudObject.detailContent)
-    }
-    
     func exportToCloudObject() -> CloudType! {
         return self
-    }
-    
-    static func convertCacheToCloudObject(cacheObject: CacheType) -> CloudType {
-        return NoteTrackModel(objectId: cacheObject.objectId, identifier: cacheObject.identifier, title: cacheObject.title, detailContent: cacheObject.detailContent)
     }
 }
 
