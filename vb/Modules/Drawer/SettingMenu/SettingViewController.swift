@@ -9,6 +9,7 @@
 import MMDrawerController
 import SDWebImage
 import SVProgressHUD
+import Kingfisher
 
 class SettingViewController: DetailBaseViewController {
     
@@ -102,6 +103,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.item == 5 {
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
+            Kingfisher.ImageCache.defaultCache.clearDiskCache()
+            Kingfisher.ImageCache.defaultCache.clearMemoryCache()
             SVProgressHUD.showSuccessWithStatus("清除成功")
             tableView.reloadData()
         }

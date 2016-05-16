@@ -7,6 +7,7 @@
 //
 
 import SDWebImage
+import MQImageDownloadGroup
 
 protocol ImageTrackCellDelegate: NSObjectProtocol {
     func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
