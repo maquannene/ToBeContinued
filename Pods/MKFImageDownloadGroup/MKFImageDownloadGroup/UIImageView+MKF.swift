@@ -9,7 +9,7 @@
 import Foundation
 import Kingfisher
 
-extension UIImageView {
+public extension UIImageView {
     
     public func mkf_setImageWithURL(URL: NSURL,
                                     identifier: String? = nil,
@@ -37,8 +37,8 @@ extension UIImageView {
         
         let task = kf_setImageWithResource(resource, placeholderImage: placeholderImage, optionsInfo: optionsInfo, progressBlock: progressBlock) { [weak self] (image, error, cacheType, imageURL) in
             
-            if let imageURLStr = imageURL?.absoluteString where identifier != nil {
-                ImageDownloadGroupManage.shareInstance.removeImageDownloadTask(identifier!, forkey: imageURLStr)
+            if let imageURLStr = imageURL?.absoluteString, identifier = identifier {
+                ImageDownloadGroupManage.shareInstance.removeImageDownloadTask(imageURLStr, fromGroup: identifier)
             }
             
             guard let sSelf = self where imageURL == sSelf.mkf_imageURL else {
@@ -80,7 +80,7 @@ extension UIImageView {
             task.cancel()
             self.mkf_setImageTask(nil)
             if let downloadIdentifier = self.mkf_downloadIdentifier, imageURL = self.mkf_imageURL {
-                ImageDownloadGroupManage.shareInstance.removeImageDownloadTask(downloadIdentifier, forkey: imageURL.absoluteString)
+                ImageDownloadGroupManage.shareInstance.removeImageDownloadTask(imageURL.absoluteString, fromGroup: downloadIdentifier)
                 self.mkf_setImageURL(nil)
                 self.mkf_setDownloadIdentifier(nil)
             }
@@ -93,7 +93,7 @@ private var mkfLastURLKey: Void?
 private var mkfImageTaskKey: Void?
 private var mfkDownloadIdentifierKey: Void?
 
-extension UIImageView {
+public extension UIImageView {
     public var mkf_imageURL: NSURL? {
         return objc_getAssociatedObject(self, &mkfLastURLKey) as? NSURL
     }

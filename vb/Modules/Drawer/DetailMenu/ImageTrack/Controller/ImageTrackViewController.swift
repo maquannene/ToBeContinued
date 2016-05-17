@@ -13,7 +13,7 @@ import AVOSCloud
 import MQMaskController
 import Photos
 import SVProgressHUD
-import MQImageDownloadGroup
+import MKFImageDownloadGroup
 
 class ImageTrackViewController: UIViewController {
     
@@ -30,6 +30,7 @@ class ImageTrackViewController: UIViewController {
     @IBOutlet weak var imageTrackCollectionView: UICollectionView! {
         didSet {
             configurePullToRefresh()
+            
             let group = ImageDownloadGroup(identifier: ImageTrackCell.RealClassName)
             group.maxConcurrentDownloads = 20
             ImageDownloadGroupManage.shareInstance.addGroup(group)
