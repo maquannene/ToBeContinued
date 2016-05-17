@@ -13,7 +13,7 @@ import AVOSCloud
 import MQMaskController
 import Photos
 import SVProgressHUD
-import MQImageDownloadGroup
+import MKFImageDownloadGroup
 
 class ImageTrackViewController: UIViewController {
     
@@ -30,9 +30,10 @@ class ImageTrackViewController: UIViewController {
     @IBOutlet weak var imageTrackCollectionView: UICollectionView! {
         didSet {
             configurePullToRefresh()
-            let group = MQImageDownloadGroup(groupIdentifier: "ImageTrackCell")
-            group.maxConcurrentDownloads = 10
-            MQImageDownloadGroupManage.shareInstance().addGroup(group)
+            
+            let group = ImageDownloadGroup(identifier: ImageTrackCell.RealClassName)
+            group.maxConcurrentDownloads = 20
+            ImageDownloadGroupManage.shareInstance.addGroup(group)
         }
     }
     
@@ -280,9 +281,9 @@ extension ImageTrackViewController: UICollectionViewDelegate, ImageTrackCellDele
         vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(ImageTrackViewController.saveImage), forControlEvents: .TouchUpInside)
         imageTrackBrowserVc = vc
         
-        let pictureDownloadGroup = MQImageDownloadGroup(groupIdentifier: "ImageTrackDisplayCell")
-        pictureDownloadGroup.maxConcurrentDownloads = 10
-        MQImageDownloadGroupManage.shareInstance().addGroup(pictureDownloadGroup)
+        let pictureDownloadGroup = ImageDownloadGroup(identifier: ImageTrackDisplayCell.RealClassName)
+        pictureDownloadGroup.maxConcurrentDownloads = 5
+        ImageDownloadGroupManage.shareInstance.addGroup(pictureDownloadGroup)
         
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
         willShowClosure = {

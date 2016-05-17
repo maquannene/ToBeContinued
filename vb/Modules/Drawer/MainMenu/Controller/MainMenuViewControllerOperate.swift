@@ -9,6 +9,7 @@
 import MMDrawerController
 import SVProgressHUD
 import SDWebImage
+import Kingfisher
 
 enum MainMenuViewControllerOperate: Int {
     case Home
@@ -208,6 +209,8 @@ extension MainMenuViewController: WBHttpRequestDelegate {
             //  清理硬盘缓存
             SDImageCache.sharedImageCache().clearDisk()
             SDImageCache.sharedImageCache().clearMemory()
+            Kingfisher.ImageCache.defaultCache.clearDiskCache()
+            Kingfisher.ImageCache.defaultCache.clearMemoryCache()
             
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MainMenuViewControllerOperate.LogOut)

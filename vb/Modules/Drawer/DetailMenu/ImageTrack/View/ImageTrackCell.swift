@@ -7,6 +7,7 @@
 //
 
 import SDWebImage
+import MSDImageDownloadGroup
 
 protocol ImageTrackCellDelegate: NSObjectProtocol {
     func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
@@ -71,11 +72,11 @@ extension ImageTrackCell {
         
         let captureUrlStr = self.imageTrack?.imageURL
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTrack.imageURL)!,
-                                     groupIdentifier: reuseIdentifier,
-                                     placeholderImage: nil,
-                                     options: .RetryFailed,
-                                     progress:
+        imageView.msd_setImageWithURL(NSURL(string: imageTrack.imageURL)!,
+                                      groupIdentifier: reuseIdentifier,
+                                      placeholderImage: nil,
+                                      options: .RetryFailed,
+                                      progress:
             { [weak self] (receivedSize, expectedSize) -> Void in
                 
                 guard let strongSelf = self else { return }

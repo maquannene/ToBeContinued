@@ -1,6 +1,8 @@
-# MQImageDownloadGroup
+# MSDImageDownloadGroup
 
-A image download group based on the SDWebImage, UIImageView download can divide groups and limit group concurrent.
+A image download group based on the SDWebImage, UIImageView download can divide groups and limit number of concurrent in group.
+
+<p align="center"><img src="https://github.com/maquannene/MSDImageDownloadGroup/blob/master/demo.gif"/></p>
 
 ### The Problem I Use SDWebImage Category
 
@@ -37,36 +39,36 @@ As is known to all, UITableViewCell can be reused, so when cell is resued, the a
 
 so, we can realize that if we need load image completion by use `sd_setImageWithURL:..`, we must be sure the imageView not be reuse, but to tableViewCell, it`s reuse usually and frequently. 
 
-### Begin Use MQImageDownloadGroup
+### Begin Use MSDImageDownloadGroup
 
-So, I write a new UIImageView category to load image, based on the SDWebImage, if you has same problem, you can use `UIImageView+mq_WebCache` and just modify one line of code：
+So, I write a new UIImageView category to load image, based on the SDWebImage, if you has same problem, you can use `UIImageView+msd_WebCache` and just modify one line of code：
 
 ```objective-c
-[cell.imageView mq_setImageWithURL:[NSURL URLWithString:@"http://www.domain.com/path/to/image.jpg"]
-                   groupIdentifier:@"customGroupID"
-                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+[cell.imageView msd_setImageWithURL:[NSURL URLWithString:@"http://www.domain.com/path/to/image.jpg"]
+                    groupIdentifier:@"customGroupID"
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                              
-                         }];
+                          }];
 ```
 
-it add your download operation into a group named "customGroupID"，and the group default `maxConcurrentDownloads` is 10, means support most 10 different URLs to download at the same time. When download URLs count is greater than maxConcurrentDownloads, the oldest URL`s download operations will be cancel. 
+it add your download operation into a group named "customGroupID"，and the group default `maxConcurrentDownloads` is 10, means support most 10 different URLs to download at the same time. When download URLs count is more than `maxConcurrentDownloads`, the oldest URL`s download operations will be cancel. 
 
-Of course, you can custom create `MQImageDownloadGroup` like this:
+Of course, you can custom create `MSDImageDownloadGroup` like this:
 
 ```objective-c
 //	create customGroup
-MQImageDownloadGroup *customGroup = [[MQImageDownloadGroup alloc] initWithGroupIdentifier:@"tableViewCellGroup"];
+MSDImageDownloadGroup *customGroup = [[MSDImageDownloadGroup alloc] initWithGroupIdentifier:@"tableViewCellGroup"];
 customGroup.maxConcurrentDownloads = 99;
 
-//	add to MQImageDownloadGroupManage
-[[MQImageDownloadGroupManage shareInstance] addGroup:customGroup];
+//	add to MSDImageDownloadGroupManage
+[[MSDImageDownloadGroupManage shareInstance] addGroup:customGroup];
 
 //	use download group
-[cell.imageView mq_setImageWithURL:@"https://xxx"
-                   groupIdentifier:@"tableViewCellGroup"
-                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+[cell.imageView msd_setImageWithURL:@"https://xxx"
+                    groupIdentifier:@"tableViewCellGroup"
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                              
-                         }];
+                          }];
 
 ```
 
@@ -75,7 +77,7 @@ customGroup.maxConcurrentDownloads = 99;
 If you need it, 
 
 ```ruby
-pod 'MQImageDownloadGroup', :git => 'https://github.com/maquannene/MQImageDownloadGroup.git'
+pod 'MSDImageDownloadGroup', :git => 'https://github.com/maquannene/MSDImageDownloadGroup.git'
 ```
 
 The following I will supplement more category.

@@ -1,6 +1,0 @@
-framework module MQImageDownloadGroup {
-  umbrella header "MQImageDownloadGroup-umbrella.h"
-
-  export *
-  module * { export * }
-}

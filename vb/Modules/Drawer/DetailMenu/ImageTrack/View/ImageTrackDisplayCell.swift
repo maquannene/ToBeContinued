@@ -7,10 +7,11 @@
 //
 
 import SDWebImage
-import MQImageDownloadGroup
+import Kingfisher
 
 protocol ImageTrackDisplayCellDataSource: class {
     var originImageURL: String! { get }
+    var thumbImageURL: String! { get }
     var imageSize: CGSize { get }
 }
 
@@ -52,28 +53,28 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
     func configurePictureCell(imageTrack: ImageTrackDisplayCellDataSource!) {
         self.imageTrack = imageTrack
         
-        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.originImageURL)
+        let thumbImage: UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageTrack.thumbImageURL)
 
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有校验正确才能设置进度
         let captureUrlStr = self.imageTrack?.originImageURL
         
-        imageView.mq_setImageWithURL(NSURL(string: imageTrack.originImageURL)!, groupIdentifier: reuseIdentifier, placeholderImage: thumbImage, options: .RetryFailed, progress: { [weak self] (receivedSize, expectedSize) -> Void in
+        imageView.mkf_setImageWithURL(NSURL(string: imageTrack.originImageURL)!, identifier: reuseIdentifier, placeholderImage: thumbImage, optionsInfo: nil, progressBlock: { [weak self] (receivedSize, totalSize) in
             
             guard let strongSelf = self else { return }
             guard captureUrlStr == strongSelf.imageTrack?.originImageURL else { return }
-            
+
             strongSelf.progressView.hidden = false
-            strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
+            strongSelf.progressView.progress = Float(receivedSize) / Float(totalSize)
             
-            }, completed: { [weak self] (image, error, cacheType, url) -> Void in
-            
-            guard let strongSelf = self else { return }
-            guard url.absoluteString == strongSelf.imageTrack?.originImageURL else { return }  //  回调验证
-            guard error == nil else { return }
-            
-            strongSelf.progressView.hidden = true
-        })
+            }) { [weak self] (image, error, cacheType, imageURL) in
+                
+                guard let strongSelf = self else { return }
+                guard imageURL?.absoluteString == strongSelf.imageTrack?.originImageURL else { return }  //  回调验证
+                guard error == nil else { return }
+
+                strongSelf.progressView.hidden = true
+        }
         
         self.imageSize = imageTrack.imageSize
         defaultConfigure()
