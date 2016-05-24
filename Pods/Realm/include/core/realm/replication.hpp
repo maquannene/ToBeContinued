@@ -31,11 +31,13 @@
 #include <realm/util/safe_int_ops.hpp>
 #include <realm/util/buffer.hpp>
 #include <realm/util/string_buffer.hpp>
-#include <realm/util/logger.hpp>
 #include <realm/impl/continuous_transactions_history.hpp>
 #include <realm/impl/transact_log.hpp>
 
 namespace realm {
+namespace util {
+    class Logger;
+}
 
 // FIXME: Be careful about the possibility of one modification function being called by another where both do transaction logging.
 
@@ -89,6 +91,15 @@ public:
     /// The default implementation does nothing.
     virtual void terminate_session() noexcept = 0;
 
+    /// Called by the associated SharedGroup to close any open files
+    /// or release similar system resources.
+    ///
+    /// This is a special purpose function that solves a problem that is
+    /// specific to the implementation available through <commit_log.hpp>. At
+    /// least for now, it is not to be considered a genuine part of the
+    /// Replication interface. The default implementation does nothing and other
+    /// implementations should not override this function.
+    virtual void commit_log_close() noexcept {}
 
     //@{
 
@@ -385,12 +396,6 @@ protected:
     virtual void do_interrupt() noexcept = 0;
 
     virtual void do_clear_interrupt() noexcept = 0;
-
-    // Part of a temporary ugly hack to avoid generating new transaction logs
-    // during application of ones that have olready been created elsewhere. See
-    // ReplicationImpl::do_initiate_transact() in
-    // realm/replication/simplified/provider.cpp for more on this.
-    static void set_replication(Group&, Replication*) noexcept;
 
     friend class _impl::TransactReverser;
 };

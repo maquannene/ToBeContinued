@@ -1,8 +1,10 @@
 # MSDImageDownloadGroup
 
-A image download group based on the SDWebImage, UIImageView download can divide groups and limit number of concurrent in group.
+A image download group based on the SDWebImage and Kingfisher, UIImageView download can divide groups and limit number of concurrent in group.
 
-<p align="center"><img src="https://github.com/maquannene/MSDImageDownloadGroup/blob/master/demo.gif"/></p>
+<p align="center"><img src="https://github.com/maquannene/MXXImageDownloadGroup/blob/master/demo.gif"/></p>
+
+## For Example:
 
 ### The Problem I Use SDWebImage Category
 
@@ -74,10 +76,16 @@ customGroup.maxConcurrentDownloads = 99;
 
 ### Installation
 
-If you need it, 
+For **SDWebImage**
 
 ```ruby
-pod 'MSDImageDownloadGroup', :git => 'https://github.com/maquannene/MSDImageDownloadGroup.git'
+pod 'MSDImageDownloadGroup', :git => 'https://github.com/maquannene/MXXImageDownloadGroup.git'
+```
+
+For **Kingfisher**
+
+```ruby
+pod 'MKFImageDownloadGroup', :git => 'https://github.com/maquannene/MXXImageDownloadGroup.git'
 ```
 
 The following I will supplement more category.

@@ -4,6 +4,8 @@ Cent [![Build Status](https://travis-ci.org/ankurp/Cent.svg?branch=master)](http
 
 Cent is a library that extends certain Swift object types using the extension feature and gives its two cents to Swift language.
 
+[Dollar](https://github.com/ankurp/Dollar) is a Swift library that provides useful functional programming helper methods without extending any built in objects. It is similar to [Lo-Dash](https://lodash.com) or [Underscore.js](http://underscorejs.org) in Javascript.
+
 ## Contents ##
 
 - [Setup](#setup)
@@ -21,11 +23,15 @@ Cent is a library that extends certain Swift object types using the extension fe
 
 ## Using [Carthage](https://github.com/Carthage/Carthage)
 
-Add `github "ankurp/Cent" ~> 5.0.0` to your `Cartfile` and run `carthage update`. If unfamiliar with Carthage then checkout their [Getting Started section](https://github.com/Carthage/Carthage#getting-started).
+Add `github "ankurp/Cent" ~> 5.1.0` to your `Cartfile` and run `carthage update`. If unfamiliar with Carthage then checkout their [Getting Started section](https://github.com/Carthage/Carthage#getting-started).
 
 ## Using [cocoapods](http://cocoapods.org/) version 0.36.x or greater
 
 Add `pod 'Cent'` to your `Podfile` and run `pod install`. Add `use_frameworks!` to the end of the `Podfile`. Requires cocoapod version 0.36.x or greater.
+
+## Using [Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+Add the following dependency `.Package(url: "https://github.com/ankurp/Dollar", majorVersion: 5, minor: 0)` to your `Package.swift` file and then run `swift build`. Requires swift version 2.2 or greater that you can install from https://swift.org
 
 ## Using `git submodule`
 
@@ -277,6 +283,27 @@ arr.contains("C")
 => true
 arr.contains("Z")
 => false
+```
+
+### `zipObject<T>(values: [T]) -> [Element:T]`
+
+Creates an object composed from arrays of keys and values.
+
+```swift
+let keys = ["A", "B", "C"]
+let vals = [1,2,3]
+keys.zipObject(vals)
+=> ["A":1,"B":2,"C":3]
+```
+
+### `isNotEmpty`
+
+Checks if the array has one or more elements.
+
+```swift
+let arr = [1,2,3]
+arr.isNotEmpty
+=> true
 ```
 
 

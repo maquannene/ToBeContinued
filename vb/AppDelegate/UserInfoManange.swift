@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import PINCache
+import Track
 import MJExtension
 import AFNetworking
 import RealmSwift
@@ -22,7 +22,7 @@ class UserInfoManange {
     
     var userModel: UserModel?
     
-    var cache: PINCache = PINCache(name: cacheName)
+    var cache: Cache! = Cache(name: cacheName)
     
     var thirdLogInIdentifier: String? {
         get {
@@ -62,26 +62,26 @@ class UserInfoManange {
     }
     
     func updateUserModel(key: String!, value: String!) {
-        if var authorizeInfo = cache.objectForKey(WeiboSDKInfo.AutorizeInfo) as? [String: String] {
+        if var authorizeInfo = cache.object(forKey: WeiboSDKInfo.AutorizeInfo) as? [String: String] {
             authorizeInfo[key] = value
-            cache.setObject(authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
+            cache.set(object: authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
         }
         else {
             var authorizeInfo = Dictionary<String, String>()
             authorizeInfo[key] = value
-            cache.setObject(authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
+            cache.set(object: authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
         }
     }
     
     func readUserModel(key: String!) -> String? {
-        guard let authorizeInfo = cache.objectForKey(WeiboSDKInfo.AutorizeInfo) as? [String: String] else { return nil }
+        guard let authorizeInfo = cache.object(forKey: WeiboSDKInfo.AutorizeInfo) as? [String: String] else { return nil }
         return authorizeInfo[key]
     }
     
     func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
         guard self.userID != nil && self.accessToken != nil else { return }
         if fromCachePriority {
-            if let userModel = cache.objectForKey(kUserInfoKey) as? UserModel {
+            if let userModel = cache.object(forKey: kUserInfoKey) as? UserModel {
                 self.userModel = userModel
             }
             completion?(true, self.userModel)
@@ -102,7 +102,7 @@ class UserInfoManange {
     
     func setUserInfoWithValue(value: AnyObject!) {
         self.userModel = UserModel().mj_setKeyValues(value)
-        cache.setObject(self.userModel!, forKey: kUserInfoKey)
+        cache.set(object: self.userModel!, forKey: kUserInfoKey)
     }
     
     func clear() {
@@ -127,9 +127,9 @@ class UserInfoManange {
         }
         
         //  移除存储三个唯一值信息的字典
-        cache.removeObjectForKey(WeiboSDKInfo.AutorizeInfo)
+        cache.removeObject(forKey: WeiboSDKInfo.AutorizeInfo)
         //  移除个人信息的字典
-        cache.removeObjectForKey(kUserInfoKey)
+        cache.removeObject(forKey: kUserInfoKey)
     }
     
 }

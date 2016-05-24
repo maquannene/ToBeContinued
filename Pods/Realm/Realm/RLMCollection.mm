@@ -276,16 +276,16 @@ static NSArray *toIndexPathArray(realm::IndexSet const& set, NSUInteger section)
     return ret;
 }
 
-- (NSArray RLM_GENERIC(NSIndexPath *)*)deletionsInSection:(NSUInteger)section {
+- (NSArray<NSIndexPath *> *)deletionsInSection:(NSUInteger)section {
     return toIndexPathArray(_indices.deletions, section);
 }
 
-- (NSArray RLM_GENERIC(NSIndexPath *)*)insertionsInSection:(NSUInteger)section {
+- (NSArray<NSIndexPath *> *)insertionsInSection:(NSUInteger)section {
     return toIndexPathArray(_indices.insertions, section);
 
 }
 
-- (NSArray RLM_GENERIC(NSIndexPath *)*)modificationsInSection:(NSUInteger)section {
+- (NSArray<NSIndexPath *> *)modificationsInSection:(NSUInteger)section {
     return toIndexPathArray(_indices.modifications, section);
 
 }
@@ -304,14 +304,16 @@ RLMNotificationToken *RLMAddNotificationBlock(id objcCollection,
             return true;
         }
     };
+
+    auto skip = suppressInitialChange ? std::make_shared<bool>(true) : nullptr;
     auto cb = [=, &collection](realm::CollectionChangeSet const& changes,
-                               std::exception_ptr err) mutable {
+                               std::exception_ptr err) {
         if (err) {
             try {
                 rethrow_exception(err);
             }
             catch (...) {
-                NSError *error;
+                NSError *error = nil;
                 RLMRealmTranslateException(&error);
                 block(nil, nil, error);
                 return;
@@ -322,9 +324,12 @@ RLMNotificationToken *RLMAddNotificationBlock(id objcCollection,
             return;
         }
 
-        if (changes.empty() || suppressInitialChange) {
+        if (skip && *skip) {
+            *skip = false;
             block(objcCollection, nil, nil);
-            suppressInitialChange = false;
+        }
+        else if (changes.empty()) {
+            block(objcCollection, nil, nil);
         }
         else {
             block(objcCollection, [[RLMCollectionChange alloc] initWithChanges:changes], nil);

@@ -1,26 +1,26 @@
 PODS:
-  - AFNetworking (3.0.4):
-    - AFNetworking/NSURLSession (= 3.0.4)
-    - AFNetworking/Reachability (= 3.0.4)
-    - AFNetworking/Security (= 3.0.4)
-    - AFNetworking/Serialization (= 3.0.4)
-    - AFNetworking/UIKit (= 3.0.4)
-  - AFNetworking/NSURLSession (3.0.4):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.0.4)
-  - AFNetworking/Security (3.0.4)
-  - AFNetworking/Serialization (3.0.4)
-  - AFNetworking/UIKit (3.0.4):
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Cent (5.0.0):
-    - Dollar (~> 5.0.0)
-  - Dollar (5.0.0)
+  - Cent (5.0.2):
+    - Dollar (~> 5.1.0)
+  - Dollar (5.1.0)
   - FDFullscreenPopGesture (1.1)
   - Kingfisher (1.9.3)
-  - MJExtension (3.0.10)
-  - MJRefresh (3.1.0)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.1.12)
   - MKFImageDownloadGroup (2.0):
     - Kingfisher (~> 1.5)
   - MMDrawerController (0.5.7):
@@ -36,21 +36,16 @@ PODS:
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
   - MQMaskController (1.0)
-  - MSDImageDownloadGroup (2.0):
-    - SDWebImage (~> 3.6)
   - NYXImagesKit (2.3)
-  - PINCache (2.2.2)
-  - Realm (0.101.0):
-    - Realm/Headers (= 0.101.0)
-  - Realm/Headers (0.101.0)
-  - RealmSwift (0.101.0):
-    - Realm (= 0.101.0)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
-  - SVProgressHUD (2.0-beta8)
+  - Realm (1.0.2):
+    - Realm/Headers (= 1.0.2)
+  - Realm/Headers (1.0.2)
+  - RealmSwift (1.0.2):
+    - Realm (= 1.0.2)
+  - SVProgressHUD (2.0.3)
   - SWTableViewCell (0.3.7)
-  - WeiboSDK (3.1.3)
+  - Track (1.2.2)
+  - WeiboSDK (3.1.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -63,12 +58,11 @@ DEPENDENCIES:
   - MKFImageDownloadGroup (from `https://github.com/maquannene/MXXImageDownloadGroup.git`)
   - MMDrawerController (~> 0.5.7)
   - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`)
-  - MSDImageDownloadGroup (from `https://github.com/maquannene/MXXImageDownloadGroup.git`)
   - NYXImagesKit
-  - PINCache
   - RealmSwift
   - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SWTableViewCell (= 0.3.7)
+  - Track
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
 EXTERNAL SOURCES:
@@ -79,8 +73,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/maquannene/MXXImageDownloadGroup.git
   MQMaskController:
     :git: https://github.com/wuhanness/MQMaskViewController.git
-  MSDImageDownloadGroup:
-    :git: https://github.com/maquannene/MXXImageDownloadGroup.git
   SVProgressHUD:
     :git: https://github.com/SVProgressHUD/SVProgressHUD.git
   WeiboSDK:
@@ -91,40 +83,35 @@ CHECKOUT OPTIONS:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
   MKFImageDownloadGroup:
-    :commit: 715ee5d08e082ce7c1458d6d1499e64ee1c15bc5
+    :commit: 22364b1bfd168cf3abcf6da08f54b0476b11c4b9
     :git: https://github.com/maquannene/MXXImageDownloadGroup.git
   MQMaskController:
     :commit: 823cb8bde32edcd2b2cf85be9f70aee624aa4160
     :git: https://github.com/wuhanness/MQMaskViewController.git
-  MSDImageDownloadGroup:
-    :commit: d917d7b2d8679a9b4939de093220a8a09eb2ae16
-    :git: https://github.com/maquannene/MXXImageDownloadGroup.git
   SVProgressHUD:
-    :commit: 9b274cc6bfb3b1113f824a7375db300e0ce0a99c
+    :commit: 5148825c5a0625da61aec451189b7fe62bf05fbf
     :git: https://github.com/SVProgressHUD/SVProgressHUD.git
   WeiboSDK:
-    :commit: 73edfa5b97ab254983f0a349ab1c8d604452d009
+    :commit: 6031a8da4ce17867ff5887b8dfc59ea45930274e
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
-  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  Cent: 4bfbe6037d911c0491425ae1ff8057404050fbb2
-  Dollar: 310893dd6b3799b9b155e3deb61a0492987e4d03
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Cent: b8ac30edd7851255320f2a100585fd61d5807503
+  Dollar: d40032c85eced868f65b86aaede4ef7c093a1bb2
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
-  MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
-  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
-  MKFImageDownloadGroup: cf80d92d6c5a67c7f1d512faf4e07c16e76de36c
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MKFImageDownloadGroup: d8588e141102b7e750a9d5a09e1653917f6fb655
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 79ace10666c55a22147a2c55dfdf1250ab105a3f
-  MSDImageDownloadGroup: 499efba844fe74404aaeb14684f3349cf84e1c82
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
-  PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
-  Realm: b21596d6d7e1c054f6fae967d27263d2593ca309
-  RealmSwift: 5247501bcd68b9db3a718cba808e1ce45ba67034
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
+  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
+  RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
-  WeiboSDK: 5f2a707c4569a64f4641f4171acd712016f24342
+  Track: 70d60731eb5f77aecfa624b3e44d525811155bfc
+  WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
 COCOAPODS: 0.39.0

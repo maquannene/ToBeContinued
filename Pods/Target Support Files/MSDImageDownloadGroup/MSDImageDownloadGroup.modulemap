@@ -1,6 +1,0 @@
-framework module MSDImageDownloadGroup {
-  umbrella header "MSDImageDownloadGroup-umbrella.h"
-
-  export *
-  module * { export * }
-}

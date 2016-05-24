@@ -22,12 +22,15 @@
 
 @class RLMObjectBase;
 
-FOUNDATION_EXTERN BOOL RLMPropertyTypeIsNullable(RLMPropertyType propertyType);
-FOUNDATION_EXTERN BOOL RLMPropertyTypeIsNumeric(RLMPropertyType propertyType);
+BOOL RLMPropertyTypeIsNullable(RLMPropertyType propertyType);
 BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 
 // private property interface
-@interface RLMProperty ()
+@interface RLMProperty () {
+@public
+    RLMPropertyType _type;
+    Ivar _swiftIvar;
+}
 
 - (instancetype)initWithName:(NSString *)name
                      indexed:(BOOL)indexed
@@ -36,6 +39,7 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 
 - (instancetype)initSwiftPropertyWithName:(NSString *)name
                                   indexed:(BOOL)indexed
+                   linkPropertyDescriptor:(RLMPropertyDescriptor *)linkPropertyDescriptor
                                  property:(objc_property_t)property
                                  instance:(RLMObjectBase *)objectInstance;
 
@@ -55,6 +59,7 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 
 // private setters
 @property (nonatomic, assign) NSUInteger column;
+@property (nonatomic, readwrite) NSString *name;
 @property (nonatomic, readwrite, assign) RLMPropertyType type;
 @property (nonatomic, readwrite) BOOL indexed;
 @property (nonatomic, readwrite) BOOL optional;
@@ -65,13 +70,14 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 @property (nonatomic, copy) NSString *objcRawType;
 @property (nonatomic, assign) BOOL isPrimary;
 @property (nonatomic, assign) Ivar swiftIvar;
-@property (nonatomic, assign) NSUInteger declarationIndex;
 
 // getter and setter names
 @property (nonatomic, copy) NSString *getterName;
 @property (nonatomic, copy) NSString *setterName;
 @property (nonatomic) SEL getterSel;
 @property (nonatomic) SEL setterSel;
+
+- (RLMProperty *)copyWithNewName:(NSString *)name;
 
 @end
 

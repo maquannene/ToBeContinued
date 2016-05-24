@@ -9,7 +9,7 @@ pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git
 pod 'MMDrawerController', '~> 0.5.7'
 pod 'MJExtension'
 pod 'MJRefresh'
-pod 'PINCache'
+pod 'Track'
 pod 'RealmSwift'
 
 pod 'NYXImagesKit' #图片处理库
@@ -19,7 +19,6 @@ pod 'FDFullscreenPopGesture', :git => 'git://github.com/forkingdog/FDFullscreenP
 
 pod 'MQMaskController', :git => 'https://github.com/wuhanness/MQMaskViewController.git'
 pod 'MKFImageDownloadGroup', :git => 'https://github.com/maquannene/MXXImageDownloadGroup.git'
-pod 'MSDImageDownloadGroup', :git => 'https://github.com/maquannene/MXXImageDownloadGroup.git'
 
 pod 'Dollar'
 pod 'Cent'

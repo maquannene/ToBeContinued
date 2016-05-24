@@ -22,6 +22,7 @@
 #include "impl/realm_coordinator.hpp"
 #include "results.hpp"
 #include "shared_realm.hpp"
+#include "util/format.hpp"
 
 #include <realm/link_view.hpp>
 
@@ -29,12 +30,12 @@ using namespace realm;
 using namespace realm::_impl;
 
 List::List() noexcept = default;
-List::~List()
-{
-    if (m_notifier) {
-        m_notifier->unregister();
-    }
-}
+List::~List() = default;
+
+List::List(const List&) = default;
+List& List::operator=(const List&) = default;
+List::List(List&&) = default;
+List& List::operator=(List&&) = default;
 
 List::List(std::shared_ptr<Realm> r, LinkViewRef l) noexcept
 : m_realm(std::move(r))
@@ -202,7 +203,6 @@ NotificationToken List::add_notification_callback(CollectionChangeCallback cb)
     return {m_notifier, m_notifier->add_callback(std::move(cb))};
 }
 
-uint_fast64_t List::get_version_counter() const noexcept
-{
-    return m_link_view->get_origin_table().get_version_counter();
-}
+List::OutOfBoundsIndexException::OutOfBoundsIndexException(size_t r, size_t c)
+: std::out_of_range(util::format("Requested index %1 greater than max %2", r, c))
+, requested(r), valid_count(c) {}
