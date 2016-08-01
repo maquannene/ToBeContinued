@@ -10,7 +10,7 @@
 
 import UIKit
 import AVOSCloud
-import SDWebImage
+import Kingfisher
 import AVFoundation
 import NYXImagesKit
 import RealmSwift
@@ -98,7 +98,9 @@ extension ImageTrackViewModel {
                 if succeed {
 //                    print("image Url: \(imageFile.url) \n size: \(imageFile.size) \n text: xxx \n image length: \(imageFile.getData().length) size: \(imageFile.size() / 1024) KB")
                     //  很重要,将imageData存到SDImageCache的disk cache中
-                    NSFileManager.defaultManager().createFileAtPath(SDImageCache.sharedImageCache().defaultCachePathForKey(imageFile.url), contents: imageFile.getData(), attributes: nil)
+                    if let image = UIImage(data: imageFile.getData()) {
+                        ImageCache.defaultCache.storeImage(image, forKey: imageFile.url)
+                    }
                     //  将本地的AVCacheFile缓存清理掉
                     imageFile.clearCachedFile()
                 }

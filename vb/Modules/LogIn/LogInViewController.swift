@@ -7,7 +7,7 @@
 //
 
 import SVProgressHUD
-import SDWebImage
+import Kingfisher
 
 enum LogInViewModel : Int {
     case NotLogIn                   //  没有登录，没有accessToken等，请登录
@@ -116,7 +116,10 @@ extension LogInViewController: WeiboSDKDelegate {
                 SVProgressHUD.dismiss()
                 if success && userModel != nil {
                     self.model = LogInViewModel.AlreadyLogIn
-                    self.userImageView!.sd_setImageWithURL(NSURL(string: userModel!.avatar_large as String!))
+                    if let avatar_large = userModel?.avatar_large as String?,
+                       let userImageURL = NSURL(string: avatar_large) {
+                        self.userImageView.kf_setImageWithURL(userImageURL)
+                    }
                     self.successLogIn()
                 }
             }

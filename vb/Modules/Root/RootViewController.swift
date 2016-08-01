@@ -8,7 +8,7 @@
 
 import MMDrawerController
 import SVProgressHUD
-import SDWebImage
+import Kingfisher
 
 class RootViewController: UIViewController {
     

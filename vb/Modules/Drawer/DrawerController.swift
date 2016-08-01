@@ -53,9 +53,9 @@ extension DrawerController: MainMenuViewControllerDelegate {
             centerViewController = homeVc
         case .NoteTrack:
             if noteTrackVc == nil {
-                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! NoteTrackViewController!
+                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? NoteTrackViewController
             }
-            if let navi = noteTrackVc!.navigationController as UINavigationController? {
+            if let navi = noteTrackVc?.navigationController as UINavigationController? {
                 centerViewController = navi
             }
             else {
@@ -64,7 +64,7 @@ extension DrawerController: MainMenuViewControllerDelegate {
             
         case .ImageTrack:
             if imageTrackVc == nil {
-                imageTrackVc = UIStoryboard(name: "ImageTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! ImageTrackViewController!
+                imageTrackVc = UIStoryboard(name: "ImageTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? ImageTrackViewController
             }
             centerViewController = imageTrackVc!
             

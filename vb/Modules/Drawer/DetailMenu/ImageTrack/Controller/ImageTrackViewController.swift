@@ -7,7 +7,7 @@
 //
 
 import AVFoundation
-import SDWebImage
+import Kingfisher
 import MJRefresh
 import AVOSCloud
 import MQMaskController

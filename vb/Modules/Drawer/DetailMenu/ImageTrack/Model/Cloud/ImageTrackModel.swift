@@ -135,7 +135,7 @@ extension ImageTrackModel: ModelExportProtocol {
 
 extension ImageTrackModel: ImageTrackCellDataSource, ImageTrackDisplayCellDataSource {
     
-    var imageURL: String! {
+    var imageURL: String {
         return thumbImageFileUrl ?? originImageFileUrl
     }
     
@@ -143,11 +143,11 @@ extension ImageTrackModel: ImageTrackCellDataSource, ImageTrackDisplayCellDataSo
         return text
     }
     
-    var thumbImageURL: String! {
+    var thumbImageURL: String {
         return thumbImageFileUrl ?? originImageFileUrl
     }
     
-    var originImageURL: String! {
+    var originImageURL: String {
         return originImageFileUrl
     }
     

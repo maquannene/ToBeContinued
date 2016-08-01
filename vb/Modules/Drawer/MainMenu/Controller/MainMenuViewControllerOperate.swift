@@ -8,7 +8,6 @@
 
 import MMDrawerController
 import SVProgressHUD
-import SDWebImage
 import Kingfisher
 
 enum MainMenuViewControllerOperate: Int {
@@ -36,7 +35,7 @@ class MainMenuViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        mainMenuView!.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.RealClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.RealClassName)
+        mainMenuView.menuTableView.registerNib(UINib(nibName: MainMenuViewCell.RealClassName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: MainMenuViewCell.RealClassName)
         UserInfoManange.shareInstance.getUserInfo(true) { [unowned self] (success, userModel) in
             if success && userModel != nil {
                 self.configure(userModel!)
@@ -49,16 +48,22 @@ class MainMenuViewController: UIViewController {
     
     func configure(userModel: UserModel)
     {
-        if let coverImagePhoto = userModel.cover_image_phone as? String {
-            mainMenuView!.headBackgroundImageView.sd_setImageWithURL(NSURL(string: coverImagePhoto as String!))
-            mainMenuView!.nameLabel.textColor = UIColor.whiteColor()
+        if let coverImagePhoto = userModel.cover_image_phone as String?,
+            let url = NSURL(string: coverImagePhoto) {
+            mainMenuView.headBackgroundImageView.kf_setImageWithURL(url)
+            mainMenuView.nameLabel.textColor = UIColor.whiteColor()
         }
         else {
-            mainMenuView!.nameLabel.textColor = UIColor.blackColor()
+            mainMenuView.nameLabel.textColor = UIColor.blackColor()
         }
-        mainMenuView!.headImageView.sd_setImageWithURL(NSURL(string: userModel.avatar_large as String!))
-        mainMenuView!.nameLabel.text = userModel.name as? String
-        mainMenuView!.describeLbel.text = userModel._description as? String
+        
+        if let avatar_large = userModel.avatar_large as String?,
+            let url = NSURL(string: avatar_large) {
+            mainMenuView.headImageView.kf_setImageWithURL(url)
+        }
+
+        mainMenuView.nameLabel.text = userModel.name as? String
+        mainMenuView.describeLbel.text = userModel._description as? String
     }
     
     deinit
@@ -82,11 +87,11 @@ extension MainMenuViewController {
                     let block: MMDrawerControllerDrawerVisualStateBlock = MMDrawerVisualState.CustomDrawerVisualState()
                     block(drawerVc, drawerSide, percentVisible)
                 }
-                self.mainMenuView!.clipsToBounds = true
+                self.mainMenuView.clipsToBounds = true
             }
             else {
                 self.mm_drawerController.setDrawerVisualStateBlock(MMDrawerVisualState.slideVisualStateBlock())
-                self.mainMenuView!.clipsToBounds = false
+                self.mainMenuView.clipsToBounds = false
             }
             NSUserDefaults.standardUserDefaults().setValue(NSNumber(bool: newValue), forKeyPath: "specialEffect")
             NSUserDefaults.standardUserDefaults().synchronize()
@@ -139,9 +144,9 @@ extension MainMenuViewController {
     @IBAction func clearDiskMemory(sender: AnyObject)
     {
         //  清理硬盘缓存
-        SDImageCache.sharedImageCache().clearDisk()
-        SDImageCache.sharedImageCache().clearMemory()
-        SDImageCache.sharedImageCache().cleanDisk()
+        ImageCache.defaultCache.clearDiskCache()
+        ImageCache.defaultCache.clearMemoryCache()
+        ImageCache.defaultCache.cleanExpiredDiskCache()
     }
     
 }
@@ -155,10 +160,10 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource {
             if scrollView.contentOffset.y < -80 {
                 scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: -80)
             }
-            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, -scrollView.contentOffset.y / 2)
+            mainMenuView.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, -scrollView.contentOffset.y / 2)
         }
         else {
-            mainMenuView!.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
+            mainMenuView.headBackgroundImageView.transform = CGAffineTransformMakeTranslation(0, 0)
         }
     }
     
@@ -207,10 +212,10 @@ extension MainMenuViewController: WBHttpRequestDelegate {
             UserInfoManange.shareInstance.clear()
             SVProgressHUD.dismiss()
             //  清理硬盘缓存
-            SDImageCache.sharedImageCache().clearDisk()
-            SDImageCache.sharedImageCache().clearMemory()
-            Kingfisher.ImageCache.defaultCache.clearDiskCache()
-            Kingfisher.ImageCache.defaultCache.clearMemoryCache()
+            //  清理硬盘缓存
+            ImageCache.defaultCache.clearDiskCache()
+            ImageCache.defaultCache.clearMemoryCache()
+            ImageCache.defaultCache.cleanExpiredDiskCache()
             
             self.mm_drawerController!.dismissViewControllerAnimated(false) {
                 self.delegate!.mainMenuViewController(self, operate: MainMenuViewControllerOperate.LogOut)

@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import SDWebImage
+import Kingfisher
 
 protocol MQPictureBrowserCellDelegate: NSObjectProtocol {
     func pictureBrowserCellTap(pictureBrowserCell: MQPictureBrowserCell)
@@ -133,7 +133,9 @@ extension MQPictureBrowserCell {
     }
     
     func configure(imageUrl: String, imageSize: CGSize) {
-        imageView.sd_setImageWithURL(NSURL(string: imageUrl)!)
+        if let url = NSURL(string: imageUrl) {
+            imageView.kf_setImageWithURL(url)
+        }
         self.imageSize = imageSize
         defaultConfigure()
     }

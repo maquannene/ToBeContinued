@@ -7,7 +7,6 @@
 //
 
 import MMDrawerController
-import SDWebImage
 import SVProgressHUD
 import Kingfisher
 
@@ -91,8 +90,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.item == 5 {
             cell = tableView.dequeueReusableCellWithIdentifier(Static.commonCell)
             cell.textLabel?.text = "清除缓存"
-            if let label = cell.accessoryView as? UILabel {
-                label.text = String(format: "%.1f MB", CGFloat(SDImageCache.sharedImageCache().getSize()) / 1204.0 / 1024.0)
+            
+            ImageCache.defaultCache.calculateDiskCacheSizeWithCompletionHandler {
+                if let label = cell.accessoryView as? UILabel {
+                    label.text = String(format: "%.1f MB", CGFloat($0) / 1204.0 / 1024.0)
+                }
             }
         }
         return cell
@@ -101,8 +103,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         if indexPath.item == 5 {
-            SDImageCache.sharedImageCache().clearDisk()
-            SDImageCache.sharedImageCache().clearMemory()
             Kingfisher.ImageCache.defaultCache.clearDiskCache()
             Kingfisher.ImageCache.defaultCache.clearMemoryCache()
             SVProgressHUD.showSuccessWithStatus("清除成功")

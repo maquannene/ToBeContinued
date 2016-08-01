@@ -6,15 +6,15 @@
 //  Copyright © 2015 maquan. All rights reserved.
 //
 
-import SDWebImage
-import MSDImageDownloadGroup
+import Kingfisher
+import MKFImageDownloadGroup
 
 protocol ImageTrackCellDelegate: NSObjectProtocol {
     func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
 protocol ImageTrackCellDataSource: class {
-    var imageURL: String! { get }
+    var imageURL: String { get }
     var textStr: String? { get }
 }
 
@@ -66,31 +66,33 @@ class ImageTrackCell: UICollectionViewCell {
 //  MARK: Public
 extension ImageTrackCell {
     
-    func configureCell(imageTrack: ImageTrackCellDataSource!) -> Void {
+    func configureCell(imageTrack: ImageTrackCellDataSource) -> Void {
         
         self.imageTrack = imageTrack
         
-        let captureUrlStr = self.imageTrack?.imageURL
-        
-        imageView.msd_setImageWithURL(NSURL(string: imageTrack.imageURL)!,
-                                      groupIdentifier: reuseIdentifier,
-                                      placeholderImage: nil,
-                                      options: .RetryFailed,
-                                      progress:
-            { [weak self] (receivedSize, expectedSize) -> Void in
-                
-                guard let strongSelf = self else { return }
-                guard captureUrlStr == strongSelf.imageTrack?.imageURL else { return }
-                print("当前图片Text:\(imageTrack.textStr),进度:\(Float(receivedSize) / Float(expectedSize))")
-                strongSelf.progressView.hidden = false
-                strongSelf.progressView.progress = Float(receivedSize) / Float(expectedSize)
-            }, completed: { [weak self] (image, error, cacheType, url) -> Void in
-                
-                guard let strongSelf = self else { return }
-                guard url.absoluteString == strongSelf.imageTrack?.imageURL else { return }  //  回调验证
-                guard error == nil else { return }
-                strongSelf.progressView.hidden = true
-            })
+        if let url = NSURL(string: imageTrack.imageURL) {
+            imageView.mkf_setImageWithURL(url,
+                                          identifier: reuseIdentifier,
+                                          placeholderImage: nil,
+                                          optionsInfo: nil,
+                                          progressBlock:
+                { [weak self] (receivedSize, totalSize) in
+                    
+                    guard let strongSelf = self else { return }
+                    guard url.absoluteString == strongSelf.imageTrack?.imageURL else { return }
+                    print("当前图片Text:\(imageTrack.textStr),进度:\(Float(receivedSize) / Float(totalSize))")
+                    strongSelf.progressView.hidden = false
+                    strongSelf.progressView.progress = Float(receivedSize) / Float(totalSize)
+                    
+                }, completionHandler: { [weak self] (image, error, cacheType, imageURL) in
+                    
+                    guard let strongSelf = self else { return }
+                    guard imageURL?.absoluteString == strongSelf.imageTrack?.imageURL else { return }  //  回调验证
+                    guard error == nil else { return }
+                    
+                    strongSelf.progressView.hidden = true
+                })
+        }
         
         textLabel.text = self.imageTrack?.textStr
     }
