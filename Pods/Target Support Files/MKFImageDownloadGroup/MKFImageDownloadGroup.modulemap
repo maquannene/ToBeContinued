@@ -1,6 +1,0 @@
-framework module MKFImageDownloadGroup {
-  umbrella header "MKFImageDownloadGroup-umbrella.h"
-
-  export *
-  module * { export * }
-}

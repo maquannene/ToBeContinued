@@ -1,6 +1,0 @@
-framework module MQMaskController {
-  umbrella header "MQMaskController-umbrella.h"
-
-  export *
-  module * { export * }
-}
