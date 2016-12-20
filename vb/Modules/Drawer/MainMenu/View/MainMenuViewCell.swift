@@ -25,7 +25,7 @@ class MainMenuViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bottomSeparateLine.frame = CGRectMake(0, h - 0.5, w, 0.5)
+        bottomSeparateLine.frame = CGRect(x: 0, y: h - 0.5, width: w, height: 0.5)
     }
     
 }
@@ -34,7 +34,7 @@ class MainMenuViewCell: UITableViewCell {
 extension MainMenuViewCell {
     
     func baseConfigure() {
-        bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        bottomSeparateLine.backgroundColor = UIColor.gray.cgColor
         layer.addSublayer(bottomSeparateLine)
     }
     
@@ -44,7 +44,7 @@ extension MainMenuViewCell {
 extension MainMenuViewCell {
     
     func configure() {
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
     
 }

@@ -20,8 +20,8 @@ class AppDelegate: UIResponder {
 
 extension AppDelegate: UIApplicationDelegate {
     
-    func application(application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let config = Realm.Configuration(schemaVersion: 2, migrationBlock: { migration, oldSchemaVersion in
             if (oldSchemaVersion < 2) {
@@ -34,28 +34,28 @@ extension AppDelegate: UIApplicationDelegate {
         
         let key = String(kCFBundleVersionKey)
         //先去沙盒中取出上次使用的版本号
-        _ = NSUserDefaults.standardUserDefaults().objectForKey(key) as? String
+        _ = UserDefaults.standard.object(forKey: key) as? String
         //加载程序中的info.plist
-        _ = NSBundle.mainBundle().infoDictionary?[key] as! String
+        _ = Bundle.main.infoDictionary?[key] as! String
         
         self.registThirdSDK()
     
         rootVc = RootViewController()
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.backgroundColor = UIColor.blackColor()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = UIColor.black
         window?.rootViewController = rootVc
         self.window?.makeKeyAndVisible()
         return true
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         UserInfoManange.shareInstance.thirdLogInIdentifier = WeiboSDKInfo.LogFromPrefix
-        return WeiboSDK.handleOpenURL(url, delegate: rootVc)
+        return WeiboSDK.handleOpen(url, delegate: rootVc)
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return WeiboSDK.handleOpenURL(url, delegate: rootVc)
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return WeiboSDK.handleOpen(url, delegate: rootVc)
     }
     
 }
@@ -63,7 +63,7 @@ extension AppDelegate: UIApplicationDelegate {
 // MARK: Private
 extension AppDelegate {
     
-    private func registThirdSDK() {
+    fileprivate func registThirdSDK() {
         //  sina sdk
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(WeiboSDKInfo.AppKey)

@@ -23,13 +23,13 @@ class HomeViewController: DetailBaseViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.hidden = true
-        self.view.backgroundColor = UIColor.yellowColor()
+        self.navigationController?.navigationBar.isHidden = true
+        self.view.backgroundColor = UIColor.yellow
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool
     {
-        let destVc: UIViewController? = self.valueForKey(identifier!) as? UIViewController
+        let destVc: UIViewController? = self.value(forKey: identifier!) as? UIViewController
         if destVc != nil {
             self.navigationController!.pushViewController(destVc!, animated: true)
             return false
@@ -39,15 +39,15 @@ class HomeViewController: DetailBaseViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let identifier = segue.identifier as String? {
-            self.setValue(segue.destinationViewController, forKey: identifier)
+            self.setValue(segue.destination, forKey: identifier)
         }
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
     
 }

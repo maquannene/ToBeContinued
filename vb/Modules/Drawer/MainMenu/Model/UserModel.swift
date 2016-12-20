@@ -43,7 +43,7 @@ class UserModel: NSObject, NSCoding {
     }
     
     //  利用MJExtension 使其可编码支持NSKeyedUnarchiver
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         self.mj_encode(aCoder)
     }
 }
@@ -52,17 +52,15 @@ extension UserModel {
     
     internal override class func initialize() {
         struct Static {
-            static var token: dispatch_once_t = 0
+            static var token: Int = 0
         }
         // make sure this isn't a subclass
         if self !== UserModel.self {
             return
         }
-        dispatch_once(&Static.token) {
-            //  处理属性和Json key不匹配情况
-            UserModel.mj_setupReplacedKeyFromPropertyName { () -> [NSObject : AnyObject]! in
-                return ["_description": "description"]
-            }
+        //  处理属性和Json key不匹配情况
+        UserModel.mj_setupReplacedKey { () -> [AnyHashable: Any]! in
+            return ["_description": "description"]
         }
     }
 }

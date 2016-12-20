@@ -15,18 +15,18 @@ class NoteTrackModel: AVObject, CloudModelBase {
     @NSManaged var title: String!
     @NSManaged var detailContent: String?
     
-    convenience init(objectId: String! = NSUUID().UUIDString, identifier: String!, title: String?, detailContent: String?) {
+    convenience init(objectId: String! = UUID().uuidString, identifier: String!, title: String?, detailContent: String?) {
         self.init()
         self.objectId = objectId
         self.identifier = identifier
-        update(title: title, detailContent: detailContent)
+        update(title, detailContent: detailContent)
     }
     
     convenience init(model: NoteTrackModel) {
         self.init(objectId: model.objectId, identifier: model.identifier, title: model.title, detailContent: model.detailContent)
     }
     
-    func update(title title: String!, detailContent: String?) {
+    func update(_ title: String!, detailContent: String?) {
         self.title = title
         self.detailContent = detailContent
     }
@@ -44,12 +44,12 @@ extension NoteTrackModel: AVSubclassing {
 }
 
 extension NoteTrackModel: NSMutableCopying, NSCopying {
-    func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+    func mutableCopy(with zone: NSZone?) -> Any {
         let noteTrackModel = NoteTrackModel(model: self)
         return noteTrackModel
     }
     
-    func copyWithZone(zone: NSZone) -> AnyObject {
+    func copy(with zone: NSZone?) -> Any {
         let noteTrackModel = NoteTrackModel(model: self)
         return noteTrackModel
     }

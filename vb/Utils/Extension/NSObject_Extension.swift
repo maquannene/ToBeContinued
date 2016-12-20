@@ -10,7 +10,7 @@ public extension NSObject {
     
     //  类方法，类也是对象，这里的self 指的就是 这个类
     public class var RealClassName: String {
-        return String(self)
+        return String(describing: self)
     }
     
     public class var ClassName: String {
@@ -19,23 +19,11 @@ public extension NSObject {
     
     //  实例方法
     public var RealClassName: String {
-        return String(self.dynamicType)
+        return String(describing: type(of: self))
     }
     
     public var ClassName: String {
-        return NSStringFromClass(self.dynamicType)
+        return NSStringFromClass(type(of: self))
     }
     
 }
-
-//class X {
-//
-//}
-//
-//let x = X()
-//
-//var c: AnyClass = X.self
-//c = x.dynamicType
-//
-//var ct: X.Type = X.self
-//ct = self.dynamicType

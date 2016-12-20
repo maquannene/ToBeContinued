@@ -24,30 +24,32 @@ class UserInfoManange {
     
     var cache: Cache! = Cache(name: cacheName)
     
+    let realm: Realm = try! Realm()
+    
     var thirdLogInIdentifier: String? {
         get {
-            return readUserModel(WeiboSDKInfo.LogFromPrefix)
+            return readUserModel(with: WeiboSDKInfo.LogFromPrefix)
         }
         set {
-            updateUserModel(WeiboSDKInfo.LogFromPrefix, value: newValue)
+            updateUserModel(with: WeiboSDKInfo.LogFromPrefix, value: newValue)
         }
     }
     
     var userID: String? {
         get {
-            return readUserModel(WeiboSDKInfo.UserIDKey)
+            return readUserModel(with: WeiboSDKInfo.UserIDKey)
         }
         set {
-            updateUserModel(WeiboSDKInfo.UserIDKey, value: newValue)
+            updateUserModel(with: WeiboSDKInfo.UserIDKey, value: newValue)
         }
     }
     
     var accessToken: String? {
         get {
-            return readUserModel(WeiboSDKInfo.AccessTokenKey)
+            return readUserModel(with: WeiboSDKInfo.AccessTokenKey)
         }
         set {
-            updateUserModel(WeiboSDKInfo.AccessTokenKey, value: newValue)
+            updateUserModel(with: WeiboSDKInfo.AccessTokenKey, value: newValue)
         }
     }
     
@@ -61,26 +63,26 @@ class UserInfoManange {
         return thirdLogInIdentifier! + "." + userID + "."
     }
     
-    func updateUserModel(key: String!, value: String!) {
+    func updateUserModel(with key: String!, value: String!) {
         if var authorizeInfo = cache.object(forKey: WeiboSDKInfo.AutorizeInfo) as? [String: String] {
             authorizeInfo[key] = value
-            cache.set(object: authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
+            cache.set(object: authorizeInfo as NSCoding, forKey: WeiboSDKInfo.AutorizeInfo)
         }
         else {
             var authorizeInfo = Dictionary<String, String>()
             authorizeInfo[key] = value
-            cache.set(object: authorizeInfo, forKey: WeiboSDKInfo.AutorizeInfo)
+            cache.set(object: authorizeInfo as NSCoding, forKey: WeiboSDKInfo.AutorizeInfo)
         }
     }
     
-    func readUserModel(key: String!) -> String? {
+    func readUserModel(with key: String!) -> String? {
         guard let authorizeInfo = cache.object(forKey: WeiboSDKInfo.AutorizeInfo) as? [String: String] else { return nil }
         return authorizeInfo[key]
     }
     
-    func getUserInfo(fromCachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
+    func getUserInfo(from cachePriority: Bool = false, updateCacheIfNeed: Bool = true, completion: ((Bool, UserModel?) -> Void)?) {
         guard self.userID != nil && self.accessToken != nil else { return }
-        if fromCachePriority {
+        if cachePriority {
             if let userModel = cache.object(forKey: kUserInfoKey) as? UserModel {
                 self.userModel = userModel
             }
@@ -88,11 +90,11 @@ class UserInfoManange {
         }
         
         if self.userModel == nil && updateCacheIfNeed {
-            let param: [String : AnyObject] = ["access_token": self.accessToken!, "uid": self.userID!]
+            let param: [String : AnyObject] = ["access_token": self.accessToken! as AnyObject, "uid": self.userID! as AnyObject]
             let url = "https://api.weibo.com/2/users/show.json"
-            AFHTTPSessionManager().GET(url, parameters: param, progress: nil
+            AFHTTPSessionManager().get(url, parameters: param, progress: nil
                 , success: { (datatask, response) -> Void in
-                    self.setUserInfoWithValue(response)
+                    self.setUserInfo(with: response as AnyObject!)
                     completion?(true, self.userModel)
                 }, failure: { (datatask, error) -> Void in
                     completion?(false, nil)
@@ -100,7 +102,7 @@ class UserInfoManange {
         }
     }
     
-    func setUserInfoWithValue(value: AnyObject!) {
+    func setUserInfo(with value: AnyObject!) {
         self.userModel = UserModel().mj_setKeyValues(value)
         cache.set(object: self.userModel!, forKey: kUserInfoKey)
     }
@@ -111,19 +113,13 @@ class UserInfoManange {
         thirdLogInIdentifier = nil
         userModel = nil
         // 清理 realm 数据
-        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
-        let realmURLs = [
-            realmURL,
-            realmURL.URLByAppendingPathExtension("lock"),
-            realmURL.URLByAppendingPathExtension("management"),
-        ]
-        let manager = NSFileManager.defaultManager()
-        for URL in realmURLs {
-            do {
-                try manager.removeItemAtURL(URL)
-            } catch {
-                // 处理错误
+        do {
+            try realm.write {
+                self.realm.deleteAll()
             }
+        }
+        catch {
+        
         }
         
         //  移除存储三个唯一值信息的字典

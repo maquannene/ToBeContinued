@@ -80,7 +80,7 @@ extension UIView {
     
 }
 
-struct ViewGlanceContent : OptionSetType {
+struct ViewGlanceContent : OptionSet {
     var rawValue: UInt
     init(rawValue: UInt) {
         self.rawValue = rawValue
@@ -96,28 +96,28 @@ struct ViewGlanceContent : OptionSetType {
 //  MARK: ViewGlance
 extension UIView {
     
-    func viewGlance(maxLevel: NSInteger, logContent: ViewGlanceContent) {
+    func viewGlance(_ maxLevel: NSInteger, logContent: ViewGlanceContent) {
         self.viewGlance(maxLevel, longContent: logContent, currentLevel: 0)
     }
     
-    func viewGlance(maxLevel: NSInteger, longContent: ViewGlanceContent, currentLevel: NSInteger) {                var levelLog = String()
+    func viewGlance(_ maxLevel: NSInteger, longContent: ViewGlanceContent, currentLevel: NSInteger) {                var levelLog = String()
         for _ in 0 ..< currentLevel {
-            levelLog = levelLog.stringByAppendingString(" | ")
+            levelLog = levelLog + " | "
         }
         
         var desLog = String()
         if longContent.contains(.Description) {
-            desLog = desLog.stringByAppendingString(self.description)
+            desLog = desLog + self.description
         }
         else {
             if (longContent.contains(.ClassName)) {
-                desLog = desLog.stringByAppendingString("\(self.dynamicType)")
+                desLog = desLog + "\(type(of: self))"
             }
             if (longContent.contains(.Point)) {
-                desLog = desLog.stringByAppendingString(NSString(format: "%p", self) as String)
+                desLog = desLog + (NSString(format: "%p", self) as String)
             }
             if (longContent.contains(.Frame)) {
-                desLog = desLog.stringByAppendingString(NSStringFromCGRect(self.frame) as String)
+                desLog = desLog + (NSStringFromCGRect(self.frame) as String)
             }
         }
 

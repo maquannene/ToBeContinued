@@ -14,15 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Cent (5.0.2):
-    - Dollar (~> 5.1.0)
-  - Dollar (5.1.0)
   - FDFullscreenPopGesture (1.1)
-  - Kingfisher (1.9.3)
+  - Kingfisher (3.1.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - MKFImageDownloadGroup (2.0):
-    - Kingfisher (~> 1.5)
+    - Kingfisher (= 3.1.0)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -37,32 +34,33 @@ PODS:
     - MMDrawerController/Core
   - MQMaskController (1.0)
   - NYXImagesKit (2.3)
-  - Realm (1.0.2):
-    - Realm/Headers (= 1.0.2)
-  - Realm/Headers (1.0.2)
-  - RealmSwift (1.0.2):
-    - Realm (= 1.0.2)
+  - Realm (1.1.0):
+    - Realm/Headers (= 1.1.0)
+  - Realm/Headers (1.1.0)
+  - RealmSwift (1.1.0):
+    - Realm (= 1.1.0)
+  - SnapKit (3.0.1)
   - SVProgressHUD (2.0.3)
   - SWTableViewCell (0.3.7)
-  - Track (1.2.2)
+  - Track (2.0.0)
   - WeiboSDK (3.1.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - Cent
-  - Dollar
   - FDFullscreenPopGesture (from `git://github.com/forkingdog/FDFullscreenPopGesture`,
     commit `da1efbf53f5fdd17090d5b30e4cd497a23827b58`)
+  - Kingfisher (= 3.1.0)
   - MJExtension
   - MJRefresh
-  - MKFImageDownloadGroup (from `https://github.com/maquannene/MXXImageDownloadGroup.git`)
+  - MKFImageDownloadGroup (from `../MXXImageDownloadGroup`)
   - MMDrawerController (~> 0.5.7)
-  - MQMaskController (from `https://github.com/wuhanness/MQMaskViewController.git`)
+  - MQMaskController (from `../MQMaskController`)
   - NYXImagesKit
   - RealmSwift
-  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
+  - SnapKit
+  - SVProgressHUD
   - SWTableViewCell (= 0.3.7)
-  - Track
+  - Track (from `../Track`)
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
 EXTERNAL SOURCES:
@@ -70,11 +68,11 @@ EXTERNAL SOURCES:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
   MKFImageDownloadGroup:
-    :git: https://github.com/maquannene/MXXImageDownloadGroup.git
+    :path: ../MXXImageDownloadGroup
   MQMaskController:
-    :git: https://github.com/wuhanness/MQMaskViewController.git
-  SVProgressHUD:
-    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+    :path: ../MQMaskController
+  Track:
+    :path: ../Track
   WeiboSDK:
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
@@ -82,36 +80,26 @@ CHECKOUT OPTIONS:
   FDFullscreenPopGesture:
     :commit: da1efbf53f5fdd17090d5b30e4cd497a23827b58
     :git: git://github.com/forkingdog/FDFullscreenPopGesture
-  MKFImageDownloadGroup:
-    :commit: 22364b1bfd168cf3abcf6da08f54b0476b11c4b9
-    :git: https://github.com/maquannene/MXXImageDownloadGroup.git
-  MQMaskController:
-    :commit: 823cb8bde32edcd2b2cf85be9f70aee624aa4160
-    :git: https://github.com/wuhanness/MQMaskViewController.git
-  SVProgressHUD:
-    :commit: 5148825c5a0625da61aec451189b7fe62bf05fbf
-    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
   WeiboSDK:
-    :commit: 6031a8da4ce17867ff5887b8dfc59ea45930274e
+    :commit: 3daf7147ddd0fde3b04a61d8d94327d41d0c239c
     :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Cent: b8ac30edd7851255320f2a100585fd61d5807503
-  Dollar: d40032c85eced868f65b86aaede4ef7c093a1bb2
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
+  Kingfisher: 7779f22e977393e9533a89a9685beb8f679d3767
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  MKFImageDownloadGroup: d8588e141102b7e750a9d5a09e1653917f6fb655
+  MKFImageDownloadGroup: 1577793c862dc00452383b8cdd5a58fa2719a914
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   MQMaskController: 79ace10666c55a22147a2c55dfdf1250ab105a3f
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
-  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
-  RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
+  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
+  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
-  Track: 70d60731eb5f77aecfa624b3e44d525811155bfc
+  Track: 45590b4545034d30f61622e82bef0534b168d9a9
   WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
 COCOAPODS: 0.39.0

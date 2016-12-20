@@ -20,11 +20,11 @@ extension MMDrawerVisualState {
             var distance: CGFloat = 0.0
             var minScale: CGFloat = 0.0     //  收起时最小缩放比
             
-            if drawerSide == MMDrawerSide.None {
+            if drawerSide == MMDrawerSide.none {
                 return
             }
             
-            if drawerSide == MMDrawerSide.Left {
+            if drawerSide == MMDrawerSide.left {
                 sideViewController = drawerController.leftDrawerViewController
                 maxDistance = drawerController.maximumLeftDrawerWidth
                 distance = maxDistance * percentVisible;
@@ -39,7 +39,7 @@ extension MMDrawerVisualState {
                     translateTransform = CATransform3DMakeTranslation(0, 0.0, 0.0);
                 }
             }
-            if drawerSide == MMDrawerSide.Right {
+            if drawerSide == MMDrawerSide.right {
                 sideViewController = drawerController.rightDrawerViewController
                 maxDistance = drawerController.maximumRightDrawerWidth
                 distance = maxDistance * percentVisible
@@ -57,6 +57,6 @@ extension MMDrawerVisualState {
             scaleTransform = CATransform3DMakeScale(scale, scale, scale);
             sideViewController?.view.layer.transform = CATransform3DConcat(scaleTransform, translateTransform)
             sideViewController?.view.alpha = percentVisible
-        }
+        } as! MMDrawerControllerDrawerVisualStateBlock
     }
 }

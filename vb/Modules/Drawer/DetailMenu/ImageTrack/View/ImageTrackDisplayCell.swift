@@ -20,7 +20,7 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
     
     @IBOutlet weak var progressView: UIProgressView! {
         didSet {
-            progressView.tintColor = UIColor.grayColor()
+            progressView.tintColor = UIColor.gray
         }
     }
     
@@ -40,34 +40,34 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
         super.baseConfigure()
         scrollView.layer.cornerRadius = 5
         scrollView.clipsToBounds = true
-        progressView.hidden = true
-        bringSubviewToFront(progressView)
+        progressView.isHidden = true
+        bringSubview(toFront: progressView)
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
         progressView.frame = CGRect(x: 20, y: layoutAttributes.frame.height / 2, width: layoutAttributes.frame.width - 40, height: 20)
     }
     
-    func configurePictureCell(imageTrack: ImageTrackDisplayCellDataSource!) {
+    func configurePictureCell(_ imageTrack: ImageTrackDisplayCellDataSource!) {
         self.imageTrack = imageTrack
         
-        let thumbImage: UIImage? = ImageCache.defaultCache.retrieveImageInDiskCacheForKey(imageTrack.thumbImageURL)
+        let thumbImage: UIImage? = ImageCache.default.retrieveImageInDiskCache(forKey: imageTrack.thumbImageURL)
         
         //  这个urlStr 是专门让closure捕获的对比值。
         //  因为同一个imageView可以有很多个获取图片请求，那么请求回调时就要进行对比校验，只有校验正确才能设置进度
-        if let url = NSURL(string: imageTrack.originImageURL) {
-            imageView.mkf_setImageWithURL(url,
-                                          identifier: reuseIdentifier,
-                                          placeholderImage: thumbImage,
-                                          optionsInfo: nil,
-                                          progressBlock:
+        if let url = URL(string: imageTrack.originImageURL) {
+            imageView.mkf_setImage(with: url,
+                                   identifier: reuseIdentifier,
+                                   placeholderImage: thumbImage,
+                                   optionsInfo: nil,
+                                   progressBlock:
                 { [weak self] (receivedSize, totalSize) in
                     
                     guard let strongSelf = self else { return }
                     guard url.absoluteString == strongSelf.imageTrack?.originImageURL else { return }
                     
-                    strongSelf.progressView.hidden = false
+                    strongSelf.progressView.isHidden = false
                     strongSelf.progressView.progress = Float(receivedSize) / Float(totalSize)
                     
                 }, completionHandler: { [weak self] (image, error, cacheType, imageURL) in
@@ -76,7 +76,7 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
                     guard imageURL?.absoluteString == strongSelf.imageTrack?.originImageURL else { return }  //  回调验证
                     guard error == nil else { return }
                     
-                    strongSelf.progressView.hidden = true
+                    strongSelf.progressView.isHidden = true
                 })
         }
         
@@ -85,7 +85,7 @@ class ImageTrackDisplayCell: MQPictureBrowserCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }

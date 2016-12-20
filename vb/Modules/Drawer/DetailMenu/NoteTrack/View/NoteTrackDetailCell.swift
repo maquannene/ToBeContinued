@@ -46,7 +46,7 @@ class NoteTrackDetailCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.cyanColor()
+        backgroundColor = UIColor.cyan
     }
 
     override func layoutSubviews() {
@@ -55,7 +55,7 @@ class NoteTrackDetailCell: UITableViewCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
 
 }
@@ -63,9 +63,9 @@ class NoteTrackDetailCell: UITableViewCell {
 // MARK: Public
 extension NoteTrackDetailCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: NoteTrackDetailCellDataSource!) -> Void {
+    func configureWithNoteTrackModel(_ noteTrackModel: NoteTrackDetailCellDataSource!) -> Void {
         self.noteTrackModel = noteTrackModel
-        selectionStyle = UITableViewCellSelectionStyle.None
+        selectionStyle = UITableViewCellSelectionStyle.none
         detailButtonWidth.constant = 0
         detailButtonRightGap.constant = 0
         //  重新设置了约束，要更新约束布局。

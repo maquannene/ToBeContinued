@@ -19,7 +19,7 @@ protocol NoteTrackCellDataSource: class {
 class NoteTrackCell: SWTableViewCell {
 
     weak var noteTrackModel: NoteTrackCellDataSource?
-    lazy var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    lazy var indexPath: IndexPath = IndexPath(row: 0, section: 0)
     lazy var topSeparateLine: CALayer = CALayer()
     lazy var bottomSeparateLine: CALayer = CALayer()
     @IBOutlet weak var titleImageView: UIImageView!
@@ -42,12 +42,12 @@ class NoteTrackCell: SWTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        topSeparateLine.frame = CGRectMake(0, 0, w, 0.5)
-        bottomSeparateLine.frame = CGRectMake(0, h - 0.5, w, 0.5)
+        topSeparateLine.frame = CGRect(x: 0, y: 0, width: w, height: 0.5)
+        bottomSeparateLine.frame = CGRect(x: 0, y: h - 0.5, width: w, height: 0.5)
     }
 
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
     
 }
@@ -55,10 +55,10 @@ class NoteTrackCell: SWTableViewCell {
 // MARK: Public
 extension NoteTrackCell {
     
-    func configureWithNoteTrackModel(noteTrackModel: NoteTrackCellDataSource!) -> Void {
+    func configureWithNoteTrackModel(_ noteTrackModel: NoteTrackCellDataSource!) -> Void {
         self.noteTrackModel = noteTrackModel
-        self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.backgroundColor = UIColor.whiteColor()
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.backgroundColor = UIColor.white
         self.contentLabel!.text = noteTrackModel.titleStr
         self.rightUtilityButtons = rightButtons() as [AnyObject]
         self.setRightUtilityButtons(self.rightUtilityButtons, withButtonWidth: 70)
@@ -68,17 +68,17 @@ extension NoteTrackCell {
 // MARK: Private
 extension NoteTrackCell {
     
-    private func baseConfigure() {
-        topSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+    fileprivate func baseConfigure() {
+        topSeparateLine.backgroundColor = UIColor.gray.cgColor
         layer.addSublayer(topSeparateLine)
-        bottomSeparateLine.backgroundColor = UIColor.grayColor().CGColor
+        bottomSeparateLine.backgroundColor = UIColor.gray.cgColor
         layer.addSublayer(bottomSeparateLine)
     }
     
-    private func rightButtons() -> NSArray {
+    fileprivate func rightButtons() -> NSArray {
         let rightButtons: NSMutableArray = NSMutableArray()
-        rightButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), title: "编辑")
-        rightButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除")
+        rightButtons.sw_addUtilityButton(with: UIColor.lightGray, title: "编辑")
+        rightButtons.sw_addUtilityButton(with: UIColor.red, title: "删除")
         return rightButtons
     }
     

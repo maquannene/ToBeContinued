@@ -11,7 +11,7 @@ import AVFoundation
 import Kingfisher
 
 protocol MQPictureBrowserCellDelegate: NSObjectProtocol {
-    func pictureBrowserCellTap(pictureBrowserCell: MQPictureBrowserCell)
+    func pictureBrowserCellTap(_ pictureBrowserCell: MQPictureBrowserCell)
 }
 
 class MQPictureBrowserCell: UICollectionViewCell {
@@ -19,10 +19,10 @@ class MQPictureBrowserCell: UICollectionViewCell {
     lazy var scrollView = UIScrollView()
     lazy var imageView = UIImageView()
     weak var delegate: MQPictureBrowserCellDelegate?
-    var imageSize: CGSize = CGSizeZero
+    var imageSize: CGSize = CGSize.zero
     
-    private var doubleTapGesture: UITapGestureRecognizer!
-    private var tapGesture: UITapGestureRecognizer!
+    fileprivate var doubleTapGesture: UITapGestureRecognizer!
+    fileprivate var tapGesture: UITapGestureRecognizer!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,11 +41,11 @@ class MQPictureBrowserCell: UICollectionViewCell {
     func baseConfigure() {
         scrollView.alwaysBounceVertical = false
         scrollView.alwaysBounceHorizontal = true
-        scrollView.directionalLockEnabled = true
+        scrollView.isDirectionalLockEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.clipsToBounds = false
-        scrollView.directionalLockEnabled = true
+        scrollView.isDirectionalLockEnabled = true
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1
         addSubview(scrollView)
@@ -59,18 +59,18 @@ class MQPictureBrowserCell: UICollectionViewCell {
         tapGesture.numberOfTapsRequired = 1
         addGestureRecognizer(tapGesture)
         
-        tapGesture.requireGestureRecognizerToFail(doubleTapGesture)
+        tapGesture.require(toFail: doubleTapGesture)
     }
     
     override func prepareForReuse() {
         scrollView.setZoomScale(1, animated: false)
     }
     
-    @objc private func tapAction(gesture: UITapGestureRecognizer) {
+    @objc fileprivate func tapAction(_ gesture: UITapGestureRecognizer) {
         delegate?.pictureBrowserCellTap(self)
     }
     
-    @objc private func dobleTapAction(gesture: UITapGestureRecognizer) {
+    @objc fileprivate func dobleTapAction(_ gesture: UITapGestureRecognizer) {
         
         guard scrollView.maximumZoomScale != 1 else { return }
         
@@ -82,17 +82,17 @@ class MQPictureBrowserCell: UICollectionViewCell {
         
         //  如果当前缩放比偏小，就放大至最大
         if maxScale - scrollView.zoomScale > (maxScale - 1) / 2 {
-            let touchPoint = gesture.locationInView(self)
+            let touchPoint = gesture.location(in: self)
             let w = cellSize.width / maxScale
             let h = cellSize.height / maxScale
             let x = touchPoint.x - (w / 2.0)
             let y = touchPoint.y - (h / 2.0)
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.scrollView.zoomToRect(CGRect(x: x, y: y, width: w, height: h), animated: false)
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.scrollView.zoom(to: CGRect(x: x, y: y, width: w, height: h), animated: false)
             }, completion: nil)
         }
         else {
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 animations: { () -> Void in
                     self.scrollView.setZoomScale(1, animated: false)
             }, completion: nil)
@@ -100,7 +100,7 @@ class MQPictureBrowserCell: UICollectionViewCell {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }
@@ -109,10 +109,10 @@ class MQPictureBrowserCell: UICollectionViewCell {
 extension MQPictureBrowserCell {
     
     //  当图片等比放大到宽度等于屏幕宽度时，图片在cell中的rect
-    func calculateImageActualRectInCell(imageSize: CGSize) -> CGRect {
+    func calculateImageActualRectInCell(_ imageSize: CGSize) -> CGRect {
         //  获取所占区域大小
         let boundingRect = CGRect(x: 0, y: 0, width: frame.size.width, height: CGFloat(MAXFLOAT))
-        let imageActualSize = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageSize.width, height:imageSize.height), boundingRect).size
+        let imageActualSize = AVMakeRect(aspectRatio: CGSize(width: imageSize.width, height:imageSize.height), insideRect: boundingRect).size
         if self.frame.height < imageActualSize.height {
             return CGRect(origin: CGPoint(x: 0, y: 0), size: imageActualSize)
         }
@@ -126,15 +126,15 @@ extension MQPictureBrowserCell {
 //  MARK: Public
 extension MQPictureBrowserCell {
     
-    func configure(image: UIImage) {
+    func configure(_ image: UIImage) {
         imageView.image = image
         self.imageSize = image.size
         defaultConfigure()
     }
     
-    func configure(imageUrl: String, imageSize: CGSize) {
-        if let url = NSURL(string: imageUrl) {
-            imageView.kf_setImageWithURL(url)
+    func configure(_ imageUrl: String, imageSize: CGSize) {
+        if let url = URL(string: imageUrl) {
+            imageView.kf.setImage(with: ImageResource(downloadURL: url))
         }
         self.imageSize = imageSize
         defaultConfigure()
@@ -142,7 +142,7 @@ extension MQPictureBrowserCell {
     
     func defaultConfigure() {
         let imageActualSize = calculateImageActualRectInCell(self.imageSize).size
-        imageView.frame = CGRect(origin: CGPointZero, size: imageActualSize)
+        imageView.frame = CGRect(origin: CGPoint.zero, size: imageActualSize)
         scrollView.frame = bounds
         scrollView.contentSize = imageActualSize
         //  如果高度超过了屏幕的高度
@@ -161,11 +161,11 @@ extension MQPictureBrowserCell {
 
 extension MQPictureBrowserCell: UIScrollViewDelegate {
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         //  缩放的时候要调整contentInset 很关键
         //  超长图片因为maximumZoomScale = 1所以进不了这个方法。
         scrollView.contentInset = UIEdgeInsets(top: (self.scrollView.h - imageView.frame.height) / 2, left: 0, bottom: (self.scrollView.h - imageView.frame.height) / 2, right: 0)

@@ -18,25 +18,25 @@ class NewNoteTrackView: UIView {
         super.awakeFromNib()
         backgroundColor = RGBA(255, 255, 255, 1)
         layer.cornerRadius = 10
-        layer.borderColor = RGBA(237, 238, 239, 1).CGColor
+        layer.borderColor = RGBA(237, 238, 239, 1).cgColor
         layer.borderWidth = 1
-        layer.shadowColor = UIColor.grayColor().CGColor
+        layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowRadius = 10
         layer.shadowOpacity = 0.8
     }
     
-    func configureData(title: String?, detailContent: String?) {
+    func configureData(_ title: String?, detailContent: String?) {
         titleTextView.text = title
         detailContentTextView.text = detailContent
     }
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, withEvent: event)
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, with: event)
         return view
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
 }

@@ -12,7 +12,7 @@ class ImageTrackCacheModel: Object {
 
     dynamic var objectId: String?
     dynamic var identifier: String!
-    dynamic var createdAt: NSDate!
+    dynamic var createdAt: Date!
     
     dynamic var thumbImageFileUrl: String?               //  瀑布流使用的略缩图
     dynamic var largeImageFileUrl: String?               //  点开看的大图
@@ -25,7 +25,7 @@ class ImageTrackCacheModel: Object {
     dynamic var text: String?
  
     convenience init(
-        objectId: String? = NSUUID().UUIDString,
+        objectId: String? = UUID().uuidString,
         identifier: String!,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,

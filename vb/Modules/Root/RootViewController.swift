@@ -17,34 +17,34 @@ class RootViewController: UIViewController {
     
     weak var currentVc: UIViewController?
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let userInfoManage = UserInfoManange.shareInstance
         if userInfoManage.accessToken != nil && userInfoManage.userID != nil {
             drawerVc = DrawerController.drawerController()
-            presentViewController(drawerVc!, animated: false) {
-                self.drawerVc!.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+            present(drawerVc!, animated: false) {
+                self.drawerVc!.open(MMDrawerSide.left, animated: true, completion: nil)
             }
         }
         else {
-            guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LogInViewController") as? LogInViewController else { return }
+            guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController else { return }
             logInVc = vc
             logInVc?.logInCompletionHandler = { [unowned self] in
-                self.logInVc?.dismissViewControllerAnimated(false) {}
+                self.logInVc?.dismiss(animated: false) {}
             }
-            presentViewController(vc, animated: false, completion: nil)
+            present(vc, animated: false, completion: nil)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.setDefaultMaskType(.None)
-        SVProgressHUD.setDefaultStyle(.Dark)
-        SVProgressHUD.setDefaultAnimationType(.Native)
+        SVProgressHUD.setDefaultMaskType(.none)
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setDefaultAnimationType(.native)
         SVProgressHUD.setMinimumDismissTimeInterval(2)
     }
     
@@ -54,7 +54,7 @@ class RootViewController: UIViewController {
 extension RootViewController: WeiboSDKDelegate {
     
     //   收到一个来自微博客户端程序的响应。 这里是用weibo 登陆成功后的response 设置userInfo和
-    func didReceiveWeiboResponse(response: WBBaseResponse!) {
+    func didReceiveWeiboResponse(_ response: WBBaseResponse!) {
         guard
             let _response = response as? WBAuthorizeResponse,
             let accessToken = _response.accessToken,
@@ -67,7 +67,7 @@ extension RootViewController: WeiboSDKDelegate {
         logInVc?.didReceiveWeiboResponse(response!)
     }
     
-    func didReceiveWeiboRequest(request: WBBaseRequest!) {
+    func didReceiveWeiboRequest(_ request: WBBaseRequest!) {
         logInVc?.didReceiveWeiboRequest(request)
     }
     

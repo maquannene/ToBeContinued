@@ -9,7 +9,7 @@
 import AVOSCloud
 import RealmSwift
   
-typealias QureyNoteTrackDataCompletion = (succeed: Bool!) -> Void
+typealias QureyNoteTrackDataCompletion = (_ succeed: Bool?) -> Void
   
 class NoteTrackViewModel: NSObject {
     
@@ -17,11 +17,11 @@ class NoteTrackViewModel: NSObject {
     var noteTrackModelList: [NoteTrackModel]! = [NoteTrackModel]()            //  存储noteModel列表的缓存数组
     let realm: Realm = try! Realm()
     
-    var expandingIndexPath: NSIndexPath?                                        //  展开的cell的IndexPath
-    var expandedIndexPath: NSIndexPath?                                         //  被展开（扩展区域）的indexPath
+    var expandingIndexPath: IndexPath?                                        //  展开的cell的IndexPath
+    var expandedIndexPath: IndexPath?                                         //  被展开（扩展区域）的indexPath
     
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
 }
 
@@ -33,23 +33,23 @@ extension NoteTrackViewModel {
      
      - parameter complete: 完成回调
      */
-    func queryNoteTrackListCompletion(fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
+    func queryNoteTrackListCompletion(_ fromCachePriority: Bool = true, updateCache: Bool = true, complete: QureyNoteTrackDataCompletion?)
     {
         var cloudModelList: [NoteTrackModel]?
         var cacheModelList: Results<NoteTrackCacheModel>?
         //  先从数据库取
         if fromCachePriority {
             //  筛选列表中的数据
-            cacheModelList = realm.objects(NoteTrackCacheModel)
+            cacheModelList = realm.objects(NoteTrackCacheModel.self)
             //  排序 + 格式转换
-            if cacheModelList?.count > 0 {
-                cloudModelList = cacheModelList?.sort {
+            if (cacheModelList?.count)! > 0 {
+                cloudModelList = cacheModelList?.sorted {
                     return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                 }.map {
                     $0.exportToCloudObject()
                 }
                 noteTrackModelList = cloudModelList
-                complete?(succeed: true)
+                complete?(true)
             }
         }
         
@@ -58,24 +58,24 @@ extension NoteTrackViewModel {
             let query: AVQuery = AVQuery(className: NoteTrackModel.RealClassName)
             //  根据identifier 识别符查询list
             query.whereKey("identifier", equalTo: identifier)
-            query.findObjectsInBackgroundWithBlock { [weak self] (objects: [AnyObject]!, error) in
-                guard let strongSelf = self else { complete?(succeed: error == nil); return }
-                guard error == nil else { print(error); complete?(succeed: false); return }
+            query.findObjectsInBackground { [weak self] (objects: [Any]?, error: Swift.Error?) in
+                guard let strongSelf = self else { complete?(error == nil); return }
+                guard error == nil else { complete?(false); return }
                 if var newNoteTrackModelList = objects as? [NoteTrackModel] {
                     if newNoteTrackModelList.count > 1 {
-                        newNoteTrackModelList.sortInPlace {
+                        newNoteTrackModelList.sort {
                             return $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
                         }
                     }
                     strongSelf.noteTrackModelList = newNoteTrackModelList
                     try! strongSelf.realm.write {
-                        strongSelf.realm.delete(cacheModelList ?? strongSelf.realm.objects(NoteTrackCacheModel))
+                        strongSelf.realm.delete(cacheModelList ?? strongSelf.realm.objects(NoteTrackCacheModel.self.self))
                         strongSelf.noteTrackModelList.forEach {
                             strongSelf.realm.add($0.exportToCacheObject(), update: true)
                         }
                     }
                 }
-                complete?(succeed: true)
+                complete?(true)
             }
         }
     }
@@ -86,19 +86,19 @@ extension NoteTrackViewModel {
     - parameter noteTrackModel:   NoteTrack 对象
     - parameter complete: 完成回调
     */
-    func queryAddNoteTrack(newNoteTrackModel: NoteTrackModel, complete: QureyNoteTrackDataCompletion?)
+    func queryAddNoteTrack(_ newNoteTrackModel: NoteTrackModel, complete: QureyNoteTrackDataCompletion?)
     {
         newNoteTrackModel.identifier = NoteTrackModel.uniqueIdentifier()
-        newNoteTrackModel.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
-            guard let sSelf = self else { complete?(succeed: succeed); return }
+        newNoteTrackModel.saveInBackground { [weak self] (succeed: Bool, error: Swift.Error?) -> Void in
+            guard let sSelf = self else { complete?(succeed); return }
             if  (succeed) {
                 //  写数据库数据
-                sSelf.noteTrackModelList.insert(newNoteTrackModel, atIndex: 0)
+                sSelf.noteTrackModelList.insert(newNoteTrackModel, at: 0)
                 try! sSelf.realm.write {
                     sSelf.realm.add(newNoteTrackModel.exportToCacheObject(), update: true)
                 }
             }
-            complete?(succeed: succeed)
+            complete?(succeed)
         }
     }
     
@@ -108,22 +108,23 @@ extension NoteTrackViewModel {
     - parameter index:    要删除的index
     - parameter complete: 删除完成回调
     */
-    func queryDeleteNoteTrackAtIndex(index: Int!, complete: QureyNoteTrackDataCompletion?)
+    func queryDeleteNoteTrackAtIndex(_ index: Int!, complete: QureyNoteTrackDataCompletion?)
     {
-        guard let trackModel = fetchNoteTrackModel(index) else { complete?(succeed: false); return }
+        guard let trackModel = fetchNoteTrackModel(index) else { complete?(false); return }
     
-        trackModel.deleteInBackgroundWithBlock { [weak self] (succeed, error) in
-            guard let strongSelf = self else { complete?(succeed: succeed); return }
+        trackModel.deleteInBackground { [weak self] (succeed, error) in
+            guard let strongSelf = self else { complete?(succeed); return }
             if succeed {
-                strongSelf.noteTrackModelList.removeAtIndex(index)
+                strongSelf.noteTrackModelList.remove(at: index)
                 //  删除数据库中 NoteTrackCacheModel 对象
-                if let deleteObj: [NoteTrackCacheModel] = strongSelf.realm.objects(NoteTrackCacheModel).filter( {$0.objectId == trackModel.objectId } ) {
-                    try! strongSelf.realm.write {
-                        strongSelf.realm.delete(deleteObj)
-                    }
+                let deleteObj: [NoteTrackCacheModel] = strongSelf.realm.objects(NoteTrackCacheModel.self).filter {
+                    $0.objectId == trackModel.objectId
+                }
+                try! strongSelf.realm.write {
+                    strongSelf.realm.delete(deleteObj)
                 }
             }
-            complete?(succeed: succeed)
+            complete?(succeed)
         }
     }
     
@@ -133,9 +134,9 @@ extension NoteTrackViewModel {
     - parameter track:   需要更新的密码对象
     - parameter complete: 完成回调
     */
-    func queryUpdateNoteTrack(newNoteTrackModel: NoteTrackModel, index: Int, complete: QureyNoteTrackDataCompletion?)
+    func queryUpdateNoteTrack(_ newNoteTrackModel: NoteTrackModel, index: Int, complete: QureyNoteTrackDataCompletion?)
     {
-        newNoteTrackModel.saveInBackgroundWithBlock { [weak self] (succeed: Bool, error: NSError!) -> Void in
+        newNoteTrackModel.saveInBackground { [weak self] (succeed: Bool, error: Swift.Error?) -> Void in
             guard let sSelf = self else { return }
             if (succeed) {
                 if let noteTrackModel = sSelf.noteTrackModelList[index] as NoteTrackModel? {
@@ -145,7 +146,7 @@ extension NoteTrackViewModel {
                     }
                 }
             }
-            complete?(succeed: succeed)
+            complete?(succeed)
         }
     }
     
@@ -155,15 +156,15 @@ extension NoteTrackViewModel {
     - parameter index: 下标号
     - returns: NoteTrackModel对象
     */
-    func fetchNoteTrackModel(index: Int!) -> NoteTrackModel?
+    func fetchNoteTrackModel(_ index: Int!) -> NoteTrackModel?
     {
         return noteTrackModelList[index]
     }
 
-    func convertToActualIndexPath(indexPath: NSIndexPath) -> NSIndexPath!
+    func convertToActualIndexPath(_ indexPath: IndexPath) -> IndexPath!
     {
         if (expandedIndexPath != nil && indexPath.row >= expandedIndexPath!.row) {
-            return NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+            return IndexPath(row: indexPath.row - 1, section: indexPath.section)
         }
         return indexPath
     }

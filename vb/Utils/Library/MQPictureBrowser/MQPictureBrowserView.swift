@@ -12,7 +12,7 @@ class MQPictureBrowserView: UIView {
         didSet {
             saveButton.backgroundColor = RGBA(0, 0, 0, 0.2)
             saveButton.layer.cornerRadius = 2
-            saveButton.layer.borderColor = UIColor.whiteColor().CGColor
+            saveButton.layer.borderColor = UIColor.white.cgColor
             saveButton.layer.borderWidth = 1
         }
     }

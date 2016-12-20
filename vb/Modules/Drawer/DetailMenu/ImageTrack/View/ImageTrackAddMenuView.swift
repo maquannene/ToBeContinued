@@ -12,14 +12,14 @@ class ImageTrackAddMenuView: UIView {
 
     @IBOutlet weak var fromPictureAlbumButton: UIButton! {
         didSet {
-            fromPictureAlbumButton.layer.borderColor = UIColor.blackColor().CGColor
+            fromPictureAlbumButton.layer.borderColor = UIColor.black.cgColor
             fromPictureAlbumButton.layer.borderWidth = 1
         }
     }
     
     @IBOutlet weak var fromCameraButton: UIButton! {
         didSet {
-            fromCameraButton.layer.borderColor = UIColor.blackColor().CGColor
+            fromCameraButton.layer.borderColor = UIColor.black.cgColor
             fromCameraButton.layer.borderWidth = 1
         }
     }

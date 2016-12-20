@@ -13,9 +13,9 @@ class NoteTrackDetailView: UIView {
     var contentText: String? {
         set {
             if newValue != nil {
-                let size: CGSize = (newValue! as NSString).boundingRectWithSize(
-                    CGSize(width: self.w - 40, height: CGFloat(MAXFLOAT)),
-                    options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                let size: CGSize = (newValue! as NSString).boundingRect(
+                    with: CGSize(width: self.w - 40, height: CGFloat(MAXFLOAT)),
+                    options: NSStringDrawingOptions.usesLineFragmentOrigin,
                     attributes: [NSFontAttributeName: contentLabel.font],
                     context: nil).size
                 contentLabel.text = newValue
@@ -34,7 +34,7 @@ class NoteTrackDetailView: UIView {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n")
+        print("\(type(of: self)) deinit\n")
     }
     
 }

@@ -12,12 +12,12 @@ class NoteTrackCacheModel: Object, CacheModelBase {
     
     dynamic var objectId: String?
     dynamic var identifier: String!
-    dynamic var createdAt: NSDate!
+    dynamic var createdAt: Date!
     
     dynamic var title: String!
     dynamic var detailContent: String?
     
-    convenience init(objectId: String? = NSUUID().UUIDString, identifier: String!, title: String!, detailContent: String?) {
+    convenience init(objectId: String? = UUID().uuidString, identifier: String!, title: String!, detailContent: String?) {
         self.init()
         self.objectId = objectId
         self.identifier = identifier
@@ -29,7 +29,7 @@ class NoteTrackCacheModel: Object, CacheModelBase {
         self.init(objectId: model.objectId, identifier: model.identifier, title: model.title, detailContent: model.detailContent)
     }
     
-    func update(title title: String!, detailContent: String?) {
+    func update(_ title: String!, detailContent: String?) {
         self.title = title
         self.detailContent = detailContent
     }

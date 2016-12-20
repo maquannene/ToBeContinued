@@ -15,7 +15,7 @@ struct WeiboSDKInfo {
     static let AutorizeInfo = "WeiboSDKInfoAutorizeInfo"                         //  认证信息key，保存了下面三项
     static let UserIDKey = "WeiboSDKInfoUserIDKey"                               //  userID
     static let AccessTokenKey = "WeiboSDKInfoAccessTokenKey"                     //  token
-    static let LogFromPrefix = "WeiboSDKInfoLogFromWeibo"                         //  微博登陆前缀
+    static let LogFromPrefix = "WeiboSDKInfoLogFromWeibo"                        //  微博登陆前缀
 }
 
 //  avoscloud sdk
@@ -25,6 +25,6 @@ let kAVCloudSDKAppKey = "gex9aggbbgfhzl7lp85ebs8ogaq8xfw8nyhjcsdkwzl14k9j"
 //  userInfoKey
 let kUserInfoKey = "UserInfoKey"
 
-func RGBA(red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> UIColor! {
+func RGBA(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> UIColor! {
     return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
 }

@@ -12,7 +12,7 @@ import Kingfisher
 
 class SettingViewController: DetailBaseViewController {
     
-    private struct Static {
+    fileprivate struct Static {
         static let disclosureCell = "disclosureCell"
         static let switchCell = "switchCell"
         static let commonCell = "commonCell"
@@ -26,22 +26,22 @@ class SettingViewController: DetailBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .Plain, target: self, action: #selector(SettingViewController.backMainAction(_:)))
-        leftButton.tintColor = UIColor.blackColor()
-        self.navigationItem.setLeftBarButtonItem(leftButton, animated: false)
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
+        let leftButton = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .plain, target: self, action: #selector(SettingViewController.backMainAction(_:)))
+        leftButton.tintColor = UIColor.black
+        self.navigationItem.setLeftBarButton(leftButton, animated: false)
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clear)
     }
 
-    @objc private func backMainAction(sender: AnyObject) {
-        mm_drawerController!.openDrawerSide(.Left, animated: true, completion: nil)
+    @objc fileprivate func backMainAction(_ sender: AnyObject) {
+        mm_drawerController!.open(.left, animated: true, completion: nil)
     }
 
 }
 
 extension SettingViewController {
     
-    @objc private func specialEffectSwitchAction(sender: UISwitch!) {
-        specialEffectSwitchClosuer?(sender.on)
+    @objc fileprivate func specialEffectSwitchAction(_ sender: UISwitch!) {
+        specialEffectSwitchClosuer?(sender.isOn)
     }
     
 }
@@ -52,7 +52,7 @@ extension SettingViewController {
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         if indexPath.item == 0 || indexPath.item == 2 || indexPath.item == 4 {
             return 20
@@ -62,36 +62,35 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return 6
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         var cell: UITableViewCell!
         if indexPath.item == 0 || indexPath.item == 2 || indexPath.item == 4 {
-            cell = tableView.dequeueReusableCellWithIdentifier(Static.gapCell)
+            cell = tableView.dequeueReusableCell(withIdentifier: Static.gapCell)
         }
         if indexPath.item == 1 {
-            cell = tableView.dequeueReusableCellWithIdentifier(Static.disclosureCell)
+            cell = tableView.dequeueReusableCell(withIdentifier: Static.disclosureCell)
             cell.textLabel?.text = "个人信息"
         }
         if indexPath.item == 3 {
-            cell = tableView.dequeueReusableCellWithIdentifier(Static.switchCell)
+            cell = tableView.dequeueReusableCell(withIdentifier: Static.switchCell)
             cell.textLabel?.text = "神器特效"
             if let sw = cell.accessoryView as? UISwitch {
-                if let specialEffect = NSUserDefaults.standardUserDefaults().valueForKey("specialEffect") as? NSNumber {
+                if let specialEffect = UserDefaults.standard.value(forKey: "specialEffect") as? NSNumber {
                     sw.setOn(specialEffect.boolValue == true, animated: false)
                 }
-                sw.addTarget(self, action: #selector(SettingViewController.specialEffectSwitchAction(_:)), forControlEvents: .ValueChanged)
+                sw.addTarget(self, action: #selector(SettingViewController.specialEffectSwitchAction(_:)), for: .valueChanged)
             }
         }
         if indexPath.item == 5 {
-            cell = tableView.dequeueReusableCellWithIdentifier(Static.commonCell)
+            cell = tableView.dequeueReusableCell(withIdentifier: Static.commonCell)
             cell.textLabel?.text = "清除缓存"
-            
-            ImageCache.defaultCache.calculateDiskCacheSizeWithCompletionHandler {
+            ImageCache.default.calculateDiskCacheSize {
                 if let label = cell.accessoryView as? UILabel {
                     label.text = String(format: "%.1f MB", CGFloat($0) / 1204.0 / 1024.0)
                 }
@@ -100,12 +99,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if indexPath.item == 5 {
-            Kingfisher.ImageCache.defaultCache.clearDiskCache()
-            Kingfisher.ImageCache.defaultCache.clearMemoryCache()
-            SVProgressHUD.showSuccessWithStatus("清除成功")
+            ImageCache.default.clearDiskCache()
+            ImageCache.default.clearMemoryCache()
+            SVProgressHUD.showSuccess(withStatus: "清除成功")
             tableView.reloadData()
         }
     }

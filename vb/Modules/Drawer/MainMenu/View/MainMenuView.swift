@@ -22,10 +22,10 @@ class MainMenuView: UIView {
     @IBOutlet weak var menuTableView: UITableView! {
         didSet {
             menuTableView.backgroundColor = RGBA(0, 0, 0, 0)
-            menuTableView.separatorStyle = .None
+            menuTableView.separatorStyle = .none
             menuTableView.tableFooterView = {
                 let view = UIView()
-                view.backgroundColor = UIColor.greenColor()
+                view.backgroundColor = UIColor.green
                 return view
             } ()
         }
@@ -40,8 +40,8 @@ class MainMenuView: UIView {
     }
     
     func baseConfigure() {
-        self.backgroundColor = UIColor.whiteColor()
-        headBackgroundImageView.userInteractionEnabled = true
+        self.backgroundColor = UIColor.white
+        headBackgroundImageView.isUserInteractionEnabled = true
     }
     
     override func layoutSubviews() {
@@ -51,7 +51,7 @@ class MainMenuView: UIView {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }

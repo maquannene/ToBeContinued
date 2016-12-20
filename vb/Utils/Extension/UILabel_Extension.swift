@@ -11,20 +11,20 @@ extension UILabel {
     /**
     判断UILabel.text是否显示不全 出现了...
     */
-    func isTruncated(maxSize size: CGSize = CGSizeZero) -> Bool {
+    func isTruncated(maxSize size: CGSize = CGSize.zero) -> Bool {
         
         var maxSize = size
         
-        if CGSizeEqualToSize(maxSize, CGSizeZero) {
+        if maxSize.equalTo(CGSize.zero) {
             
             maxSize = CGSize(width: self.frame.size.width, height: CGFloat(MAXFLOAT))
         }
         
         if let string = self.text {
             
-            let size: CGSize = (string as NSString).boundingRectWithSize(
-                maxSize,
-                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+            let size: CGSize = (string as NSString).boundingRect(
+                with: maxSize,
+                options: NSStringDrawingOptions.usesLineFragmentOrigin,
                 attributes: [NSFontAttributeName: self.font],
                 context: nil).size
             

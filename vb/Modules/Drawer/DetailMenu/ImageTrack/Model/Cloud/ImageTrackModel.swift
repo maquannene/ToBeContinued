@@ -34,7 +34,7 @@ class ImageTrackModel: AVObject, CloudModelBase {
 //    }
     
     convenience init(
-        objectId: String? = NSUUID().UUIDString,
+        objectId: String? = UUID().uuidString,
         identifier: String!,
         thumbImageFileUrl: String?,
         largeImageFileUrl: String?,
@@ -54,8 +54,8 @@ class ImageTrackModel: AVObject, CloudModelBase {
         self.largeImageFileObjectId = largeImageFileObjectId ?? originImageFileObjectId
         self.originImageFileObjectId = originImageFileObjectId
         self.text = text
-        self.imageWidht = imageSize.width
-        self.imageHeight = imageSize.height
+        self.imageWidht = imageSize.width as NSNumber!
+        self.imageHeight = imageSize.height as NSNumber!
     }
     
     convenience init(model: ImageTrackModel) {
@@ -68,7 +68,7 @@ class ImageTrackModel: AVObject, CloudModelBase {
                   largeImageFileObjectId: model.largeImageFileObjectId,
                   originImageFileObjectId: model.originImageFileObjectId,
                   text: model.text,
-                  imageSize: CGSize(width: model.imageWidht.integerValue, height:model.imageHeight.integerValue))
+                  imageSize: CGSize(width: model.imageWidht.intValue, height:model.imageHeight.intValue))
     }
     
     convenience init(cacheModel: ImageTrackCacheModel) {
@@ -85,7 +85,7 @@ class ImageTrackModel: AVObject, CloudModelBase {
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }
@@ -97,12 +97,12 @@ extension ImageTrackModel: AVSubclassing {
 }
 
 extension ImageTrackModel: NSMutableCopying, NSCopying {
-    func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+    func mutableCopy(with zone: NSZone?) -> Any {
         let noteTrackModel = ImageTrackModel(model: self)
         return noteTrackModel
     }
     
-    func copyWithZone(zone: NSZone) -> AnyObject {
+    func copy(with zone: NSZone?) -> Any {
         let noteTrackModel = ImageTrackModel(model: self)
         return noteTrackModel
     }
@@ -123,7 +123,7 @@ extension ImageTrackModel: ModelExportProtocol {
                                           largeImageFileObjectId: largeImageFileObjectId,
                                           originImageFileObjectId: originImageFileObjectId,
                                           text: text,
-                                          imageSize: CGSize(width: imageWidht.integerValue, height:imageHeight.integerValue))
+                                          imageSize: CGSize(width: imageWidht.intValue, height:imageHeight.intValue))
         object.createdAt = createdAt
         return object
     }
@@ -152,6 +152,6 @@ extension ImageTrackModel: ImageTrackCellDataSource, ImageTrackDisplayCellDataSo
     }
     
     var imageSize: CGSize {
-        return CGSize(width: imageWidht.integerValue, height: imageHeight.integerValue)
+        return CGSize(width: imageWidht.intValue, height: imageHeight.intValue)
     }
 }

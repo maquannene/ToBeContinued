@@ -9,7 +9,7 @@
 extension UIScreen {
     
     public class func screenSize() -> CGSize! {
-        return UIScreen.mainScreen().bounds.size
+        return UIScreen.main.bounds.size
     }
     
 }

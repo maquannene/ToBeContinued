@@ -20,7 +20,7 @@ class ImageTrackViewController: UIViewController {
     var viewModel: ImageTrackViewModel!
     weak var imageTrackBrowserVc: MQPictureBrowserController?
     var addMenuMaskVC: MQMaskController?
-    var willShowClosure: (Void -> Void)?
+    var willShowClosure: ((Void) -> Void)?
     var statusBarHidden: Bool = false
     
     @IBOutlet weak var updateProgressView: UIProgressView!
@@ -33,7 +33,7 @@ class ImageTrackViewController: UIViewController {
             
             let group = ImageDownloadGroup(identifier: ImageTrackCell.RealClassName)
             group.maxConcurrentDownloads = 20
-            ImageDownloadGroupManage.shareInstance.addGroup(group)
+            ImageDownloadGroupManage.shareInstance.add(group)
         }
     }
     
@@ -55,7 +55,7 @@ class ImageTrackViewController: UIViewController {
                 updateProgressTop.constant = -20
             }
             self.view.setNeedsUpdateConstraints()
-            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: { () -> Void in
                 self.setNeedsStatusBarAppearanceUpdate()
                 self.view.layoutIfNeeded()
                 }, completion: nil)
@@ -72,16 +72,16 @@ class ImageTrackViewController: UIViewController {
         imageTrackCollectionView.mj_header.beginRefreshing()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return statusBarHidden
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+    override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
+        return .slide
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }
@@ -108,50 +108,50 @@ extension ImageTrackViewController {
 //  MARK: Action
 extension ImageTrackViewController {
     
-    @IBAction func addImageTrackAction(sender: AnyObject!)
+    @IBAction func addImageTrackAction(_ sender: AnyObject!)
     {
-        let addMenuView = NSBundle.mainBundle().loadNibNamed("ImageTrack", owner: nil, options: nil)[0] as! ImageTrackAddMenuView
+        let addMenuView = Bundle.main.loadNibNamed("ImageTrack", owner: nil, options: nil)?[0] as! ImageTrackAddMenuView
         addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
-        addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(ImageTrackViewController.addFromPictureAlbumButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        addMenuView.fromCameraButton.addTarget(self, action: #selector(ImageTrackViewController.addFromCameraButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.TipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
-        addMenuMaskVC!.showWithAnimated(true, completion: nil)
+        addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(ImageTrackViewController.addFromPictureAlbumButtonAction(_:)), for: UIControlEvents.touchUpInside)
+        addMenuView.fromCameraButton.addTarget(self, action: #selector(ImageTrackViewController.addFromCameraButtonAction(_:)), for: UIControlEvents.touchUpInside)
+        addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.tipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
+        addMenuMaskVC!.showWith(animated: true, completion: nil)
     }
     
-    @objc private func addFromPictureAlbumButtonAction(sender: AnyObject!)
+    @objc fileprivate func addFromPictureAlbumButtonAction(_ sender: AnyObject!)
     {
-        addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
+        addMenuMaskVC!.dismissWith(animated: true, completion: nil)
         let imagePickerVc = UIImagePickerController()
-        imagePickerVc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerVc.sourceType = UIImagePickerControllerSourceType.photoLibrary
         imagePickerVc.delegate = self
-        presentViewController(imagePickerVc, animated: true, completion: nil)
+        present(imagePickerVc, animated: true, completion: nil)
     }
     
-    @objc private func addFromCameraButtonAction(sender: AnyObject!)
+    @objc fileprivate func addFromCameraButtonAction(_ sender: AnyObject!)
     {
-        addMenuMaskVC!.dismissWithAnimated(true, completion: nil)
+        addMenuMaskVC!.dismissWith(animated: true, completion: nil)
         let imagePickerVc = UIImagePickerController()
-        imagePickerVc.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePickerVc.sourceType = UIImagePickerControllerSourceType.camera
         imagePickerVc.delegate = self
-        presentViewController(imagePickerVc, animated: true, completion: nil)
+        present(imagePickerVc, animated: true, completion: nil)
     }
     
-    @objc private func saveImage()
+    @objc fileprivate func saveImage()
     {
-        print(imageTrackBrowserVc!.collectionView.indexPathsForVisibleItems())
-        let indexPath = imageTrackBrowserVc!.collectionView.indexPathsForVisibleItems()[0]
-        guard let cell = imageTrackBrowserVc!.collectionView.cellForItemAtIndexPath(indexPath) as? ImageTrackDisplayCell else { return }
+        print(imageTrackBrowserVc!.collectionView.indexPathsForVisibleItems)
+        let indexPath = imageTrackBrowserVc!.collectionView.indexPathsForVisibleItems[0]
+        guard let cell = imageTrackBrowserVc!.collectionView.cellForItem(at: indexPath) as? ImageTrackDisplayCell else { return }
         guard let image = cell.imageView.image else { return }
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(ImageTrackViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject)
+    func image(_ image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject)
     {
         guard didFinishSavingWithError == nil else {
-            SVProgressHUD.showErrorWithStatus("保存失败")
+            SVProgressHUD.showError(withStatus: "保存失败")
             return
         }
-        SVProgressHUD.showSuccessWithStatus("保存成功")
+        SVProgressHUD.showSuccess(withStatus: "保存成功")
     }
     
 }
@@ -159,10 +159,10 @@ extension ImageTrackViewController {
 //  MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         guard let image = info[UIImagePickerControllerOriginalImage] as! UIImage? else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
             return
         }
         viewModel.queryAddImageTrackWithOringinImage(image, progress: { [weak self] (progress) -> Void in
@@ -176,17 +176,17 @@ extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigatio
                 guard succeed == true else { strongSelf.updateProgressShow = false; return }
                 strongSelf.updateProgressView.progress = 1
                 strongSelf.updateProgressLabel.text = "长传成功"
-                strongSelf.imageTrackCollectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                strongSelf.imageTrackCollectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { () -> Void in
                     strongSelf.updateProgressShow = false
             })
         }
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
     {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -194,38 +194,38 @@ extension ImageTrackViewController: UIImagePickerControllerDelegate, UINavigatio
 //  MARK: MQPictureBrowserControllerDataSource MQPictureBrowserControllerDelegate
 extension ImageTrackViewController: MQPictureBrowserControllerDataSource, MQPictureBrowserControllerDelegate {
     
-    func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo?
+    func pictureBrowserController(_ controller: MQPictureBrowserController, animationInfoOfShowPictureAtIndex index: Int) -> ShowAnimationInfo?
     {
-        if let cell = imageTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! ImageTrackCell? {
+        if let cell = imageTrackCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! ImageTrackCell? {
             return (cell.imageView, cell)
         }
         return nil
     }
     
-    func pictureBrowserController(controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo?
+    func pictureBrowserController(_ controller: MQPictureBrowserController, animationInfoOfHidePictureAtIndex index: Int) -> HideAnimationInfo?
     {
-        if let cell = imageTrackCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) as! ImageTrackCell? {
+        if let cell = imageTrackCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! ImageTrackCell? {
             return (cell.imageView, cell)
         }
         return nil
     }
     
-    func numberOfItemsInPictureBrowserController(controller: MQPictureBrowserController) -> Int
+    func numberOfItemsInPictureBrowserController(_ controller: MQPictureBrowserController) -> Int
     {
         return viewModel.imageTrackModelList.count
     }
     
-    func pictureBrowserController(controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
+    func pictureBrowserController(_ controller: MQPictureBrowserController, pictureCellForItemAtIndex index: Int) -> MQPictureBrowserCell
     {
-        let imageTrackDisplayCell = controller.collectionView.dequeueReusableCellWithReuseIdentifier(ImageTrackDisplayCell.RealClassName, forIndexPath: NSIndexPath(forItem: index, inSection: 0)) as! ImageTrackDisplayCell
+        let imageTrackDisplayCell = controller.collectionView.dequeueReusableCell(withReuseIdentifier: ImageTrackDisplayCell.RealClassName, for: IndexPath(item: index, section: 0)) as! ImageTrackDisplayCell
         imageTrackDisplayCell.configurePictureCell(viewModel.imageTrackModelList[index])
         return imageTrackDisplayCell
     }
     
-    func pictureBrowserController(controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
+    func pictureBrowserController(_ controller: MQPictureBrowserController, willDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int)
     {
         guard willShowClosure == nil else { willShowClosure!(); willShowClosure = nil; return }
-        imageTrackCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
+        imageTrackCollectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredVertically, animated: true)
     }
     
 //    func pictureBrowserController(controller: MQPictureBrowserController, didDisplayCell pictureCell: MQPictureBrowserCell, forItemAtIndex index: Int) {
@@ -236,13 +236,13 @@ extension ImageTrackViewController: MQPictureBrowserControllerDataSource, MQPict
 //  MARK: ImageTrackLayoutDelegate
 extension ImageTrackViewController: ImageTrackLayoutDelegate {
     
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
     {
         print(indexPath.item)
         if let imageTrack = viewModel.imageTrackModelList[indexPath.item] as ImageTrackModel? {
             let imageWidht = cellWidth - 10 //  转成imageWidth进行计算
             let boundingRect = CGRect(x: 0, y: 0, width: imageWidht, height: CGFloat(MAXFLOAT))
-            let imageRect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: imageTrack.imageWidht.doubleValue, height:imageTrack.imageHeight.doubleValue), boundingRect)
+            let imageRect = AVMakeRect(aspectRatio: CGSize(width: imageTrack.imageWidht.doubleValue, height:imageTrack.imageHeight.doubleValue), insideRect: boundingRect)
             let cellHeight = imageRect.height + 10  //  回归cellHeight
             return cellHeight > 300 ? (300, true) : (cellHeight, false)
         }
@@ -254,36 +254,36 @@ extension ImageTrackViewController: ImageTrackLayoutDelegate {
 //  MARK: UICollectionViewDelegate
 extension ImageTrackViewController: UICollectionViewDelegate, ImageTrackCellDelegate {
 
-    func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer)
+    func imageTrackCellDidLongPress(_ imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer)
     {
-        let index = imageTrackCollectionView.indexPathForItemAtPoint(gesture.locationInView(imageTrackCollectionView))!.item
-        let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.Default) { [unowned self] (action) -> Void in
+        let index = imageTrackCollectionView.indexPathForItem(at: gesture.location(in: imageTrackCollectionView))!.item
+        let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.default) { [unowned self] (action) -> Void in
             self.viewModel.queryDeleteImageTrackAtIndex(index) { [weak self] (succeed) -> Void in
                 guard let strongSelf = self else { return }
-                strongSelf.imageTrackCollectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+                strongSelf.imageTrackCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
             }
         }
-        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
-        let alertController = UIAlertController(title: nil, message: "删除图文迹", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let alertController = UIAlertController(title: nil, message: "删除图文迹", preferredStyle: UIAlertControllerStyle.actionSheet)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        let vc = MQPictureBrowserController(animationModel: .PictureMoveAndBackgroundFadeOut)
+        let vc = MQPictureBrowserController(animationModel: .pictureMoveAndBackgroundFadeOut)
         vc.dataSource = self
         vc.delegate = self
         vc.cellGap = 10
-        vc.collectionView.registerNib(UINib(nibName: "ImageTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: ImageTrackDisplayCell.RealClassName)
+        vc.collectionView.register(UINib(nibName: "ImageTrackDisplayCell", bundle: nil), forCellWithReuseIdentifier: ImageTrackDisplayCell.RealClassName)
         vc.presentFromViewController(self, atIndexPicture: indexPath.item)
-        vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(ImageTrackViewController.saveImage), forControlEvents: .TouchUpInside)
+        vc.pictureBrowerView.saveButton.addTarget(self, action: #selector(ImageTrackViewController.saveImage), for: .touchUpInside)
         imageTrackBrowserVc = vc
         
         let pictureDownloadGroup = ImageDownloadGroup(identifier: ImageTrackDisplayCell.RealClassName)
         pictureDownloadGroup.maxConcurrentDownloads = 5
-        ImageDownloadGroupManage.shareInstance.addGroup(pictureDownloadGroup)
+        ImageDownloadGroupManage.shareInstance.add(pictureDownloadGroup)
         
         //  这里设置willShowClosure，willShow的delegate时就不用调用了
         willShowClosure = {
@@ -296,14 +296,14 @@ extension ImageTrackViewController: UICollectionViewDelegate, ImageTrackCellDele
 //  MARK: UICollectionViewDataSource
 extension ImageTrackViewController: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return viewModel.imageTrackModelList.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageTrackCell.RealClassName, forIndexPath: indexPath) as! ImageTrackCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageTrackCell.RealClassName, for: indexPath) as! ImageTrackCell
         cell.configureCell(viewModel.imageTrackModelList[indexPath.item])
         cell.delegate = self
         return cell

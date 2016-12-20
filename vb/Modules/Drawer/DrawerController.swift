@@ -28,32 +28,32 @@ class DrawerController: MMDrawerController {
     class func drawerController() -> DrawerController {
         let mainVc = MainMenuViewController()
         let homeVc = HomeViewController()
-        let drawerController = DrawerController(centerViewController: homeVc, leftDrawerViewController: mainVc, rightDrawerViewController: nil)
-        drawerController.mainVc = mainVc
-        drawerController.homeVc = homeVc
-        drawerController.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
-        drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+        let drawerController = DrawerController(center: homeVc, leftDrawerViewController: mainVc, rightDrawerViewController: nil)
+        drawerController?.mainVc = mainVc
+        drawerController?.homeVc = homeVc
+        drawerController?.maximumLeftDrawerWidth = UIWindow.windowSize().width - 60
+        drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.all
         //  全部特效除过PanningDrawerView
-        drawerController.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.All.rawValue & ~MMCloseDrawerGestureMode.PanningDrawerView.rawValue))
-        drawerController.mainVc?.delegate = drawerController
-        return drawerController
+        drawerController?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode(rawValue: (MMCloseDrawerGestureMode.all.rawValue & ~MMCloseDrawerGestureMode.panningDrawerView.rawValue))
+        drawerController?.mainVc?.delegate = drawerController
+        return drawerController!
     }
     
 }
 
 extension DrawerController: MainMenuViewControllerDelegate {
     
-    func mainMenuViewController(mainMenuViewController: MainMenuViewController, operate: MainMenuViewControllerOperate)
+    func mainMenuViewController(_ mainMenuViewController: MainMenuViewController, operate: MainMenuViewControllerOperate)
     {
         var centerViewController: UIViewController?
         switch operate {
-        case .LogOut:
+        case .logOut:
             return
-        case .Home:
+        case .home:
             centerViewController = homeVc
-        case .NoteTrack:
+        case .noteTrack:
             if noteTrackVc == nil {
-                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? NoteTrackViewController
+                noteTrackVc = UIStoryboard(name: "NoteTrack", bundle: Bundle.main).instantiateInitialViewController() as? NoteTrackViewController
             }
             if let navi = noteTrackVc?.navigationController as UINavigationController? {
                 centerViewController = navi
@@ -62,24 +62,24 @@ extension DrawerController: MainMenuViewControllerDelegate {
                 centerViewController = UINavigationController(rootViewController: noteTrackVc!)
             }
             
-        case .ImageTrack:
+        case .imageTrack:
             if imageTrackVc == nil {
-                imageTrackVc = UIStoryboard(name: "ImageTrack", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? ImageTrackViewController
+                imageTrackVc = UIStoryboard(name: "ImageTrack", bundle: Bundle.main).instantiateInitialViewController() as? ImageTrackViewController
             }
             centerViewController = imageTrackVc!
             
-        case .Setting:
+        case .setting:
             return
         }
         
         if centerViewController == self.centerViewController {
-            closeDrawerAnimated(true, completion: nil)
+            closeDrawer(animated: true, completion: nil)
         }
         else {
-            setCenterViewController(centerViewController, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
-                self.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
-                self.bouncePreviewForDrawerSide(MMDrawerSide.Left, distance: 5, completion: { [unowned self] (finish) -> Void in
-                    self.openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
+            setCenterView(centerViewController, withFullCloseAnimation: true, completion: { [unowned self] (finish) -> Void in
+                self.openDrawerGestureModeMask = MMOpenDrawerGestureMode()
+                self.bouncePreview(for: MMDrawerSide.left, distance: 5, completion: { [unowned self] (finish) -> Void in
+                    self.openDrawerGestureModeMask = MMOpenDrawerGestureMode.all
                 })
             })
         }

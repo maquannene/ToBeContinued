@@ -9,20 +9,20 @@
 typealias CellHeightInfo = (cellHeight: CGFloat, longCell: Bool)
 
 protocol ImageTrackLayoutDelegate: NSObjectProtocol {
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth cellWidth: CGFloat) -> CellHeightInfo
 }
 
 class ImageTrackLayoutAttributes: UICollectionViewLayoutAttributes {
     
     var longImage: Bool = false
     
-    override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = super.copyWithZone(zone) as! ImageTrackLayoutAttributes
+    override func copy(with zone: NSZone?) -> Any {
+        let copy = super.copy(with: zone) as! ImageTrackLayoutAttributes
         copy.longImage = longImage
         return copy
     }
     
-    override func isEqual(object: AnyObject?) -> Bool {
+    override func isEqual(_ object: Any?) -> Bool {
         if let attributes = object as? ImageTrackLayoutAttributes {
             if attributes.longImage == longImage {
                 return super.isEqual(object)
@@ -40,24 +40,24 @@ class ImageTrackLayout: UICollectionViewLayout {
     var cellWidth: CGFloat = 0
     var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
-    private var layoutAttributesCache = [ImageTrackLayoutAttributes]()
-    private var contentHeight: CGFloat = 0
-    private var contentWidth: CGFloat = 0
+    fileprivate var layoutAttributesCache = [ImageTrackLayoutAttributes]()
+    fileprivate var contentHeight: CGFloat = 0
+    fileprivate var contentWidth: CGFloat = 0
     
-    override class func layoutAttributesClass() -> AnyClass {
+    override class var layoutAttributesClass : AnyClass {
         return ImageTrackLayoutAttributes.self
     }
     
     
-    override func collectionViewContentSize() -> CGSize {
+    override var collectionViewContentSize : CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
     
     //  prepareLayout中计算每个cell的布局放在缓存cache中
-    override func prepareLayout() {
+    override func prepare() {
         
-        super.prepareLayout()
+        super.prepare()
         
         layoutAttributesCache.removeAll()
         contentHeight = 0
@@ -68,25 +68,25 @@ class ImageTrackLayout: UICollectionViewLayout {
             xOffsets.append(CGFloat(column) * cellWidth + sectionInset.left)
         }
         
-        var yOffsets = [CGFloat](count: numberOfColumns, repeatedValue: sectionInset.top)
+        var yOffsets = [CGFloat](repeating: sectionInset.top, count: numberOfColumns)
         
         var column = 0
         
-        for item in 0..<collectionView!.numberOfItemsInSection(0) {
-            let indexPath = NSIndexPath(forItem: item, inSection: 0)
+        for item in 0..<collectionView!.numberOfItems(inSection: 0) {
+            let indexPath = IndexPath(item: item, section: 0)
             let cellHeightInfo = delegate!.collectionView(collectionView!, heightForImageAtIndexPath: indexPath, withWidth: cellWidth)
             let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: cellWidth, height: cellHeightInfo.cellHeight)
-            let attributes = ImageTrackLayoutAttributes(forCellWithIndexPath: indexPath)
+            let attributes = ImageTrackLayoutAttributes(forCellWith: indexPath)
             attributes.frame = frame
             attributes.longImage = cellHeightInfo.longCell
             layoutAttributesCache.append(attributes)
-            contentHeight = max(contentHeight, CGRectGetMaxY(frame))
-            contentWidth = max(contentWidth, CGRectGetMaxX(frame))
+            contentHeight = max(contentHeight, frame.maxY)
+            contentWidth = max(contentWidth, frame.maxX)
             yOffsets[column] = yOffsets[column] + cellHeightInfo.cellHeight
             let x = yOffsets.reduce(yOffsets[0]){
                 min($0, $1)
             }
-            column = yOffsets.indexOf(x)!
+            column = yOffsets.index(of: x)!
         }
         
         contentHeight += sectionInset.bottom
@@ -94,10 +94,10 @@ class ImageTrackLayout: UICollectionViewLayout {
     }
     
     //  从缓存中获取当前rect 要展示的[attributes]
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         for attributes in layoutAttributesCache {
-            if CGRectIntersectsRect(attributes.frame, rect) {
+            if attributes.frame.intersects(rect) {
                 layoutAttributes.append(attributes)
             }
         }
@@ -105,7 +105,7 @@ class ImageTrackLayout: UICollectionViewLayout {
     }
     
     //  从缓存中获取indexPath的attributes
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributesCache[indexPath.item]
     }
     

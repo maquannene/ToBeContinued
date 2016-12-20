@@ -10,7 +10,7 @@ import Kingfisher
 import MKFImageDownloadGroup
 
 protocol ImageTrackCellDelegate: NSObjectProtocol {
-    func imageTrackCellDidLongPress(imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
+    func imageTrackCellDidLongPress(_ imageTrackCell: ImageTrackCell, gesture: UIGestureRecognizer) -> Void
 }
 
 protocol ImageTrackCellDataSource: class {
@@ -47,18 +47,18 @@ class ImageTrackCell: UICollectionViewCell {
         addGestureRecognizer(longPressGesture)
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
         let attributes = layoutAttributes as! ImageTrackLayoutAttributes
-        longImageIcon.hidden = !attributes.longImage
+        longImageIcon.isHidden = !attributes.longImage
     }
     
-    @objc private func longpressAction(sender: AnyObject) {
+    @objc func longpressAction(_ sender: AnyObject) {
         delegate?.imageTrackCellDidLongPress(self, gesture: sender as! UIGestureRecognizer)
     }
     
     deinit {
-        print("\(self.dynamicType) deinit\n", terminator: "")
+        print("\(type(of: self)) deinit\n", terminator: "")
     }
     
 }
@@ -66,22 +66,22 @@ class ImageTrackCell: UICollectionViewCell {
 //  MARK: Public
 extension ImageTrackCell {
     
-    func configureCell(imageTrack: ImageTrackCellDataSource) -> Void {
+    func configureCell(_ imageTrack: ImageTrackCellDataSource) -> Void {
         
         self.imageTrack = imageTrack
         
-        if let url = NSURL(string: imageTrack.imageURL) {
-            imageView.mkf_setImageWithURL(url,
-                                          identifier: reuseIdentifier,
-                                          placeholderImage: nil,
-                                          optionsInfo: nil,
-                                          progressBlock:
+        if let url = URL(string: imageTrack.imageURL) {
+            imageView.mkf_setImage(with: url,
+                                   identifier: reuseIdentifier,
+                                   placeholderImage: nil,
+                                   optionsInfo: nil,
+                                   progressBlock:
                 { [weak self] (receivedSize, totalSize) in
                     
                     guard let strongSelf = self else { return }
                     guard url.absoluteString == strongSelf.imageTrack?.imageURL else { return }
                     print("当前图片Text:\(imageTrack.textStr),进度:\(Float(receivedSize) / Float(totalSize))")
-                    strongSelf.progressView.hidden = false
+                    strongSelf.progressView.isHidden = false
                     strongSelf.progressView.progress = Float(receivedSize) / Float(totalSize)
                     
                 }, completionHandler: { [weak self] (image, error, cacheType, imageURL) in
@@ -90,7 +90,7 @@ extension ImageTrackCell {
                     guard imageURL?.absoluteString == strongSelf.imageTrack?.imageURL else { return }  //  回调验证
                     guard error == nil else { return }
                     
-                    strongSelf.progressView.hidden = true
+                    strongSelf.progressView.isHidden = true
                 })
         }
         

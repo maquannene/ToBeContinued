@@ -19,7 +19,7 @@ protocol CloudModelBase {
 
 extension CloudModelBase {
     static func uniqueIdentifier() -> String! {
-        return UserInfoManange.shareInstance.uniqueCloudKey! + String(self)
+        return UserInfoManange.shareInstance.uniqueCloudKey! + String(describing: self)
     }
 }
 
@@ -30,7 +30,7 @@ protocol CacheModelBase {
 
 extension CacheModelBase {
     static func uniqueIdentifier() -> String! {
-        return UserInfoManange.shareInstance.uniqueCacheKey! + String(self)
+        return UserInfoManange.shareInstance.uniqueCacheKey! + String(describing: self)
     }
     func synced() -> Bool {
         return false
