@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4A46DE59CA93E56D7209FB1A9D189641522DA97D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6B83D6AA4A7AAA8A638F99EE7761C934BE1C38A1" : 9223372036854775807,
+    "513C97799BC7B1C01FD0FCFE4B5007FA8588C5C1" : 9223372036854775807,
+    "4A46DE59CA93E56D7209FB1A9D189641522DA97D" : 9223372036854775807,
+    "621CF0FA089BDD93486683D3420BD9A9AC1248DF" : 9223372036854775807,
+    "83700F58C0165CC20774AC8861C87F9B96014D92" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FF2FB0A7-3076-421E-BB9A-C252E915CDFF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6B83D6AA4A7AAA8A638F99EE7761C934BE1C38A1" : "Appear\/",
+    "513C97799BC7B1C01FD0FCFE4B5007FA8588C5C1" : "MXXImageDownloadGroup\/",
+    "4A46DE59CA93E56D7209FB1A9D189641522DA97D" : "ToBeContinued\/",
+    "621CF0FA089BDD93486683D3420BD9A9AC1248DF" : "MQMaskController\/",
+    "83700F58C0165CC20774AC8861C87F9B96014D92" : "Track\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "vb",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "vb.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/maquannene\/ToBeContinued.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4A46DE59CA93E56D7209FB1A9D189641522DA97D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:maquannene\/MXXImageDownloadGroup.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "513C97799BC7B1C01FD0FCFE4B5007FA8588C5C1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:wuhanness\/MQMaskViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "621CF0FA089BDD93486683D3420BD9A9AC1248DF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:maquannene\/Appear.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6B83D6AA4A7AAA8A638F99EE7761C934BE1C38A1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:maquannene\/Track.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "83700F58C0165CC20774AC8861C87F9B96014D92"
+    }
+  ]
+}

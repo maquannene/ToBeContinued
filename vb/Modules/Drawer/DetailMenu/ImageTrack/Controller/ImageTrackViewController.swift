@@ -10,7 +10,7 @@ import AVFoundation
 import Kingfisher
 import MJRefresh
 import AVOSCloud
-import MQMaskController
+import Appear
 import Photos
 import SVProgressHUD
 import MKFImageDownloadGroup
@@ -19,7 +19,7 @@ class ImageTrackViewController: UIViewController {
     
     var viewModel: ImageTrackViewModel!
     weak var imageTrackBrowserVc: MQPictureBrowserController?
-    var addMenuMaskVC: MQMaskController?
+    var addMenuAppear: Appear?
     var willShowClosure: ((Void) -> Void)?
     var statusBarHidden: Bool = false
     
@@ -114,13 +114,14 @@ extension ImageTrackViewController {
         addMenuView.frame = CGRect(x: 0, y: 64, width: addMenuView.w, height: addMenuView.h)
         addMenuView.fromPictureAlbumButton.addTarget(self, action: #selector(ImageTrackViewController.addFromPictureAlbumButtonAction(_:)), for: UIControlEvents.touchUpInside)
         addMenuView.fromCameraButton.addTarget(self, action: #selector(ImageTrackViewController.addFromCameraButtonAction(_:)), for: UIControlEvents.touchUpInside)
-        addMenuMaskVC = MQMaskController(maskController: MQMaskControllerType.tipDismiss, withContentView: addMenuView, contentCenter: false, delayTime: 0)
-        addMenuMaskVC!.showWith(animated: true, completion: nil)
+        
+        addMenuAppear = Appear(dismissType: .tip, contentView: addMenuView)
+        addMenuAppear!.show(with: .`default`, animation: nil, compeltion: nil)
     }
     
     @objc fileprivate func addFromPictureAlbumButtonAction(_ sender: AnyObject!)
     {
-        addMenuMaskVC!.dismissWith(animated: true, completion: nil)
+        addMenuAppear?.dismiss(with: .`default`)
         let imagePickerVc = UIImagePickerController()
         imagePickerVc.sourceType = UIImagePickerControllerSourceType.photoLibrary
         imagePickerVc.delegate = self
@@ -129,7 +130,6 @@ extension ImageTrackViewController {
     
     @objc fileprivate func addFromCameraButtonAction(_ sender: AnyObject!)
     {
-        addMenuMaskVC!.dismissWith(animated: true, completion: nil)
         let imagePickerVc = UIImagePickerController()
         imagePickerVc.sourceType = UIImagePickerControllerSourceType.camera
         imagePickerVc.delegate = self

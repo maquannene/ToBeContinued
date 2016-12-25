@@ -6,8 +6,8 @@ target "vb" do
 
 # 二方
 pod 'Track', :path => '../Track'
-pod 'MQMaskController', :path => '../MQMaskController'
 pod 'MKFImageDownloadGroup', :path => '../MXXImageDownloadGroup'
+pod 'Appear', :path => '../Appear'
 
 # 三方
 pod 'AFNetworking', '~> 3.0'
